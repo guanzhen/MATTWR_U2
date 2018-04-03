@@ -1,0 +1,1336 @@
+# Reading C:/altera/13.1/modelsim_ase/tcl/vsim/pref.tcl 
+# do MaterialTowerCPLD_run_msim_rtl_vhdl.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vcom -93 -work work {D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/MaterialTowerCPLD.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD
+# -- Compiling architecture bdf_type of MaterialTowerCPLD
+# vcom -93 -work work {D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/SRAM_IO.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity SRAM_IO
+# -- Compiling architecture A_SRAM_IO of SRAM_IO
+# vcom -93 -work work {D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/QuadDecToDirPulse.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package NUMERIC_STD
+# -- Compiling entity QuadDecToDIRPulse
+# -- Compiling architecture a_QuadDecToDIRPulse of QuadDecToDIRPulse
+# vcom -93 -work work {D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# vcom -93 -work work {D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Hex7Seg.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Hex7Seg
+# -- Compiling architecture A_Hex7Seg of Hex7Seg
+# 
+# vcom -93 -work work {D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L maxv -L rtl_work -L work -voptargs="+acc"  MaterialTowerCPLD
+# vsim -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L maxv -L rtl_work -L work -voptargs=\"+acc\" -t 1ps MaterialTowerCPLD 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run 1 sec
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Hex7Seg.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Hex7Seg
+# -- Compiling architecture A_Hex7Seg of Hex7Seg
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/SRAM_IO.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity SRAM_IO
+# -- Compiling architecture A_SRAM_IO of SRAM_IO
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/SRAM_IO.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity SRAM_IO
+# -- Compiling architecture A_SRAM_IO of SRAM_IO
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Hex7Seg.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Hex7Seg
+# -- Compiling architecture A_Hex7Seg of Hex7Seg
+vcom -reportprogress 300 -work work D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+vsim work.materialtowercpld_vhd_tst
+# vsim work.materialtowercpld_vhd_tst 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.materialtowercpld_vhd_tst(materialtowercpld_arch)
+# Loading work.materialtowercpld(bdf_type)
+# Loading work.sram_io(a_sram_io)
+# Loading work.io_space(a_io_space)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# Loading work.hex7seg(a_hex7seg)
+add wave -position insertpoint sim:/materialtowercpld_vhd_tst/*
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/Clk
+add wave -position insertpoint  \
+sim:/materialtowercpld_vhd_tst/A \
+sim:/materialtowercpld_vhd_tst/AD \
+sim:/materialtowercpld_vhd_tst/CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN1_TXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_RXD \
+sim:/materialtowercpld_vhd_tst/CC_CAN2_TXD \
+sim:/materialtowercpld_vhd_tst/Clk \
+sim:/materialtowercpld_vhd_tst/CPLD_INT \
+sim:/materialtowercpld_vhd_tst/DIP_SWITCH \
+sim:/materialtowercpld_vhd_tst/EN_EDIF_CAN \
+sim:/materialtowercpld_vhd_tst/ENC_1_A \
+sim:/materialtowercpld_vhd_tst/ENC_1_B \
+sim:/materialtowercpld_vhd_tst/ENC_1_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_1_INX \
+sim:/materialtowercpld_vhd_tst/ENC_1_N \
+sim:/materialtowercpld_vhd_tst/ENC_1_PS \
+sim:/materialtowercpld_vhd_tst/ENC_2_A \
+sim:/materialtowercpld_vhd_tst/ENC_2_B \
+sim:/materialtowercpld_vhd_tst/ENC_2_DIR \
+sim:/materialtowercpld_vhd_tst/ENC_2_INX \
+sim:/materialtowercpld_vhd_tst/ENC_2_N \
+sim:/materialtowercpld_vhd_tst/ENC_2_PS \
+sim:/materialtowercpld_vhd_tst/ENC_ERR \
+sim:/materialtowercpld_vhd_tst/FAN_PULSE \
+sim:/materialtowercpld_vhd_tst/FAN_PWM \
+sim:/materialtowercpld_vhd_tst/FPGA_OK \
+sim:/materialtowercpld_vhd_tst/IO_Input0 \
+sim:/materialtowercpld_vhd_tst/IO_Input1 \
+sim:/materialtowercpld_vhd_tst/IO_Input2 \
+sim:/materialtowercpld_vhd_tst/IO_Input8 \
+sim:/materialtowercpld_vhd_tst/IO_Input9 \
+sim:/materialtowercpld_vhd_tst/IO_Input10 \
+sim:/materialtowercpld_vhd_tst/IO_Input11 \
+sim:/materialtowercpld_vhd_tst/IO_Input12 \
+sim:/materialtowercpld_vhd_tst/IO_Input13 \
+sim:/materialtowercpld_vhd_tst/IO_Input16 \
+sim:/materialtowercpld_vhd_tst/IO_Input17 \
+sim:/materialtowercpld_vhd_tst/IO_Input18 \
+sim:/materialtowercpld_vhd_tst/IO_Input19 \
+sim:/materialtowercpld_vhd_tst/IO_Input20 \
+sim:/materialtowercpld_vhd_tst/IO_Input21 \
+sim:/materialtowercpld_vhd_tst/IO_Input22 \
+sim:/materialtowercpld_vhd_tst/IO_Input23 \
+sim:/materialtowercpld_vhd_tst/IO_Output \
+sim:/materialtowercpld_vhd_tst/LED_PWM \
+sim:/materialtowercpld_vhd_tst/nADV \
+sim:/materialtowercpld_vhd_tst/nCS \
+sim:/materialtowercpld_vhd_tst/nRD \
+sim:/materialtowercpld_vhd_tst/nWAIT \
+sim:/materialtowercpld_vhd_tst/nWR \
+sim:/materialtowercpld_vhd_tst/PIZZA_CALIBRATION \
+sim:/materialtowercpld_vhd_tst/PWM_LED \
+sim:/materialtowercpld_vhd_tst/RST \
+sim:/materialtowercpld_vhd_tst/SDCLKO \
+sim:/materialtowercpld_vhd_tst/Seg_LED
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/wave.do
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/wave.do
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workspaces/SVN/09_Material_Tower_2.0/ForTEST/CPLD_Liyang/CPLD/XMC4700_CPLD/Simulation/modelsim/wave.do
