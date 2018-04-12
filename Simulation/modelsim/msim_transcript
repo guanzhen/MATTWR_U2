@@ -1,0 +1,1152 @@
+# Reading C:/Programs/altera/14.1/modelsim_ae/tcl/vsim/pref.tcl
+# do MaterialTowerCPLD_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim PE vmap 10.3c Lib Mapping Utility 2014.09 Sep 20 2014
+# vmap -modelsim_quiet work rtl_work 
+# Copying C:/Programs/altera/14.1/modelsim_ae/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:/Programs/altera/14.1/modelsim_ae/win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vcom -93 -work work {C:/Projects/Quartus/MT_CPLD/PWM_Module.vhd}
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:28:51 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/PWM_Module.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package NUMERIC_STD
+# -- Compiling entity PWM_Module
+# -- Compiling architecture a_PWM_Module of PWM_Module
+# End time: 10:28:52 on Apr 12,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Projects/Quartus/MT_CPLD/SRAM_IO.vhd}
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:28:52 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/SRAM_IO.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity SRAM_IO
+# -- Compiling architecture A_SRAM_IO of SRAM_IO
+# End time: 10:28:53 on Apr 12,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Projects/Quartus/MT_CPLD/QuadDecToDirPulse.vhd}
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:28:53 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/QuadDecToDirPulse.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package NUMERIC_STD
+# -- Compiling entity QuadDecToDIRPulse
+# -- Compiling architecture a_QuadDecToDIRPulse of QuadDecToDIRPulse
+# End time: 10:28:53 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd}
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:28:53 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(124): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(192): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(127): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(131): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(133): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(135): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(139): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(141): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(143): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(145): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(147): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(151): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(153): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(155): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(157): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(159): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(163): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(165): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(167): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(171): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(173): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(175): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(177): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(180): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(195): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(198): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(200): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(202): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(206): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(208): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(210): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(214): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(218): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(226): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(228): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(230): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(232): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(234): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(238): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(240): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(242): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(244): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(246): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(254): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(258): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(260): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(262): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(264): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(311): VHDL Compiler exiting
+# End time: 10:28:53 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 46
+# ** Error: C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+# Error in macro ./MaterialTowerCPLD_run_msim_rtl_vhdl.do line 11
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+#     while executing
+# "vcom -93 -work work {C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd}"
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:31:42 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(100): near "variable": syntax error
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(102): (vcom-1136) Unknown identifier "IO_ADDR_TMP".
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(102): Illegal concurrent statement.
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(102): Target type (error) in variable assignment is different from expression type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(102): (vcom-1136) Unknown identifier "IO_ADDR_TMP".
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(126): (vcom-1136) Unknown identifier "IO_ADDR_TMP".
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(194): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(197): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(200): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(202): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(204): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(208): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(210): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(212): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(216): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(220): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(228): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(230): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(232): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(234): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(236): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(240): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(242): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(244): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(246): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(248): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(256): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(260): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(262): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(264): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(266): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(313): VHDL Compiler exiting
+# End time: 10:31:42 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 8, Warnings: 24
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:32:51 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(101): near "variable": syntax error
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(125): (vcom-1136) Unknown identifier "IO_ADDR_TMP".
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(193): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(196): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(199): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(201): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(203): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(207): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(209): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(211): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(215): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(219): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(227): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(229): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(231): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(233): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(235): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(239): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(241): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(243): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(245): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(247): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(255): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(259): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(261): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(263): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(265): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(312): VHDL Compiler exiting
+# End time: 10:32:51 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 24
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:33:15 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(102): Illegal concurrent statement.
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(126): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(194): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(72): Variable declaration 'IO_ADDR_TMP' not allowed in this region.
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(129): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(133): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(135): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(137): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(141): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(143): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(145): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(147): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(149): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(153): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(155): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(157): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(159): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(161): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(165): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(167): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(169): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(173): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(175): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(177): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(179): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(182): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(197): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(200): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(202): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(204): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(208): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(210): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(212): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(216): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(220): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(228): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(230): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(232): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(234): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(236): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(240): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(242): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(244): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(246): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(248): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(256): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(260): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(262): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(264): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(266): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(313): VHDL Compiler exiting
+# End time: 10:33:15 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 5, Warnings: 46
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:35:24 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(109): near "variable": syntax error
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(126): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(194): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(72): Variable declaration 'IO_ADDR_TMP' not allowed in this region.
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(129): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(133): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(135): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(137): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(141): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(143): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(145): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(147): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(149): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(153): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(155): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(157): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(159): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(161): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(165): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(167): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(169): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(173): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(175): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(177): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(179): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(182): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(197): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(200): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(202): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(204): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(208): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(210): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(212): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(216): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(220): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(228): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(230): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(232): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(234): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(236): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(240): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(242): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(244): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(246): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(248): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(256): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(260): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(262): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(264): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(266): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(313): VHDL Compiler exiting
+# End time: 10:35:24 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 5, Warnings: 46
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:36:19 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(125): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(193): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Warning: [9] C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(108): (vcom-1013) Initial value of "IO_ADDR_TMP" depends on value of signal "IO_ADDR".
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(72): Variable declaration 'IO_ADDR_TMP' not allowed in this region.
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(128): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(132): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(134): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(136): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(140): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(142): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(144): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(146): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(148): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(152): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(154): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(156): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(158): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(160): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(164): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(166): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(168): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(172): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(174): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(176): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(178): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(181): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(196): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(199): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(201): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(203): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(207): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(209): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(211): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(215): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(219): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(227): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(229): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(231): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(233): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(235): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(239): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(241): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(243): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(245): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(247): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(255): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(259): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(261): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(263): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(265): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(312): VHDL Compiler exiting
+# End time: 10:36:19 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 47
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:36:59 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(125): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(193): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Warning: [9] C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(108): (vcom-1013) Initial value of "IO_ADDR_TMP" depends on value of signal "IO_ADDR".
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(72): Variable declaration 'IO_ADDR_TMP' not allowed in this region.
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(128): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(132): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(134): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(136): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(140): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(142): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(144): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(146): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(148): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(152): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(154): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(156): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(158): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(160): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(164): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(166): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(168): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(172): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(174): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(176): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(178): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(181): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(196): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(199): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(201): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(203): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(207): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(209): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(211): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(215): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(219): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(227): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(229): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(231): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(233): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(235): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(239): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(241): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(243): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(245): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(247): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(255): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(259): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(261): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(263): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(265): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(312): VHDL Compiler exiting
+# End time: 10:36:59 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 47
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:39:23 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(126): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(195): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(72): Variable declaration 'IO_ADDR_TMP' not allowed in this region.
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(129): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(133): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(135): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(137): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(141): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(143): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(145): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(147): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(149): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(153): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(155): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(157): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(159): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(161): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(165): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(167): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(169): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(173): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(175): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(177): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(179): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(182): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(198): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(201): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(203): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(205): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(209): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(211): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(213): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(217): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(221): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(229): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(231): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(233): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(235): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(237): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(241): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(243): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(245): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(247): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(249): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(257): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(261): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(263): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(265): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(267): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(314): VHDL Compiler exiting
+# End time: 10:39:23 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 46
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:39:44 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(72): Variable declaration 'IO_ADDR_TMP' not allowed in this region.
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(314): VHDL Compiler exiting
+# End time: 10:39:44 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:40:22 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# End time: 10:40:22 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:41:00 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(125): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(194): (vcom-1014) Array type case expression must be of a locally static subtype.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(128): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(132): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(134): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(136): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(140): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(142): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(144): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(146): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(148): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(152): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(154): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(156): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(158): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(160): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(164): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(166): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(168): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(172): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(174): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(176): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(178): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(181): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(197): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(200): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(202): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(204): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(208): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(210): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(212): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(216): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(220): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(228): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(230): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(232): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(234): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(236): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(240): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(242): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(244): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(246): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(248): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(256): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(260): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(262): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(264): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Warning: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(266): (vcom-1322) Case statement choice (string literal) cannot be checked for uniqueness.
+# 
+# ** Error: C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd(313): VHDL Compiler exiting
+# End time: 10:41:00 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 46
+# C:/Programs/altera/14.1/modelsim_ae/win32aloem/vcom failed.
+vsim work.io_space
+# vsim -gui "+altera" -l msim_transcript -do "MaterialTowerCPLD_run_msim_rtl_vhdl.do" 
+# Start time: 10:41:09 on Apr 12,2018
+# //  ModelSim ALTERA 10.3c Sep 20 2014 
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.io_space(a_io_space)
+vcom -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:41:31 on Apr 12,2018
+# vcom -reportprogress 300 -93 -work work C:/Projects/Quartus/MT_CPLD/IO_SPACE.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# End time: 10:41:32 on Apr 12,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vlog -work rtl_work -refresh -force_refresh
+# Model Technology ModelSim ALTERA vlog 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:42:19 on Apr 12,2018
+# vlog -reportprogress 300 -work rtl_work -refresh -force_refresh 
+# -- Skipping entity io_space
+# -- Skipping entity pwm_module
+# -- Skipping entity quaddectodirpulse
+# -- Skipping entity sram_io
+# End time: 10:42:19 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work rtl_work -refresh -force_refresh
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:42:19 on Apr 12,2018
+# vcom -reportprogress 300 -work rtl_work -refresh -force_refresh 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IO_SPACE
+# -- Compiling architecture A_IO_SPACE of IO_SPACE
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package NUMERIC_STD
+# -- Compiling entity PWM_Module
+# -- Compiling architecture a_PWM_Module of PWM_Module
+# -- Compiling entity QuadDecToDIRPulse
+# -- Compiling architecture a_QuadDecToDIRPulse of QuadDecToDIRPulse
+# -- Compiling entity SRAM_IO
+# -- Compiling architecture A_SRAM_IO of SRAM_IO
+# End time: 10:42:20 on Apr 12,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:46:21 on Apr 12,2018
+# vcom -reportprogress 300 -work work C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/MaterialTowerCPLD.vht 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MaterialTowerCPLD_vhd_tst
+# -- Compiling architecture MaterialTowerCPLD_arch of MaterialTowerCPLD_vhd_tst
+# End time: 10:46:21 on Apr 12,2018, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/QuadToDirPulse.vht
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:47:00 on Apr 12,2018
+# vcom -reportprogress 300 -work work C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/QuadToDirPulse.vht 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity TB1
+# -- Compiling architecture behavior of TB1
+# End time: 10:47:01 on Apr 12,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim work.quaddectodirpulse
+# vsim 
+# Start time: 10:48:11 on Apr 12,2018
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+add wave -position insertpoint  \
+sim:/quaddectodirpulse/A \
+sim:/quaddectodirpulse/B
+add wave -position insertpoint  \
+sim:/quaddectodirpulse/PS \
+sim:/quaddectodirpulse/DIR \
+sim:/quaddectodirpulse/Enc
+restart
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+run
+run
+run
+run
+run
+run
+run
+run
+restart
+run
+# GetModuleFileName: The specified module could not be found.
+# 
+# 
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+vcom -reportprogress 300 -work work C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/QuadToDirPulse.vht
+# Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+# Start time: 10:52:53 on Apr 12,2018
+# vcom -reportprogress 300 -work work C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/QuadToDirPulse.vht 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity TB1
+# -- Compiling architecture behavior of TB1
+# End time: 10:52:54 on Apr 12,2018, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim work.tb1
+# vsim 
+# Start time: 10:53:32 on Apr 12,2018
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb1(behavior)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.quaddectodirpulse(a_quaddectodirpulse)
+# ** Failure: (vsim-3817) Port "N" of entity "quaddectodirpulse" is not in the component being instantiated.
+#    Time: 0 ps  Iteration: 0  Instance: /tb1/uut File: C:/Projects/Quartus/MT_CPLD/QuadDecToDirPulse.vhd Line: 16
+# Fatal error in file C:/Projects/Quartus/MT_CPLD/QuadDecToDirPulse.vhd
+#  while elaborating region: /tb1/uut
+# Fatal error in file C:/Projects/Quartus/MT_CPLD/Simulation/modelsim/QuadToDirPulse.vht
+#  while elaborating region: /tb1
+# Error loading design

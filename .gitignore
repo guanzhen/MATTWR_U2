@@ -1,0 +1,16 @@
+
+output_files/
+
+incremental_db/
+
+greybox_tmp/
+
+db/
+
+Simulation/modelsim/gate_work/
+
+Simulation/modelsim/rtl_work/
+
+Simulation/modelsim/work/
+
+*.bak

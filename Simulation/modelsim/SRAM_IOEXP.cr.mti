@@ -1,0 +1,18 @@
+D:/Works/WORK_OFFICE/MaterialTower/SVN/XMC_DL/CPLD/XMC4700_CPLD/Simulation/modelsim/SRAMIO.vht {1 {vcom -work work -2002 -explicit D:/Works/WORK_OFFICE/MaterialTower/SVN/XMC_DL/CPLD/XMC4700_CPLD/Simulation/modelsim/SRAMIO.vht
+Model Technology ModelSim ALTERA vcom 10.1e Compiler 2013.06 Jun 12 2013
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity SRAMIO_tbv
+-- Compiling architecture logic of SRAMIO_tbv
+
+} {} {}} D:/Works/WORK_OFFICE/MaterialTower/SVN/XMC_DL/CPLD/XMC4700_CPLD/SRAM_IO.vhd {1 {vcom -work work -2002 -explicit D:/Works/WORK_OFFICE/MaterialTower/SVN/XMC_DL/CPLD/XMC4700_CPLD/SRAM_IO.vhd
+Model Technology ModelSim ALTERA vcom 10.1e Compiler 2013.06 Jun 12 2013
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity CPLD_XMC4700_SRAM_U
+-- Compiling architecture A_CPLD_XMC4700_SRAM_U of CPLD_XMC4700_SRAM_U
+
+} {} {}}
