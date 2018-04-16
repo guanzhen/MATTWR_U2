@@ -48,23 +48,17 @@ begin
     
 	 if nRESET = '0' then
 		iDATA      <= (others => '0');
-	 elsif falling_edge(i_DAT_RD_rdy) then
-		if nCS = '0' then
-			iDATA      <= IO_DAT_RD;
-		end if;
+	 elsif falling_edge(i_DAT_RD_rdy) and nCS = '0'then
+   	iDATA      <= IO_DAT_RD;
     end if;
 
 	 if nCS = '0' then		
-		IO_RDY_RD <= '0';
+		IO_RDY_RD <= '0';		
+		DATA <= iDATA;
 	 else 
 		IO_RDY_RD <= nRD;
-	 end if;
-		
-	 if nCS = '0' then
-		DATA <= iDATA;
-	 else
 		DATA <= (others => 'Z');
-  	 end if;
+	 end if;
 	 
 end process SRAM_RD_DATA_PROC;
 

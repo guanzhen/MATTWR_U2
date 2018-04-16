@@ -292,7 +292,7 @@ begin
 			H_timer    <= sH_timer;
 			PWM_Duty   <= sPWM_Duty;
 			PWM_Frq    <= sPWM_Frq;
-			PWM_ONOFF  <= sPWM_ONOFF; 
+			PWM_ONOFF  <= sPWM_ONOFF;
 			WrVal_MT1  <= sWrVal_MT1;
 			WrVal_MT2  <= sWrVal_MT2;	
 			oPin7_0    <= soPin7_0;

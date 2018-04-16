@@ -42,14 +42,6 @@
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:07:03  SEPTEMBER 28, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION 14.1.0
-set_global_assignment -name VHDL_FILE PWM_Module.vhd
-set_global_assignment -name BDF_FILE MaterialTowerCPLD.bdf
-set_global_assignment -name VHDL_FILE SRAM_IO.vhd
-set_global_assignment -name VHDL_FILE QuadDecToDirPulse.vhd
-set_global_assignment -name VHDL_FILE IO_SPACE.vhd
-set_global_assignment -name VHDL_FILE System_reset.vhd
-set_global_assignment -name VHDL_FILE clk_sep.vhd
-set_global_assignment -name BDF_FILE PWMblock.bdf
 
 # Pin & Location Assignments
 # ==========================
@@ -160,7 +152,7 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 # Analysis & Synthesis Assignments
 # ================================
 set_global_assignment -name FAMILY "MAX V"
-set_global_assignment -name TOP_LEVEL_ENTITY QuadDecToDIRPulse
+set_global_assignment -name TOP_LEVEL_ENTITY SRAM_IO
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 5
@@ -253,3 +245,9 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to DIP_SWITCH[1]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to DIP_SWITCH[0]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to EN_EDIF_CAN
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to RST
+set_global_assignment -name VHDL_FILE MaterialTowerCPLD.vhd
+set_global_assignment -name VHDL_FILE PWM_Module.vhd
+set_global_assignment -name VHDL_FILE SRAM_IO.vhd
+set_global_assignment -name VHDL_FILE QuadDecToDirPulse.vhd
+set_global_assignment -name VHDL_FILE IO_SPACE.vhd
+set_global_assignment -name VHDL_FILE System_reset.vhd
