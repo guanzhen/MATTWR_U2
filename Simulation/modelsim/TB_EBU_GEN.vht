@@ -3,30 +3,22 @@ USE ieee.std_logic_1164.all;
 LIBRARY work;
 USE work.common.all;
 
-ENTITY TB_SRAMIO IS
+ENTITY TB_EBU_GEN IS
 GENERIC  
     (
         WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
         CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
     );  
-END TB_SRAMIO;
+END TB_EBU_GEN;
 
-architecture logic of TB_SRAMIO is
+architecture logic of TB_EBU_GEN is
 signal sEBUCLK       : std_logic;
-signal sclk          : std_logic;
 signal nRESET        : std_logic := '1';                                             
-signal DATA          : std_logic_vector(WIDTH-1 downto 0) := (others => 'Z'); 
 signal nRD           : std_logic := '1';                                             
 signal nWR           : std_logic := '1';                                             
 signal nCS           : std_logic := '1';                                             
 signal nADV          : std_logic := '1';                                             
 signal nWAIT         : std_logic := '1';                                             
-signal IO_ADDR       : std_logic_vector(WIDTH-1 downto 0);
-signal IO_DAT_WR     : std_logic_vector(WIDTH-1 downto 0);
-signal IO_DAT_RD     : std_logic_vector(WIDTH-1 downto 0);
-signal IO_RDY_WR     : std_logic;
-signal IO_RDY_RD     : std_logic;
-signal i_DAT_RD_rdy  : std_logic;
 
 signal sAD_BUS       : std_logic_vector(WIDTH-1 downto 0);
 signal sA_BUS        : std_logic_vector(WIDTH-1 downto 0);
@@ -36,26 +28,6 @@ signal sEBU_ienwait  : std_logic := '1';
 signal sEBU_iAdd     : std_logic_vector(WIDTH-1 downto 0);
 signal sEBU_iData    : std_logic_vector(WIDTH-1 downto 0);
 signal sEBU_oData    : std_logic_vector(WIDTH-1 downto 0);
-
-COMPONENT SRAM_IO is  
-	GENERIC ( WIDTH : INTEGER := 8; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
-	PORT
-	(
-		nRESET		:	 IN STD_LOGIC;
-		DATA		:	 INOUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		nRD		:	 IN STD_LOGIC;
-		nWR		:	 IN STD_LOGIC;
-		nCS		:	 IN STD_LOGIC;
-		nADV		:	 IN STD_LOGIC;
-		nWAIT		:	 IN STD_LOGIC;
-		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_RDY_WR		:	 OUT STD_LOGIC;
-		IO_RDY_RD		:	 OUT STD_LOGIC;
-		i_DAT_RD_rdy		:	 IN STD_LOGIC
-	);
-END COMPONENT;
 
 COMPONENT MOD_EBU is
 generic (
@@ -93,9 +65,6 @@ BEGIN
 ebu_clk : MOD_CLKGEN 
 GENERIC MAP (period => 100 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sEBUCLK );
 
-cpld_clk : MOD_CLKGEN
-GENERIC MAP (period => 900 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sclk );
-
 reset : MOD_RESET
 GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => nRESET );
 
@@ -110,34 +79,16 @@ PORT MAP (
   iAddress => sEBU_iAdd,
   iData => sEBU_iData,
   oData => sEBU_oData,
-  ioData => IO_ADDR,
+  ioData => sAD_BUS,
   oADV => nADV,
   oCS => nCS,
   oRD => nRD,
   oWR => nWR
   );
-  
-u1 : SRAM_IO
-GENERIC MAP (  WIDTH =>  8,  CPLD_VERSION =>  "00001101" )
-PORT MAP 
-(
-  nRESET     =>  nRESET       ,
-  DATA       =>  DATA         ,
-  nRD        =>  nRD          ,
-  nWR        =>  nWR          ,
-  nCS        =>  nCS          ,
-  nADV       =>  nADV         ,
-  nWAIT      =>  nWAIT        ,
-  IO_ADDR    =>  IO_ADDR      , --AD_Bus
-  IO_DAT_WR  =>  IO_DAT_WR    , -- data to read
-  IO_DAT_RD  =>  IO_DAT_RD    , -- data to read
-  IO_RDY_WR  =>  IO_RDY_WR    , -- write signal
-  IO_RDY_RD  =>  IO_RDY_RD    , -- read signal
-  i_DAT_RD_rdy  =>  i_DAT_RD_rdy
-);
 
-TESTSRAM : PROCESS is
+EBUASYNCMUX : PROCESS is
 BEGIN
+
 --------------------------------------------------------
 -- READ
 --------------------------------------------------------
@@ -145,16 +96,17 @@ BEGIN
 sEBU_ienwait <= '0';
 -- Read
 sEBU_iRdWr <='1';
-nRESET <= '0';
 sEBU_iRst<= '0';
 wait for 100 ns;
 sEBU_iRst<= '1';
-nRESET <= '1';
 -- Read : adress phase
 sEBU_iAdd <= "00001100";
 sEBU_iData <= "10100011";
+sAD_BUS <= (others => 'Z');
 wait until nRD = '0';
 -- read : command phase
+sAD_BUS <= "00001111";
+--wait for 200 ns; -- n wait delay. 100 nS  =  1 cycle
 wait until nRD = '1';
 wait for 100 ns;
 sEBU_iRst <= 'Z';
@@ -173,9 +125,11 @@ sEBU_iRst<= '1';
 -- Read : adress phase
 sEBU_iAdd <= "00001100";
 sEBU_iData <= "10100011";
+sAD_BUS <= (others => 'Z');
 nWAIT <= '0';
 wait until nRD = '0';
 -- read : command phase
+sAD_BUS <= "00001111";
 wait for 500 ns; -- n wait delay. 100 nS  =  1 cycle
 nWAIT <= '1';
 wait until nRD = '1';
@@ -193,10 +147,12 @@ sEBU_iRst <= '1';
 -- Write: address phase
 sEBU_iAdd <= "00001101";
 sEBU_iData <= "10100011";
+sAD_BUS <= (others => 'Z');
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';
 
 wait;
-END PROCESS TESTSRAM;
+END PROCESS EBUASYNCMUX;
+
 end architecture logic;

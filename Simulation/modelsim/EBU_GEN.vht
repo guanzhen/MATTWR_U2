@@ -35,7 +35,7 @@ port (
 end MOD_EBU;
 
 ----------------------------------------------------------------
-architecture logic of MOD_EBU is
+architecture async_mux of MOD_EBU is
 type ebu_state is ( AP, AH ,CD ,CPi, CPe, DH ,RP,IDLE );
 signal state : ebu_state := IDLE;
 --signal cnt_CPe : integer := 0;
@@ -54,7 +54,7 @@ variable cnt_CPe : integer := 0;
 BEGIN  
   if (reset = '0') then
 		ioData <= (others => 'Z');
-    oData <= (others => '0');
+    oData <= (others => 'Z');
     oRD <= '1';
     oWR <= '1';
     oCS <= '1';
@@ -120,7 +120,7 @@ BEGIN
       -- sample wait signal
       if (ien_wait = '1') AND (iWait = '0') then
         cnt_CPe := cnt_CPe + 1;
-       end if;      
+      end if;      
       -- next state logic
       cnt_CD:= cnt_CD - 1;
       if (cnt_CD > 0) then
@@ -137,19 +137,19 @@ BEGIN
         ioData <= iData;
       else
         oRD <= '0';
-      end if;           
+      end if;          
+      -- sample wait signal
+      if (ien_wait = '1') AND (iWait = '0') then
+        cnt_CPe := cnt_CPe + 1;
+      end if;      
       -- next state logic
       cnt_CP:= cnt_CP - 1;
       if (cnt_CP > 0) then
         phase := CPi;
-        -- sample wait signal
-        if (ien_wait = '1') AND (iWait = '0') then
-          cnt_CPe := cnt_CPe + 1;
-        end if;
       else
         if (cnt_CPe > 0) then
           phase := CPe;
-        else        
+        else
           if (iRd_nWr = '0') then -- Datahold phase is only for write commands
             if (cnt_DH > 0) then
               phase := DH;
@@ -158,7 +158,7 @@ BEGIN
             else
               phase := IDLE;
             end if;
-          else --READ command
+          else --READ command            
             oData <= ioData;
             if (cnt_RP > 0) then
               phase := RP;
@@ -171,23 +171,21 @@ BEGIN
     when CPe =>
       state <= CPe;
       -- output logic
-      oCS <= '0';
-      
+      oCS <= '0';      
       if (iRd_nWr = '0') then -- Datahold phase is only for write commands
         oWR <= '0';
         ioData <= iData;
       else
-        oData <= ioData;
         oRD <= '0';
       end if;
-      -- next state logic
-      cnt_CPe := cnt_CPe - 1;
+      -- sample wait signal /next state logic
+      if (ien_wait = '1') AND (iWait = '0') then
+        cnt_CPe := cnt_CPe + 1; -- extend by 1 if wait is still active
+      else
+        cnt_CPe := cnt_CPe - 1;      
+      end if;
       if (cnt_CPe > 0) then
         phase := CPe;    
-        -- sample wait signal
-        if (ien_wait = '1') AND (iWait = '0') then
-          cnt_CPe := cnt_CPe + 1; -- extend by 1 if wait is still active
-        end if;
       elsif (iRd_nWr = '0') then -- Datahold phase is only for write commands
         if (cnt_DH > 0) then
           phase := DH;
@@ -196,7 +194,8 @@ BEGIN
         else
           phase := IDLE;
         end if;
-      else --READ command
+      else --READ command      
+        oData <= ioData;
         if (cnt_RP > 0) then
           phase := RP;
         else
@@ -206,7 +205,6 @@ BEGIN
     when DH =>
       -- output logic
       state <= DH;
-      oWR <= '0';
       oCS <= '0';
       ioData <= iData;
       -- next state logic
@@ -237,4 +235,4 @@ BEGIN
 	end if;  
 END PROCESS MULTIPLEXED_EBU;
 
-end architecture logic;
+end architecture async_mux;
