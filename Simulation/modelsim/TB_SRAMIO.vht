@@ -22,9 +22,10 @@ signal nCS           : std_logic := '1';
 signal nADV          : std_logic := '1';                                             
 signal nWAIT         : std_logic := '1';                                             
 signal IO_ADDR       : std_logic_vector(WIDTH-1 downto 0);
+signal IO_DAT_WR     : std_logic_vector(WIDTH-1 downto 0);
+signal IO_DAT_RD     : std_logic_vector(WIDTH-1 downto 0);
 signal IO_RDY_WR     : std_logic;
 signal IO_RDY_RD     : std_logic;
-signal IO_DAT_RD     : std_logic_vector(WIDTH-1 downto 0);
 signal i_DAT_RD_rdy  : std_logic;
 
 signal sAD_BUS       : std_logic_vector(WIDTH-1 downto 0);
@@ -34,6 +35,7 @@ signal sEBU_iRdWr    : std_logic := '1';
 signal sEBU_ienwait  : std_logic := '1';
 signal sEBU_iAdd     : std_logic_vector(WIDTH-1 downto 0);
 signal sEBU_iData    : std_logic_vector(WIDTH-1 downto 0);
+signal sEBU_oData    : std_logic_vector(WIDTH-1 downto 0);
 signal inpin         : std_logic_vector(3 downto 0) := "1010";
 signal outpin        : std_logic_vector(3 downto 0) := "ZZZZ";
 signal iopin         : std_logic_vector(3 downto 0) := "ZZZZ";
@@ -50,10 +52,10 @@ COMPONENT SRAM_IO is
 		nADV		:	 IN STD_LOGIC;
 		nWAIT		:	 IN STD_LOGIC;
 		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_RDY_WR		:	 OUT STD_LOGIC;
 		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_RDY_RD		:	 OUT STD_LOGIC;
 		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0);
+		IO_RDY_WR		:	 OUT STD_LOGIC;
+		IO_RDY_RD		:	 OUT STD_LOGIC;
 		i_DAT_RD_rdy		:	 IN STD_LOGIC
 	);
 END COMPONENT;
@@ -75,11 +77,12 @@ port (
   iclk : in std_logic;
   reset : in std_logic;
   iRd_nWr : in std_logic;
-  ien_wait : in std_logic := '0'; --enable wait for WAIT signal
+  ien_wait : in std_logic := '0'; --enable wait for WAIT signal  
+  iWait: in std_logic;
   iAddress : in std_logic_vector(addwidth - 1 downto 0);
-  oAddress : out std_logic_vector(addwidth - 1 downto 0);
-  iData : out std_logic_vector(datawidth - 1 downto 0);
+  iData : in std_logic_vector(datawidth - 1 downto 0);
   oData : out std_logic_vector(datawidth - 1 downto 0);
+  ioData : inout std_logic_vector(datawidth - 1 downto 0);
   oADV : out std_logic;
   oCS : out std_logic;
   oRD : out std_logic;
@@ -106,10 +109,11 @@ PORT MAP (
   reset => sEBU_iRst,
   iRd_nWr => sEBU_iRdWr,
   ien_wait => sEBU_ienwait,
+  iWait => nWAIT,
   iAddress => sEBU_iAdd,
-  oAddress => sA_BUS,
   iData => sEBU_iData,
-  oData => sAD_BUS,
+  oData => sEBU_oData,
+  ioData => sAD_BUS,
   oADV => nADV,
   oCS => nCS,
   oRD => nRD,
@@ -127,16 +131,48 @@ PORT MAP
   nCS        =>  nCS          ,
   nADV       =>  nADV         ,
   nWAIT      =>  nWAIT        ,
-  IO_ADDR    =>  IO_ADDR      ,
-  IO_RDY_WR  =>  IO_RDY_WR    ,
-  IO_RDY_RD  =>  IO_RDY_RD    ,
-  IO_DAT_RD  =>  IO_DAT_RD    ,
+  IO_ADDR    =>  IO_ADDR      , --AD_Bus
+  IO_DAT_WR  =>  IO_DAT_WR    , -- data to read
+  IO_DAT_RD  =>  IO_DAT_RD    , -- data to read
+  IO_RDY_WR  =>  IO_RDY_WR    , -- write signal
+  IO_RDY_RD  =>  IO_RDY_RD    , -- read signal
   i_DAT_RD_rdy  =>  i_DAT_RD_rdy
 );
 
-write_gen : PROCESS (sclk) is
+read_SRAM : PROCESS is
 BEGIN
 
-END PROCESS write_gen;
+sEBU_ienwait <= '1';
+-- Read
+sEBU_iRdWr <='1';
+sEBU_iRst<= '0';
+wait for 100 ns;
+sEBU_iRst<= '1';
+-- Read : adress phase
+sEBU_iAdd <= "00001100";
+sEBU_iData <= "10100011";
+sAD_BUS <= (others => 'Z');
+nWAIT <= '0';
+nWAIT <= '1';
+wait until nRD = '0';
+-- read : command phase
+sAD_BUS <= "00001111";
+--wait for 200 ns; -- n wait delay. 100 nS  =  1 cycle
+wait until nRD = '1';
+wait for 200 ns;
+-- Write
+sEBU_iRdWr <='0';
+sEBU_iRst <= '0';
+wait for 100 ns;
+sEBU_iRst <= '1';
+-- Write: address phase
+sEBU_iAdd <= "00001101";
+sEBU_iData <= "10100011";
+sAD_BUS <= (others => 'Z');
+wait until nWR = '0';
+--write : command phase
+wait until nWR = '1';
 
+wait;
+END PROCESS read_SRAM;
 end architecture logic;

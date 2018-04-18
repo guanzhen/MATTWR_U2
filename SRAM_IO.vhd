@@ -11,20 +11,20 @@ GENERIC
     );
 PORT 
     (
-       nRESET        : IN    std_logic;                                                -- 
-       DATA          : INOUT std_logic_vector(WIDTH-1 downto 0) := (others => 'Z');    -- Datenbus, Register auslesen
-       nRD           : IN    std_logic;                                                -- Read (uP)
-       nWR           : IN    std_logic;                                                -- Write (uP)
-       nCS           : IN    std_logic;                                                -- CS an CPLD (uP)
-       nADV          : IN    std_logic;                                                
-       nWAIT         : IN    std_logic;                                                
-		 
-       IO_ADDR       : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
-       IO_RDY_WR     : OUT   std_logic := '0' ;     
-       IO_DAT_WR     : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
-       IO_RDY_RD     : OUT   std_logic := '0' ;   
-		 IO_DAT_RD     : IN    std_logic_vector(WIDTH-1 downto 0) ;                                       
-		 i_DAT_RD_rdy	: IN 	  std_logic := '0' 
+      nRESET        : IN    std_logic;                                                -- 
+      DATA          : INOUT std_logic_vector(WIDTH-1 downto 0) := (others => 'Z');    -- Datenbus, Register auslesen
+      nRD           : IN    std_logic;                                                -- Read (uP)
+      nWR           : IN    std_logic;                                                -- Write (uP)
+      nCS           : IN    std_logic;                                                -- CS an CPLD (uP)
+      nADV          : IN    std_logic;                                                
+      nWAIT         : IN    std_logic;                                                
+
+      IO_ADDR       : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
+      IO_RDY_WR     : OUT   std_logic := '0' ;     
+      IO_DAT_WR     : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
+      IO_RDY_RD     : OUT   std_logic := '0' ;   
+      IO_DAT_RD     : IN    std_logic_vector(WIDTH-1 downto 0) ;                                       
+      i_DAT_RD_rdy	: IN 	  std_logic := '0' 
     );
 end SRAM_IO;
 

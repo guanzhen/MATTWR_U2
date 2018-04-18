@@ -19,12 +19,13 @@ generic (
 port (
   iclk : in std_logic;
   reset : in std_logic;
-  iRd_nWr : in std_logic;
+  iRd_nWr : in std_logic;  
   ien_wait : in std_logic := '0'; --enable wait for WAIT signal
-  iAddress : in std_logic_vector(addwidth - 1 downto 0);
-  oAddress : out std_logic_vector(addwidth - 1 downto 0);
-  iData : out std_logic_vector(datawidth - 1 downto 0);
-  oData : out std_logic_vector(datawidth - 1 downto 0);
+  iWait: in std_logic;
+  iAddress : in std_logic_vector(addwidth - 1 downto 0); --simulation data (address)to EBU_GEN
+  iData : in std_logic_vector(datawidth - 1 downto 0); -- simulation data (data) to EBU_GEN
+  oData : out std_logic_vector(datawidth - 1 downto 0); -- output data/data read by EBU unit for TB
+  ioData : inout std_logic_vector(datawidth - 1 downto 0); -- IO multiplexed address/data bus for EBU unit
   oADV : out std_logic;
   oCS : out std_logic;
   oRD : out std_logic;
@@ -35,27 +36,36 @@ end MOD_EBU;
 
 ----------------------------------------------------------------
 architecture logic of MOD_EBU is
-type ebu_state is ( AP, AH ,CD ,CP, DH ,RP,IDLE );
+type ebu_state is ( AP, AH ,CD ,CPi, CPe, DH ,RP,IDLE );
+signal state : ebu_state := IDLE;
+--signal cnt_CPe : integer := 0;
 BEGIN
 
-MULTIPLEXED_EBU: PROCESS
-variable phase : ebu_state := AP;
+MULTIPLEXED_EBU: PROCESS (iclk,reset)
+variable phase : ebu_state := IDLE;
 variable cnt_AP : integer := addrc;
 variable cnt_AH: integer := addhold;
 variable cnt_CD: integer := cmd_delay;
 variable cnt_CP: integer := waitrdc;
 variable cnt_DH : integer := datac;
 variable cnt_RP: integer := rdrecovc;
+variable cnt_CPe : integer := 0;
 
 BEGIN  
   if (reset = '0') then
-		oAddress <= (others => 'Z');
+		ioData <= (others => 'Z');
     oData <= (others => '0');
     oRD <= '1';
     oWR <= '1';
     oCS <= '1';
     oADV <= '1';    
     phase := AP;
+    state <= IDLE;
+    cnt_AP := addrc;
+    cnt_AH := addhold;
+    cnt_CD := cmd_delay;
+    cnt_DH := datac;
+    cnt_CPe := 0;
     if (iRd_nWr = '1') then --set the number of command phase cycles based on the read write signal.
       cnt_CP := waitrdc;
       cnt_RP := rdrecovc;
@@ -64,40 +74,120 @@ BEGIN
       cnt_RP := wrrecovc;
     end if;
   elsif rising_edge(iclk) then
+    oADV <= '1';
+    oCS <= '1';
+    oRD <= '1';
+    oWR <= '1';
+    ioData <= (others => 'Z');
     case phase is
     when AP =>
+      state <= AP;
+      -- outputs
+      oCS <='0';
+      ioData <= iAddress;
+      oADV <= '0';
+      -- next state logic
+        cnt_AP:= cnt_AP - 1;
       if (cnt_AP > 0) then
         phase := AP;
-        cnt_AP:= cnt_AP - 1;
       else
         if (cnt_AH > 0) then -- go to address hold phase
         phase := AH;
         elsif (cnt_CD > 0) then -- go to command delay phase
         phase := CD;
         else -- go to command phase direct.
-        phase := CP;
+        phase := CPi;
         end if;          
       end if;
     when AH =>
+      state <= AH;
+      --outputs
+      ioData <= iAddress;
+      oCS <= '0';
+      --next state logic
+      cnt_AH:= cnt_AH - 1;
       if (cnt_AH > 0) then
         phase := AH;
-        cnt_AH:= cnt_AH - 1;
-      elsif (cnt_CD > 0) then -- go to command delay phase
+      elsif (cnt_CD > 0) then -- go to command delay phase if configured
         phase := CD;
       else -- go to command phase direct.
-        phase := CP;
+        phase := CPi;
       end if;
     when CD =>
+      state <= CD;
+      -- output logic
+      oCS <= '0';
+      -- sample wait signal
+      if (ien_wait = '1') AND (iWait = '0') then
+        cnt_CPe := cnt_CPe + 1;
+       end if;      
+      -- next state logic
+      cnt_CD:= cnt_CD - 1;
       if (cnt_CD > 0) then
         phase := CD;
-        cnt_CD:= cnt_CD - 1;
       else -- go to command phase direct.
-        phase := CP;
+        phase := CPi;
       end if;
-    when CP =>
+    when CPi =>    
+      state <= CPi;
+      oCS <= '0';
+      --set outputs for Command Phase
+      if (iRd_nWr = '0') then -- Datahold phase is only for write commands
+        oWR <= '0';
+        ioData <= iData;
+      else
+        oRD <= '0';
+      end if;           
+      -- next state logic
+      cnt_CP:= cnt_CP - 1;
       if (cnt_CP > 0) then
-        phase := CP;
-        cnt_CP:= cnt_CP - 1;
+        phase := CPi;
+        -- sample wait signal
+        if (ien_wait = '1') AND (iWait = '0') then
+          cnt_CPe := cnt_CPe + 1;
+        end if;
+      else
+        if (cnt_CPe > 0) then
+          phase := CPe;
+        else        
+          if (iRd_nWr = '0') then -- Datahold phase is only for write commands
+            if (cnt_DH > 0) then
+              phase := DH;
+            elsif (cnt_RP > 0) then
+              phase := RP;
+            else
+              phase := IDLE;
+            end if;
+          else --READ command
+            oData <= ioData;
+            if (cnt_RP > 0) then
+              phase := RP;
+            else
+              phase := IDLE;
+            end if;        
+          end if; -- end if (iRd_nWr = '0') then 
+        end if; -- end if (cnt_CPe > 0) then
+      end if; -- end if (cnt_CP > 1) then      
+    when CPe =>
+      state <= CPe;
+      -- output logic
+      oCS <= '0';
+      
+      if (iRd_nWr = '0') then -- Datahold phase is only for write commands
+        oWR <= '0';
+        ioData <= iData;
+      else
+        oData <= ioData;
+        oRD <= '0';
+      end if;
+      -- next state logic
+      cnt_CPe := cnt_CPe - 1;
+      if (cnt_CPe > 0) then
+        phase := CPe;    
+        -- sample wait signal
+        if (ien_wait = '1') AND (iWait = '0') then
+          cnt_CPe := cnt_CPe + 1; -- extend by 1 if wait is still active
+        end if;
       elsif (iRd_nWr = '0') then -- Datahold phase is only for write commands
         if (cnt_DH > 0) then
           phase := DH;
@@ -106,17 +196,23 @@ BEGIN
         else
           phase := IDLE;
         end if;
-      else --WRITE command 
+      else --READ command
         if (cnt_RP > 0) then
           phase := RP;
         else
           phase := IDLE;
         end if;        
-      end if;
+      end if;    
     when DH =>
+      -- output logic
+      state <= DH;
+      oWR <= '0';
+      oCS <= '0';
+      ioData <= iData;
+      -- next state logic
+      cnt_DH := cnt_DH - 1;
       if (cnt_DH > 0) then
         phase := DH;
-        cnt_DH := cnt_DH - 1;
       else
         if (cnt_RP > 0) then
           phase := RP;
@@ -125,19 +221,20 @@ BEGIN
         end if;        
       end if;    
     when RP =>
+      state <= RP;
+      -- next state logic
+      cnt_RP := cnt_RP - 1;
       if (cnt_RP > 0) then
         phase := RP;
-        cnt_RP := cnt_RP - 1;
       else
         phase := IDLE;
       end if;
     when IDLE =>
+      state <= IDLE;
       phase := IDLE; --wait for reset
     end case;
 
-	end if;
-  
-  wait on reset,iclk;
+	end if;  
 END PROCESS MULTIPLEXED_EBU;
 
 end architecture logic;
