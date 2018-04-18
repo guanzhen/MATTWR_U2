@@ -17,7 +17,7 @@ PORT
       nWR           : IN    std_logic;                                                -- Write (uP)
       nCS           : IN    std_logic;                                                -- CS an CPLD (uP)
       nADV          : IN    std_logic;                                                
-      nWAIT         : IN    std_logic;                                                
+      nWAIT         : OUT    std_logic;                                                
 
       IO_ADDR       : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
       IO_RDY_WR     : OUT   std_logic := '0' ;     
@@ -30,11 +30,10 @@ end SRAM_IO;
 
 architecture A_SRAM_IO of SRAM_IO is
 
-signal oDATA : std_logic_vector(WIDTH-1 downto 0);
 signal iDATA : std_logic_vector(WIDTH-1 downto 0);
 
 BEGIN
-
+nWAIT <= '1';
 DATA <= iDATA when nCS = '0' AND nRD = '0' else (others => 'Z');
 IO_RDY_RD <= '1' when nCS = '0' AND nRD = '0' else '0';
 IO_RDY_WR <= '1' when nCS = '0' AND nWR = '0' else '0';

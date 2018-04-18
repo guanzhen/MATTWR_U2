@@ -75,7 +75,7 @@ port (
   reset : in std_logic;
   iRd_nWr : in std_logic;
   ien_wait : in std_logic := '0'; --enable wait for WAIT signal  
-  iWait: in std_logic;
+  iWait: out std_logic;
   iAddress : in std_logic_vector(addwidth - 1 downto 0);
   iData : in std_logic_vector(datawidth - 1 downto 0);
   oData : out std_logic_vector(datawidth - 1 downto 0);
@@ -178,15 +178,12 @@ sEBU_iRst<= '1';
 sEBU_iAdd <= "00001101";
 sEBU_iData <= (others => 'Z');
 IO_DAT_RD <= "10100011";
-nWAIT <= '0';
 wait until nRD = '0';
 wait for 10 ns;
 i_DAT_RD_rdy <= '1';
 wait for 100 ns;
 i_DAT_RD_rdy <= '0';
 -- read : command phase
-wait for 400 ns; -- n wait delay. 100 nS  =  1 cycle
-nWAIT <= '1';
 wait until nRD = '1';
 wait for 100 ns;
 sEBU_iRst <= 'Z';
