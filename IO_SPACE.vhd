@@ -13,22 +13,16 @@ GENERIC
     );
 PORT 
     (
-      nRESET        : IN    std_logic; 
+      nRESET        : IN    std_logic;
       Clk           : IN    std_logic;
       IO_ADDR       : IN    std_logic_vector(BUS_WIDTH-1 downto 0);                     
       IO_RDY_WR     : IN    std_logic;
       IO_DAT_WR     : IN    std_logic_vector(BUS_WIDTH-1 downto 0);  
       IO_RDY_RD     : IN    std_logic;
       IO_DAT_RD     : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');  
-
       --IO PINS
-      iPin7_0       : IN    std_logic_vector(2 downto 0); 
-      iPin15_8      : IN    std_logic_vector(5 downto 0); 
-      iPin23_16     : IN    std_logic_vector(BUS_WIDTH-1 downto 0); 
-
-      oPin7_0       : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');
-      oPin15_8      : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');
-      oPin23_16     : OUT   std_logic := '0';
+      iInputs       : IN    std_logic_vector(23 downto 0);
+      oOutputs      : OUT   std_logic_vector(23 downto 0);
 
       --DIP Switch
       DIP_SW        : IN    std_logic_vector (3 downto 0);
@@ -92,19 +86,14 @@ signal sPWM_Duty  : STD_LOGIC_VECTOR (13 downto 0):= (others => '0');
 signal sPWM_Frq   : STD_LOGIC_VECTOR (13 downto 0):= (others => '0');
 
 --IO Output buffer
-signal soPin7_0   : std_logic_vector(7 downto 0) := (others => '0');
-signal soPin15_8  : std_logic_vector(7 downto 0) := (others => '0');
-signal soPin23_16 : std_logic := '0';
-signal sPizza_Cali : std_logic := '0';
+signal soOutputs   : std_logic_vector(23 downto 0) := (others => '0');
 
 BEGIN
 
 sEBU_EVENT    <= IO_RDY_WR OR IO_RDY_RD when nRESET = '1' else '0';
 
 -- outputs
-oPin7_0       <= soPin7_0;
-oPin15_8      <= soPin15_8 OR X"40";
-oPin23_16     <= soPin23_16;
+oOutputs      <= soOutputs OR X"004000";
 Wr_MT1        <= sWr_MT1;
 Wr_MT2        <= sWr_MT2;
 H_timer       <= sH_timer;
@@ -115,8 +104,7 @@ PWM_Duty      <= sPWM_Duty;
 Wr_PWM        <= sWr_PWM;
 PWM_ONOFF     <= sPWM_ONOFF;
 WrVal_MT1     <= sWrVal_MT1;
-WrVal_MT2     <= sWrVal_MT2;	
-Pizza_Cali    <= sPizza_Cali;
+WrVal_MT2     <= sWrVal_MT2;
 
 LED_OUT : process (sSeg_LED,Seg_DP)
 begin
@@ -127,6 +115,15 @@ begin
   end if;
 end process LED_OUT;
 
+PIZZA_CALI_PROC: process (nRESET,iInputs)
+begin
+  if (nRESET = '0') then
+    Pizza_Cali  <= '0';
+  else
+    Pizza_Cali <= ((not iInputs(16)) or (not iInputs(8))) and DIP_SW(1);   -- IO INPUT 10 or and 11, 12, 13, 14, 15, 16, 17  
+  end if;
+end process PIZZA_CALI_PROC;
+
 IO_SPACE_PROC : process (nRESET,clk,sEBU_EVENT)
 variable vADDRESS : std_logic_vector (7 downto 0);
 begin
@@ -134,9 +131,7 @@ begin
 if (nRESET = '0') then
   vADDRESS := (others => '0');
   sSeg_LED <= "11111111";
-  soPin7_0 <= "00000000"; --(others => 'Z');
-  soPin15_8 <= "00000000";--(others => 'Z');
-  soPin23_16 <= '0';
+  soOutputs <= (others=> '0');
   sWr_MT1 <= '0';
   sWrVal_MT1 <= (others => '0');
   sWr_MT2 <= '0';  
@@ -146,12 +141,9 @@ if (nRESET = '0') then
   sTrigger_Reset <= '0';
   sPWM_Frq <= "11111010000000";	
   sPWM_Duty <= "01111101000000";	
-  sPWM_ONOFF <= '0';  
-  sPizza_Cali <= '0';
+  sPWM_ONOFF <= '0'; 
 elsif rising_edge(sEBU_EVENT) then
   vADDRESS := IO_ADDR;
-  sPizza_Cali <= ((not iPin23_16(0)) or (not iPin15_8(0))) and DIP_SW(1);   -- IO INPUT 10 or and 11, 12, 13, 14, 15, 16, 17
-
   if (IO_RDY_WR = '1') then
     case vADDRESS is 
     -- 7 Segment
@@ -159,11 +151,11 @@ elsif rising_edge(sEBU_EVENT) then
       sSeg_LED <=  IO_DAT_WR;
     -- IO Ouput
     when X"02" => -- 0x02   IO block 3
-      soPin23_16 <= IO_DAT_WR(0);
+      soOutputs(23 downto 16) <= IO_DAT_WR;
     when X"03" => -- 0x03   IO block 2
-      soPin15_8(7 downto 0) <= IO_DAT_WR;
+      soOutputs(15 downto 8) <= IO_DAT_WR;
     when X"04" => -- 0x04   IO block 1
-      soPin7_0(7 downto 0) <= IO_DAT_WR;
+      soOutputs(7 downto 0) <= IO_DAT_WR;
     -- Write Encoder counter 1
     when X"20" => -- 0x20 latch Encoder counter
       sWr_MT1 <= not sWr_MT1;
@@ -212,67 +204,67 @@ elsif rising_edge(sEBU_EVENT) then
   
   if (IO_RDY_RD = '1') then
     vADDRESS := IO_ADDR;
-      case vADDRESS is			
-			-- 7 Seg LED indicator for error display
-			when X"00" =>
-			IO_DAT_RD(7 downto 0)              <= sSeg_LED(7 downto 0);
-			-- IO Input
-      when X"06" => -- 0x02   IO block 3
-        IO_DAT_RD(7 downto 0)             <= iPin23_16(7 downto 0);
-      when X"07" => -- 0x03   IO block 2
-        IO_DAT_RD(7 downto 0)             <=  "00" & iPin15_8(5 downto 0);
-      when X"08" => -- 0x04   IO block 1
-        IO_DAT_RD(7 downto 0)             <=  "00000" & iPin7_0(2 downto 0);
-			--Read IO Output
-      when X"02" => -- 0x02   IO block 3
-        IO_DAT_RD(7 downto 0)             <= "0000000" & soPin23_16;                
-      when X"03" => -- 0x03   IO block 2
-        IO_DAT_RD(7 downto 0)             <= soPin15_8(7 downto 0);
-      when X"04" => -- 0x04   IO block 1
-        IO_DAT_RD(7 downto 0)             <= soPin7_0(7 downto 0);
-      -- CPLD Version
-			when X"0A" => -- 0x0a  CPLD version
-			  IO_DAT_RD(7 downto 0)             <= CPLD_VERSION(7 downto 0);
-			-- DIP Switch setting
-			when X"0B" => -- 0x0b  DIP Switch setting
-			 IO_DAT_RD(7 downto 0)             <= "0000" & DIP_SW(3 downto 0);
-      -- Read Encoder 1 counter
-      when X"20" => -- 0x20 latch Encoder counter
-      sEnc_MT1 <= Enc_MT1;
-      when X"21" => -- 0x21  Read encoder cunter
-        IO_DAT_RD(7 downto 0)            <= sEnc_MT1(31 downto 24);
-      when X"22" => -- 0x22  Read encoder cunter 
-        IO_DAT_RD(7 downto 0)            <= sEnc_MT1(23 downto 16);
-      when X"23" => -- 0x23  Read encoder cunter 
-        IO_DAT_RD(7 downto 0)            <= sEnc_MT1(15 downto 8);
-      when X"24" => -- 0x24  Read encoder cunter                                       
-        IO_DAT_RD(7 downto 0)            <= sEnc_MT1(7 downto 0);
-      -- Read Encoder 2 counter
-      when X"25" => -- 0x25 latch Encoder counter
-      sEnc_MT2 <= Enc_MT2;
-      when X"26" => -- 0x26  Read encoder cunter
-      IO_DAT_RD(7 downto 0)            <= sEnc_MT2(31 downto 24);
-      when X"27" => -- 0x27  Read encoder cunter 
-      IO_DAT_RD(7 downto 0)            <= sEnc_MT2(23 downto 16);
-      when X"28" => -- 0x28  Read encoder cunter 
-      IO_DAT_RD(7 downto 0)            <= sEnc_MT2(15 downto 8);
-      when X"29" => -- 0x29  Read encoder cunter                                       
-      IO_DAT_RD(7 downto 0)            <= sEnc_MT2(7 downto 0);
-			--Reset module
-			when X"40" => -- 0x40 Read timer config
-		    IO_DAT_RD(7 downto 0) <= R_timer(7 downto 0);
-			--PWM I/F
-		  when X"45" =>  --0x45 Read PWM Frq Low
-        IO_DAT_RD(7 downto 0)            <= sPWM_Frq(7 downto 0);
-		  when X"46" => --0x46 Read PWM Frq High
-        IO_DAT_RD(7 downto 0)            <= "00" & sPWM_Frq(13 downto 8);
-		  when X"47" => --0x47 Read PWM duty Low
-        IO_DAT_RD(7 downto 0)            <= sPWM_Duty(7 downto 0);
-		  when X"48" => --0x48 Read PWM duty High
-        IO_DAT_RD(7 downto 0)            <= "00" & sPWM_Duty(13 downto 8);
-		  when others =>
-        IO_DAT_RD(7 downto 0)            <= "11110011";
-			end case;
+    case vADDRESS is			
+    -- 7 Seg LED indicator for error display
+    when X"00" =>
+    IO_DAT_RD(7 downto 0)              <= sSeg_LED(7 downto 0);
+    -- Output registers
+    when X"02" => -- 0x02   IO block 3
+      IO_DAT_RD <= soOutputs(23 downto 16);
+    when X"03" => -- 0x03   IO block 2
+      IO_DAT_RD <= soOutputs(15 downto 8);
+    when X"04" => -- 0x04   IO block 1
+      IO_DAT_RD <= soOutputs(7 downto 0);
+    -- Input pins
+    when X"06" => -- 0x06   IO block 3    
+      IO_DAT_RD             <= iInputs(23 downto 16);
+    when X"07" => -- 0x07   IO block 2
+      IO_DAT_RD             <= iInputs(15 downto 8);
+    when X"08" => -- 0x08   IO block 1
+      IO_DAT_RD             <= iInputs(7 downto 0);
+    -- CPLD Version
+    when X"0A" => -- 0x0a  CPLD version
+      IO_DAT_RD(7 downto 0)             <= CPLD_VERSION(7 downto 0);
+    -- DIP Switch setting
+    when X"0B" => -- 0x0b  DIP Switch setting
+     IO_DAT_RD(7 downto 0)             <= "0000" & DIP_SW(3 downto 0);
+    -- Read Encoder 1 counter
+    when X"20" => -- 0x20 latch Encoder counter
+    sEnc_MT1 <= Enc_MT1;
+    when X"21" => -- 0x21  Read encoder cunter
+      IO_DAT_RD(7 downto 0)            <= sEnc_MT1(31 downto 24);
+    when X"22" => -- 0x22  Read encoder cunter 
+      IO_DAT_RD(7 downto 0)            <= sEnc_MT1(23 downto 16);
+    when X"23" => -- 0x23  Read encoder cunter 
+      IO_DAT_RD(7 downto 0)            <= sEnc_MT1(15 downto 8);
+    when X"24" => -- 0x24  Read encoder cunter                                       
+      IO_DAT_RD(7 downto 0)            <= sEnc_MT1(7 downto 0);
+    -- Read Encoder 2 counter
+    when X"25" => -- 0x25 latch Encoder counter
+    sEnc_MT2 <= Enc_MT2;
+    when X"26" => -- 0x26  Read encoder cunter
+    IO_DAT_RD(7 downto 0)            <= sEnc_MT2(31 downto 24);
+    when X"27" => -- 0x27  Read encoder cunter 
+    IO_DAT_RD(7 downto 0)            <= sEnc_MT2(23 downto 16);
+    when X"28" => -- 0x28  Read encoder cunter 
+    IO_DAT_RD(7 downto 0)            <= sEnc_MT2(15 downto 8);
+    when X"29" => -- 0x29  Read encoder cunter                                       
+    IO_DAT_RD(7 downto 0)            <= sEnc_MT2(7 downto 0);
+    --Reset module
+    when X"40" => -- 0x40 Read timer config
+      IO_DAT_RD(7 downto 0) <= R_timer(7 downto 0);
+    --PWM I/F
+    when X"45" =>  --0x45 Read PWM Frq Low
+      IO_DAT_RD(7 downto 0)            <= sPWM_Frq(7 downto 0);
+    when X"46" => --0x46 Read PWM Frq High
+      IO_DAT_RD(7 downto 0)            <= "00" & sPWM_Frq(13 downto 8);
+    when X"47" => --0x47 Read PWM duty Low
+      IO_DAT_RD(7 downto 0)            <= sPWM_Duty(7 downto 0);
+    when X"48" => --0x48 Read PWM duty High
+      IO_DAT_RD(7 downto 0)            <= "00" & sPWM_Duty(13 downto 8);
+    when others =>
+      IO_DAT_RD(7 downto 0)            <= "11110011";
+    end case;
   end if;
 end if;  
 end process IO_SPACE_PROC;
