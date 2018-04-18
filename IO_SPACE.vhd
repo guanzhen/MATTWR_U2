@@ -5,60 +5,50 @@ use std.standard;
 
 entity IO_SPACE is
 GENERIC
-    (
-      BUS_WIDTH    : integer  :=    8;     
-      ENC_WIDTH    : integer  :=    32;   
-      FAN_WIDTH    : integer  :=    32;		  
-      CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                     
-    );
+  (
+  BUS_WIDTH    : integer  :=    8;     
+  ENC_WIDTH    : integer  :=    32;   
+  FAN_WIDTH    : integer  :=    32;		  
+  CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                     
+  );
 PORT 
-    (
-      nRESET        : IN    std_logic;
-      Clk           : IN    std_logic;
-      IO_ADDR       : IN    std_logic_vector(BUS_WIDTH-1 downto 0);                     
-      IO_RDY_WR     : IN    std_logic;
-      IO_DAT_WR     : IN    std_logic_vector(BUS_WIDTH-1 downto 0);  
-      IO_RDY_RD     : IN    std_logic;
-      IO_DAT_RD     : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');  
-      --IO PINS
-      iInputs       : IN    std_logic_vector(23 downto 0);
-      oOutputs      : OUT   std_logic_vector(23 downto 0);
-
-      --DIP Switch
-      DIP_SW        : IN    std_logic_vector (3 downto 0);
-
-      --Mt Enc
-      Wr_MT1        : OUT   std_logic := '0';
-      WrVal_MT1     : OUT   std_logic_vector (ENC_WIDTH-1 downto 0) := (others => '0');
-      Enc_MT1       : IN    std_logic_vector (ENC_WIDTH-1 downto 0);
-
-      Wr_MT2        : OUT   std_logic := '0';
-      WrVal_MT2     : OUT   std_logic_vector (ENC_WIDTH-1 downto 0) := (others => '0');
-      Enc_MT2       : IN    std_logic_vector (ENC_WIDTH-1 downto 0);
-
-
-      --7 Seg LED 
-      Seg_LED       : OUT   std_logic_vector (7 downto 0);
-      Seg_DP        : IN    std_logic;                                                       --7 Seg LED DP control Signal & PWM signal from MCU in other module
-
-      --System Reset
-      Wr_timer      : OUT   std_logic := '0';
-      H_timer       : OUT STD_LOGIC_VECTOR (7 downto 0)  := (others => '0'); --for setting
-      R_timer       : IN std_logic_vector (7 downto 0);  --count by us
-      Trigger_Reset : OUT   std_logic := '0';
-
-      --Pizza calibration
-      Pizza_Cali    : OUT   std_logic := '0';
-
-
-      --LED brightness & FAN Speed control
-      Wr_PWM        : OUT   std_logic := '0';
-      PWM_ONOFF     : OUT   std_logic := '0';
-         
-      --PWM I/F
-      PWM_Duty      : OUT  STD_LOGIC_VECTOR (13 downto 0):= (others => '0'); --(0-16000)0-100%
-      PWM_Frq       : OUT  STD_LOGIC_VECTOR (13 downto 0):= (others => '0')  --320-16000 (2-100K,)
-    );
+  (
+  nRESET        : IN    std_logic;
+  Clk           : IN    std_logic;
+  IO_ADDR       : IN    std_logic_vector(BUS_WIDTH-1 downto 0);                     
+  IO_RDY_WR     : IN    std_logic;
+  IO_DAT_WR     : IN    std_logic_vector(BUS_WIDTH-1 downto 0);  
+  IO_RDY_RD     : IN    std_logic;
+  IO_DAT_RD     : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');  
+  --IO PINS
+  iInputs       : IN    std_logic_vector(23 downto 0);
+  oOutputs      : OUT   std_logic_vector(23 downto 0);
+  --DIP Switch
+  DIP_SW        : IN    std_logic_vector (3 downto 0);
+  --Mt Enc
+  Wr_MT1        : OUT   std_logic := '0';
+  WrVal_MT1     : OUT   std_logic_vector (ENC_WIDTH-1 downto 0) := (others => '0');
+  Enc_MT1       : IN    std_logic_vector (ENC_WIDTH-1 downto 0);
+  Wr_MT2        : OUT   std_logic := '0';
+  WrVal_MT2     : OUT   std_logic_vector (ENC_WIDTH-1 downto 0) := (others => '0');
+  Enc_MT2       : IN    std_logic_vector (ENC_WIDTH-1 downto 0);
+  --7 Seg LED 
+  Seg_LED       : OUT   std_logic_vector (7 downto 0);
+  Seg_DP        : IN    std_logic;                                                       --7 Seg LED DP control Signal & PWM signal from MCU in other module
+  --System Reset
+  Wr_timer      : OUT   std_logic := '0';
+  H_timer       : OUT STD_LOGIC_VECTOR (7 downto 0)  := (others => '0'); --for setting
+  R_timer       : IN std_logic_vector (7 downto 0);  --count by us
+  Trigger_Reset : OUT   std_logic := '0';
+  --Pizza calibration
+  Pizza_Cali    : OUT   std_logic := '0';
+  --LED brightness & FAN Speed control
+  Wr_PWM        : OUT   std_logic := '0';
+  PWM_ONOFF     : OUT   std_logic := '0';
+  --PWM I/F
+  PWM_Duty      : OUT  STD_LOGIC_VECTOR (13 downto 0):= (others => '0'); --(0-16000)0-100%
+  PWM_Frq       : OUT  STD_LOGIC_VECTOR (13 downto 0):= (others => '0')  --320-16000 (2-100K,)
+  );
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
@@ -109,13 +99,13 @@ WrVal_MT2     <= sWrVal_MT2;
 LED_OUT : process (sSeg_LED,Seg_DP)
 begin
   if (Seg_DP = '0') then
-    Seg_LED <=  sSeg_LED AND X"00"; 
+    Seg_LED <=  sSeg_LED or X"00"; 
   else
-    Seg_LED <=  sSeg_LED AND X"FF";
+    Seg_LED <=  sSeg_LED or X"FF";
   end if;
 end process LED_OUT;
 
-PIZZA_CALI_PROC: process (nRESET,iInputs)
+PIZZA_CALI_PROC: process (nRESET,iInputs,DIP_SW)
 begin
   if (nRESET = '0') then
     Pizza_Cali  <= '0';
@@ -207,7 +197,7 @@ elsif rising_edge(sEBU_EVENT) then
     case vADDRESS is			
     -- 7 Seg LED indicator for error display
     when X"00" =>
-    IO_DAT_RD(7 downto 0)              <= sSeg_LED(7 downto 0);
+      IO_DAT_RD <= sSeg_LED;
     -- Output registers
     when X"02" => -- 0x02   IO block 3
       IO_DAT_RD <= soOutputs(23 downto 16);

@@ -41,13 +41,14 @@ COMPONENT SRAM_IO is
 	GENERIC ( WIDTH : INTEGER := 8; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
 	PORT
 	(
-		nRESET		:	 IN STD_LOGIC;
-		DATA		:	 INOUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		nRD		:	 IN STD_LOGIC;
+    iCLK : IN std_logic;
+		nRESET :	 IN STD_LOGIC;
+		DATA :	 INOUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
+		nRD :	 IN STD_LOGIC;
 		nWR		:	 IN STD_LOGIC;
 		nCS		:	 IN STD_LOGIC;
 		nADV		:	 IN STD_LOGIC;
-		nWAIT		:	 IN STD_LOGIC;
+		nWAIT		:	 OUT STD_LOGIC;
 		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
 		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
 		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0);
@@ -121,6 +122,7 @@ u1 : SRAM_IO
 GENERIC MAP (  WIDTH =>  8,  CPLD_VERSION =>  "00001101" )
 PORT MAP 
 (
+  iCLK       => sclk,
   nRESET     =>  nRESET       ,
   DATA       =>  DATA         ,
   nRD        =>  nRD          ,
