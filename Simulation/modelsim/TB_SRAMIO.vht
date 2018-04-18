@@ -110,7 +110,7 @@ PORT MAP (
   iAddress => sEBU_iAdd,
   iData => sEBU_iData,
   oData => sEBU_oData,
-  ioData => IO_ADDR,
+  ioData => DATA,
   oADV => nADV,
   oCS => nCS,
   oRD => nRD,
@@ -138,12 +138,13 @@ PORT MAP
 
 TESTSRAM : PROCESS is
 BEGIN
+--defaults
+i_DAT_RD_rdy <= '0';
 --------------------------------------------------------
 -- READ
 --------------------------------------------------------
-
-sEBU_ienwait <= '0';
 -- Read
+sEBU_ienwait <= '0';
 sEBU_iRdWr <='1';
 nRESET <= '0';
 sEBU_iRst<= '0';
@@ -152,10 +153,14 @@ sEBU_iRst<= '1';
 nRESET <= '1';
 -- Read : adress phase
 sEBU_iAdd <= "00001100";
-sEBU_iData <= "10100011";
+sEBU_iData <= (others => 'Z');
+IO_DAT_RD <= "10100010";
 wait until nRD = '0';
+wait for 10 ns;
+i_DAT_RD_rdy <= '1';
 -- read : command phase
 wait until nRD = '1';
+i_DAT_RD_rdy <= '0';
 wait for 100 ns;
 sEBU_iRst <= 'Z';
 wait for 200 ns;
@@ -163,20 +168,24 @@ wait for 200 ns;
 --------------------------------------------------------
 -- READ WITH WAIT
 --------------------------------------------------------
-
-sEBU_ienwait <= '1';
 -- Read
+sEBU_ienwait <= '1';
 sEBU_iRdWr <='1';
 sEBU_iRst<= '0';
 wait for 100 ns;
 sEBU_iRst<= '1';
 -- Read : adress phase
-sEBU_iAdd <= "00001100";
-sEBU_iData <= "10100011";
+sEBU_iAdd <= "00001101";
+sEBU_iData <= (others => 'Z');
+IO_DAT_RD <= "10100011";
 nWAIT <= '0';
 wait until nRD = '0';
+wait for 10 ns;
+i_DAT_RD_rdy <= '1';
+wait for 100 ns;
+i_DAT_RD_rdy <= '0';
 -- read : command phase
-wait for 500 ns; -- n wait delay. 100 nS  =  1 cycle
+wait for 400 ns; -- n wait delay. 100 nS  =  1 cycle
 nWAIT <= '1';
 wait until nRD = '1';
 wait for 100 ns;
