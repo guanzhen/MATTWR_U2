@@ -6,19 +6,19 @@ use std.standard;
 entity IO_SPACE is
 GENERIC
     (
-        BUS_WIDTH    : integer  :=    8;     
-        ENC_WIDTH    : integer  :=    32;   
-        FAN_WIDTH    : integer  :=    32;		  
-        CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                     
+      BUS_WIDTH    : integer  :=    8;     
+      ENC_WIDTH    : integer  :=    32;   
+      FAN_WIDTH    : integer  :=    32;		  
+      CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                     
     );
 PORT 
     (
-       nRESET        : IN    std_logic; 
+     nRESET        : IN    std_logic; 
 		 Clk           : IN    std_logic;
-       IO_ADDR       : IN    std_logic_vector(BUS_WIDTH-1 downto 0);                     
-       IO_RDY_WR     : IN    std_logic;
+     IO_ADDR       : IN    std_logic_vector(BUS_WIDTH-1 downto 0);                     
+     IO_RDY_WR     : IN    std_logic;
 		 IO_DAT_WR     : IN    std_logic_vector(BUS_WIDTH-1 downto 0);  
-       IO_RDY_RD     : IN    std_logic;
+     IO_RDY_RD     : IN    std_logic;
 		 IO_DAT_RD     : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');  
 		 
 		 --IO PINS
@@ -69,6 +69,7 @@ PORT
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
+signal sEBU_EVENT : std_logic := '0';
 signal sWr_MT1    : std_logic := '0';
 signal sWr_MT2    : std_logic := '0';
 signal sWrVal_MT1 : std_logic_vector (ENC_WIDTH-1 downto 0) := (others => '0');
@@ -95,13 +96,78 @@ signal sPWM_Frq   : STD_LOGIC_VECTOR (13 downto 0):= (others => '0');
 signal soPin7_0   : std_logic_vector(7 downto 0) := (others => '0');
 signal soPin15_8  : std_logic_vector(7 downto 0) := (others => '0');
 signal soPin23_16 : std_logic := '0';
+signal sPizza_Cali : std_logic := '0';
 
 BEGIN
+
+sEBU_EVENT <= IO_RDY_WR OR IO_RDY_RD;
+oPin7_0       <= soPin7_0;
+oPin15_8      <= soPin15_8 OR X"40";
+oPin23_16     <= soPin23_16;
 Wr_MT1        <= sWr_MT1;
 Wr_MT2        <= sWr_MT2;
+H_timer       <= sH_timer;
 Wr_timer      <= sWr_timer;
 Trigger_Reset <= sTrigger_Reset;	
+PWM_Frq       <= sPWM_Frq;
+PWM_Duty      <= sPWM_Duty;
 Wr_PWM        <= sWr_PWM;
+PWM_ONOFF     <= sPWM_ONOFF;
+WrVal_MT1     <= sWrVal_MT1;
+WrVal_MT2     <= sWrVal_MT2;	
+Pizza_Cali    <= sPizza_Cali;
+
+LED_OUT : process (sSeg_LED,Seg_DP)
+begin
+  if (Seg_DP = '0') then
+    Seg_LED <=  sSeg_LED OR X"00"; 
+  else
+    Seg_LED <=  sSeg_LED OR X"FF";
+  end if;
+end process LED_OUT;
+
+IO_SPACE_PROC : process (nRESET)
+variable vADDRESS : std_logic_vector (7 downto 0);
+begin
+
+if (nRESET = '0') then
+  vADDRESS := (others => '0');
+  sSeg_LED <= "11111111";
+  soPin7_0 <= "00000000"; --(others => 'Z');
+  soPin15_8 <= "00000000";--(others => 'Z');
+  soPin23_16 <= '0';
+  sWr_MT1 <= '0';
+  sWrVal_MT1 <= (others => '0');
+  sWr_MT2 <= '0';  
+  sWrVal_MT2 <= (others => '0');
+  sH_timer <= "00001011";
+  sWr_timer <= '0';
+  sTrigger_Reset <= '0';
+  sPWM_Frq <= "11111010000000";	
+  sPWM_Duty <= "01111101000000";	
+  sPWM_ONOFF <= '0';  
+  sPizza_Cali <= '0';
+elsif rising_edge(sEBU_EVENT) then
+  vADDRESS := IO_ADDR;  
+  if (IO_RDY_RD = '1') then
+    case vADDRESS is 
+    when X"00" =>   
+      sSeg_LED(7 downto 0) <=  IO_DAT_WR(7 downto 0);
+    when X"02" => -- 0x02   IO block 3
+      soPin23_16 <= IO_DAT_WR(0);
+    when X"03" => -- 0x03   IO block 2
+      soPin15_8(7 downto 0) <= IO_DAT_WR(7 downto 0);
+    when X"04" => -- 0x04   IO block 1
+      soPin7_0(7 downto 0) <= IO_DAT_WR(7 downto 0);
+
+    when others =>
+    end case;
+  end if;
+end if;  
+end process IO_SPACE_PROC;
+
+
+
 
 IOSPACE_WR_PROC: process (nRESET, IO_RDY_WR, IO_RDY_RD, IO_DAT_WR, IO_ADDR, sWr_MT1, sWr_MT2, sWrVal_MT1, sWrVal_MT2, soPin7_0, soPin15_8, soPin23_16, iPin23_16, iPin15_8, iPin7_0, DIP_SW, sEnc_MT1, sEnc_MT2, Enc_MT1, Enc_MT2, sWr_timer, sTrigger_Reset, sWr_PWM, sSeg_LED, R_timer, sPWM_Frq, sPWM_Duty) is
     variable IO_ADDR_TMP : std_logic_vector (7 downto 0);
