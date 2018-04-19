@@ -1,0 +1,332 @@
+Analysis & Synthesis report for MaterialTowerCPLD
+Thu Apr 19 13:15:35 2018
+Quartus II 64-Bit Version 14.1.0 Build 186 12/03/2014 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. User-Specified and Inferred Latches
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2014 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus II License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Thu Apr 19 13:13:45 2018       ;
+; Quartus II 64-Bit Version   ; 14.1.0 Build 186 12/03/2014 SJ Full Version ;
+; Revision Name               ; MaterialTowerCPLD                           ;
+; Top-level Entity Name       ; PWM_Module                                  ;
+; Family                      ; MAX V                                       ;
+; Total logic elements        ; 138                                         ;
+; Total pins                  ; 33                                          ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; 5M1270ZT144C5      ;                    ;
+; Top-level entity name                                                      ; PWM_Module         ; MaterialTowerCPLD  ;
+; Family name                                                                ; MAX V              ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                          ;
++----------------------------------+-----------------+-----------------+------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                   ; Library ;
++----------------------------------+-----------------+-----------------+------------------------------------------------+---------+
+; PWM_Module.vhd                   ; yes             ; User VHDL File  ; C:/Projects/Quartus/MT_CPLD_GIT/PWM_Module.vhd ;         ;
++----------------------------------+-----------------+-----------------+------------------------------------------------+---------+
+
+
++------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary          ;
++---------------------------------------------+--------+
+; Resource                                    ; Usage  ;
++---------------------------------------------+--------+
+; Total logic elements                        ; 138    ;
+;     -- Combinational with no register       ; 108    ;
+;     -- Register only                        ; 16     ;
+;     -- Combinational with a register        ; 14     ;
+;                                             ;        ;
+; Logic element usage by number of LUT inputs ;        ;
+;     -- 4 input functions                    ; 74     ;
+;     -- 3 input functions                    ; 17     ;
+;     -- 2 input functions                    ; 29     ;
+;     -- 1 input functions                    ; 2      ;
+;     -- 0 input functions                    ; 0      ;
+;                                             ;        ;
+; Logic elements by mode                      ;        ;
+;     -- normal mode                          ; 112    ;
+;     -- arithmetic mode                      ; 26     ;
+;     -- qfbk mode                            ; 0      ;
+;     -- register cascade mode                ; 0      ;
+;     -- synchronous clear/load mode          ; 0      ;
+;     -- asynchronous clear/load mode         ; 29     ;
+;                                             ;        ;
+; Total registers                             ; 30     ;
+; Total logic cells in carry chains           ; 28     ;
+; I/O pins                                    ; 33     ;
+; Maximum fan-out node                        ; nReset ;
+; Maximum fan-out                             ; 70     ;
+; Total fan-out                               ; 527    ;
+; Average fan-out                             ; 3.08   ;
++---------------------------------------------+--------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                  ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+; |PWM_Module                ; 138 (138)   ; 30           ; 0          ; 33   ; 0            ; 108 (108)    ; 16 (16)           ; 14 (14)          ; 28 (28)         ; 0 (0)      ; |PWM_Module         ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; DutyVal[13]                                         ; PWM_G               ; yes                    ;
+; DutyVal[12]                                         ; PWM_G               ; yes                    ;
+; DutyVal[11]                                         ; PWM_G               ; yes                    ;
+; DutyVal[10]                                         ; PWM_G               ; yes                    ;
+; DutyVal[9]                                          ; PWM_G               ; yes                    ;
+; DutyVal[8]                                          ; PWM_G               ; yes                    ;
+; DutyVal[7]                                          ; PWM_G               ; yes                    ;
+; DutyVal[6]                                          ; PWM_G               ; yes                    ;
+; DutyVal[5]                                          ; PWM_G               ; yes                    ;
+; DutyVal[4]                                          ; PWM_G               ; yes                    ;
+; DutyVal[3]                                          ; PWM_G               ; yes                    ;
+; DutyVal[2]                                          ; PWM_G               ; yes                    ;
+; DutyVal[1]                                          ; PWM_G               ; yes                    ;
+; DutyVal[0]                                          ; PWM_G               ; yes                    ;
+; FrqVal[13]                                          ; PWM_G               ; yes                    ;
+; FrqVal[12]                                          ; PWM_G               ; yes                    ;
+; FrqVal[11]                                          ; PWM_G               ; yes                    ;
+; FrqVal[10]                                          ; PWM_G               ; yes                    ;
+; FrqVal[9]                                           ; PWM_G               ; yes                    ;
+; FrqVal[8]                                           ; PWM_G               ; yes                    ;
+; FrqVal[7]                                           ; PWM_G               ; yes                    ;
+; FrqVal[6]                                           ; PWM_G               ; yes                    ;
+; FrqVal[5]                                           ; PWM_G               ; yes                    ;
+; FrqVal[4]                                           ; PWM_G               ; yes                    ;
+; FrqVal[3]                                           ; PWM_G               ; yes                    ;
+; FrqVal[2]                                           ; PWM_G               ; yes                    ;
+; FrqVal[1]                                           ; PWM_G               ; yes                    ;
+; FrqVal[0]                                           ; PWM_G               ; yes                    ;
+; Number of user-specified and inferred latches = 28  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 30    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 29    ;
+; Number of registers using Asynchronous Load  ; 28    ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |PWM_Module|T_Duty[13]     ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |PWM_Module|T_Duty[12]     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 14.1.0 Build 186 12/03/2014 SJ Full Version
+    Info: Processing started: Thu Apr 19 13:13:22 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MaterialTowerCPLD -c MaterialTowerCPLD
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Info (12021): Found 2 design units, including 1 entities, in source file materialtowercpld.vhd
+    Info (12022): Found design unit 1: MaterialTowerCPLD-bdf_type
+    Info (12023): Found entity 1: MaterialTowerCPLD
+Info (12021): Found 2 design units, including 1 entities, in source file pwm_module.vhd
+    Info (12022): Found design unit 1: PWM_Module-a_PWM_Module
+    Info (12023): Found entity 1: PWM_Module
+Info (12021): Found 2 design units, including 1 entities, in source file sram_io.vhd
+    Info (12022): Found design unit 1: SRAM_IO-A_SRAM_IO
+    Info (12023): Found entity 1: SRAM_IO
+Info (12021): Found 2 design units, including 1 entities, in source file quaddectodirpulse.vhd
+    Info (12022): Found design unit 1: QuadDecToDIRPulse-a_QuadDecToDIRPulse
+    Info (12023): Found entity 1: QuadDecToDIRPulse
+Info (12021): Found 2 design units, including 1 entities, in source file io_space.vhd
+    Info (12022): Found design unit 1: IO_SPACE-A_IO_SPACE
+    Info (12023): Found entity 1: IO_SPACE
+Info (12021): Found 2 design units, including 1 entities, in source file system_reset.vhd
+    Info (12022): Found design unit 1: System_reset-A_System_reset
+    Info (12023): Found entity 1: System_reset
+Info (12127): Elaborating entity "PWM_Module" for the top level hierarchy
+Warning (10631): VHDL Process Statement warning at PWM_Module.vhd(37): inferring latch(es) for signal or variable "DutyVal", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at PWM_Module.vhd(37): inferring latch(es) for signal or variable "FrqVal", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "FrqVal[0]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[1]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[2]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[3]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[4]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[5]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[6]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[7]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[8]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[9]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[10]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[11]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[12]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "FrqVal[13]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[0]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[1]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[2]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[3]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[4]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[5]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[6]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[7]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[8]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[9]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[10]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[11]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[12]" at PWM_Module.vhd(37)
+Info (10041): Inferred latch for "DutyVal[13]" at PWM_Module.vhd(37)
+Info (21057): Implemented 171 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 32 input pins
+    Info (21059): Implemented 1 output pins
+    Info (21061): Implemented 138 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 671 megabytes
+    Info: Processing ended: Thu Apr 19 13:13:45 2018
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:45
+
+
