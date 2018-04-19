@@ -24,7 +24,7 @@ signal nWAIT         : std_logic := '1';
 signal IO_ADDR       : std_logic_vector(WIDTH-1 downto 0);
 signal IO_DAT_WR     : std_logic_vector(WIDTH-1 downto 0);
 signal IO_DAT_RD     : std_logic_vector(WIDTH-1 downto 0);
-signal i_DAT_RD_rdy  : std_logic;
+signal nWrRdy        : std_logic;
 
 signal sEBU_iRst     : std_logic := '1';  --EBU reset signal
 signal sEBU_iRdWr    : std_logic := '1';
@@ -45,6 +45,7 @@ COMPONENT SRAM_IO is
 		nCS		:	 IN STD_LOGIC;
 		nADV		:	 IN STD_LOGIC;
 		nWAIT		:	 OUT STD_LOGIC;
+    nWrRdy        : OUT std_logic;
 		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
 		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
 		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0)
@@ -123,6 +124,7 @@ PORT MAP
   nCS        =>  nCS          ,
   nADV       =>  nADV         ,
   nWAIT      =>  nWAIT        ,
+  nWrRdy      =>  nWrRdy        ,
   IO_ADDR    =>  IO_ADDR      , --AD_Bus
   IO_DAT_WR  =>  IO_DAT_WR    , -- data to read
   IO_DAT_RD  =>  IO_DAT_RD     -- data to read
@@ -131,7 +133,6 @@ PORT MAP
 TESTSRAM : PROCESS is
 BEGIN
 --defaults
-i_DAT_RD_rdy <= '0';
 --------------------------------------------------------
 -- READ
 --------------------------------------------------------
