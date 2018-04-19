@@ -50,14 +50,7 @@ SIGNAL IO_RDY_WR : STD_LOGIC;
 
 SIGNAL iInputs : STD_LOGIC_VECTOR(23 DOWNTO 0);
 SIGNAL oOutputs : STD_LOGIC_VECTOR(23 DOWNTO 0);
-
-SIGNAL iPin7_0 : STD_LOGIC_VECTOR(2 DOWNTO 0);
-SIGNAL iPin15_8 : STD_LOGIC_VECTOR(5 DOWNTO 0);
-SIGNAL iPin23_16 : STD_LOGIC_VECTOR(7 DOWNTO 0);
 SIGNAL nRESET : STD_LOGIC;
-SIGNAL oPin7_0 : STD_LOGIC_VECTOR(7 DOWNTO 0);
-SIGNAL oPin15_8 : STD_LOGIC_VECTOR(7 DOWNTO 0);
-SIGNAL oPin23_16 : STD_LOGIC;
 SIGNAL Pizza_Cali : STD_LOGIC;
 SIGNAL PWM_Duty : STD_LOGIC_VECTOR(13 DOWNTO 0);
 SIGNAL PWM_Frq : STD_LOGIC_VECTOR(13 DOWNTO 0);
@@ -158,19 +151,19 @@ BEGIN
 nRESET <= '0';
 wait for 100 ns;
 nRESET <= '1';
-IO_RDY_WR <= '0';
+wait for 100 ns;
+IO_RDY_RD <= '1';
+IO_RDY_WR <= '1';
 IO_DAT_WR <= (others => '0');
 Seg_DP <= '1';
-
-iPin7_0 <= (others => 'Z');
-iPin15_8 <= (others => 'Z');
-iPin23_16 <= (others => 'Z');
+iInputs<= (others => 'Z');
 
 -- READ CPLD VERSION
 IO_ADDR <= "00001010";
-IO_RDY_RD <= '1';
 wait for 100 ns;
 IO_RDY_RD <= '0';
+wait for 100 ns;
+IO_RDY_RD <= '1';
 
 nRESET <= '1';
 wait for 200 ns;
@@ -178,9 +171,9 @@ wait for 200 ns;
 -- WRITE SOMETHING
 IO_ADDR <= X"00";
 IO_DAT_WR <= X"5F";
-IO_RDY_WR <= '1';
-wait for 100 ns;
 IO_RDY_WR <= '0';
+wait for 100 ns;
+IO_RDY_WR <= '1';
 
 
 

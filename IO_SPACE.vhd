@@ -196,7 +196,7 @@ end process IO_SPACE_PROC_WR;
 IO_SPACE_PROC_RD : process (nRESET,sEBU_EVENT,IO_RDY_RD)
 variable vADDRESS : std_logic_vector (7 downto 0);
 begin
-  if falling_edge(IO_RDY_WR) then
+  if rising_edge(Clk) then
   vADDRESS := IO_ADDR;
     case vADDRESS is			
     -- 7 Seg LED indicator for error display
