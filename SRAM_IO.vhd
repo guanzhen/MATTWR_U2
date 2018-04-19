@@ -74,21 +74,22 @@ begin
     IO_DAT_WR <= (others => '0');
   elsif falling_edge(nWR) and nCS = '0' then
     IO_DAT_WR <= DATA;
-  end if; 
-  
+  end if;   
 end process SRAM_WR_DATA_PROC;
 
 -- nWrite state machine
 SRAM_WR_SIG_PROC: process (nRESET, nCS, iCLK,nWR,sWrState) is
 begin
-  if nRESET = '0' then
+  if nRESET = '0' or nCS = '1' then
     sWrState <= idle;
   elsif nWR = '0' and sWrState = idle then
     sWrState <= write_start1;
   elsif rising_edge(iCLK) then
     if sWrState = write_start1 then
       sWrState <= write_start2;
-    elsif sWrState = write_start2 then
+    end if;
+  elsif falling_edge(iCLK) then
+    if sWrState = write_start2 then
       sWrState <= write_end;
     end if;
   end if;
