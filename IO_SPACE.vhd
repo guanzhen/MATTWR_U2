@@ -52,7 +52,6 @@ PORT
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
-signal sEBU_EVENT : std_logic := '0';
 signal sWr_MT1    : std_logic := '0';
 signal sWr_MT2    : std_logic := '0';
 signal sWrVal_MT1 : std_logic_vector (ENC_WIDTH-1 downto 0) := (others => '0');
@@ -79,8 +78,6 @@ signal sPWM_Frq   : STD_LOGIC_VECTOR (13 downto 0):= (others => '0');
 signal soOutputs   : std_logic_vector(23 downto 0) := (others => '0');
 
 BEGIN
-
-sEBU_EVENT    <= IO_RDY_WR OR IO_RDY_RD when nRESET = '1' else '0';
 
 -- outputs
 oOutputs      <= soOutputs OR X"004000";
@@ -114,7 +111,7 @@ begin
   end if;
 end process PIZZA_CALI_PROC;
 
-IO_SPACE_PROC_WR : process (nRESET,sEBU_EVENT,IO_RDY_WR)
+IO_SPACE_PROC_WR : process (nRESET,IO_RDY_WR)
 variable vADDRESS : std_logic_vector (7 downto 0);
 begin
 
@@ -193,7 +190,7 @@ elsif falling_edge(IO_RDY_WR) then
 end if;
 end process IO_SPACE_PROC_WR;
   
-IO_SPACE_PROC_RD : process (nRESET,sEBU_EVENT,IO_RDY_RD)
+IO_SPACE_PROC_RD : process (nRESET,Clk,IO_RDY_RD)
 variable vADDRESS : std_logic_vector (7 downto 0);
 begin
   if rising_edge(Clk) then
