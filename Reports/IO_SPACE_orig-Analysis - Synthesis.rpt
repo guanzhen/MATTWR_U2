@@ -1,0 +1,644 @@
+Analysis & Synthesis report for MaterialTowerCPLD
+Wed Apr 18 13:47:15 2018
+Quartus II 64-Bit Version 14.1.0 Build 186 12/03/2014 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. User-Specified and Inferred Latches
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |IO_SPACE
+ 12. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2014 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus II License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Wed Apr 18 13:00:08 2018       ;
+; Quartus II 64-Bit Version   ; 14.1.0 Build 186 12/03/2014 SJ Full Version ;
+; Revision Name               ; MaterialTowerCPLD                           ;
+; Top-level Entity Name       ; IO_SPACE                                    ;
+; Family                      ; MAX V                                       ;
+; Total logic elements        ; 527                                         ;
+; Total pins                  ; 254                                         ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; 5M1270ZT144C5      ;                    ;
+; Top-level entity name                                                      ; IO_SPACE           ; MaterialTowerCPLD  ;
+; Family name                                                                ; MAX V              ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                        ;
++----------------------------------+-----------------+-----------------+----------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                 ; Library ;
++----------------------------------+-----------------+-----------------+----------------------------------------------+---------+
+; IO_SPACE.vhd                     ; yes             ; User VHDL File  ; C:/Projects/Quartus/MT_CPLD_GIT/IO_SPACE.vhd ;         ;
++----------------------------------+-----------------+-----------------+----------------------------------------------+---------+
+
+
++------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary          ;
++---------------------------------------------+--------+
+; Resource                                    ; Usage  ;
++---------------------------------------------+--------+
+; Total logic elements                        ; 527    ;
+;     -- Combinational with no register       ; 400    ;
+;     -- Register only                        ; 1      ;
+;     -- Combinational with a register        ; 126    ;
+;                                             ;        ;
+; Logic element usage by number of LUT inputs ;        ;
+;     -- 4 input functions                    ; 238    ;
+;     -- 3 input functions                    ; 136    ;
+;     -- 2 input functions                    ; 152    ;
+;     -- 1 input functions                    ; 0      ;
+;     -- 0 input functions                    ; 0      ;
+;                                             ;        ;
+; Logic elements by mode                      ;        ;
+;     -- normal mode                          ; 527    ;
+;     -- arithmetic mode                      ; 0      ;
+;     -- qfbk mode                            ; 0      ;
+;     -- register cascade mode                ; 0      ;
+;     -- synchronous clear/load mode          ; 9      ;
+;     -- asynchronous clear/load mode         ; 0      ;
+;                                             ;        ;
+; Total registers                             ; 127    ;
+; I/O pins                                    ; 254    ;
+; Maximum fan-out node                        ; nRESET ;
+; Maximum fan-out                             ; 225    ;
+; Total fan-out                               ; 1941   ;
+; Average fan-out                             ; 2.49   ;
++---------------------------------------------+--------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                  ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+; |IO_SPACE                  ; 527 (527)   ; 127          ; 0          ; 254  ; 0            ; 400 (400)    ; 1 (1)             ; 126 (126)        ; 0 (0)           ; 0 (0)      ; |IO_SPACE           ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                 ;
++------------------------------------------------------+---------------------+------------------------+
+; Latch Name                                           ; Latch Enable Signal ; Free of Timing Hazards ;
++------------------------------------------------------+---------------------+------------------------+
+; IO_DAT_RD[0]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[1]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[2]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[3]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[4]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[5]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[6]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; IO_DAT_RD[7]$latch                                   ; IO_DAT_RD[7]        ; yes                    ;
+; sWr_MT1                                              ; sWr_MT1             ; yes                    ;
+; sWr_MT2                                              ; sWr_MT2             ; yes                    ;
+; sWr_timer                                            ; sWr_timer           ; yes                    ;
+; sTrigger_Reset                                       ; sTrigger_Reset      ; yes                    ;
+; sWr_PWM                                              ; sWr_PWM             ; yes                    ;
+; sPWM_Frq[0]                                          ; sPWM_Frq[0]         ; yes                    ;
+; sPWM_Frq[8]                                          ; sPWM_Frq[8]         ; yes                    ;
+; sPWM_Duty[0]                                         ; sPWM_Duty[0]        ; yes                    ;
+; sEnc_MT2[8]                                          ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT2[0]                                          ; sEnc_MT2[1]         ; yes                    ;
+; soPin15_8[0]                                         ; soPin15_8[0]        ; yes                    ;
+; soPin23_16                                           ; soPin23_16          ; yes                    ;
+; sEnc_MT1[24]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT1[0]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sSeg_LED[0]                                          ; sSeg_LED[0]         ; yes                    ;
+; soPin7_0[0]                                          ; soPin7_0[0]         ; yes                    ;
+; sEnc_MT2[24]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[8]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT1[16]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[16]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sPWM_Duty[8]                                         ; sPWM_Duty[8]        ; yes                    ;
+; sEnc_MT1[1]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[25]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[25]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[17]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[17]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sSeg_LED[1]                                          ; sSeg_LED[0]         ; yes                    ;
+; soPin15_8[1]                                         ; soPin15_8[0]        ; yes                    ;
+; sEnc_MT1[9]                                          ; sEnc_MT1[0]         ; yes                    ;
+; soPin7_0[1]                                          ; soPin7_0[0]         ; yes                    ;
+; sEnc_MT2[9]                                          ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT2[1]                                          ; sEnc_MT2[1]         ; yes                    ;
+; sPWM_Frq[9]                                          ; sPWM_Frq[8]         ; yes                    ;
+; sPWM_Duty[1]                                         ; sPWM_Duty[0]        ; yes                    ;
+; sPWM_Frq[1]                                          ; sPWM_Frq[0]         ; yes                    ;
+; sPWM_Duty[9]                                         ; sPWM_Duty[8]        ; yes                    ;
+; sEnc_MT1[18]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT1[2]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[26]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[26]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[18]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sSeg_LED[2]                                          ; sSeg_LED[0]         ; yes                    ;
+; soPin15_8[2]                                         ; soPin15_8[0]        ; yes                    ;
+; sEnc_MT1[10]                                         ; sEnc_MT1[0]         ; yes                    ;
+; soPin7_0[2]                                          ; soPin7_0[0]         ; yes                    ;
+; sEnc_MT2[10]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT2[2]                                          ; sEnc_MT2[1]         ; yes                    ;
+; sPWM_Frq[10]                                         ; sPWM_Frq[8]         ; yes                    ;
+; sPWM_Duty[2]                                         ; sPWM_Duty[0]        ; yes                    ;
+; sPWM_Frq[2]                                          ; sPWM_Frq[0]         ; yes                    ;
+; sPWM_Duty[10]                                        ; sPWM_Duty[8]        ; yes                    ;
+; sPWM_Frq[3]                                          ; sPWM_Frq[0]         ; yes                    ;
+; sPWM_Frq[11]                                         ; sPWM_Frq[8]         ; yes                    ;
+; sPWM_Duty[3]                                         ; sPWM_Duty[0]        ; yes                    ;
+; sEnc_MT2[11]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT2[3]                                          ; sEnc_MT2[1]         ; yes                    ;
+; soPin15_8[3]                                         ; soPin15_8[0]        ; yes                    ;
+; sEnc_MT1[19]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT1[11]                                         ; sEnc_MT1[0]         ; yes                    ;
+; soPin7_0[3]                                          ; soPin7_0[0]         ; yes                    ;
+; sEnc_MT1[3]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sSeg_LED[3]                                          ; sSeg_LED[0]         ; yes                    ;
+; sEnc_MT1[27]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[27]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT2[19]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sPWM_Duty[11]                                        ; sPWM_Duty[8]        ; yes                    ;
+; soPin7_0[4]                                          ; soPin7_0[0]         ; yes                    ;
+; sEnc_MT2[12]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[4]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[28]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[28]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[20]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[20]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sSeg_LED[4]                                          ; sSeg_LED[0]         ; yes                    ;
+; soPin15_8[4]                                         ; soPin15_8[0]        ; yes                    ;
+; sEnc_MT1[12]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[4]                                          ; sEnc_MT2[1]         ; yes                    ;
+; sPWM_Frq[12]                                         ; sPWM_Frq[8]         ; yes                    ;
+; sPWM_Duty[4]                                         ; sPWM_Duty[0]        ; yes                    ;
+; sPWM_Frq[4]                                          ; sPWM_Frq[0]         ; yes                    ;
+; sPWM_Duty[12]                                        ; sPWM_Duty[8]        ; yes                    ;
+; soPin7_0[5]                                          ; soPin7_0[0]         ; yes                    ;
+; sEnc_MT2[13]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[21]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT1[5]                                          ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[29]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sEnc_MT1[29]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[21]                                         ; sEnc_MT2[1]         ; yes                    ;
+; sSeg_LED[5]                                          ; sSeg_LED[0]         ; yes                    ;
+; soPin15_8[5]                                         ; soPin15_8[0]        ; yes                    ;
+; sEnc_MT1[13]                                         ; sEnc_MT1[0]         ; yes                    ;
+; sEnc_MT2[5]                                          ; sEnc_MT2[1]         ; yes                    ;
+; Number of user-specified and inferred latches = 203  ;                     ;                        ;
++------------------------------------------------------+---------------------+------------------------+
+Table restricted to first 100 entries. Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 127   ;
+; Number of registers using Synchronous Clear  ; 1     ;
+; Number of registers using Synchronous Load   ; 8     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 1:1                ; 2 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux27            ;
+; 1:1                ; 6 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux181           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux174           ;
+; 1:1                ; 6 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux196           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux186           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux211           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux89            ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux77            ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux74            ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux67            ;
+; 1:1                ; 33 bits   ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux116           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux58            ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux50            ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux43            ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux34            ;
+; 1:1                ; 33 bits   ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux146           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux0             ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux12            ;
+; 254:1              ; 2 bits    ; 338 LEs       ; 38 LEs               ; 300 LEs                ; No         ; |IO_SPACE|Mux162           ;
+; 254:1              ; 2 bits    ; 338 LEs       ; 38 LEs               ; 300 LEs                ; No         ; |IO_SPACE|Mux160           ;
+; 254:1              ; 2 bits    ; 338 LEs       ; 34 LEs               ; 304 LEs                ; No         ; |IO_SPACE|Mux158           ;
+; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |IO_SPACE|Mux21            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |IO_SPACE ;
++----------------+----------+----------------------------------------------+
+; Parameter Name ; Value    ; Type                                         ;
++----------------+----------+----------------------------------------------+
+; BUS_WIDTH      ; 8        ; Signed Integer                               ;
+; ENC_WIDTH      ; 32       ; Signed Integer                               ;
+; FAN_WIDTH      ; 32       ; Signed Integer                               ;
+; CPLD_VERSION   ; 00001101 ; Unsigned Binary                              ;
++----------------+----------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 14.1.0 Build 186 12/03/2014 SJ Full Version
+    Info: Processing started: Wed Apr 18 12:59:37 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MaterialTowerCPLD -c MaterialTowerCPLD
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Info (12021): Found 2 design units, including 1 entities, in source file materialtowercpld.vhd
+    Info (12022): Found design unit 1: MaterialTowerCPLD-bdf_type
+    Info (12023): Found entity 1: MaterialTowerCPLD
+Info (12021): Found 2 design units, including 1 entities, in source file pwm_module.vhd
+    Info (12022): Found design unit 1: PWM_Module-a_PWM_Module
+    Info (12023): Found entity 1: PWM_Module
+Info (12021): Found 2 design units, including 1 entities, in source file sram_io.vhd
+    Info (12022): Found design unit 1: SRAM_IO-A_SRAM_IO
+    Info (12023): Found entity 1: SRAM_IO
+Info (12021): Found 2 design units, including 1 entities, in source file quaddectodirpulse.vhd
+    Info (12022): Found design unit 1: QuadDecToDIRPulse-a_QuadDecToDIRPulse
+    Info (12023): Found entity 1: QuadDecToDIRPulse
+Info (12021): Found 2 design units, including 1 entities, in source file io_space.vhd
+    Info (12022): Found design unit 1: IO_SPACE-A_IO_SPACE
+    Info (12023): Found entity 1: IO_SPACE
+Info (12021): Found 2 design units, including 1 entities, in source file system_reset.vhd
+    Info (12022): Found design unit 1: System_reset-A_System_reset
+    Info (12023): Found entity 1: System_reset
+Info (12127): Elaborating entity "IO_SPACE" for the top level hierarchy
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "soPin7_0", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "soPin15_8", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "soPin23_16", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sSeg_LED", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sWr_MT1", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sWr_MT2", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sPWM_ONOFF", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sWrVal_MT1", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sWrVal_MT2", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sH_timer", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sWr_timer", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sTrigger_Reset", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sPWM_Frq", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sPWM_Duty", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sWr_PWM", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "IO_DAT_RD", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sEnc_MT1", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at IO_SPACE.vhd(106): inferring latch(es) for signal or variable "sEnc_MT2", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "sEnc_MT2[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[8]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[9]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[10]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[11]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[12]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[13]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[14]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[15]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[16]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[17]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[18]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[19]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[20]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[21]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[22]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[23]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[24]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[25]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[26]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[27]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[28]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[29]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[30]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT2[31]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[8]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[9]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[10]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[11]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[12]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[13]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[14]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[15]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[16]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[17]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[18]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[19]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[20]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[21]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[22]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[23]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[24]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[25]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[26]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[27]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[28]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[29]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[30]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sEnc_MT1[31]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "IO_DAT_RD[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWr_PWM" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[8]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[9]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[10]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[11]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[12]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Duty[13]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[8]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[9]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[10]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[11]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[12]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_Frq[13]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sTrigger_Reset" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWr_timer" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sH_timer[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[8]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[9]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[10]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[11]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[12]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[13]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[14]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[15]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[16]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[17]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[18]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[19]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[20]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[21]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[22]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[23]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[24]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[25]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[26]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[27]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[28]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[29]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[30]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT2[31]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[8]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[9]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[10]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[11]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[12]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[13]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[14]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[15]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[16]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[17]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[18]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[19]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[20]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[21]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[22]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[23]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[24]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[25]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[26]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[27]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[28]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[29]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[30]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWrVal_MT1[31]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sPWM_ONOFF" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWr_MT2" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sWr_MT1" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "sSeg_LED[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin23_16" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin15_8[7]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[0]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[1]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[2]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[3]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[4]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[5]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[6]" at IO_SPACE.vhd(106)
+Info (10041): Inferred latch for "soPin7_0[7]" at IO_SPACE.vhd(106)
+Warning (13012): Latch IO_DAT_RD[0]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[4]
+Warning (13012): Latch IO_DAT_RD[1]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[4]
+Warning (13012): Latch IO_DAT_RD[2]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[4]
+Warning (13012): Latch IO_DAT_RD[3]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[4]
+Warning (13012): Latch IO_DAT_RD[4]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[6]
+Warning (13012): Latch IO_DAT_RD[5]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[6]
+Warning (13012): Latch IO_DAT_RD[6]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[3]
+Warning (13012): Latch IO_DAT_RD[7]$latch has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal IO_ADDR[3]
+Info (21057): Implemented 781 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 114 input pins
+    Info (21059): Implemented 140 output pins
+    Info (21061): Implemented 527 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 34 warnings
+    Info: Peak virtual memory: 707 megabytes
+    Info: Processing ended: Wed Apr 18 13:00:08 2018
+    Info: Elapsed time: 00:00:31
+    Info: Total CPU time (on all processors): 00:00:53
+
+
