@@ -17,8 +17,8 @@ PORT
   Clk           : IN    std_logic;
   IO_ADDR       : IN    std_logic_vector(BUS_WIDTH-1 downto 0);                     
   IO_RDY_WR     : IN    std_logic;
-  IO_DAT_WR     : IN    std_logic_vector(BUS_WIDTH-1 downto 0);  
   IO_RDY_RD     : IN    std_logic;
+  IO_DAT_WR     : IN    std_logic_vector(BUS_WIDTH-1 downto 0);  
   IO_DAT_RD     : OUT   std_logic_vector(BUS_WIDTH-1 downto 0) := (others => '0');  
   --IO PINS
   iInputs       : IN    std_logic_vector(23 downto 0);
@@ -114,7 +114,7 @@ begin
   end if;
 end process PIZZA_CALI_PROC;
 
-IO_SPACE_PROC : process (nRESET,clk,sEBU_EVENT)
+IO_SPACE_PROC_WR : process (nRESET,sEBU_EVENT,IO_RDY_WR)
 variable vADDRESS : std_logic_vector (7 downto 0);
 begin
 
@@ -132,68 +132,72 @@ if (nRESET = '0') then
   sPWM_Frq <= "11111010000000";	
   sPWM_Duty <= "01111101000000";	
   sPWM_ONOFF <= '0'; 
-elsif rising_edge(sEBU_EVENT) then
+elsif falling_edge(IO_RDY_WR) then
   vADDRESS := IO_ADDR;
-  if (IO_RDY_WR = '1') then
-    case vADDRESS is 
-    -- 7 Segment
-    when X"00" =>   
-      sSeg_LED <=  IO_DAT_WR;
-    -- IO Ouput
-    when X"02" => -- 0x02   IO block 3
-      soOutputs(23 downto 16) <= IO_DAT_WR;
-    when X"03" => -- 0x03   IO block 2
-      soOutputs(15 downto 8) <= IO_DAT_WR;
-    when X"04" => -- 0x04   IO block 1
-      soOutputs(7 downto 0) <= IO_DAT_WR;
-    -- Write Encoder counter 1
-    when X"20" => -- 0x20 latch Encoder counter
-      sWr_MT1 <= not sWr_MT1;
-    when X"21" => -- 0x21 Write Encoder counter
-      sWrVal_MT1(31 downto 24)<= IO_DAT_WR;
-    when X"22" => -- 0x22 Write Encoder counter 
-      sWrVal_MT1(23 downto 16)<= IO_DAT_WR;
-    when X"23" => -- 0x23 Write Encoder counter 
-      sWrVal_MT1(15 downto 8) <= IO_DAT_WR(7 downto 0);
-    when X"24" => -- 0x24 Write Encoder counter 
-      sWrVal_MT1(7 downto 0) <= IO_DAT_WR(7 downto 0);
-    -- Write Encoder counter 2
-    when X"25" => -- 0x25 latch Encoder counter
-      sWr_MT2 <= not sWr_MT2;
-    when X"26" => -- 0x26 Write Encoder counter
-      sWrVal_MT2(31 downto 24) <= IO_DAT_WR(7 downto 0);
-    when X"27" => -- 0x27 Write Encoder counter 
-      sWrVal_MT2(23 downto 16) <= IO_DAT_WR(7 downto 0);
-    when X"28" => -- 0x28 Write Encoder counter 
-      sWrVal_MT2(15 downto 8) <= IO_DAT_WR(7 downto 0);
-    when X"29" => -- 0x29 Write Encoder counter 
-      sWrVal_MT2(7 downto 0) <= IO_DAT_WR(7 downto 0);
-    --Reset module
-    when X"40" => -- 0x40 Write timer config
-      sH_timer(7 downto 0) <= IO_DAT_WR(7 downto 0);
-    when X"41" => -- 0x41 Write timer latch
-      sWr_timer <= not sWr_timer;
-    when X"42" => -- 0x42 Trigger Reset
-      sTrigger_Reset <= not sTrigger_Reset;
-    --PWM I/F
-    when X"45" => --0x45 Write PWM Frq Low
-      sPWM_Frq(7 downto 0) <= IO_DAT_WR(7 downto 0);
-    when X"46" => --0x46 Write PWM Frq High
-      sPWM_Frq(13 downto 8) <= IO_DAT_WR(5 downto 0); 
-    when X"47" => --0x47 Write PWM duty Low
-      sPWM_Duty(7 downto 0)<= IO_DAT_WR(7 downto 0);
-    when X"48" => --0x48 Write PWM duty High
-      sPWM_Duty(13 downto 8)<= IO_DAT_WR(5 downto 0);
-    --LED brightness & --FAN control
-    when X"49" => --0x49 Write LED latch, On/OFF
-      sWr_PWM <= not sWr_PWM;
-      sPWM_ONOFF <= IO_DAT_WR(0);
-    when others =>
-    end case;
-  end if;
+
+  case vADDRESS is 
+  -- 7 Segment
+  when X"00" =>   
+    sSeg_LED <=  IO_DAT_WR;
+  -- IO Ouput
+  when X"02" => -- 0x02   IO block 3
+    soOutputs(23 downto 16) <= IO_DAT_WR;
+  when X"03" => -- 0x03   IO block 2
+    soOutputs(15 downto 8) <= IO_DAT_WR;
+  when X"04" => -- 0x04   IO block 1
+    soOutputs(7 downto 0) <= IO_DAT_WR;
+  -- Write Encoder counter 1
+  when X"20" => -- 0x20 latch Encoder counter
+    sWr_MT1 <= not sWr_MT1;
+  when X"21" => -- 0x21 Write Encoder counter
+    sWrVal_MT1(31 downto 24)<= IO_DAT_WR;
+  when X"22" => -- 0x22 Write Encoder counter 
+    sWrVal_MT1(23 downto 16)<= IO_DAT_WR;
+  when X"23" => -- 0x23 Write Encoder counter 
+    sWrVal_MT1(15 downto 8) <= IO_DAT_WR(7 downto 0);
+  when X"24" => -- 0x24 Write Encoder counter 
+    sWrVal_MT1(7 downto 0) <= IO_DAT_WR(7 downto 0);
+  -- Write Encoder counter 2
+  when X"25" => -- 0x25 latch Encoder counter
+    sWr_MT2 <= not sWr_MT2;
+  when X"26" => -- 0x26 Write Encoder counter
+    sWrVal_MT2(31 downto 24) <= IO_DAT_WR(7 downto 0);
+  when X"27" => -- 0x27 Write Encoder counter 
+    sWrVal_MT2(23 downto 16) <= IO_DAT_WR(7 downto 0);
+  when X"28" => -- 0x28 Write Encoder counter 
+    sWrVal_MT2(15 downto 8) <= IO_DAT_WR(7 downto 0);
+  when X"29" => -- 0x29 Write Encoder counter 
+    sWrVal_MT2(7 downto 0) <= IO_DAT_WR(7 downto 0);
+  --Reset module
+  when X"40" => -- 0x40 Write timer config
+    sH_timer(7 downto 0) <= IO_DAT_WR(7 downto 0);
+  when X"41" => -- 0x41 Write timer latch
+    sWr_timer <= not sWr_timer;
+  when X"42" => -- 0x42 Trigger Reset
+    sTrigger_Reset <= not sTrigger_Reset;
+  --PWM I/F
+  when X"45" => --0x45 Write PWM Frq Low
+    sPWM_Frq(7 downto 0) <= IO_DAT_WR(7 downto 0);
+  when X"46" => --0x46 Write PWM Frq High
+    sPWM_Frq(13 downto 8) <= IO_DAT_WR(5 downto 0); 
+  when X"47" => --0x47 Write PWM duty Low
+    sPWM_Duty(7 downto 0)<= IO_DAT_WR(7 downto 0);
+  when X"48" => --0x48 Write PWM duty High
+    sPWM_Duty(13 downto 8)<= IO_DAT_WR(5 downto 0);
+  --LED brightness & --FAN control
+  when X"49" => --0x49 Write LED latch, On/OFF
+    sWr_PWM <= not sWr_PWM;
+    sPWM_ONOFF <= IO_DAT_WR(0);
+  when others =>
+  end case;
+end if;
+end process IO_SPACE_PROC_WR;
   
-  if (IO_RDY_RD = '1') then
-    vADDRESS := IO_ADDR;
+IO_SPACE_PROC_RD : process (nRESET,sEBU_EVENT,IO_RDY_RD)
+variable vADDRESS : std_logic_vector (7 downto 0);
+begin
+  if falling_edge(IO_RDY_WR) then
+  vADDRESS := IO_ADDR;
     case vADDRESS is			
     -- 7 Seg LED indicator for error display
     when X"00" =>
@@ -256,7 +260,6 @@ elsif rising_edge(sEBU_EVENT) then
       IO_DAT_RD(7 downto 0)            <= "11110011";
     end case;
   end if;
-end if;  
-end process IO_SPACE_PROC;
+end process IO_SPACE_PROC_RD;
 
 END architecture A_IO_SPACE;

@@ -24,12 +24,8 @@ signal nWAIT         : std_logic := '1';
 signal IO_ADDR       : std_logic_vector(WIDTH-1 downto 0);
 signal IO_DAT_WR     : std_logic_vector(WIDTH-1 downto 0);
 signal IO_DAT_RD     : std_logic_vector(WIDTH-1 downto 0);
-signal IO_RDY_WR     : std_logic;
-signal IO_RDY_RD     : std_logic;
 signal i_DAT_RD_rdy  : std_logic;
 
-signal sAD_BUS       : std_logic_vector(WIDTH-1 downto 0);
-signal sA_BUS        : std_logic_vector(WIDTH-1 downto 0);
 signal sEBU_iRst     : std_logic := '1';  --EBU reset signal
 signal sEBU_iRdWr    : std_logic := '1';
 signal sEBU_ienwait  : std_logic := '1';
@@ -51,10 +47,7 @@ COMPONENT SRAM_IO is
 		nWAIT		:	 OUT STD_LOGIC;
 		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
 		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_RDY_WR		:	 OUT STD_LOGIC;
-		IO_RDY_RD		:	 OUT STD_LOGIC;
-		i_DAT_RD_rdy		:	 IN STD_LOGIC
+		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -101,7 +94,7 @@ reset : MOD_RESET
 GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => nRESET );
 
 ebu_gen : entity work.mod_ebu(async_mux)
-GENERIC MAP (addrc => 3, addhold=> 0 , cmd_delay => 0, waitrdc => 2, waitwrd => 2, datac => 2 , rdrecovc => 0, wrrecovc => 0 , datawidth => 8, addwidth => 8 )
+GENERIC MAP (addrc => 2, addhold=> 0 , cmd_delay => 0, waitrdc => 8, waitwrd => 2, datac => 2 , rdrecovc => 0, wrrecovc => 0 , datawidth => 8, addwidth => 8 )
 PORT MAP (
   iclk => sEBUCLK,
   reset => sEBU_iRst,
@@ -132,10 +125,7 @@ PORT MAP
   nWAIT      =>  nWAIT        ,
   IO_ADDR    =>  IO_ADDR      , --AD_Bus
   IO_DAT_WR  =>  IO_DAT_WR    , -- data to read
-  IO_DAT_RD  =>  IO_DAT_RD    , -- data to read
-  IO_RDY_WR  =>  IO_RDY_WR    , -- write signal
-  IO_RDY_RD  =>  IO_RDY_RD    , -- read signal
-  i_DAT_RD_rdy  =>  i_DAT_RD_rdy
+  IO_DAT_RD  =>  IO_DAT_RD     -- data to read
 );
 
 TESTSRAM : PROCESS is
@@ -158,12 +148,8 @@ sEBU_iAdd <= "00001100";
 sEBU_iData <= (others => 'Z');
 IO_DAT_RD <= "10100010";
 wait until nRD = '0';
-wait for 10 ns;
-i_DAT_RD_rdy <= '1';
 -- read : command phase
-wait until nRD = '1';
-i_DAT_RD_rdy <= '0';
-wait for 100 ns;
+wait for 1000 ns;
 sEBU_iRst <= 'Z';
 wait for 200 ns;
 
@@ -181,10 +167,6 @@ sEBU_iAdd <= "00001101";
 sEBU_iData <= (others => 'Z');
 IO_DAT_RD <= "10100011";
 wait until nRD = '0';
-wait for 10 ns;
-i_DAT_RD_rdy <= '1';
-wait for 100 ns;
-i_DAT_RD_rdy <= '0';
 -- read : command phase
 wait until nRD = '1';
 wait for 100 ns;
