@@ -1,7 +1,6 @@
 library IEEE;
 use ieee.std_logic_1164.all;
 use std.standard;
-    
 
 entity SRAM_IO is
 GENERIC
@@ -87,9 +86,7 @@ begin
   elsif rising_edge(iCLK) then
     if sWrState = write_start1 then
       sWrState <= write_start2;
-    end if;
-  elsif falling_edge(iCLK) then
-    if sWrState = write_start2 then
+	 elsif sWrState = write_start2 then
       sWrState <= write_end;
     end if;
   end if;

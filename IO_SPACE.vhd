@@ -1,6 +1,49 @@
 library IEEE;
 use ieee.std_logic_1164.all;
 use std.standard;
+
+package Package_IO_SPACE is
+
+COMPONENT IO_SPACE
+  GENERIC ( BUS_WIDTH : INTEGER := 8; ENC_WIDTH : INTEGER := 32; FAN_WIDTH : INTEGER := 32; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := "00001101" );
+	
+	PORT (
+	Clk : IN STD_LOGIC;
+	DIP_SW : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+	Enc_MT1 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+	Enc_MT2 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+	H_timer : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	IO_ADDR : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	IO_DAT_RD : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	IO_DAT_WR : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	IO_RDY_RD : IN STD_LOGIC;
+	IO_RDY_WR : IN STD_LOGIC;
+	nRESET : IN STD_LOGIC;
+  iInputs : IN std_logic_vector(23 downto 0);
+  oOutputs : OUT std_logic_vector(23 downto 0);
+	Pizza_Cali : OUT STD_LOGIC;
+	PWM_Config : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	PWM_Duty : OUT STD_LOGIC_VECTOR(13 DOWNTO 0);
+	PWM_Frq : OUT STD_LOGIC_VECTOR(13 DOWNTO 0);
+	PWM_ONOFF : OUT STD_LOGIC;
+	R_timer : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	Seg_DP : IN STD_LOGIC;
+	Seg_LED : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	Trigger_Reset : OUT STD_LOGIC;
+	Wr_MT1 : OUT STD_LOGIC;
+	Wr_MT2 : OUT STD_LOGIC;
+	Wr_PWM : OUT STD_LOGIC;
+	Wr_timer : OUT STD_LOGIC;
+	WrVal_MT1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+	WrVal_MT2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+	);
+END COMPONENT;
+
+end package Package_IO_SPACE;
+
+library IEEE;
+use ieee.std_logic_1164.all;
+use std.standard;
     
 
 entity IO_SPACE is
@@ -46,6 +89,7 @@ PORT
   Wr_PWM        : OUT   std_logic := '0';
   PWM_ONOFF     : OUT   std_logic := '0';
   --PWM I/F
+  PWM_Config    : OUT  STD_LOGIC_VECTOR (7 downto 0):= (others => '0'); --(0-16000)0-100%
   PWM_Duty      : OUT  STD_LOGIC_VECTOR (13 downto 0):= (others => '0'); --(0-16000)0-100%
   PWM_Frq       : OUT  STD_LOGIC_VECTOR (13 downto 0):= (others => '0')  --320-16000 (2-100K,)
   );
@@ -71,6 +115,7 @@ signal sWr_PWM    : std_logic := '0';
 signal sPWM_ONOFF : std_logic := '0';
 
 --PWM I/F
+signal sPWM_Config  : STD_LOGIC_VECTOR (7 downto 0):= (others => '0');
 signal sPWM_Duty  : STD_LOGIC_VECTOR (13 downto 0):= (others => '0');
 signal sPWM_Frq   : STD_LOGIC_VECTOR (13 downto 0):= (others => '0');
 
@@ -92,6 +137,7 @@ Wr_PWM        <= sWr_PWM;
 PWM_ONOFF     <= sPWM_ONOFF;
 WrVal_MT1     <= sWrVal_MT1;
 WrVal_MT2     <= sWrVal_MT2;
+PWM_Config    <= sPWM_Config;
 
 LED_OUT : process (sSeg_LED,Seg_DP)
 begin
@@ -126,6 +172,7 @@ if (nRESET = '0') then
   sH_timer <= "00001011";
   sWr_timer <= '0';
   sTrigger_Reset <= '0';
+  sPWM_Config <= (others => '0');
   sPWM_Frq <= "11111010000000";	
   sPWM_Duty <= "01111101000000";	
   sPWM_ONOFF <= '0'; 
@@ -173,6 +220,8 @@ elsif falling_edge(IO_RDY_WR) then
   when X"42" => -- 0x42 Trigger Reset
     sTrigger_Reset <= not sTrigger_Reset;
   --PWM I/F
+  when X"44" => --0x44 Write PWM Configuration
+    sPWM_Config <= IO_DAT_WR(7 downto 0);
   when X"45" => --0x45 Write PWM Frq Low
     sPWM_Frq(7 downto 0) <= IO_DAT_WR(7 downto 0);
   when X"46" => --0x46 Write PWM Frq High
@@ -245,6 +294,8 @@ begin
     when X"40" => -- 0x40 Read timer config
       IO_DAT_RD(7 downto 0) <= R_timer(7 downto 0);
     --PWM I/F
+    when X"44" =>  --0x44 Read PWM Frq Low
+      IO_DAT_RD <= sPWM_Config;    
     when X"45" =>  --0x45 Read PWM Frq Low
       IO_DAT_RD(7 downto 0)            <= sPWM_Frq(7 downto 0);
     when X"46" => --0x46 Read PWM Frq High
