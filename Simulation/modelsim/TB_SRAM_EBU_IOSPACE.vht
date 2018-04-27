@@ -2,16 +2,18 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 LIBRARY work;
 USE work.common.all;
+USE work.Package_IO_SPACE.all;
+USE work.Package_PWM_Module.all;
 
-ENTITY TB_SRAMIO IS
+ENTITY TB_SRAM_EBU_IOSPACE IS
 GENERIC  
     (
         WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
         CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
     );  
-END TB_SRAMIO;
+END TB_SRAM_EBU_IOSPACE;
 
-architecture logic of TB_SRAMIO is
+architecture logic of TB_SRAM_EBU_IOSPACE is
 signal sEBUCLK       : std_logic;
 signal sclk          : std_logic;
 signal nRESET        : std_logic := '1';                                             
@@ -32,6 +34,33 @@ signal sEBU_ienwait  : std_logic := '1';
 signal sEBU_iAdd     : std_logic_vector(WIDTH-1 downto 0);
 signal sEBU_iData    : std_logic_vector(WIDTH-1 downto 0);
 signal sEBU_oData    : std_logic_vector(WIDTH-1 downto 0);
+
+--PWM signal
+SIGNAL PWM : STD_LOGIC;
+
+--IOSPACE signals
+SIGNAL Clk : STD_LOGIC;
+SIGNAL DIP_SW : STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL Enc_MT1 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL Enc_MT2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL H_timer : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL iInputs : STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL oOutputs : STD_LOGIC_VECTOR(23 DOWNTO 0);
+SIGNAL Pizza_Cali : STD_LOGIC;
+SIGNAL PWM_Duty : STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL PWM_Config : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL PWM_Frq : STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL PWM_ONOFF : STD_LOGIC;
+SIGNAL R_timer : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL Seg_DP : STD_LOGIC;
+SIGNAL Seg_LED : STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL Trigger_Reset : STD_LOGIC;
+SIGNAL Wr_MT1 : STD_LOGIC;
+SIGNAL Wr_MT2 : STD_LOGIC;
+SIGNAL Wr_PWM : STD_LOGIC;
+SIGNAL Wr_timer : STD_LOGIC;
+SIGNAL WrVal_MT1 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL WrVal_MT2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 COMPONENT SRAM_IO is  
 	GENERIC ( WIDTH : INTEGER := 8; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
@@ -115,7 +144,7 @@ PORT MAP (
   oWR => nWR
   );
   
-u1 : SRAM_IO
+SRAM : SRAM_IO
 GENERIC MAP (  WIDTH =>  8,  CPLD_VERSION =>  "00001101" )
 PORT MAP 
 (
@@ -133,9 +162,58 @@ PORT MAP
   IO_DAT_RD  =>  IO_DAT_RD     -- data to read
 );
 
+pwm_mod : PWM_Module
+PORT MAP (
+-- list connections between master ports and signals
+	CLK => sclk,
+	Config => PWM_Config,
+	Duty => PWM_Duty,
+	Frq => PWM_Frq,
+	nReset => nReset,
+	PWM => PWM,
+	Wr => nWrRdy
+);
+
+i1 : IO_SPACE
+GENERIC MAP( BUS_WIDTH => 8, ENC_WIDTH  => 32, FAN_WIDTH => 32, CPLD_VERSION =>  "00001101" )
+	
+	PORT MAP (
+-- list connections between master ports and signals
+	Clk => sclk,
+	DIP_SW => DIP_SW,
+	Enc_MT1 => Enc_MT1,
+	Enc_MT2 => Enc_MT2,
+	H_timer => H_timer,
+	IO_ADDR => IO_ADDR,
+	IO_DAT_RD => IO_DAT_RD,
+	IO_DAT_WR => IO_DAT_WR,
+	IO_RDY_RD => nRD,
+	IO_RDY_WR => nWR,
+  iInputs => iInputs,
+  oOutputs => oOutputs,
+	nRESET => nRESET,
+	Pizza_Cali => Pizza_Cali,
+	PWM_Config => PWM_Config,
+	PWM_Duty => PWM_Duty(13 downto 0),
+	PWM_Frq => PWM_Frq(13 downto 0),
+	PWM_ONOFF => PWM_ONOFF,
+	R_timer => R_timer,
+	Seg_DP => Seg_DP,
+	Seg_LED => Seg_LED,
+	Trigger_Reset => Trigger_Reset,
+	Wr_MT1 => Wr_MT1,
+	Wr_MT2 => Wr_MT2,
+	Wr_PWM => Wr_PWM,
+	Wr_timer => Wr_timer,
+	WrVal_MT1 => WrVal_MT1,
+	WrVal_MT2 => WrVal_MT2
+);
+
 TESTSRAM : PROCESS is
 BEGIN
 --defaults
+PWM_Duty(15 downto 14) <= (others => '0');
+PWM_Frq(15 downto 14) <= (others => '0');
 --------------------------------------------------------
 -- READ
 --------------------------------------------------------

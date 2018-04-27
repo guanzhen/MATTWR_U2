@@ -29,6 +29,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;                                
 LIBRARY work;
 USE work.common.all;
+USE work.Package_PWM_Module.all;
 
 ENTITY PWM_Module_vhd_tst IS
 END PWM_Module_vhd_tst;
@@ -42,17 +43,6 @@ SIGNAL Frq : STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL nReset : STD_LOGIC;
 SIGNAL PWM : STD_LOGIC;
 SIGNAL Wr : STD_LOGIC;
-COMPONENT PWM_Module
-	PORT (
-	CLK : IN STD_LOGIC;
-	Config : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-	Duty : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	Frq : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	nReset : IN STD_LOGIC;
-	PWM : OUT STD_LOGIC;
-	Wr : IN STD_LOGIC
-	);
-END COMPONENT;
 
 BEGIN
 
@@ -84,14 +74,20 @@ BEGIN
 nReset <= '0';                                                  
 wait for 100 ns;
 nReset <= '1';
-Frq <= X"3E80";
-Duty <= X"1F40";
+Frq <= X"000F";
+Duty <= X"0008";
 Config <= ((0) => '1', others => '0');
 --(to_integer(unsigned(s_proc_chan(2 downto 0)))+4) => '1', others => '0');
 Wr <= '0';
 wait for 100 ns;
 Wr <= '1';
-wait for 500 ns;
+wait for 3000 ns;
+Frq <= X"001F";
+Duty <= X"000F";
+Wr <= '0';
+wait for 100 ns;
+Wr <= '1';
+
 
 
 WAIT;                                                        

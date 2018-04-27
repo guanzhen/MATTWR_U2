@@ -5,10 +5,10 @@ USE work.common.all;
 
 ENTITY TB_EBU_GEN IS
 GENERIC  
-    (
-        WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
-        CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
-    );  
+  (
+      WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
+      CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
+  );  
 END TB_EBU_GEN;
 
 architecture logic of TB_EBU_GEN is
