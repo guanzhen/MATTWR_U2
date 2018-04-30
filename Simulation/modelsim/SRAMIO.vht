@@ -1,19 +1,19 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 LIBRARY work;
-LIBRARY ieee;
-USE ieee.numeric_std.ALL;
+USE 
 
-ENTITY SRAMIO_tbv IS
+ENTITY TB_SRAMIO IS
 GENERIC  
     (
         WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
         CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
     );  
-END SRAMIO_tbv;
+END TB_SRAMIO;
 
-architecture logic of SRAMIO_tbv is
-signal clk           : std_logic;
+architecture logic of TB_SRAMIO is
+signal sEBUCLK       : std_logic;
+signal sclk          : std_logic;
 signal nRESET        : std_logic := '1';                                             
 signal DATA          : std_logic_vector(WIDTH-1 downto 0) := (others => 'Z'); 
 signal nRD           : std_logic := '1';                                             
@@ -30,7 +30,8 @@ signal IO_RDY_ADR    : std_logic;
 signal inpin         : std_logic_vector(3 downto 0) := "1010";
 signal outpin        : std_logic_vector(3 downto 0) := "ZZZZ";
 signal iopin         : std_logic_vector(3 downto 0) := "ZZZZ";
-       
+
+
 component CPLD_XMC4700_SRAM_U is  
 GENERIC
 (
@@ -79,30 +80,11 @@ PORT MAP
 );
 
 
-clk_gen : PROCESS is                                      
-BEGIN                                                        
-    loop
-    clk <= '0';
-    wait for 5 us;
-    clk <= '1';
-    wait for 5 us;
-    end loop;
-END PROCESS clk_gen;  
-
-reset_gen : PROCESS is                                          
-BEGIN                                                
-    nRESET <= '0';
-    wait for 10 us;
-    nRESET <= '1';
-    wait;
-END PROCESS reset_gen;     
-
-
-write_gen : PROCESS (clk) is
+write_gen : PROCESS (sclk) is
 variable step    : integer RANGE 0 to 15 := 0;
 variable stepidx : integer RANGE 0 to 50 := 0;
 BEGIN
-    if rising_edge(clk) and nRESET = '1' then
+    if rising_edge(sclk) and nRESET = '1' then
       case step is
       -- read sequence
       when 0 =>
