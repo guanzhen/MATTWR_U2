@@ -1,0 +1,50 @@
+<NotepadPlus>
+    <Project name="MTCPLD">
+        <Folder name="Source">
+            <File name="System_reset.vhd" />
+            <File name="Hex7Seg.vhd" />
+            <File name="IO_SPACE.vhd" />
+            <File name="MaterialTowerCPLD.vhd" />
+            <File name="MTCPLD_Top.vhd" />
+            <File name="PWM_Module.vhd" />
+            <File name="PWM_Module_orig.vhd" />
+            <File name="QuadDecToDirPulse.vhd" />
+            <File name="SRAM_IO.vhd" />
+        </Folder>
+        <Folder name="Simulation">
+            <File name="Simulation\modelsim\TB_SRAMIO.vht" />
+            <File name="Simulation\modelsim\TB_SRAM_EBU_IOSPACE.vht" />
+            <File name="Simulation\modelsim\TB_PWM_Module.vht" />
+            <File name="Simulation\modelsim\TB_IO_SPACE.vht" />
+            <File name="Simulation\modelsim\TB_EBU_GEN.vht" />
+            <File name="Simulation\modelsim\SRAMIO.vht" />
+            <File name="Simulation\modelsim\QuadToDirPulse.vht" />
+            <File name="Simulation\modelsim\MaterialTowerCPLD.vht" />
+            <File name="Simulation\modelsim\EBU_GEN.vht" />
+            <File name="Simulation\modelsim\common.vht" />
+            <File name="Simulation\modelsim\wave.do" />
+            <File name="Simulation\modelsim\run_sramio_wave.do" />
+            <File name="Simulation\modelsim\run_sramio.do" />
+            <File name="Simulation\modelsim\run_sram_ebu.do" />
+            <File name="Simulation\modelsim\run_pwm.do" />
+        </Folder>
+    </Project>
+    <Project name="MFControl">
+        <Folder name="icon">
+            <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\icon\led_black.png" />
+            <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\icon\led_green.png" />
+            <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\icon\MF.jpg" />
+        </Folder>
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\can.bas" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\CanSetup.html" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\changlog.txt" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\DebugLog.bas" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\default.ini" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\MFControl.bas" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\MFControl.htm" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\MF_Commands.bas" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\MF_Init.bas" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\ptkl_mf.h" />
+        <File name="C:\Program Files (x86)\Caccia Win32\Shared\Script\MeasurementFeederControl\en\xmf_loopback.b" />
+    </Project>
+</NotepadPlus>
