@@ -68,12 +68,21 @@ set_location_assignment PIN_15 -to AD[3]
 set_location_assignment PIN_14 -to AD[2]
 set_location_assignment PIN_13 -to AD[1]
 set_location_assignment PIN_12 -to AD[0]
+set_location_assignment PIN_97 -to CAN1_RXD
+set_location_assignment PIN_98 -to CAN1_TXD
+set_location_assignment PIN_101 -to CAN2_RXD
+set_location_assignment PIN_102 -to CAN2_TXD
+set_location_assignment PIN_103 -to CC_CAN1_RXD
+set_location_assignment PIN_104 -to CC_CAN1_TXD
+set_location_assignment PIN_105 -to CC_CAN2_RXD
+set_location_assignment PIN_106 -to CC_CAN2_TXD
 set_location_assignment PIN_18 -to Clk
-set_location_assignment IOBANK_1 -to CPLD_INT
-set_location_assignment PIN_109 -to DIP_SWITCH[3]
-set_location_assignment PIN_110 -to DIP_SWITCH[2]
-set_location_assignment PIN_111 -to DIP_SWITCH[1]
-set_location_assignment PIN_112 -to DIP_SWITCH[0]
+set_location_assignment PIN_1 -to CPLD_INT
+set_location_assignment PIN_112 -to DIP_SWITCH[3]
+set_location_assignment PIN_111 -to DIP_SWITCH[2]
+set_location_assignment PIN_110 -to DIP_SWITCH[1]
+set_location_assignment PIN_109 -to DIP_SWITCH[0]
+set_location_assignment PIN_37 -to EN_EDIF_CAN
 set_location_assignment PIN_67 -to ENC_1_A
 set_location_assignment PIN_68 -to ENC_1_B
 set_location_assignment PIN_63 -to ENC_1_DIR
@@ -87,6 +96,7 @@ set_location_assignment PIN_61 -to ENC_2_INX
 set_location_assignment PIN_72 -to ENC_2_N
 set_location_assignment PIN_60 -to ENC_2_PS
 set_location_assignment PIN_52 -to ENC_ERR
+set_location_assignment PIN_51 -to FAN_PULSE
 set_location_assignment PIN_58 -to FAN_PWM
 set_location_assignment PIN_53 -to FPGA_OK
 set_location_assignment PIN_88 -to IO_Input0
@@ -128,8 +138,10 @@ set_location_assignment PIN_7 -to nCS
 set_location_assignment PIN_4 -to nRD
 set_location_assignment PIN_6 -to nWAIT
 set_location_assignment PIN_5 -to nWR
+set_location_assignment PIN_50 -to PIZZA_CALIBRATION
 set_location_assignment PIN_113 -to PWM_LED
 set_location_assignment PIN_2 -to RST
+set_location_assignment PIN_49 -to SDCLKO
 set_location_assignment PIN_123 -to Seg_LED[7]
 set_location_assignment PIN_122 -to Seg_LED[6]
 set_location_assignment PIN_121 -to Seg_LED[5]
@@ -137,6 +149,7 @@ set_location_assignment PIN_120 -to Seg_LED[4]
 set_location_assignment PIN_118 -to Seg_LED[2]
 set_location_assignment PIN_117 -to Seg_LED[1]
 set_location_assignment PIN_114 -to Seg_LED[0]
+set_location_assignment PIN_48 -to IO_Output[7]
 set_location_assignment PIN_119 -to Seg_LED[3]
 
 # Classic Timing Assignments
@@ -225,14 +238,14 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to AD[3]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to AD[2]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to AD[1]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to AD[0]
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CAN1_RXD
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CAN1_TXD
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CAN2_RXD
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CAN2_TXD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CAN1_RXD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CAN1_TXD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CAN2_RXD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CAN2_TXD
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CC_CAN1_RXD
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CC_CAN1_TXD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CC_CAN1_TXD
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CC_CAN2_RXD
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CC_CAN2_TXD
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to CC_CAN2_TXD
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to CPLD_INT
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to DIP_SWITCH[3]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to DIP_SWITCH[2]
