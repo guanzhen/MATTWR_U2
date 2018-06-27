@@ -7,8 +7,8 @@ USE work.common.all;
 ENTITY TB_SRAMIO IS
 GENERIC  
     (
-        DATAWIDTH        : integer  :=    16;                                               -- Datenbus 8 Bit
-        CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
+        DATAWIDTH    : integer  := 16;                                   -- Datenbus 8 Bit
+        CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"        -- Version 0.13
     );  
 END TB_SRAMIO;
 
@@ -38,18 +38,18 @@ COMPONENT SRAM_IO is
 	GENERIC ( DATAWIDTH : INTEGER := 16; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
 	PORT
 	(
-    iCLK : IN std_logic;
-		nRESET :	 IN STD_LOGIC;
-		DATA :	 INOUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-		nRD :	 IN STD_LOGIC;
-		nWR		:	 IN STD_LOGIC;
-		nCS		:	 IN STD_LOGIC;
-		nADV		:	 IN STD_LOGIC;
-		nWAIT		:	 OUT STD_LOGIC;
-    nWrRdy        : OUT std_logic;
-		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
+    iCLK      : IN std_logic;
+		nRESET    : IN STD_LOGIC;
+		DATA      : INOUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		nRD       : IN STD_LOGIC;
+		nWR       : IN STD_LOGIC;
+		nCS       : IN STD_LOGIC;
+		nADV      : IN STD_LOGIC;
+		nWAIT     : OUT STD_LOGIC;
+    nWrRdy    : OUT std_logic;
+		IO_ADDR	  : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		IO_DAT_WR	: OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		IO_DAT_RD	: IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -90,7 +90,7 @@ ebu_clk : MOD_CLKGEN
 GENERIC MAP (period => 100 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sEBUCLK );
 
 cpld_clk : MOD_CLKGEN
-GENERIC MAP (period => 900 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sclk );
+GENERIC MAP (period => 500 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sclk );
 
 reset : MOD_RESET
 GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => nRESET );
@@ -98,7 +98,7 @@ GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => nRESET );
 ebu_gen : entity work.mod_ebu(async_mux)
 GENERIC MAP (
 addrc => 1, addhold=> 0 , cmd_delay => 0, waitrdc => 2, 
-waitwrd => 9, datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
+waitwrd => 6, datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
 datawidth => DATAWIDTH, addwidth => DATAWIDTH )
 PORT MAP (
   iclk => sEBUCLK,
@@ -138,10 +138,10 @@ TESTSRAM : PROCESS is
 BEGIN
 --defaults
 --------------------------------------------------------
--- READ
+-- READ WITH WAIT 1
 --------------------------------------------------------
 -- Read
-sEBU_ienwait <= '0';
+sEBU_ienwait <= '1';
 sEBU_iRdWr <='1';
 nRESET <= '0';
 sEBU_iRst<= '0';
@@ -160,7 +160,7 @@ sEBU_iRst <= 'Z';
 wait for 200 ns;
 
 --------------------------------------------------------
--- READ WITH WAIT
+-- READ WITH WAIT 2
 --------------------------------------------------------
 -- Read
 sEBU_ienwait <= '1';
@@ -178,8 +178,29 @@ wait until nRD = '1';
 wait for 100 ns;
 sEBU_iRst <= 'Z';
 wait for 200 ns;
+
 --------------------------------------------------------
--- WRITE
+-- READ WITH WAIT 3
+--------------------------------------------------------
+-- Read
+sEBU_ienwait <= '1';
+sEBU_iRdWr <='1';
+sEBU_iRst<= '0';
+wait for 600 ns;
+sEBU_iRst<= '1';
+-- Read : address phase
+wait for 100 ns;
+sEBU_iAdd <= std_logic_vector(to_unsigned(10, sEBU_iAdd'length));
+sEBU_iData <= (others => 'Z');
+IO_DAT_RD <= std_logic_vector(to_unsigned(333, IO_DAT_RD'length));
+wait until nRD = '0';
+-- read : command phase
+wait until nRD = '1';
+wait for 100 ns;
+sEBU_iRst <= 'Z';
+wait for 200 ns;
+--------------------------------------------------------
+-- WRITE 1
 --------------------------------------------------------
 sEBU_iRdWr <='0';
 sEBU_iRst <= '0';
@@ -188,29 +209,36 @@ sEBU_iRst <= '1';
 wait for 100 ns;
 -- Write: address phase
 sEBU_iAdd <= std_logic_vector(to_unsigned(20, sEBU_iAdd'length));
-sEBU_iData <= std_logic_vector(to_unsigned(333, sEBU_iData'length));
+sEBU_iData <= std_logic_vector(to_unsigned(444, sEBU_iData'length));
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';
 
+--------------------------------------------------------
+-- WRITE 2
+--------------------------------------------------------
 sEBU_iRst <= '0';
 wait for 10 ns;
 sEBU_iRst <= '1';
 -- Write: address phase
 sEBU_iAdd <= std_logic_vector(to_unsigned(14, sEBU_iAdd'length));
-sEBU_iData <= std_logic_vector(to_unsigned(444, sEBU_iData'length));
+sEBU_iData <= std_logic_vector(to_unsigned(555, sEBU_iData'length));
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';
 
 wait until rising_edge(sclk);
 wait for 800 ns;
+--------------------------------------------------------
+-- WRITE 3
+--------------------------------------------------------
+
 sEBU_iRst <= '0';
 wait for 100 ns;
 sEBU_iRst <= '1';
 -- Write: address phase
 sEBU_iAdd <= std_logic_vector(to_unsigned(23, sEBU_iAdd'length));
-sEBU_iData <= std_logic_vector(to_unsigned(555, sEBU_iData'length));
+sEBU_iData <= std_logic_vector(to_unsigned(666, sEBU_iData'length));
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';

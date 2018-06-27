@@ -50,7 +50,7 @@ SRAM_RD_DATA_PROC: process (nRESET, iCLK,nCS,nRD, IO_DAT_RD) is
 begin
   if nRESET = '0' or nCS = '1' then
     DATA <= (others => 'Z');
-  elsif rising_edge(iCLK) and nCS = '0' and nRD = '0' then
+  elsif falling_edge(iCLK) and nCS = '0' and nRD = '0' then
     DATA <= IO_DAT_RD;
   end if;
 end process SRAM_RD_DATA_PROC;
@@ -62,7 +62,7 @@ begin
     sReadState <= idle;
   elsif nRD = '0' and sReadState = idle then
     sReadState <= read_start;
-  elsif rising_edge(iCLK) and sReadState = read_start then
+  elsif falling_edge(iCLK) and sReadState = read_start then
     sReadState <= read_end;
   end if;
 end process SRAM_RD_WAIT_PROC;
