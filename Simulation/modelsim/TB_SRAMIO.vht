@@ -1,12 +1,13 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
 LIBRARY work;
 USE work.common.all;
 
 ENTITY TB_SRAMIO IS
 GENERIC  
     (
-        WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
+        DATAWIDTH        : integer  :=    16;                                               -- Datenbus 8 Bit
         CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
     );  
 END TB_SRAMIO;
@@ -15,40 +16,40 @@ architecture logic of TB_SRAMIO is
 signal sEBUCLK       : std_logic;
 signal sclk          : std_logic;
 signal nRESET        : std_logic := '1';                                             
-signal DATA          : std_logic_vector(WIDTH-1 downto 0) := (others => 'Z'); 
+signal DATA          : std_logic_vector(DATAWIDTH-1 downto 0) := (others => 'Z'); 
 signal nRD           : std_logic := '1';                                             
 signal nWR           : std_logic := '1';                                             
 signal nCS           : std_logic := '1';                                             
 signal nADV          : std_logic := '1';                                             
 signal nWAIT         : std_logic := '1';                                             
-signal IO_ADDR       : std_logic_vector(WIDTH-1 downto 0);
-signal IO_DAT_WR     : std_logic_vector(WIDTH-1 downto 0);
-signal IO_DAT_RD     : std_logic_vector(WIDTH-1 downto 0);
+signal IO_ADDR       : std_logic_vector(DATAWIDTH-1 downto 0);
+signal IO_DAT_WR     : std_logic_vector(DATAWIDTH-1 downto 0);
+signal IO_DAT_RD     : std_logic_vector(DATAWIDTH-1 downto 0);
 signal nWrRdy        : std_logic;
 
 signal sEBU_iRst     : std_logic := '1';  --EBU reset signal
 signal sEBU_iRdWr    : std_logic := '1';
 signal sEBU_ienwait  : std_logic := '1';
-signal sEBU_iAdd     : std_logic_vector(WIDTH-1 downto 0);
-signal sEBU_iData    : std_logic_vector(WIDTH-1 downto 0);
-signal sEBU_oData    : std_logic_vector(WIDTH-1 downto 0);
+signal sEBU_iAdd     : std_logic_vector(DATAWIDTH-1 downto 0);
+signal sEBU_iData    : std_logic_vector(DATAWIDTH-1 downto 0);
+signal sEBU_oData    : std_logic_vector(DATAWIDTH-1 downto 0);
 
 COMPONENT SRAM_IO is  
-	GENERIC ( WIDTH : INTEGER := 8; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
+	GENERIC ( DATAWIDTH : INTEGER := 16; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
 	PORT
 	(
     iCLK : IN std_logic;
 		nRESET :	 IN STD_LOGIC;
-		DATA :	 INOUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
+		DATA :	 INOUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 		nRD :	 IN STD_LOGIC;
 		nWR		:	 IN STD_LOGIC;
 		nCS		:	 IN STD_LOGIC;
 		nADV		:	 IN STD_LOGIC;
 		nWAIT		:	 OUT STD_LOGIC;
     nWrRdy        : OUT std_logic;
-		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(width-1 DOWNTO 0);
-		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(width-1 DOWNTO 0)
+		IO_ADDR		:	 OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		IO_DAT_WR		:	 OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		IO_DAT_RD		:	 IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -62,8 +63,8 @@ generic (
   datac : integer := 1 ; -- number of data hold cycles 
   rdrecovc : integer := 0; -- number of recovery cycles in recover phase after read access
   wrrecovc : integer := 0; -- number of recovery cycles in recover phase after wr access
-  datawidth : integer := 8 ; 
-  addwidth : integer := 8
+  datawidth : integer := 16 ; 
+  addwidth : integer := 16
 );
 port (
   iclk : in std_logic;
@@ -98,7 +99,7 @@ ebu_gen : entity work.mod_ebu(async_mux)
 GENERIC MAP (
 addrc => 1, addhold=> 0 , cmd_delay => 0, waitrdc => 2, 
 waitwrd => 9, datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
-datawidth => 8, addwidth => 8 )
+datawidth => DATAWIDTH, addwidth => DATAWIDTH )
 PORT MAP (
   iclk => sEBUCLK,
   reset => sEBU_iRst,
@@ -116,7 +117,7 @@ PORT MAP (
   );
   
 u1 : SRAM_IO
-GENERIC MAP (  WIDTH =>  8,  CPLD_VERSION =>  "00001101" )
+GENERIC MAP (  DATAWIDTH =>  DATAWIDTH,  CPLD_VERSION =>  "00001101" )
 PORT MAP 
 (
   iCLK       => sclk,
@@ -140,17 +141,17 @@ BEGIN
 -- READ
 --------------------------------------------------------
 -- Read
-sEBU_ienwait <= '1';
+sEBU_ienwait <= '0';
 sEBU_iRdWr <='1';
 nRESET <= '0';
 sEBU_iRst<= '0';
 wait for 100 ns;
 sEBU_iRst<= '1';
 nRESET <= '1';
--- Read : adress phase
-sEBU_iAdd <= "00001100";
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(8, sEBU_iAdd'length));
 sEBU_iData <= (others => 'Z');
-IO_DAT_RD <= "10100010";
+IO_DAT_RD <= std_logic_vector(to_unsigned(111, IO_DAT_RD'length));
 wait until nRD = '0';
 -- read : command phase
 wait until nRD = '1';
@@ -167,10 +168,10 @@ sEBU_iRdWr <='1';
 sEBU_iRst<= '0';
 wait for 100 ns;
 sEBU_iRst<= '1';
--- Read : adress phase
-sEBU_iAdd <= "00001101";
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(9, sEBU_iAdd'length));
 sEBU_iData <= (others => 'Z');
-IO_DAT_RD <= "10100011";
+IO_DAT_RD <= std_logic_vector(to_unsigned(222, IO_DAT_RD'length));
 wait until nRD = '0';
 -- read : command phase
 wait until nRD = '1';
@@ -186,8 +187,8 @@ wait for 100 ns;
 sEBU_iRst <= '1';
 wait for 100 ns;
 -- Write: address phase
-sEBU_iAdd <= "00001101";
-sEBU_iData <= "10100011";
+sEBU_iAdd <= std_logic_vector(to_unsigned(20, sEBU_iAdd'length));
+sEBU_iData <= std_logic_vector(to_unsigned(333, sEBU_iData'length));
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';
@@ -196,8 +197,8 @@ sEBU_iRst <= '0';
 wait for 10 ns;
 sEBU_iRst <= '1';
 -- Write: address phase
-sEBU_iAdd <= "00001110";
-sEBU_iData <= "10100111";
+sEBU_iAdd <= std_logic_vector(to_unsigned(14, sEBU_iAdd'length));
+sEBU_iData <= std_logic_vector(to_unsigned(444, sEBU_iData'length));
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';
@@ -208,8 +209,8 @@ sEBU_iRst <= '0';
 wait for 100 ns;
 sEBU_iRst <= '1';
 -- Write: address phase
-sEBU_iAdd <= "00001110";
-sEBU_iData <= "10100111";
+sEBU_iAdd <= std_logic_vector(to_unsigned(23, sEBU_iAdd'length));
+sEBU_iData <= std_logic_vector(to_unsigned(555, sEBU_iData'length));
 wait until nWR = '0';
 --write : command phase
 wait until nWR = '1';

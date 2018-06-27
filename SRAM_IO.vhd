@@ -5,23 +5,23 @@ use std.standard;
 entity SRAM_IO is
 GENERIC
   (
-    WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
+    DATAWIDTH        : integer  :=    16;                                               -- Datenbus 16 Bit
     CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
   );
 PORT 
   (
     iCLK          : IN std_logic;
     nRESET        : IN    std_logic;                                                -- 
-    DATA          : INOUT std_logic_vector(WIDTH-1 downto 0) := (others => 'Z');    -- Datenbus, Register auslesen
+    DATA          : INOUT std_logic_vector(DATAWIDTH-1 downto 0) := (others => 'Z');    -- Datenbus, Register auslesen
     nRD           : IN    std_logic;                                                -- Read (uP)
     nWR           : IN    std_logic;                                                -- Write (uP)
     nCS           : IN    std_logic;                                                -- CS an CPLD (uP)
     nADV          : IN    std_logic;                                                
     nWAIT         : OUT    std_logic;
     nWrRdy        : OUT std_logic;
-    IO_ADDR       : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
-    IO_DAT_WR     : OUT   std_logic_vector(WIDTH-1 downto 0) := (others => '0');   
-    IO_DAT_RD     : IN    std_logic_vector(WIDTH-1 downto 0)                                     
+    IO_ADDR       : OUT   std_logic_vector(DATAWIDTH-1 downto 0) := (others => '0');   
+    IO_DAT_WR     : OUT   std_logic_vector(DATAWIDTH-1 downto 0) := (others => '0');   
+    IO_DAT_RD     : IN    std_logic_vector(DATAWIDTH-1 downto 0)                                     
   );
 end SRAM_IO;
 

@@ -1,12 +1,13 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
 LIBRARY work;
 USE work.common.all;
 
 ENTITY TB_EBU_GEN IS
 GENERIC  
   (
-      WIDTH        : integer  :=    8;                                               -- Datenbus 8 Bit
+      DATAWIDTH    : integer  :=    16;                                              -- DataBus 16 Bit
       CPLD_VERSION : std_logic_vector(7 downto 0) := "00001101"                      -- Version 0.13
   );  
 END TB_EBU_GEN;
@@ -20,14 +21,13 @@ signal nCS           : std_logic := '1';
 signal nADV          : std_logic := '1';                                             
 signal nWAIT         : std_logic := '1';                                             
 
-signal sAD_BUS       : std_logic_vector(WIDTH-1 downto 0);
-signal sA_BUS        : std_logic_vector(WIDTH-1 downto 0);
+signal sAD_BUS       : std_logic_vector(DATAWIDTH-1 downto 0);
 signal sEBU_iRst     : std_logic := '1';  --EBU reset signal
 signal sEBU_iRdWr    : std_logic := '1';
 signal sEBU_ienwait  : std_logic := '1';
-signal sEBU_iAdd     : std_logic_vector(WIDTH-1 downto 0);
-signal sEBU_iData    : std_logic_vector(WIDTH-1 downto 0);
-signal sEBU_oData    : std_logic_vector(WIDTH-1 downto 0);
+signal sEBU_iAdd     : std_logic_vector(DATAWIDTH-1 downto 0);
+signal sEBU_iData    : std_logic_vector(DATAWIDTH-1 downto 0);
+signal sEBU_oData    : std_logic_vector(DATAWIDTH-1 downto 0);
 
 COMPONENT MOD_EBU is
 generic (
@@ -39,8 +39,8 @@ generic (
   datac : integer := 1 ; -- number of data hold cycles 
   rdrecovc : integer := 0; -- number of recovery cycles in recover phase after read access
   wrrecovc : integer := 0; -- number of recovery cycles in recover phase after wr access
-  datawidth : integer := 8 ; 
-  addwidth : integer := 8
+  datawidth : integer := 16 ; 
+  addwidth : integer := 16
 );
 port (
   iclk : in std_logic;
@@ -69,7 +69,7 @@ reset : MOD_RESET
 GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => nRESET );
 
 ebu_gen : entity work.mod_ebu(async_mux)
-GENERIC MAP (addrc => 3, addhold=> 0 , cmd_delay => 0, waitrdc => 2, waitwrd => 2, datac => 2 , rdrecovc => 0, wrrecovc => 0 , datawidth => 8, addwidth => 8 )
+GENERIC MAP (addrc => 3, addhold=> 0 , cmd_delay => 0, waitrdc => 2, waitwrd => 2, datac => 2 , rdrecovc => 0, wrrecovc => 0 , datawidth => 16, addwidth => 16 )
 PORT MAP (
   iclk => sEBUCLK,
   reset => sEBU_iRst,
@@ -99,13 +99,13 @@ sEBU_iRdWr <='1';
 sEBU_iRst<= '0';
 wait for 100 ns;
 sEBU_iRst<= '1';
--- Read : adress phase
-sEBU_iAdd <= "00001100";
-sEBU_iData <= "10100011";
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(12, sEBU_iAdd'length));
+sEBU_iData <= std_logic_vector(to_unsigned(163, sEBU_iData'length));
 sAD_BUS <= (others => 'Z');
 wait until nRD = '0';
 -- read : command phase
-sAD_BUS <= "00001111";
+sAD_BUS <= std_logic_vector(to_unsigned(15, sAD_BUS'length));
 --wait for 200 ns; -- n wait delay. 100 nS  =  1 cycle
 wait until nRD = '1';
 wait for 100 ns;
@@ -122,14 +122,14 @@ sEBU_iRdWr <='1';
 sEBU_iRst<= '0';
 wait for 100 ns;
 sEBU_iRst<= '1';
--- Read : adress phase
-sEBU_iAdd <= "00001100";
-sEBU_iData <= "10100011";
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(12, sEBU_iAdd'length));
+sEBU_iData <= std_logic_vector(to_unsigned(163, sEBU_iData'length));
 sAD_BUS <= (others => 'Z');
 nWAIT <= '0';
 wait until nRD = '0';
 -- read : command phase
-sAD_BUS <= "00001111";
+sAD_BUS <= std_logic_vector(to_unsigned(15, sAD_BUS'length));
 wait for 500 ns; -- n wait delay. 100 nS  =  1 cycle
 nWAIT <= '1';
 wait until nRD = '1';
@@ -145,8 +145,8 @@ sEBU_iRst <= '0';
 wait for 100 ns;
 sEBU_iRst <= '1';
 -- Write: address phase
-sEBU_iAdd <= "00001101";
-sEBU_iData <= "10100011";
+sEBU_iAdd <= std_logic_vector(to_unsigned(11, sEBU_iAdd'length));
+sEBU_iData <= std_logic_vector(to_unsigned(125, sEBU_iData'length));
 sAD_BUS <= (others => 'Z');
 wait until nWR = '0';
 --write : command phase

@@ -13,8 +13,8 @@ generic (
   datac : integer := 1 ; -- number of data hold cycles 
   rdrecovc : integer := 0; -- number of recovery cycles in recover phase after read access
   wrrecovc : integer := 0; -- number of recovery cycles in recover phase after wr access
-  datawidth : integer := 8 ; 
-  addwidth : integer := 8
+  datawidth : integer := 16 ; 
+  addwidth : integer := 16
 );
 port (
   iclk : in std_logic;
