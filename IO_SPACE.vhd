@@ -24,9 +24,9 @@ PORT
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
-signal sPWMCONFIG1 : std_logic_vector(15 downto 0);
-signal sPWMPERIOD1 : std_logic_vector(15 downto 0);
-signal sPWMDUTY1   : std_logic_vector(15 downto 0);
+signal sPWMCONFIG1 : std_logic_vector(15 downto 0) := X"1010";
+signal sPWMPERIOD1 : std_logic_vector(15 downto 0) := X"2020";
+signal sPWMDUTY1   : std_logic_vector(15 downto 0) := X"3030";
 BEGIN
 
 oPWMCONFIG1 <= sPWMCONFIG1;
@@ -58,7 +58,7 @@ variable vAddress : std_logic_vector (7 downto 0);
 begin
   if (inRESET = '0') then
   vAddress := (others => '0');
-  elsif rising_edge(iCLK) and  inRdRdy = '1' then
+  elsif falling_edge(inRdRdy) then
   vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is			
     -- PWMCONFIG1
