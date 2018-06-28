@@ -24,7 +24,7 @@ LIBRARY work;
 
 ENTITY MTCPLD_Top IS 
   GENERIC
-  ( EBU_WIDTH: INTEGER := 16
+  ( DATAWIDTH: INTEGER := 16
   );
   PORT
   (
@@ -35,7 +35,7 @@ ENTITY MTCPLD_Top IS
   iCS_FPGA :  IN  STD_LOGIC;
   iADV :  IN  STD_LOGIC;
   oWAIT :  OUT  STD_LOGIC;
-  ioData :  INOUT  STD_LOGIC_VECTOR(EBU_WIDTH-1 DOWNTO 0);    
+  ioData :  INOUT  STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);    
   iENC_A3 :  IN  STD_LOGIC;
   iENC_B3 :  IN  STD_LOGIC;
   iENC_N3 :  IN  STD_LOGIC;
@@ -82,6 +82,92 @@ ENTITY MTCPLD_Top IS
 END MTCPLD_Top;
 
 ARCHITECTURE logic OF MTCPLD_Top IS 
+signal nRESET        : STD_LOGIC := '1';                                             
+signal nCS           : STD_LOGIC := '1';                                             
+signal nADV          : STD_LOGIC := '1';                                             
+signal nWAIT         : STD_LOGIC := '1';                                             
+signal IO_ADDR       : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
+signal IO_DAT_WR     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
+signal IO_DAT_RD     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
+signal nWrRdy        : STD_LOGIC;
+
+signal oPWMCONFIG1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal oPWMDUTY1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal oPWMPERIOD1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+
+COMPONENT IO_SPACE
+	PORT (
+	iAddress : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	iCLK : IN STD_LOGIC;
+	iData : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	inRdRdy : IN STD_LOGIC;
+	inRESET : IN STD_LOGIC;
+	inWrRdy : IN STD_LOGIC;
+	oData : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+	oPWMCONFIG1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+	oPWMDUTY1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+	oPWMPERIOD1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT SRAM_IO is  
+	GENERIC ( DATAWIDTH : INTEGER := 16; CPLD_VERSION : STD_LOGIC_VECTOR(7 DOWNTO 0) := b"00001101" );
+	PORT
+	(
+    iCLK      : IN std_logic;
+		nRESET    : IN STD_LOGIC;
+		DATA      : INOUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		nRD       : IN STD_LOGIC;
+		nWR       : IN STD_LOGIC;
+		nCS       : IN STD_LOGIC;
+		nADV      : IN STD_LOGIC;
+		nWAIT     : OUT STD_LOGIC;
+    nWrRdy    : OUT std_logic;
+		IO_ADDR	  : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		IO_DAT_WR	: OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+		IO_DAT_RD	: IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
+	);
+END COMPONENT;
+
+
 BEGIN
 
+nRESET <= iSW_RESET_CPLD;
+nCS <= iCS_FPGA;
+
+MOD_SRAMIO : SRAM_IO
+GENERIC MAP (  DATAWIDTH =>  DATAWIDTH,  CPLD_VERSION =>  "00001101" )
+PORT MAP 
+(
+  iCLK       => iCLK,
+  nRESET     =>  nRESET       ,
+  DATA       =>  ioData       ,
+  nRD        =>  iRD          ,
+  nWR        =>  iWR          ,
+  nCS        =>  nCS          ,
+  nADV       =>  iADV         ,
+  nWAIT      =>  oWAIT        ,
+  nWrRdy     =>  nWrRdy        ,
+  IO_ADDR    =>  IO_ADDR      , -- address bus to IOSPACE
+  IO_DAT_WR  =>  IO_DAT_WR    , -- data to write to IOSPACE
+  IO_DAT_RD  =>  IO_DAT_RD      -- data to read from IOSPACE
+);
+
+MOD_IOSPACE : IO_SPACE
+	PORT MAP (
+-- list connections between master ports and signals
+	iAddress => IO_ADDR,
+	iCLK => iCLK,
+	iData => IO_DAT_WR,
+	inRdRdy => iRD,
+	inRESET => nRESET,
+	inWrRdy => iWR,
+	oData => IO_DAT_RD,
+	oPWMCONFIG1 => oPWMCONFIG1,
+	oPWMDUTY1 => oPWMDUTY1,
+	oPWMPERIOD1 => oPWMPERIOD1
+	);  
+
+  
+  
 END logic;

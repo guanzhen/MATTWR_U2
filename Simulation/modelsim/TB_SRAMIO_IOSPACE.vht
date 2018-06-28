@@ -162,7 +162,7 @@ u2 : IO_SPACE
 	iData => IO_DAT_WR,
 	inRdRdy => nRD,
 	inRESET => nRESET,
-	inWrRdy => nWrRdy,
+	inWrRdy => nWR,
 	oData => IO_DAT_RD,
 	oPWMCONFIG1 => oPWMCONFIG1,
 	oPWMDUTY1 => oPWMDUTY1,
