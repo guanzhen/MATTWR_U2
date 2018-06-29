@@ -29,7 +29,12 @@ PORT
   oWrPWMDUTY2   : out STD_LOGIC;
   iPWMCONFIG2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
-  iPWMDUTY2     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0')
+  iPWMDUTY2     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  
+  --7SEG Module
+  oWrSEG7OUTPUT : out STD_LOGIC;
+  iWrSEG7OUTPUT : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0')
+  
   );
 end IO_SPACE;
 
@@ -48,6 +53,7 @@ begin
     oWrPWMCONFIG2 <= '0';
     oWrPWMPERIOD2 <= '0';
     oWrPWMDUTY2 <= '0';
+    oWrSEG7OUTPUT <= '0';
   elsif falling_edge(inWrRdy) then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
@@ -56,6 +62,7 @@ begin
     oWrPWMCONFIG2 <= '0';
     oWrPWMPERIOD2 <= '0';
     oWrPWMDUTY2 <= '0';
+    oWrSEG7OUTPUT <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
     -- PWMCONFIG1
@@ -65,6 +72,7 @@ begin
     when X"03" => oWrPWMCONFIG2 <= '1';
     when X"04" => oWrPWMPERIOD2 <= '1';
     when X"05" => oWrPWMDUTY2 <= '1';
+    when X"40" => oWrSEG7OUTPUT <= '1';
     when others =>
     end case;
   end if;
@@ -87,6 +95,7 @@ begin
     when X"03" => oData <= iPWMCONFIG2;
     when X"04" => oData <= iPWMPERIOD2;
     when X"05" => oData <= iPWMDUTY2;
+    when X"40" => oData <= iWrSEG7OUTPUT;
     when others =>  oData <= (others=>'0');
     end case;
   end if;

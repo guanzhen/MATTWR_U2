@@ -90,7 +90,7 @@ signal IO_DAT_WR     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal IO_DAT_RD     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal nWrRdy        : STD_LOGIC;
 
--- Signals for PWM modules
+-- PWM modules signals
 signal sWrPWMCONFIG1 : STD_LOGIC;
 signal sWrPWMPERIOD1 : STD_LOGIC;
 signal sWrPWMDUTY1   : STD_LOGIC;
@@ -103,6 +103,10 @@ signal sWrPWMDUTY2   : STD_LOGIC;
 signal sPWMCONFIG2   : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 signal sPWMDUTY2     : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 signal sPWMPERIOD2   : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+--7SEGMENT Led module signals
+signal sWrSEG7OUTPUT : STD_LOGIC;
+signal sSeg7En       : STD_LOGIC;
+signal sSEG7OUTPUT   : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 
 COMPONENT IO_SPACE
 	PORT (
@@ -124,7 +128,10 @@ COMPONENT IO_SPACE
   oWrPWMDUTY2   : out STD_LOGIC;
   iPWMCONFIG2   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD2   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
-  iPWMDUTY2     : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+  iPWMDUTY2     : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+  oWrSEG7OUTPUT : out STD_LOGIC;
+  iWrSEG7OUTPUT : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+
 	);
 END COMPONENT;
 
@@ -161,16 +168,28 @@ COMPONENT PWMMODULE
   ); 
 END COMPONENT;
 
+COMPONENT LED7SEGMODULE
+	GENERIC ( DATAWIDTH : INTEGER := 16 );
+	PORT (
+  inReset		:	 IN STD_LOGIC;
+  iWrData		:	 IN STD_LOGIC;
+  iEnable		:	 IN STD_LOGIC;    
+  iData		:	 IN STD_LOGIC_VECTOR(datawidth-1 DOWNTO 0);
+  oLEDOutput		:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
 BEGIN
 
-nRESET <= iSW_RESET_CPLD;
-nCS <= iCS_FPGA;
+nRESET  <= iSW_RESET_CPLD;
+nCS     <= iCS_FPGA;
+sSeg7En <= iPWM_LED;
 
 MOD_SRAMIO : SRAM_IO
 GENERIC MAP (  DATAWIDTH =>  DATAWIDTH,  CPLD_VERSION =>  "00001101" )
 PORT MAP 
 (
-  iCLK       => iCLK,
+  iCLK       =>  iCLK         ,
   nRESET     =>  nRESET       ,
   DATA       =>  ioData       ,
   nRD        =>  iRD          ,
@@ -205,7 +224,9 @@ MOD_IOSPACE : IO_SPACE
   oWrPWMDUTY2 => sWrPWMDUTY2,
 	iPWMCONFIG2 => sPWMCONFIG2,
 	iPWMDUTY2 => sPWMDUTY2,
-	iPWMPERIOD2 => sPWMPERIOD2
+	iPWMPERIOD2 => sPWMPERIOD2,
+  oWrSEG7OUTPUT => sWrSEG7OUTPUT,
+  iWrSEG7OUTPUT => sSEG7OUTPUT
 	);  
 
 MOD_PWM1 : PWMMODULE
@@ -234,5 +255,13 @@ MOD_PWM2 : PWMMODULE
   oPWMDUTY => sPWMDUTY2
   );
   
+ LED7SEG : LED7SEGMODULE
+  PORT MAP (
+  inReset => nRESET,
+  iWrData => sWrSEG7OUTPUT,
+  iEnable => sSeg7En,
+  iData => IO_DAT_WR,
+  oLEDOutput => o7SEGLED
+  );
   
 END logic;

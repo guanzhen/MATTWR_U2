@@ -29,12 +29,12 @@ architecture A_SRAM_IO of SRAM_IO is
 type readstate is ( idle,read_start,read_end );
 type writestate is ( idle,write_start1,write_start2,write_end );
 
-signal sReadState : readstate:= idle;
+signal sRdState : readstate:= idle;
 signal sWrState : writestate:= idle;
 
 BEGIN
 
-SRAM_WAIT_SIG : nWAIT <= '0' when sReadState = read_start else '1';  
+SRAM_WAIT_SIG : nWAIT <= '0' when sRdState = read_start else '1';  
 
 SRAM_ADDR_PROC: process (nRESET, nCS, nADV, DATA) is
 begin
@@ -49,7 +49,7 @@ end process SRAM_ADDR_PROC;
 -- READ SIGNALS
 ----------------------
 
---DATA <= IO_DAT_RD when sReadState = read_start else (others => 'Z');
+--DATA <= IO_DAT_RD when sRdState = read_start else (others => 'Z');
 SRAM_RD_DATA_PROC: process (nRESET, iCLK,nCS,nRD, IO_DAT_RD) is
 begin
   if nRESET = '0' or nCS = '1' then
@@ -60,14 +60,14 @@ begin
 end process SRAM_RD_DATA_PROC;
 
 -- nWait state machine
-SRAM_RD_STATE_PROC: process (nRESET, nCS, iCLK,nRD,sReadState) is
+SRAM_RD_STATE_PROC: process (nRESET, nCS, iCLK,nRD,sRdState) is
 begin
   if nRESET = '0' or nCS = '1' then
-    sReadState <= idle;
-  elsif nRD = '0' and sReadState = idle then
-    sReadState <= read_start;
-  elsif rising_edge(iCLK) and sReadState = read_start then
-    sReadState <= read_end;
+    sRdState <= idle;
+  elsif nRD = '0' and sRdState = idle then
+    sRdState <= read_start;
+  elsif rising_edge(iCLK) and sRdState = read_start then
+    sRdState <= read_end;
   end if;
 end process SRAM_RD_STATE_PROC;
 
