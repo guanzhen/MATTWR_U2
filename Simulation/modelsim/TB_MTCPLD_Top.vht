@@ -192,8 +192,10 @@ GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => iSW_RESET_CPLD );
 
   ebu_gen : entity work.mod_ebu(async_mux)
   GENERIC MAP (
-  addrc => 1, addhold=> 0 , cmd_delay => 0, waitrdc => 2, 
-  waitwrd => 6, datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
+  addrc => 1, addhold=> 0 , cmd_delay => 0, 
+  waitrdc => 6,
+  waitwrd => 6, 
+  datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
   datawidth => DATAWIDTH, addwidth => DATAWIDTH )
   PORT MAP (
   iclk => sEBUCLK,
@@ -309,14 +311,30 @@ sEBU_iData <= X"0033";
 wait until iWR = '0';
 --write : command phase
 wait until iWR = '1';
+wait for 200 ns;
+
+--------------------------------------------------------
+-- WRITE 4
+--------------------------------------------------------
+
+sEBU_iRst <= '0';
+wait for 100 ns;
+sEBU_iRst <= '1';
+-- Write: address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(3, sEBU_iAdd'length));
+sEBU_iData <= X"0044";
+wait until iWR = '0';
+--write : command phase
+wait until iWR = '1';
 wait for 100 ns;
 sEBU_iRst <= 'Z';
 wait for 200 ns;
+
 --------------------------------------------------------
--- READ WITH WAIT 1
+-- READ no WAIT 1
 --------------------------------------------------------
 -- Read
-sEBU_ienwait <= '1';
+sEBU_ienwait <= '0';
 sEBU_iRdWr <='1';
 nRESET <= '0';
 sEBU_iRst<= '0';
@@ -334,10 +352,10 @@ sEBU_iRst <= 'Z';
 wait for 200 ns;
 
 --------------------------------------------------------
--- READ WITH WAIT 2
+-- READ no WAIT 2
 --------------------------------------------------------
 -- Read
-sEBU_ienwait <= '1';
+sEBU_ienwait <= '0';
 sEBU_iRdWr <='1';
 sEBU_iRst<= '0';
 wait for 100 ns;
@@ -353,10 +371,10 @@ sEBU_iRst <= 'Z';
 wait for 200 ns;
 
 --------------------------------------------------------
--- READ WITH WAIT 3
+-- READ no WAIT 3
 --------------------------------------------------------
 -- Read
-sEBU_ienwait <= '1';
+sEBU_ienwait <= '0';
 sEBU_iRdWr <='1';
 sEBU_iRst<= '0';
 wait for 600 ns;
@@ -371,6 +389,62 @@ wait for 100 ns;
 sEBU_iRst <= 'Z';
 wait for 200 ns;
 
+--------------------------------------------------------
+-- READ no WAIT 1
+--------------------------------------------------------
+-- Read
+sEBU_ienwait <= '0';
+sEBU_iRdWr <='1';
+sEBU_iRst<= '0';
+wait for 100 ns;
+sEBU_iRst<= '1';
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(3, sEBU_iAdd'length));
+sEBU_iData <= (others => 'Z');
+wait until iRD = '0';
+-- read : command phase
+wait until iRD = '1';
+wait for 100 ns;
+sEBU_iRst <= 'Z';
+wait for 200 ns;
+
+--------------------------------------------------------
+-- READ no WAIT 2
+--------------------------------------------------------
+-- Read
+sEBU_ienwait <= '0';
+sEBU_iRdWr <='1';
+sEBU_iRst<= '0';
+wait for 100 ns;
+sEBU_iRst<= '1';
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(4, sEBU_iAdd'length));
+sEBU_iData <= (others => 'Z');
+wait until iRD = '0';
+-- read : command phase
+wait until iRD = '1';
+wait for 100 ns;
+sEBU_iRst <= 'Z';
+wait for 200 ns;
+
+--------------------------------------------------------
+-- READ no WAIT 3
+--------------------------------------------------------
+-- Read
+sEBU_ienwait <= '0';
+sEBU_iRdWr <='1';
+sEBU_iRst<= '0';
+wait for 300 ns;
+sEBU_iRst<= '1';
+-- Read : address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(5, sEBU_iAdd'length));
+sEBU_iData <= (others => 'Z');
+wait until iRD = '0';
+-- read : command phase
+wait until iRD = '1';
+wait for 100 ns;
+sEBU_iRst <= 'Z';
+wait for 200 ns;
 
 wait; -- last line. DO NOT MOVE!
 END PROCESS TESTSRAM;

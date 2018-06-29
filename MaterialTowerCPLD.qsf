@@ -233,6 +233,8 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[3]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[2]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[1]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[0]
+set_global_assignment -name VHDL_FILE Hex7Seg.vhd
+set_global_assignment -name VHDL_FILE constants.vhd
 set_global_assignment -name VHDL_FILE PWM_Module.vhd
 set_global_assignment -name VHDL_FILE MTCPLD_Top.vhd
 set_global_assignment -name VHDL_FILE SRAM_IO.vhd

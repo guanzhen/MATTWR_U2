@@ -11,15 +11,12 @@ GENERIC
   );
 PORT 
   (
-	iCLK      : IN STD_LOGIC;
-	inRESET   : IN STD_LOGIC;   
-	iWrPWMCONFIG   : IN STD_LOGIC;
-	iWrPWMPERIOD   : IN STD_LOGIC;
-	iWrPWMDUTY     : IN STD_LOGIC;
---	iRdPWMCONFIG   : IN STD_LOGIC;
---	iRdPWMPERIOD   : IN STD_LOGIC;
---	iRdPWMDUTY     : IN STD_LOGIC;
-  iData           : IN STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
+	iCLK         : IN STD_LOGIC;
+	inRESET      : IN STD_LOGIC;   
+	iWrPWMCONFIG : IN STD_LOGIC;
+	iWrPWMPERIOD : IN STD_LOGIC;
+	iWrPWMDUTY   : IN STD_LOGIC;
+  iData        : IN STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
   --Register Ouputs  
   oPWMCONFIG   : OUT std_logic_vector(PWMBITWIDTH-1 downto 0):= (others => '0');
   oPWMPERIOD   : OUT std_logic_vector(PWMBITWIDTH-1 downto 0):= (others => '0');
@@ -45,7 +42,7 @@ begin
 if (inRESET = '0')then
   sPWMCONFIG <= (others=> '0');
   sPWMPERIOD <= (others=> '0');
-  sDUTY <= (others=> '0');
+  sDUTY      <= (others=> '0');
 else
   if rising_edge(iWrPWMCONFIG) then
     sPWMCONFIG <= iData;
