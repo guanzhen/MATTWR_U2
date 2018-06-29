@@ -34,18 +34,22 @@ signal sWrState : writestate:= idle;
 
 BEGIN
 
-nWAIT <= '0' when sReadState = read_start else '1';  
-nWrRdy <= '0' when sWrState = write_start2 else '1';
+SRAM_WAIT_SIG : nWAIT <= '0' when sReadState = read_start else '1';  
 
 SRAM_ADDR_PROC: process (nRESET, nCS, nADV, DATA) is
 begin
   if nRESET = '0' then
     IO_ADDR <= (others => '0');
-  elsif falling_edge(nADV) and nCS = '0' then 
-    IO_ADDR <= DATA;
+  elsif falling_edge(nADV) then 
+    IO_ADDR <= to_x01(DATA);
   end if ;
 end process SRAM_ADDR_PROC;
 
+----------------------
+-- READ SIGNALS
+----------------------
+
+--DATA <= IO_DAT_RD when sReadState = read_start else (others => 'Z');
 SRAM_RD_DATA_PROC: process (nRESET, iCLK,nCS,nRD, IO_DAT_RD) is
 begin
   if nRESET = '0' or nCS = '1' then
@@ -56,7 +60,7 @@ begin
 end process SRAM_RD_DATA_PROC;
 
 -- nWait state machine
-SRAM_RD_WAIT_PROC: process (nRESET, nCS, iCLK,nRD,sReadState) is
+SRAM_RD_STATE_PROC: process (nRESET, nCS, iCLK,nRD,sReadState) is
 begin
   if nRESET = '0' or nCS = '1' then
     sReadState <= idle;
@@ -65,8 +69,11 @@ begin
   elsif falling_edge(iCLK) and sReadState = read_start then
     sReadState <= read_end;
   end if;
-end process SRAM_RD_WAIT_PROC;
+end process SRAM_RD_STATE_PROC;
 
+----------------------
+-- WRITE SIGNALS
+----------------------
 SRAM_WR_DATA_PROC: process (nRESET, nCS, nWR, DATA) is
 begin
   if nRESET = '0' then
@@ -77,7 +84,7 @@ begin
 end process SRAM_WR_DATA_PROC;
 
 -- nWrite state machine
-SRAM_WR_SIG_PROC: process (nRESET, nCS, iCLK,nWR,sWrState) is
+SRAM_WR_STATE_PROC: process (nRESET, nCS, iCLK,nWR,sWrState) is
 begin
   if nRESET = '0' or nCS = '1' then
     sWrState <= idle;
@@ -90,6 +97,8 @@ begin
       sWrState <= write_end;
     end if;
   end if;
-end process SRAM_WR_SIG_PROC;
+end process SRAM_WR_STATE_PROC;
+
+SRAM_WR_SIG : nWrRdy <= '0' when sWrState = write_start2 else '1';
 
 END architecture A_SRAM_IO;

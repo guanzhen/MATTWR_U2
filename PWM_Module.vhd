@@ -1,103 +1,63 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.std_logic_unsigned.all;
+library IEEE;
+use ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
+use std.standard;
 
-package Package_PWM_Module is
-
-COMPONENT PWM_Module
-	PORT (
-	CLK : IN STD_LOGIC;
-	Config : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-	Duty : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	Frq : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	nReset : IN STD_LOGIC;
-	PWM : OUT STD_LOGIC;
-	Wr : IN STD_LOGIC
-	);
-END COMPONENT;
-
-end package Package_PWM_Module;
-
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.std_logic_unsigned.all;
-USE ieee.numeric_std.all;
- 
-entity PWM_Module is
-GENERIC (
-  datawidth : integer := 8
+entity PWMMODULE is
+GENERIC
+  (
+  BUSWIDTH : integer := 16;
+  PWMBITWIDTH : integer := 16
   );
 PORT 
-  ( 
-  nReset  : IN  STD_LOGIC;
-  CLK     : IN  STD_LOGIC;
-  Wr      : IN  STD_LOGIC;
-  Config  : IN  STD_LOGIC_VECTOR(datawidth-1 downto 0);
-  Duty    : IN  STD_LOGIC_VECTOR (15 downto 0);
-  Frq     : IN  STD_LOGIC_VECTOR (15 downto 0); 
-  PWM     : OUT STD_LOGIC := '0'
+  (
+	iCLK      : IN STD_LOGIC;
+	inRESET   : IN STD_LOGIC;   
+	iWrPWMCONFIG   : IN STD_LOGIC;
+	iWrPWMPERIOD   : IN STD_LOGIC;
+	iWrPWMDUTY     : IN STD_LOGIC;
+--	iRdPWMCONFIG   : IN STD_LOGIC;
+--	iRdPWMPERIOD   : IN STD_LOGIC;
+--	iRdPWMDUTY     : IN STD_LOGIC;
+  iData           : IN STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
+  --Register Ouputs  
+  oPWMCONFIG   : OUT std_logic_vector(PWMBITWIDTH-1 downto 0):= (others => '0');
+  oPWMPERIOD   : OUT std_logic_vector(PWMBITWIDTH-1 downto 0):= (others => '0');
+  oPWMDUTY     : OUT std_logic_vector(PWMBITWIDTH-1 downto 0):= (others => '0')
   );
-end entity PWM_Module;
- 
-architecture a_PWM_Module of PWM_Module is
+end PWMMODULE;
 
-signal P        : STD_LOGIC            := '0';
-signal sConfig  : STD_LOGIC_VECTOR (datawidth-1 downto 0);
-signal DutyVal  : SIGNED(15 downto 0)   := ( others=> '0');
-signal FrqVal   : SIGNED(15 downto 0)   := ( others=> '0');
---temp coutner
-signal T_Frq    : SIGNED(15 downto 0)   := ( others=> '0'); 
-signal T_Duty   : SIGNED(15 downto 0)   := ( others=> '0'); 
+architecture LOGIC of PWMMODULE is
+signal sPWMCONFIG : STD_LOGIC_VECTOR(15 downto 0):= (others=> '0');
+signal sPWMPERIOD : SIGNED(PWMBITWIDTH-1 downto 0):= (others=> '0');
+signal sDUTY      : SIGNED(PWMBITWIDTH-1 downto 0):= (others=> '0');
+signal sIntPWMPERIOD : SIGNED(PWMBITWIDTH-1 downto 0):= (others=> '0');
+signal sIntDUTY      : SIGNED(PWMBITWIDTH-1 downto 0):= (others=> '0');
 
 begin
 
-PWM <= P and sConfig(0);
+oPWMCONFIG <= sPWMCONFIG;
+oPWMPERIOD <= std_logic_vector(sPWMPERIOD);
+oPWMDUTY <= std_logic_vector(sDUTY);
 
-PWM_CTRL :process (nReset, CLK, Wr) is
+PWM_CTRL : process(iData,inRESET,iCLK,iWrPWMCONFIG,iWrPWMDUTY,iWrPWMPERIOD) is
 begin
-  if (nReset = '0') then
-    sConfig <= (others => '0');  
-    FrqVal  <= "0011111010000000";  
-    DutyVal <= "0001111101000000";
-  elsif rising_edge(clk) then
-    if Wr = '0' then
-      sConfig <= Config;
-      FrqVal <= signed(Frq);
-      DutyVal <= signed(Duty);
-    else
-      sConfig <= sConfig;
-      FrqVal <= FrqVal;
-      DutyVal <= DutyVal;
-    end if;
+if (inRESET = '0')then
+  sPWMCONFIG <= (others=> '0');
+  sPWMPERIOD <= (others=> '0');
+  sDUTY <= (others=> '0');
+else
+  if rising_edge(iWrPWMCONFIG) then
+    sPWMCONFIG <= iData;
   end if;
-end process PWM_CTRL;
-
-PWM_G : process (Wr,nReset, CLK, FrqVal,DutyVal) is 
-begin 
-  if (Wr = '0') then
-    p <= '0';
-    T_Frq <= FrqVal;
-    T_Duty <= DutyVal;
-  elsif rising_edge(CLK) then
-    --duty & pulse
-    if T_Frq >= 1 then
-      T_Frq <= T_Frq -1;
-      --duty
-      if T_Duty >= 1 then
-        T_Duty <= T_Duty -1;
-        p <= '1';
-      else
-        T_Duty <= (others => '0');
-        p <= '0';
-      end if;
-    else
-      T_Frq  <= FrqVal;
-      T_Duty <= DutyVal;
-      p      <= '0';
-    end if;
+  if rising_edge(iWrPWMPERIOD) then
+    sPWMPERIOD <= SIGNED(iData);
   end if;
-end process PWM_G;
+  if rising_edge(iWrPWMDUTY) then
+    sDUTY <= SIGNED(iData);
+  end if;
+end if;
 
-end architecture a_PWM_Module;
+end process;
+
+end architecture LOGIC;

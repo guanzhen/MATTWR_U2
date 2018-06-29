@@ -83,30 +83,36 @@ END MTCPLD_Top;
 
 ARCHITECTURE logic OF MTCPLD_Top IS 
 signal nRESET        : STD_LOGIC := '1';                                             
-signal nCS           : STD_LOGIC := '1';                                             
-signal nADV          : STD_LOGIC := '1';                                             
+signal nCS           : STD_LOGIC := '1';                                                
 signal nWAIT         : STD_LOGIC := '1';                                             
 signal IO_ADDR       : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal IO_DAT_WR     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal IO_DAT_RD     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal nWrRdy        : STD_LOGIC;
 
-signal oPWMCONFIG1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
-signal oPWMDUTY1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
-signal oPWMPERIOD1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal sWrPWMCONFIG1 : STD_LOGIC;
+signal sWrPWMPERIOD1 : STD_LOGIC;
+signal sWrPWMDUTY1 : STD_LOGIC;
+
+signal sPWMCONFIG1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal sPWMDUTY1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal sPWMPERIOD1 : STD_LOGIC_VECTOR(15 DOWNTO 0);
 
 COMPONENT IO_SPACE
 	PORT (
-	iAddress : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 	iCLK : IN STD_LOGIC;
-	iData : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	inRdRdy : IN STD_LOGIC;
 	inRESET : IN STD_LOGIC;
 	inWrRdy : IN STD_LOGIC;
+	inRdRdy : IN STD_LOGIC;
+	iAddress : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	iData : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 	oData : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	oPWMCONFIG1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	oPWMDUTY1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	oPWMPERIOD1 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+  oWrPWMCONFIG1 : out STD_LOGIC;
+  oWrPWMPERIOD1 : out STD_LOGIC;
+  oWrPWMDUTY1   : out STD_LOGIC;
+	iPWMCONFIG1 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	iPWMDUTY1 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	iPWMPERIOD1 : IN STD_LOGIC_VECTOR(15 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -129,6 +135,21 @@ COMPONENT SRAM_IO is
 	);
 END COMPONENT;
 
+COMPONENT PWMMODULE 
+  GENERIC ( BUSWIDTH : INTEGER := 16; PWMBITWIDTH : INTEGER := 16 ); 
+  PORT 
+  ( 
+    iCLK    :   IN STD_LOGIC; 
+    inRESET    :   IN STD_LOGIC; 
+    iWrPWMCONFIG    :   IN STD_LOGIC; 
+    iWrPWMPERIOD    :   IN STD_LOGIC; 
+    iWrPWMDUTY    :   IN STD_LOGIC; 
+    iData    :   IN STD_LOGIC_VECTOR(buswidth-1 DOWNTO 0); 
+    oPWMCONFIG    :   OUT STD_LOGIC_VECTOR(pwmbitwidth-1 DOWNTO 0); 
+    oPWMPERIOD    :   OUT STD_LOGIC_VECTOR(pwmbitwidth-1 DOWNTO 0); 
+    oPWMDUTY    :   OUT STD_LOGIC_VECTOR(pwmbitwidth-1 DOWNTO 0) 
+  ); 
+END COMPONENT;
 
 BEGIN
 
@@ -147,7 +168,7 @@ PORT MAP
   nCS        =>  nCS          ,
   nADV       =>  iADV         ,
   nWAIT      =>  oWAIT        ,
-  nWrRdy     =>  nWrRdy        ,
+  nWrRdy     =>  nWrRdy       ,
   IO_ADDR    =>  IO_ADDR      , -- address bus to IOSPACE
   IO_DAT_WR  =>  IO_DAT_WR    , -- data to write to IOSPACE
   IO_DAT_RD  =>  IO_DAT_RD      -- data to read from IOSPACE
@@ -163,11 +184,27 @@ MOD_IOSPACE : IO_SPACE
 	inRESET => nRESET,
 	inWrRdy => iWR,
 	oData => IO_DAT_RD,
-	oPWMCONFIG1 => oPWMCONFIG1,
-	oPWMDUTY1 => oPWMDUTY1,
-	oPWMPERIOD1 => oPWMPERIOD1
+  oWrPWMCONFIG1 => sWrPWMCONFIG1,
+  oWrPWMPERIOD1 => sWrPWMPERIOD1,
+  oWrPWMDUTY1 => sWrPWMDUTY1,
+	iPWMCONFIG1 => sPWMCONFIG1,
+	iPWMDUTY1 => sPWMDUTY1,
+	iPWMPERIOD1 => sPWMPERIOD1
 	);  
 
+MOD_PWM1 : PWMMODULE
+  PORT MAP (
+  iCLK => iCLK,
+  inRESET => nRESET,
+  iWrPWMCONFIG => sWrPWMCONFIG1,
+  iWrPWMPERIOD => sWrPWMPERIOD1,
+  iWrPWMDUTY => sWrPWMDUTY1,
+  iData => IO_DAT_WR,
+  oPWMCONFIG => sPWMCONFIG1,
+  oPWMPERIOD => sPWMPERIOD1,
+  oPWMDUTY => sPWMDUTY1
+  );
+  
   
   
 END logic;

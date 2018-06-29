@@ -268,6 +268,51 @@ BEGIN
 
 --defaults
 --------------------------------------------------------
+-- WRITE 1
+--------------------------------------------------------
+sEBU_iRdWr <='0'; -- Set to write mode.
+sEBU_iRst <= '0';
+wait for 100 ns;
+sEBU_iRst <= '1';
+-- Write: address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(0, sEBU_iAdd'length));
+sEBU_iData <= X"0011";
+wait until iWR = '0';
+--write : command phase
+wait until iWR = '1';
+
+--------------------------------------------------------
+-- WRITE 2
+--------------------------------------------------------
+sEBU_iRst <= '0';
+wait for 100 ns;
+sEBU_iRst <= '1';
+-- Write: address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(1, sEBU_iAdd'length));
+sEBU_iData <= X"0022";
+wait until iWR = '0';
+--write : command phase
+wait until iWR = '1';
+
+wait until rising_edge(iCLK);
+wait for 300 ns;
+--------------------------------------------------------
+-- WRITE 3
+--------------------------------------------------------
+
+sEBU_iRst <= '0';
+wait for 100 ns;
+sEBU_iRst <= '1';
+-- Write: address phase
+sEBU_iAdd <= std_logic_vector(to_unsigned(2, sEBU_iAdd'length));
+sEBU_iData <= X"0033";
+wait until iWR = '0';
+--write : command phase
+wait until iWR = '1';
+wait for 100 ns;
+sEBU_iRst <= 'Z';
+wait for 200 ns;
+--------------------------------------------------------
 -- READ WITH WAIT 1
 --------------------------------------------------------
 -- Read
@@ -325,53 +370,9 @@ wait until iRD = '1';
 wait for 100 ns;
 sEBU_iRst <= 'Z';
 wait for 200 ns;
---------------------------------------------------------
--- WRITE 1
---------------------------------------------------------
-sEBU_iRdWr <='0';
-sEBU_iRst <= '0';
-wait for 100 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(0, sEBU_iAdd'length));
-sEBU_iData <= X"0011";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
 
---------------------------------------------------------
--- WRITE 2
---------------------------------------------------------
-sEBU_iRst <= '0';
-wait for 10 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(1, sEBU_iAdd'length));
-sEBU_iData <= X"0022";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
 
-wait until rising_edge(iCLK);
-wait for 800 ns;
---------------------------------------------------------
--- WRITE 3
---------------------------------------------------------
-
-sEBU_iRst <= '0';
-wait for 100 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(2, sEBU_iAdd'length));
-sEBU_iData <= X"0033";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
-
-wait;
+wait; -- last line. DO NOT MOVE!
 END PROCESS TESTSRAM;
 
 END MTCPLD_Top_arch;

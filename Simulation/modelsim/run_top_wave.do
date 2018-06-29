@@ -15,15 +15,23 @@ add wave -noupdate /tb_mtcpld_top/i1/iRD
 add wave -noupdate /tb_mtcpld_top/i1/nWAIT
 add wave -noupdate /tb_mtcpld_top/i1/iWR
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/ioData
-add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/sReadState
-add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/sWrState
 add wave -noupdate -divider INTERFACE
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/IO_DAT_RD
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/IO_DAT_WR
 add wave -noupdate -radix decimal /tb_mtcpld_top/i1/IO_ADDR
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/nWrRdy
+add wave -noupdate -divider SRAM
+add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/sReadState
+add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/sWrState
+add wave -noupdate -divider PWM
+add wave -noupdate /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMCONFIG
+add wave -noupdate /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMPERIOD
+add wave -noupdate /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMDUTY
+add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMPERIOD
+add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMCONFIG
+add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMDUTY
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {217408 ps} 0}
+WaveRestoreCursors {{Cursor 1} {3400000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 250
 configure wave -valuecolwidth 55
@@ -39,4 +47,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {1837500 ps}
+WaveRestoreZoom {0 ps} {7350 ns}
