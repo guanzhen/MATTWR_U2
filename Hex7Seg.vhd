@@ -4,7 +4,8 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY LED7SEGMODULE IS
 
 GENERIC (
-DATAWIDTH : integer := 16
+DATAWIDTH : integer := 16;
+INACTIVESTATE : std_logic := '0'
 );
 PORT 
 (
@@ -20,9 +21,9 @@ ARCHITECTURE A_Hex7Seg OF LED7SEGMODULE IS
 SIGNAL s7SEGOUTPUT : STD_LOGIC_VECTOR(7 downto 0);
 BEGIN
 
-oLEDOutput <= s7SEGOUTPUT when iEnable = '1' else (others=>'0');
+oLEDOutput <= s7SEGOUTPUT when iEnable = '0' else (others=>INACTIVESTATE);
 
-WRITEREG : PROCESS(inReset,iWrData)
+WRITEREG : PROCESS(inReset,iWrData,iData)
   BEGIN  
   if (inReset = '0') then
     s7SEGOUTPUT <= (others =>'0');
