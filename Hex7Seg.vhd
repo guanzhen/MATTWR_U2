@@ -26,7 +26,7 @@ oLEDOutput <= s7SEGOUTPUT when iEnable = '0' else (others=>INACTIVESTATE);
 WRITEREG : PROCESS(inReset,iWrData,iData)
   BEGIN  
   if (inReset = '0') then
-    s7SEGOUTPUT <= (others =>'0');
+    s7SEGOUTPUT <= (others =>INACTIVESTATE);
   elsif rising_edge(iWrData) then    
     s7SEGOUTPUT <= iData(7 downto 0);
   end if;  
