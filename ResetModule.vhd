@@ -70,19 +70,21 @@ BEGIN
   end if;
 END PROCESS;
 
-COUNTER1US : PROCESS(iCLK,inReset,iWrPeriod,sEnable)
-variable vCounter1US : natural range 0 to COUNTSPERUS;
+COUNTER1US : PROCESS(iCLK,inReset,iWrPeriod,iWrConfig,sEnable)
+variable vCounter1US : integer range 0 to COUNTSPERUS;
 BEGIN
-  if (inReset = '0' or iWrPeriod = '1') then -- reset internal counter on reset or write to period counter
+  if (inReset = '0' or iWrPeriod = '1' or iWrConfig = '1') then -- reset internal counter on reset or write to period counter
     vCounter1US := 0;
     sCounter1USOF <= '0';
-  elsif rising_edge(iCLK) and sEnable = '1' then
+  elsif rising_edge(iCLK) then
     sCounter1USOF <= '0'; 
     vCounter1US := vCounter1US + 1;
-    if vCounter1US = COUNTSPERUS then
-      sCounter1USOF <= '1';
-      vCounter1US := 0;
-    end if;
+  end if;
+  
+  if vCounter1US = COUNTSPERUS then
+    sCounter1USOF <= '1';
+    vCounter1US := 0;
+  --end if;
   end if;  
 END PROCESS;
 END ARCHITECTURE LOGIC;
