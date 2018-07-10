@@ -27,7 +27,7 @@ END;
 
 ARCHITECTURE LOGIC OF RESETMODULE IS 
 SIGNAL sResetConfig   : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0); -- holds reset configuration
-SIGNAL sResetPeriod   : integer range 0 to MAXCOUNT-1 := DEFAULT_RESET_PERIOD; -- number of counts in us.
+SIGNAL sResetPeriod   : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0); -- holds reset configuration
 SIGNAL sEnable        : STD_LOGIC:= '0';
 SIGNAL sReset         : STD_LOGIC:= '0'; -- active high output when reset counter has elasped
 SIGNAL sCounter1USOF  : STD_LOGIC:= '0'; -- signal for overflow output from counter2
@@ -35,7 +35,7 @@ SIGNAL sCounter1USOF  : STD_LOGIC:= '0'; -- signal for overflow output from coun
 BEGIN
 
 oResetConfig <= sResetConfig;
-oResetPeriod <= std_logic_vector(to_unsigned(sResetPeriod, oResetPeriod'length));
+oResetPeriod <= sResetPeriod;
 sEnable <= sResetConfig(0); --bit 0 is Enable signal
 oReset <= sReset;
 -- Process for writing into module registers.
@@ -48,14 +48,15 @@ BEGIN
   end if;
   
   if (inReset = '0') then                 -- reset sResetPeriod register to default values
-    sResetPeriod <= DEFAULT_RESET_PERIOD;
+    sResetPeriod <= std_logic_vector(to_unsigned(DEFAULT_RESET_PERIOD, sResetPeriod'length));
   elsif rising_edge(iWrPeriod) then       -- write to period register 
-    sResetPeriod <= to_integer(unsigned(iData(DATAWIDTH-1 downto 0)));
+    sResetPeriod <= iData;
   end if;
 END PROCESS;
 
 COUNTER : PROCESS(inReset,iCLK,sCounter1USOF,iWrPeriod,sResetPeriod,sEnable)
 variable vCounter : integer range 0 to MAXCOUNT-1:= 0;
+variable vPeriod  : integer range 0 to MAXCOUNT-1:= 0;
 BEGIN
   if (inReset = '0' or iWrPeriod = '1') then -- reset internal counter on reset or write to period counter
     vCounter := 0;
@@ -63,7 +64,8 @@ BEGIN
   else
     if rising_edge(sCounter1USOF) and sEnable = '1' then -- increment counter when module is enabled
       vCounter := vCounter + 1;
-      if (vCounter = sResetPeriod) then
+      vPeriod := to_integer(unsigned(sResetPeriod(DATAWIDTH-1 downto 0))); 
+      if (vCounter = vPeriod) then
         sReset <= '1';                                   -- set output reset signal
       end if;
     end if;  
