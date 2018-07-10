@@ -26,12 +26,11 @@ PORT
 END;
 
 ARCHITECTURE LOGIC OF RESETMODULE IS 
-SIGNAL sResetConfig: STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0); -- holds reset configuration
---SIGNAL sResetPeriod: STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0); -- number of counts in us.
-SIGNAL sResetPeriod: integer range 0 to MAXCOUNT-1 := DEFAULT_RESET_PERIOD; -- number of counts in us.
-SIGNAL sEnable     : STD_LOGIC:= '0';
-SIGNAL sReset      : STD_LOGIC:= '0'; -- active high output when reset counter has elasped
-SIGNAL sCounter1USOF : STD_LOGIC:= '0'; -- signal for overflow output from counter2
+SIGNAL sResetConfig   : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0); -- holds reset configuration
+SIGNAL sResetPeriod   : integer range 0 to MAXCOUNT-1 := DEFAULT_RESET_PERIOD; -- number of counts in us.
+SIGNAL sEnable        : STD_LOGIC:= '0';
+SIGNAL sReset         : STD_LOGIC:= '0'; -- active high output when reset counter has elasped
+SIGNAL sCounter1USOF  : STD_LOGIC:= '0'; -- signal for overflow output from counter2
 
 BEGIN
 
@@ -42,15 +41,15 @@ oReset <= sReset;
 -- Process for writing into module registers.
 WRITEREG : PROCESS(inReset,iWrConfig,iWrPeriod,iData,sReset)
 BEGIN  
-  if (inReset = '0' or sReset = '1') then                        -- reset sResetConfig register to default values
+  if (inReset = '0' or sReset = '1') then -- reset sResetConfig register to default values
     sResetConfig <= (others =>'0');
-  elsif rising_edge(iWrConfig) then              -- write to config register 
+  elsif rising_edge(iWrConfig) then       -- write to config register 
       sResetConfig <= iData;
   end if;
   
-  if (inReset = '0') then  -- reset sResetPeriod register to default values
+  if (inReset = '0') then                 -- reset sResetPeriod register to default values
     sResetPeriod <= DEFAULT_RESET_PERIOD;
-  elsif rising_edge(iWrPeriod) then               -- write to period register 
+  elsif rising_edge(iWrPeriod) then       -- write to period register 
     sResetPeriod <= to_integer(unsigned(iData(DATAWIDTH-1 downto 0)));
   end if;
 END PROCESS;
@@ -62,13 +61,12 @@ BEGIN
     vCounter := 0;
     sReset <= '0';
   else
-    if rising_edge(sCounter1USOF) and sEnable = '1' then               -- increment counter
+    if rising_edge(sCounter1USOF) and sEnable = '1' then -- increment counter when module is enabled
       vCounter := vCounter + 1;
-    end if;    
-     -- set output reset signal
-    if rising_edge(iCLK) and (vCounter = sResetPeriod) then
-      sReset <= '1';
-    end if;
+      if (vCounter = sResetPeriod) then
+        sReset <= '1';                                   -- set output reset signal
+      end if;
+    end if;  
   end if;
 END PROCESS;
 
@@ -78,16 +76,12 @@ BEGIN
   if (inReset = '0' or iWrPeriod = '1') then -- reset internal counter on reset or write to period counter
     vCounter1US := 0;
     sCounter1USOF <= '0';
-  elsif rising_edge(iCLK) then
-    if sEnable = '1' then
-      vCounter1US := vCounter1US + 1;
-    end if;     
-  --setoverflow signal when counter rolls over
+  elsif rising_edge(iCLK) and sEnable = '1' then
+    sCounter1USOF <= '0'; 
+    vCounter1US := vCounter1US + 1;
     if vCounter1US = COUNTSPERUS then
       sCounter1USOF <= '1';
       vCounter1US := 0;
-    else
-      sCounter1USOF <= '0'; 
     end if;
   end if;  
 END PROCESS;
