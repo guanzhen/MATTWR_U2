@@ -61,7 +61,7 @@ END COMPONENT;
 BEGIN
 
 cpld_clk : MOD_CLKGEN
-GENERIC MAP (period => 500 ns ) PORT MAP ( reset => inReset, clk_en => '1', clk_o => iCLK );
+GENERIC MAP (period => 100 ns ) PORT MAP ( reset => inReset, clk_en => '1', clk_o => iCLK );
 
 	i1 : RESETMODULE
 	PORT MAP (
@@ -82,13 +82,32 @@ BEGIN
   wait for 100 ns;
   inReset <= '1';                  
 WAIT;                                                       
-END PROCESS init;                                           
-always : PROCESS                                              
--- optional sensitivity list                                  
--- (        )                                                 
--- variable declarations                                      
-BEGIN                                                         
-        -- code executes for every event on sensitivity list  
-WAIT;                                                        
+END PROCESS init;
+
+always : PROCESS 
+BEGIN
+  iWrConfig <= '0';
+  iWrPeriod <= '0';
+  iData <= (others =>'0');  
+  wait until inReset = '1';
+  iWrPeriod <= '1';
+  iData <= X"000A";
+  wait for 100 ns;  
+  iWrPeriod <= '0';
+  iWrConfig <= '1';
+  iData <= X"0001";
+  wait for 100 ns;
+  iWrConfig <= '0';
+  wait until oReset = '1';
+  wait for 1000 ns;
+  iWrPeriod <= '1';
+  iData <= X"0001";
+  wait for 100 ns;
+  iWrPeriod <= '0';
+  iWrConfig <= '1';
+  iData <= X"0001";
+  wait for 100 ns;
+  iWrConfig <= '0';
+  wait until oReset = '1';
 END PROCESS always;                                          
 END RESETMODULE_arch;
