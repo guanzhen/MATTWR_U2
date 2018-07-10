@@ -1,11 +1,4 @@
-C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd
-Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling package constants
-
-} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd
+C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO
