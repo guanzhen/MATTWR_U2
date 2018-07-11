@@ -27,23 +27,24 @@ end PWMMODULE;
 
 architecture LOGIC of PWMMODULE is
 type OUTPUTSTATE is (IDLE,HI,LO);
-type PWM_STATE is (RESET,IDLE,HI,LO);
-signal sPWMCONFIG : STD_LOGIC_VECTOR(15 downto 0):= (others=> '0');
+type PWM_STATE is (IDLE,HI,LO);
+signal sPWMCONFIG : STD_LOGIC_VECTOR(2 downto 0):= (others=> '0');
 signal sPWMPERIOD : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sDUTY      : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sIntPWMPERIOD : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sIntDUTY   : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sOPState   : OUTPUTSTATE := IDLE;
-signal sPWMState  : PWM_STATE   := RESET;
+signal sPWMState  : PWM_STATE   := IDLE;
 signal sEN        : STD_LOGIC   := '0';
 signal sDEFOP     : STD_LOGIC_VECTOR(1 downto 0):= (others => '0');
 begin
 
-oPWMCONFIG <= sPWMCONFIG;
+oPWMCONFIG <= B"0000_0000_0000_0" & sPWMCONFIG;
 oPWMPERIOD <= std_logic_vector(sPWMPERIOD);
 oPWMDUTY <= std_logic_vector(sDUTY);
-sEN <= sPWMCONFIG(0); -- Enable bit
-sDEFOP <= sPWMCONFIG(2 downto 1);
+S_EN : sEN <= sPWMCONFIG(0); -- Enable bit
+S_DEFOP : sDEFOP <= sPWMCONFIG(2 downto 1);
+
 PWM_CTRL : process(iData,inRESET,iCLK,iWrPWMCONFIG,iWrPWMDUTY,iWrPWMPERIOD) is
 begin
 if (inRESET = '0')then
@@ -52,7 +53,7 @@ if (inRESET = '0')then
   sDUTY      <= (others=> '0');
 else
   if rising_edge(iWrPWMCONFIG) then
-    sPWMCONFIG <= iData;
+    sPWMCONFIG <= iData(2 downto 0);
   end if;
   if rising_edge(iWrPWMPERIOD) then
     sPWMPERIOD <= iData;
@@ -63,17 +64,14 @@ else
 end if;
 end process;
 
-PWM_G : process (iCLK,inRESET,iWrPWMCONFIG,iWrPWMDUTY,iWrPWMPERIOD) is
-variable vDutyCnt : integer range 0 to 65535;
-variable vPeriodCnt : integer range 0 to 65535;
-variable vCounter : integer range 0 to 65535;
+PWM_G : process (iCLK,inRESET,iWrPWMDUTY,iWrPWMPERIOD) is
+variable vDutyCnt : integer range 0 to 2**PWMBITWIDTH-1;
+variable vCounter : integer range 0 to 2**PWMBITWIDTH-1;
 begin
 if (inRESET = '0')then
-  sPWMState <= RESET;
+  sPWMState <= IDLE;
 elsif rising_edge(iCLK) then
   case sPWMState is
-  when RESET=>
-    sPWMState <= IDLE;
   when IDLE=>    
     sOPState <= IDLE;
     vCounter := to_integer(unsigned(sPWMPERIOD(PWMBITWIDTH-1 downto 0)));
@@ -82,12 +80,14 @@ elsif rising_edge(iCLK) then
     end if;
   when HI=>
     sOPState <= HI;
-    vCounter := vCounter - 1;
+    if (vCounter > 1) then
+      vCounter := vCounter - 1;
+    end if;
     vDutyCnt := to_integer(unsigned(sDUTY(PWMBITWIDTH-1 downto 0)));
-    if (vCounter <= vDutyCnt) then -- should not happen
+    if (vCounter <= vDutyCnt) then
       sPWMState <= LO;
     end if;
-    if (sEN = '0') or (iWrPWMCONFIG = '1') or (iWrPWMDUTY = '1') then
+    if (sEN = '0') or (iWrPWMPERIOD = '1') or (iWrPWMDUTY = '1') then
       sPWMState <= IDLE;
     end if;
   when LO=>
@@ -97,7 +97,7 @@ elsif rising_edge(iCLK) then
       sPWMState <= HI;
       vCounter := to_integer(unsigned(sPWMPERIOD(PWMBITWIDTH-1 downto 0)));
     end if;
-    if (sEN = '0') or (iWrPWMCONFIG = '1') or (iWrPWMDUTY = '1') then
+    if (sEN = '0') or (iWrPWMPERIOD = '1') or (iWrPWMDUTY = '1') then
       sPWMState <= IDLE;
     end if;
   end case;

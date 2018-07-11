@@ -102,30 +102,69 @@ BEGIN
   iData <= std_logic_vector(to_unsigned(6, iData'length));
   wait for 100 ns;
   iWrPWMCONFIG <= '0';
-  --write duty cycle
-  iWrPWMDUTY <= '1';  
-  iData <= std_logic_vector(to_unsigned(5, iData'length));
-  wait for 100 ns;
-  iWrPWMDUTY <= '0';  
   --write period
   iWrPWMPERIOD <= '1';  
   iData <= std_logic_vector(to_unsigned(10, iData'length));
   wait for 100 ns;
   iWrPWMPERIOD <= '0';
+  --write duty cycle
+  iWrPWMDUTY <= '1';  
+  iData <= std_logic_vector(to_unsigned(5, iData'length));
+  wait for 100 ns;
+  iWrPWMDUTY <= '0';  
   --enable module
   iWrPWMCONFIG <= '1';
   iData <= std_logic_vector(to_unsigned(7, iData'length));
   wait for 100 ns;
   iWrPWMCONFIG <= '0';
-  wait for 2 ms;
+  -- delay
+  wait for 1300 ns;
+  --write period to force reset
+  iWrPWMPERIOD <= '1';  
+  iData <= std_logic_vector(to_unsigned(10, iData'length));
+  wait for 100 ns;
+  iWrPWMPERIOD <= '0';
+  wait for 2 us;
+  wait until rising_edge(oPWM);
+  -- disable module
+  iWrPWMCONFIG <= '1';
+  iData <= std_logic_vector(to_unsigned(6, iData'length));
+  wait for 100 ns;
+  iWrPWMCONFIG <= '0';
+    --write period
+  iWrPWMPERIOD <= '1';  
+  iData <= std_logic_vector(to_unsigned(10, iData'length));
+  wait for 100 ns;
+  iWrPWMPERIOD <= '0';
+  -- write duty cycle
+  iWrPWMDUTY <= '1';  
+  iData <= std_logic_vector(to_unsigned(0, iData'length));
+  wait for 100 ns;
+  iWrPWMDUTY <= '0';
+  -- enable module
+  iWrPWMCONFIG <= '1';
+  iData <= std_logic_vector(to_unsigned(7, iData'length));
+  wait for 100 ns;
+  iWrPWMCONFIG <= '0';
+  -- delay
+  wait for 2 us;
+  --write period
+  iWrPWMPERIOD <= '1';  
+  iData <= std_logic_vector(to_unsigned(10, iData'length));
+  wait for 100 ns;
+  iWrPWMPERIOD <= '0';
+  -- write duty cycle
+  iWrPWMDUTY <= '1';  
+  iData <= std_logic_vector(to_unsigned(10, iData'length));
+  wait for 100 ns;
+  iWrPWMDUTY <= '0';  
+  wait until rising_edge(oPWM);
   -- disable module
   iWrPWMCONFIG <= '1';
   iData <= std_logic_vector(to_unsigned(6, iData'length));
   wait for 100 ns;
   iWrPWMCONFIG <= '0';
   
-  
-        -- code executes for every event on sensitivity list  
 WAIT;                                                        
 END PROCESS always;                                          
 END PWMMODULE_arch;
