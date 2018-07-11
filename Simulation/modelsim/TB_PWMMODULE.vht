@@ -124,8 +124,8 @@ BEGIN
   iData <= std_logic_vector(to_unsigned(10, iData'length));
   wait for 100 ns;
   iWrPWMPERIOD <= '0';
-  wait for 2 us;
-  wait until rising_edge(oPWM);
+  wait for 1300 ns;
+  --wait until rising_edge(oPWM);
   -- disable module
   iWrPWMCONFIG <= '1';
   iData <= std_logic_vector(to_unsigned(6, iData'length));

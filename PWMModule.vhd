@@ -6,8 +6,8 @@ use std.standard;
 entity PWMMODULE is
 GENERIC
   (
-  BUSWIDTH : integer := 16;
-  PWMBITWIDTH : integer := 16
+  BUSWIDTH : natural := 16;
+  PWMBITWIDTH : natural := 16
   );
 PORT 
   (
@@ -27,7 +27,7 @@ end PWMMODULE;
 
 architecture LOGIC of PWMMODULE is
 type OUTPUTSTATE is (IDLE,HI,LO);
-type PWM_STATE is (IDLE,HI,LO);
+type PWM_STATE is (IDLE,HI,LO,RESET);
 signal sPWMCONFIG : STD_LOGIC_VECTOR(2 downto 0):= (others=> '0');
 signal sPWMPERIOD : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sDUTY      : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
@@ -64,9 +64,9 @@ else
 end if;
 end process;
 
-PWM_G : process (iCLK,inRESET,iWrPWMDUTY,iWrPWMPERIOD) is
-variable vDutyCnt : integer range 0 to 2**PWMBITWIDTH-1;
-variable vCounter : integer range 0 to 2**PWMBITWIDTH-1;
+PWM_G : process (iCLK,sEN,inRESET,iWrPWMDUTY,iWrPWMPERIOD) is
+variable vDutyCnt : natural range 0 to 2**PWMBITWIDTH-1;
+variable vCounter : natural range 0 to 2**PWMBITWIDTH-1;
 begin
 if (inRESET = '0')then
   sPWMState <= IDLE;
@@ -78,6 +78,9 @@ elsif rising_edge(iCLK) then
     if (sEN = '1') then
       sPWMState <= HI;
     end if;
+  when RESET =>
+    vCounter := to_integer(unsigned(sPWMPERIOD(PWMBITWIDTH-1 downto 0)));
+    sPWMState <= HI;
   when HI=>
     sOPState <= HI;
     if (vCounter > 1) then
@@ -87,8 +90,10 @@ elsif rising_edge(iCLK) then
     if (vCounter <= vDutyCnt) then
       sPWMState <= LO;
     end if;
-    if (sEN = '0') or (iWrPWMPERIOD = '1') or (iWrPWMDUTY = '1') then
+    if (sEN = '0') then
       sPWMState <= IDLE;
+    elsif (iWrPWMPERIOD = '1') or (iWrPWMDUTY = '1') then
+      sPWMState <= RESET;
     end if;
   when LO=>
     sOPState <= LO;
@@ -97,8 +102,10 @@ elsif rising_edge(iCLK) then
       sPWMState <= HI;
       vCounter := to_integer(unsigned(sPWMPERIOD(PWMBITWIDTH-1 downto 0)));
     end if;
-    if (sEN = '0') or (iWrPWMPERIOD = '1') or (iWrPWMDUTY = '1') then
+    if (sEN = '0') then
       sPWMState <= IDLE;
+    elsif (iWrPWMPERIOD = '1') or (iWrPWMDUTY = '1') then
+      sPWMState <= RESET;
     end if;
   end case;
 end if;

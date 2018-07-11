@@ -1,4 +1,12 @@
-C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd
+C:/Projects/Quartus/MT_CPLD_GIT/Hex7Seg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Hex7Seg.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity LED7SEGMODULE
+-- Compiling architecture A_Hex7Seg of LED7SEGMODULE
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -31,6 +39,24 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package std_logic_1164
 -- Compiling entity MOD_EBU
 -- Compiling architecture async_mux of MOD_EBU
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_RESETMODULE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_RESETMODULE.vht
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package COMMON
+-- Compiling entity RESETMODULE_vhd_tst
+-- Compiling architecture RESETMODULE_arch of RESETMODULE_vhd_tst
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/IO_SPACE.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/IO_SPACE.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity IO_SPACE
+-- Compiling architecture A_IO_SPACE of IO_SPACE
 
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
@@ -65,6 +91,14 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling architecture logic of TB_EBU_GEN
 -- Loading entity MOD_EBU
 
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_7SEG.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_7SEG.vht
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity TB_7SEG
+-- Compiling architecture LED7SEGMODULE_arch of TB_7SEG
+
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_MTCPLD_Top.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_MTCPLD_Top.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
@@ -75,5 +109,15 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity TB_MTCPLD_Top
 -- Compiling architecture MTCPLD_Top_arch of TB_MTCPLD_Top
 -- Loading entity MOD_EBU
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/ResetModule.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/ResetModule.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package constants
+-- Compiling entity RESETMODULE
+-- Compiling architecture LOGIC of RESETMODULE
 
 } {} {}}
