@@ -18,30 +18,35 @@ PORT
   oData     : OUT std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   
   --PWM Module
-  oWrPWMCONFIG1 : out STD_LOGIC;
-  oWrPWMPERIOD1 : out STD_LOGIC;
-  oWrPWMDUTY1   : out STD_LOGIC;
+  oWrPWMCONFIG1 : OUT STD_LOGIC;
+  oWrPWMPERIOD1 : OUT STD_LOGIC;
+  oWrPWMDUTY1   : OUT STD_LOGIC;
   iPWMCONFIG1   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD1   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMDUTY1     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
-  oWrPWMCONFIG2 : out STD_LOGIC;
-  oWrPWMPERIOD2 : out STD_LOGIC;
-  oWrPWMDUTY2   : out STD_LOGIC;
+  oWrPWMCONFIG2 : OUT STD_LOGIC;
+  oWrPWMPERIOD2 : OUT STD_LOGIC;
+  oWrPWMDUTY2   : OUT STD_LOGIC;
   iPWMCONFIG2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMDUTY2     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   
   --7SEG Module
-  oWrSEG7OUTPUT : out STD_LOGIC;
-  iWrSEG7OUTPUT : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0')
+  oWrSEG7OUTPUT : OUT STD_LOGIC;
+  iSEG7OUTPUT : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   
+  --Reset Module : 
+  oWrRESETCONFIG : OUT STD_LOGIC;
+  oWrRESETPERIOD : OUT STD_LOGIC;
+  iRESETCONFIG  : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  iRESETPERIOD  : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0')
   );
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
 BEGIN
 
--- Writes
+-- Set the respective write signal based on address input.
 IO_SPACE_PROC_WR : process (inRESET,inWrRdy)
 variable vAddress : std_logic_vector (7 downto 0);
 begin
@@ -54,6 +59,8 @@ begin
     oWrPWMPERIOD2 <= '0';
     oWrPWMDUTY2 <= '0';
     oWrSEG7OUTPUT <= '0';
+    oWrRESETCONFIG <= '0';
+    oWrRESETPERIOD <= '0';
   elsif falling_edge(inWrRdy) then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
@@ -63,22 +70,25 @@ begin
     oWrPWMPERIOD2 <= '0';
     oWrPWMDUTY2 <= '0';
     oWrSEG7OUTPUT <= '0';
+    oWrRESETCONFIG <= '0';
+    oWrRESETPERIOD <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
-    -- PWMCONFIG1
     when X"00" => oWrPWMCONFIG1 <= '1';
     when X"01" => oWrPWMPERIOD1 <= '1';
     when X"02" => oWrPWMDUTY1 <= '1';
     when X"03" => oWrPWMCONFIG2 <= '1';
     when X"04" => oWrPWMPERIOD2 <= '1';
     when X"05" => oWrPWMDUTY2 <= '1';
-    when X"40" => oWrSEG7OUTPUT <= '1';
+    when X"40" => oWrSEG7OUTPUT <= '1';    
+    when X"30" => oWrRESETCONFIG <= '1';
+    when X"31" => oWrRESETPERIOD <= '1';
     when others =>
     end case;
   end if;
 end process IO_SPACE_PROC_WR;
   
--- Reads
+-- Direct the respective data to read to EBU interface
 IO_SPACE_PROC_RD : process (inRESET,iCLK,inRdRdy)
 variable vAddress : std_logic_vector (7 downto 0);
 begin
@@ -95,7 +105,9 @@ begin
     when X"03" => oData <= iPWMCONFIG2;
     when X"04" => oData <= iPWMPERIOD2;
     when X"05" => oData <= iPWMDUTY2;
-    when X"40" => oData <= iWrSEG7OUTPUT;
+    when X"40" => oData <= iSEG7OUTPUT;
+    when X"30" => oData <= iRESETCONFIG;
+    when X"31" => oData <= iRESETPERIOD;
     when others =>  oData <= (others=>'0');
     end case;
   end if;

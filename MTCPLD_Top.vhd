@@ -107,6 +107,11 @@ signal sPWMPERIOD2   : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 signal sWrSEG7OUTPUT : STD_LOGIC;
 signal sSeg7En       : STD_LOGIC;
 signal sSEG7OUTPUT   : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+-- Reset Module signals
+signal sWrConfig     : STD_LOGIC;
+signal sWrPeriod     : STD_LOGIC;
+signal sResetConfig  : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+signal sResetPeriod  : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 
 COMPONENT IO_SPACE
 	PORT (
@@ -117,20 +122,24 @@ COMPONENT IO_SPACE
 	iAddress  : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 	iData     : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 	oData     : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-  oWrPWMCONFIG1 : out STD_LOGIC;
-  oWrPWMPERIOD1 : out STD_LOGIC;
-  oWrPWMDUTY1   : out STD_LOGIC;
+  oWrPWMCONFIG1 : OUT STD_LOGIC;
+  oWrPWMPERIOD1 : OUT STD_LOGIC;
+  oWrPWMDUTY1   : OUT STD_LOGIC;
 	iPWMCONFIG1   : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 	iPWMDUTY1     : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 	iPWMPERIOD1   : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-  oWrPWMCONFIG2 : out STD_LOGIC;
-  oWrPWMPERIOD2 : out STD_LOGIC;
-  oWrPWMDUTY2   : out STD_LOGIC;
+  oWrPWMCONFIG2 : OUT STD_LOGIC;
+  oWrPWMPERIOD2 : OUT STD_LOGIC;
+  oWrPWMDUTY2   : OUT STD_LOGIC;
   iPWMCONFIG2   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD2   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   iPWMDUTY2     : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
-  oWrSEG7OUTPUT : out STD_LOGIC;
-  iWrSEG7OUTPUT : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+  oWrSEG7OUTPUT : OUT STD_LOGIC;
+  iSEG7OUTPUT   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+  oWrRESETCONFIG : OUT STD_LOGIC;
+  oWrRESETPERIOD : OUT STD_LOGIC;
+  iRESETCONFIG  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+  iRESETPERIOD  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
 
 	);
 END COMPONENT;
@@ -174,8 +183,21 @@ COMPONENT LED7SEGMODULE
   inReset		:	 IN STD_LOGIC;
   iWrData		:	 IN STD_LOGIC;
   iEnable		:	 IN STD_LOGIC;    
-  iData		:	 IN STD_LOGIC_VECTOR(datawidth-1 DOWNTO 0);
+  iData		:	 IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
   oLEDOutput		:	 OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT RESETMODULE
+	PORT (
+	iCLK : IN STD_LOGIC;
+	iData : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	inReset : IN STD_LOGIC;
+	iWrConfig : IN STD_LOGIC;
+	iWrPeriod : IN STD_LOGIC;
+	oReset : OUT STD_LOGIC;
+	oResetConfig : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+	oResetPeriod : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -226,7 +248,11 @@ MOD_IOSPACE : IO_SPACE
 	iPWMDUTY2 => sPWMDUTY2,
 	iPWMPERIOD2 => sPWMPERIOD2,
   oWrSEG7OUTPUT => sWrSEG7OUTPUT,
-  iWrSEG7OUTPUT => sSEG7OUTPUT
+  iSEG7OUTPUT => sSEG7OUTPUT,
+  oWrRESETCONFIG => sWrConfig,
+  oWrRESETPERIOD => sWrPeriod,
+  iRESETCONFIG => sResetConfig,
+  iRESETPERIOD => sResetPeriod   
 	);  
 
 MOD_PWM1 : PWMMODULE
@@ -255,7 +281,7 @@ MOD_PWM2 : PWMMODULE
   oPWMDUTY => sPWMDUTY2
   );
   
- LED7SEG : LED7SEGMODULE
+MOD_SEG : LED7SEGMODULE
   PORT MAP (
   inReset => nRESET,
   iWrData => sWrSEG7OUTPUT,
@@ -264,4 +290,15 @@ MOD_PWM2 : PWMMODULE
   oLEDOutput => o7SEGLED
   );
   
+MOD_RESET : RESETMODULE
+  PORT MAP (
+	iCLK => iCLK,
+	iData => IO_DAT_WR,
+	inReset => nRESET,
+	iWrConfig => sWrConfig,
+	iWrPeriod => sWrPeriod,
+	oReset => oRST,
+	oResetConfig => sResetConfig,
+	oResetPeriod => sResetPeriod
+	);
 END logic;
