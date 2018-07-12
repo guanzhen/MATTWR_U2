@@ -41,8 +41,8 @@ signal sQEMDir : dirstate := CW;
 begin
 
 oDir <= sDir;
---oPulse <= sPulse;
-oPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
+oPulse <= sPulse;
+sPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
 oIndex <= iIndex;
 
 --PULSE_OUTPUT : sPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
@@ -76,32 +76,22 @@ begin
     Af <= '0';
     Br <= '0';
     Bf <= '0';
-    sPulse <= '0';
   elsif rising_edge(iCLK) then
+    Ar <= '0';
+    Af <= '0';
+    Br <= '0';
+    Bf <= '0';
     if (A_p = '0' AND iA = '1') then 
       Ar <= '1';
-    else
-      Ar <= '0';
     end if;
     if (A_p = '1' AND iA = '0') then 
       Af <= '1';
-    else
-      Af <= '0';
     end if;
     if (B_p = '0' AND iB = '1') then 
       Br <= '1';
-    else
-      Br <= '0';
     end if;
     if (B_p = '1' AND iB = '0') then 
       Bf <= '1';
-    else
-      Bf <= '0';
-    end if;    
-    if  Ar = '1' or Af = '1' or Br = '1' or Bf = '1' then
-      sPulse <= '1';
-    else
-      sPulse <= '0';
     end if;
   end if;
 end process;
@@ -110,7 +100,8 @@ DIR_GEN : process (inRESET,iCLK,iA,iB,Ar,Af,Br,Bf,sQEMDir) is
 begin
   if (inRESET = '0') then
     sQEMDir <= CW;
-  elsif rising_edge(iCLK) then
+  else
+  --elsif rising_edge(iCLK) then
     case sQEMDir is
     when CW =>
       if (Af = '1' AND iB = '1') OR (Br = '1' AND iA = '1') then
