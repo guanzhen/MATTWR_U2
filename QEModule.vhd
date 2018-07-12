@@ -28,11 +28,14 @@ PORT
 end QEMODULE;
 
 architecture LOGIC of QEMODULE is
-signal Ar, Br  : STD_LOGIC_VECTOR (1 downto 0) := "00";
+type encstate is (Q1,Q2,Q3,Q4);
+signal Ar,Br,Af,Bf : STD_LOGIC := '0';
+--signal Ar, Br  : STD_LOGIC_VECTOR (1 downto 0) := "00";
 signal sDir    : STD_LOGIC := '0';
 signal P  	   : STD_LOGIC := '0';
 signal sQEMCONFIG : STD_LOGIC := '0';
 signal sQEMCOUNTER : SIGNED(ENCWIDTH-1 downto 0) := ( others=> '0');
+signal sQEMState : encstate := Q1;
 begin
 
 oDir <= sDir;
@@ -47,35 +50,109 @@ begin
   end if;
 end process;
 
-QuadDecProcess : process (iCLK,iA,iB) is 
+QuadDecProcess : process (inRESET,iA,iB) is 
 begin
-	if rising_edge(iCLK) then
-		Ar <= (Ar(0)&iA);
-		Br <= (Br(0)&iB);
-		if (Ar = "01") then -- rising edge of A
-			P <= '1';
-			if (iB = '0') then sDir <= '0'; -- A leads B
-			else sDir <= '1';					-- B leads A
-			end if;
-		elsif (Ar = "10") then -- falling edge of A
-			P <= '1';
-			if (iB = '1') then sDir <= '0'; -- A leads B
-			else sDir <= '1';					-- B leads A
-			end if;
-		elsif (Br = "01") then -- positive edge of B
-			P <= '1';
-			if (iA = '1') then sDir <= '0'; -- A leads B
-			else sDir <= '1';					-- B leads A
-			end if;
-		elsif (Br = "10") then -- positive edge of B
-			P <= '1';
-			if (iA = '0') then sDir <= '0'; -- A leads B
-			else sDir <= '1';					-- B leads A
-			end if;
-		else P <= '0';
-		end if;
-	end if;
-end process QuadDecProcess;
+  if (inRESET = '0') then
+    Ar <= '0';
+  elsif rising_edge(iA) then
+    Ar <= '1';
+    Br <= '0';
+    Af <= '0';
+    Bf <= '0';
+  end if;
+  if inRESET = '0' then
+    Br <= '0';
+  elsif rising_edge(iB) then
+    Ar <= '0';
+    Br <= '1';
+    Af <= '0';
+    Bf <= '0';
+  end if;
+  if inRESET = '0' then
+    Af <= '0';
+  elsif falling_edge(iA) then
+    Ar <= '0';
+    Br <= '0';
+    Af <= '1';
+    Bf <= '0';
+  end if;
+  if inRESET = '0' then
+    Bf <= '0';
+  elsif falling_edge(iB) then
+    Ar <= '0';
+    Br <= '0';
+    Af <= '0';
+    Bf <= '1';
+  end if;
+end process;
+
+QESTATE : process(inRESET, Ar,Br,Af,Bf) is
+begin
+  if inRESET = '0' then
+    sQEMState <= Q1;
+  else
+    case sQEMState is
+    when Q1 =>
+      if Af = '1' then
+        sQEMState <= Q2;
+      end if;
+      if Br = '1' then
+        sQEMState <= Q4;
+      end if;      
+    when Q2 =>
+      if Br = '1' then
+        sQEMState <= Q3;
+      end if;       
+      if Ar = '1' then
+        sQEMState <= Q1;
+      end if;
+    when Q3 =>
+      if Ar = '1' then
+        sQEMState <= Q4;
+      end if;
+      if Bf = '1' then
+        sQEMState <= Q2;
+      end if;
+    when Q4 =>    
+      if Bf = '1' then
+        sQEMState <= Q1;
+      end if;   
+      if Af = '1' then
+        sQEMState <= Q3;
+      end if;
+    end case;
+  end if;
+
+end process;
+-- QuadDecProcess : process (iCLK,iA,iB) is 
+-- begin
+	-- if rising_edge(iCLK) then
+		-- Ar <= (Ar(0)&iA);
+		-- Br <= (Br(0)&iB);
+		-- if (Ar = "01") then -- rising edge of A
+			-- P <= '1';
+			-- if (iB = '0') then sDir <= '0'; -- A leads B
+			-- else sDir <= '1';					-- B leads A
+			-- end if;
+		-- elsif (Ar = "10") then -- falling edge of A
+			-- P <= '1';
+			-- if (iB = '1') then sDir <= '0'; -- A leads B
+			-- else sDir <= '1';					-- B leads A
+			-- end if;
+		-- elsif (Br = "01") then -- positive edge of B
+			-- P <= '1';
+			-- if (iA = '1') then sDir <= '0'; -- A leads B
+			-- else sDir <= '1';					-- B leads A
+			-- end if;
+		-- elsif (Br = "10") then -- positive edge of B
+			-- P <= '1';
+			-- if (iA = '0') then sDir <= '0'; -- A leads B
+			-- else sDir <= '1';					-- B leads A
+			-- end if;
+		-- else P <= '0';
+		-- end if;
+	-- end if;
+-- end process QuadDecProcess;
 
 pulse_gen : process (iCLK) is 
 begin 
