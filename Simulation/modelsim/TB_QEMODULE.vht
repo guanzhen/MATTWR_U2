@@ -115,6 +115,7 @@ begin
   iA <= '0'; iB <= '0';  
   wait until inReset = '1';
   -- CW
+  --wait for 30 ns;
   iA <= '1'; iB <= '0';  
   wait for 500 ns;
   iA <= '0'; iB <= '0';  
@@ -130,7 +131,61 @@ begin
   iA <= '0'; iB <= '1'; 
   wait for 500 ns;
   iA <= '1'; iB <= '1';  
-
+  
+  -- CCW
+  wait for 1000 ns;
+  iA <= '0'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '0'; 
+  wait for 500 ns;
+  iA <= '1'; iB <= '1';  
+  
+  -- CW
+  wait for 1030 ns;
+  iA <= '1'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '1'; 
+  wait for 500 ns;
+  iA <= '1'; iB <= '1';  
+  
+  -- CCW
+  wait for 1010 ns;
+  iA <= '0'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '1';  
+  wait for 500 ns;
+  iA <= '0'; iB <= '0';  
+  wait for 500 ns;
+  iA <= '1'; iB <= '0'; 
+  wait for 500 ns;
+  iA <= '1'; iB <= '1';  
+  
   wait;
 end process;
 
