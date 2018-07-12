@@ -31,8 +31,6 @@ type PWM_STATE is (IDLE,HI,LO,RESET);
 signal sPWMCONFIG : STD_LOGIC_VECTOR(2 downto 0):= (others=> '0');
 signal sPWMPERIOD : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sDUTY      : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
-signal sIntPWMPERIOD : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
-signal sIntDUTY   : STD_LOGIC_VECTOR(PWMBITWIDTH-1 downto 0):= (others=> '0');
 signal sOPState   : OUTPUTSTATE := IDLE;
 signal sPWMState  : PWM_STATE   := IDLE;
 signal sEN        : STD_LOGIC   := '0';

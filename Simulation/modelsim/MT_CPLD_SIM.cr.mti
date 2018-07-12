@@ -6,12 +6,31 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity LED7SEGMODULE
 -- Compiling architecture A_Hex7Seg of LED7SEGMODULE
 
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_PWMMODULE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_PWMMODULE.vht
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package COMMON
+-- Compiling entity PWMMODULE_vhd_tst
+-- Compiling architecture PWMMODULE_arch of PWMMODULE_vhd_tst
+
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Compiling package constants
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package constants
+-- Compiling entity MTCPLD_Top
+-- Compiling architecture logic of MTCPLD_Top
 
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
@@ -23,6 +42,15 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity TB_SRAMIOSPACE
 -- Compiling architecture logic of TB_SRAMIOSPACE
 -- Loading entity MOD_EBU
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/PWMModule.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/PWMModule.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity PWMMODULE
+-- Compiling architecture LOGIC of PWMMODULE
 
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/SRAM_IO.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/SRAM_IO.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
