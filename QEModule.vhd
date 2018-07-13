@@ -42,11 +42,11 @@ begin
 
 oDir <= sDir;
 oPulse <= sPulse;
-sPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
+sPulse <= '1' when ((Ar = '1' or Af = '1' or Br = '1' or Bf = '1') AND sQEMCONFIG = '1') else '0';
 oIndex <= iIndex;
 
 --PULSE_OUTPUT : sPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
-DIR_OUTPUT : sDir <= '0' when sQEMDir = CW else '1';
+DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW AND sQEMCONFIG = '1') else '1';
 oQEMCOUNTER <= STD_LOGIC_VECTOR(sQEMCOUNTER);
 
 QEM_CTRL : process (inRESET,iWrQEMCONFIG)
@@ -119,8 +119,8 @@ enc_count : process (iCLK,inRESET,sPulse,sDir) is
 begin 
   if (inRESET = '0') then
     sQEMCOUNTER <= (others=> '0');
-  elsif rising_edge(iCLK) and sPulse = '1'  then
-    if sDir = '1' then
+  elsif (rising_edge(iCLK) and sPulse = '1' and sQEMCONFIG = '1') then
+    if (sDir = '1') then
       sQEMCOUNTER <= sQEMCOUNTER - 1;
     else
       sQEMCOUNTER <= sQEMCOUNTER + 1;
