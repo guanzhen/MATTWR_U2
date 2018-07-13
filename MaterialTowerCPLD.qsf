@@ -229,6 +229,10 @@ set_location_assignment PIN_51 -to oCPLD_DEBUG[3]
 set_location_assignment PIN_50 -to oCPLD_DEBUG[2]
 set_location_assignment PIN_49 -to oCPLD_DEBUG[1]
 set_location_assignment PIN_48 -to oCPLD_DEBUG[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[0]
 set_global_assignment -name VHDL_FILE QEModule.vhd
 set_global_assignment -name VHDL_FILE PWMModule.vhd
 set_global_assignment -name VHDL_FILE ResetModule.vhd
@@ -238,7 +242,3 @@ set_global_assignment -name VHDL_FILE constants.vhd
 set_global_assignment -name VHDL_FILE MTCPLD_Top.vhd
 set_global_assignment -name VHDL_FILE SRAM_IO.vhd
 set_global_assignment -name VHDL_FILE IO_SPACE.vhd
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[3]
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[2]
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[1]
-set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[0]

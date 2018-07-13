@@ -40,13 +40,12 @@ signal sQEMState : encstate := Q1;
 signal sQEMDir : dirstate := CW;
 begin
 
-oDir <= sDir;
-oPulse <= sPulse;
-sPulse <= '1' when ((Ar = '1' or Af = '1' or Br = '1' or Bf = '1') AND sQEMCONFIG = '1') else '0';
+oDir <= sDir when sQEMCONFIG = '1' else '0';
+oPulse <= sPulse when sQEMCONFIG = '1' else '0';
 oIndex <= iIndex;
-
+oQEMCONFIG <= ((0) => sQEMCONFIG, others => '0');
 --PULSE_OUTPUT : sPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
-DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW AND sQEMCONFIG = '1') else '1';
+DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW) else '1';
 oQEMCOUNTER <= STD_LOGIC_VECTOR(sQEMCOUNTER);
 
 QEM_CTRL : process (inRESET,iWrQEMCONFIG)
@@ -69,53 +68,50 @@ begin
 end process;
 
 EDGE_GEN : process (inRESET,iCLK,iA,iB,A_p,B_p) is 
--- variable 
+variable Arise,Afall,Brise,Bfall : STD_LOGIC := '0';
 begin
   if (inRESET = '0') then
-    Ar <= '0';
-    Af <= '0';
-    Br <= '0';
-    Bf <= '0';
+    Arise := '0';
+    Afall := '0';
+    Brise := '0';
+    Bfall := '0';
+    sQEMDir <= CW;
+    sPulse <= '0';
   elsif rising_edge(iCLK) then
-    Ar <= '0';
-    Af <= '0';
-    Br <= '0';
-    Bf <= '0';
+    sPulse <= '0';
+    Arise := '0';
+    Afall := '0';
+    Brise := '0';
+    Bfall := '0';
     if (A_p = '0' AND iA = '1') then 
-      Ar <= '1';
+      Arise := '1';
     end if;
     if (A_p = '1' AND iA = '0') then 
-      Af <= '1';
+      Afall := '1';
     end if;
     if (B_p = '0' AND iB = '1') then 
-      Br <= '1';
+      Brise := '1';
     end if;
     if (B_p = '1' AND iB = '0') then 
-      Bf <= '1';
-    end if;
-  end if;
-end process;
-
-DIR_GEN : process (inRESET,iCLK,iA,iB,Ar,Af,Br,Bf,sQEMDir) is
-begin
-  if (inRESET = '0') then
-    sQEMDir <= CW;
-  else
-  --elsif rising_edge(iCLK) then
+      Bfall := '1';
+    end if; 
     case sQEMDir is
     when CW =>
-      if (Af = '1' AND iB = '1') OR (Br = '1' AND iA = '1') then
+      if (Afall = '1' AND iB = '1') OR (Brise = '1' AND iA = '1') then
         sQEMDir <= CCW;
       end if;
     when CCW =>
-      if (Bf = '1' AND iA = '1') OR (Ar = '1' AND iB = '1') then
+      if (Bfall = '1' AND iA = '1') OR (Arise = '1' AND iB = '1') then
         sQEMDir <= CW;
       end if;
-    end case;
+    end case;    
+  end if;
+  if (Arise = '1' or Afall = '1' or Brise = '1' or Bfall = '1') then
+    sPulse <= '1';
   end if;
 end process;
 
-enc_count : process (iCLK,inRESET,sPulse,sDir) is
+enc_count : process (iCLK,inRESET,sPulse,sDir,sQEMCONFIG) is
 begin 
   if (inRESET = '0') then
     sQEMCOUNTER <= (others=> '0');
