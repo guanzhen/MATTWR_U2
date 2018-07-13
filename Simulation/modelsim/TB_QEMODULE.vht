@@ -155,10 +155,10 @@ begin
   wait for 500 ns;
   iA <= '1'; iB <= '1';  
   
-  -- iData <= X"0000";
-  -- iWrQEMCONFIG <= '1';
-  -- wait for 100 ns;  
-  -- iWrQEMCONFIG <= '0';  
+  iData <= X"0000";
+  iWrQEMCONFIG <= '1';
+  wait for 100 ns;  
+  iWrQEMCONFIG <= '0';  
   
   -- CW
   wait for 1030 ns;

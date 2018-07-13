@@ -43,8 +43,8 @@ begin
 oDir <= sDir when sQEMCONFIG = '1' else '0';
 oPulse <= sPulse when sQEMCONFIG = '1' else '0';
 oIndex <= iIndex;
-oQEMCONFIG <= ((0) => sQEMCONFIG, others => '0');
---PULSE_OUTPUT : sPulse <= '1' when Ar = '1' or Af = '1' or Br = '1' or Bf = '1' else '0';
+oQEMCONFIG <= B"0000_0000_0000_000" & sQEMCONFIG;
+
 DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW) else '1';
 oQEMCOUNTER <= STD_LOGIC_VECTOR(sQEMCOUNTER);
 
