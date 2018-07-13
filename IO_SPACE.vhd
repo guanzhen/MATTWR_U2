@@ -2,6 +2,9 @@ library IEEE;
 use ieee.std_logic_1164.all;
 use std.standard;
 
+LIBRARY work;
+USE work.constants.all;
+
 entity IO_SPACE is
 GENERIC
   (
@@ -16,6 +19,18 @@ PORT
   iAddress  : IN std_logic_vector(BUSWIDTH-1 downto 0);
   iData     : IN std_logic_vector(BUSWIDTH-1 downto 0);
   oData     : OUT std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  
+  --QE Module
+  oWrQEMCONFIG1 : OUT STD_LOGIC;
+  oWrQEMCOUNTERL1 : OUT STD_LOGIC;
+  oWrQEMCOUNTERH1 : OUT STD_LOGIC;
+  iQEMCONFIG1 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iQEMCOUNTER1 : IN STD_LOGIC_VECTOR(ENC_WIDTH-1 DOWNTO 0);
+  oWrQEMCONFIG2 : OUT STD_LOGIC;
+  oWrQEMCOUNTERL2 : OUT STD_LOGIC;
+  oWrQEMCOUNTERH2 : OUT STD_LOGIC;
+  iQEMCONFIG2 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iQEMCOUNTER2 : IN STD_LOGIC_VECTOR(ENC_WIDTH-1 DOWNTO 0);
   
   --PWM Module
   oWrPWMCONFIG1 : OUT STD_LOGIC;
@@ -44,6 +59,8 @@ PORT
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
+signal sQEMBUFFER1 : STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
+signal sQEMBUFFER2 : STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
 BEGIN
 
 -- Set the respective write signal based on address input.
@@ -61,6 +78,12 @@ begin
     oWrSEG7OUTPUT <= '0';
     oWrRESETCONFIG <= '0';
     oWrRESETPERIOD <= '0';
+    oWrQEMCONFIG1 <= '0';
+    oWrQEMCOUNTERL1 <= '0';
+    oWrQEMCOUNTERH1 <= '0';
+    oWrQEMCONFIG2 <= '0';
+    oWrQEMCOUNTERL2 <= '0';
+    oWrQEMCOUNTERH2 <= '0';
   elsif falling_edge(inWrRdy) then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
@@ -72,6 +95,11 @@ begin
     oWrSEG7OUTPUT <= '0';
     oWrRESETCONFIG <= '0';
     oWrRESETPERIOD <= '0';
+    oWrQEMCOUNTERL1 <= '0';
+    oWrQEMCOUNTERH1 <= '0';
+    oWrQEMCONFIG2 <= '0';
+    oWrQEMCOUNTERL2 <= '0';
+    oWrQEMCOUNTERH2 <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
     when X"00" => oWrPWMCONFIG1 <= '1';
@@ -83,6 +111,12 @@ begin
     when X"40" => oWrSEG7OUTPUT <= '1';    
     when X"30" => oWrRESETCONFIG <= '1';
     when X"31" => oWrRESETPERIOD <= '1';
+    when X"10" => oWrQEMCONFIG1 <= '1';
+    when X"11" => oWrQEMCOUNTERL1 <= '1';
+    when X"12" => oWrQEMCOUNTERH1 <= '1';    
+    when X"13" => oWrQEMCONFIG2 <= '1';
+    when X"14" => oWrQEMCOUNTERL2 <= '1';
+    when X"15" => oWrQEMCOUNTERH2 <= '1';    
     when others =>
     end case;
   end if;
@@ -93,7 +127,9 @@ IO_SPACE_PROC_RD : process (inRESET,iCLK,inRdRdy)
 variable vAddress : std_logic_vector (7 downto 0);
 begin
   if (inRESET = '0') then
-    vAddress := (others => '0');
+    vAddress := (others => '0');    
+    sQEMBUFFER1 <= (others => '0');
+    sQEMBUFFER2 <= (others => '0');
     oData <= (others => '0');
   elsif falling_edge(inRdRdy) then
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
@@ -105,6 +141,16 @@ begin
     when X"03" => oData <= iPWMCONFIG2;
     when X"04" => oData <= iPWMPERIOD2;
     when X"05" => oData <= iPWMDUTY2;
+    when X"10" => oData <= iQEMCONFIG1;
+    when X"11" => oData <= sQEMBUFFER1;
+    when X"12" => 
+      oData <= iQEMCOUNTER1(15 downto 0);
+      sQEMBUFFER1 <= iQEMCOUNTER1(ENC_WIDTH-1 downto 16);
+    when X"13" => oData <= iQEMCONFIG2;
+    when X"14" => oData <= sQEMBUFFER2;
+    when X"15" => 
+      oData <= iQEMCOUNTER2(15 downto 0);
+      sQEMBUFFER1 <= iQEMCOUNTER2(ENC_WIDTH-1 downto 16);
     when X"40" => oData <= iSEG7OUTPUT;
     when X"30" => oData <= iRESETCONFIG;
     when X"31" => oData <= iRESETPERIOD;

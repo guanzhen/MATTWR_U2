@@ -54,7 +54,7 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 # Analysis & Synthesis Assignments
 # ================================
 set_global_assignment -name FAMILY "MAX V"
-set_global_assignment -name TOP_LEVEL_ENTITY QEModule
+set_global_assignment -name TOP_LEVEL_ENTITY MTCPLD_Top
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 5
@@ -233,6 +233,7 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[3]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[2]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[1]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[0]
+set_global_assignment -name VHDL_FILE InputModule.vhd
 set_global_assignment -name VHDL_FILE QEModule.vhd
 set_global_assignment -name VHDL_FILE PWMModule.vhd
 set_global_assignment -name VHDL_FILE ResetModule.vhd

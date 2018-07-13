@@ -15,6 +15,8 @@ PORT
 	inRESET : IN STD_LOGIC;   
   iData   : IN STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
 	iWrQEMCONFIG  : IN STD_LOGIC;
+  iWrQEMCOUNTERL : IN STD_LOGIC;
+  iWrQEMCOUNTERH : IN STD_LOGIC;
 	iA      : IN STD_LOGIC;
 	iB      : IN STD_LOGIC;
 	iIndex  : IN STD_LOGIC;
@@ -35,6 +37,8 @@ signal A_p,B_p : STD_LOGIC := '0';
 signal sDir : STD_LOGIC := '0';
 signal sPulse : STD_LOGIC := '0';
 signal sQEMCONFIG : STD_LOGIC := '0';
+signal sWrCounter : STD_LOGIC:= '0';
+signal sBUFFER : STD_LOGIC_VECTOR (ENCWIDTH-1 downto 0) := (others=>'0');
 signal sQEMCOUNTER : SIGNED(ENCWIDTH-1 downto 0) := ( others=> '0');
 signal sQEMState : encstate := Q1;
 signal sQEMDir : dirstate := CW;
@@ -43,19 +47,36 @@ begin
 oDir <= sDir when sQEMCONFIG = '1' else '0';
 oPulse <= sPulse when sQEMCONFIG = '1' else '0';
 oIndex <= iIndex;
-oQEMCONFIG <= B"0000_0000_0000_000" & sQEMCONFIG;
+oQEMCONFIG <= X"000" & B"000" & sQEMCONFIG;
 
 DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW) else '1';
 oQEMCOUNTER <= STD_LOGIC_VECTOR(sQEMCOUNTER);
 
-QEM_CTRL : process (inRESET,iWrQEMCONFIG)
+QEM_CTRL : process (iCLK,inRESET,iWrQEMCONFIG,iWrQEMCOUNTERL,iWrQEMCOUNTERH)
 begin
   if (inRESET = '0') then
     sQEMCONFIG <= '0';
-  elsif rising_edge(iWrQEMCONFIG) then
-    sQEMCONFIG <= iData(0);   
-  end if;
+  else
+    if rising_edge(iWrQEMCONFIG) then
+      sQEMCONFIG <= iData(0);
+    end if;
+  end if;  
+  
+  if (inRESET = '0') then
+    sBUFFER <= (others => '0');
+    sWrCounter <= '0';
+  elsif rising_edge(iCLK) then
+    sWrCounter <= '0';
+    if (iWrQEMCOUNTERL = '1') then
+      sBUFFER(15 downto 0) <= iData;
+    end if; 
+    if (iWrQEMCOUNTERH = '1') then
+      sBUFFER(31 downto 16) <= iData;
+      sWrCounter <= '1';
+    end if;
+  end if;    
 end process;
+
 QuadDecProcess : process (inRESET,iCLK,iA,iB) is 
 begin
   if (inRESET = '0') then
@@ -111,17 +132,17 @@ begin
   end if;
 end process;
 
-enc_count : process (iCLK,inRESET,sPulse,sDir,sQEMCONFIG) is
+enc_count : process (iCLK,inRESET,sPulse,sDir,sQEMCONFIG,sWrCounter,sBUFFER) is
 begin 
-  if (inRESET = '0') then
-    sQEMCOUNTER <= (others=> '0');
-  elsif (rising_edge(iCLK) and sPulse = '1' and sQEMCONFIG = '1') then
+  if (sWrCounter = '1') then      
+    sQEMCOUNTER <= SIGNED(sBUFFER);
+  elsif rising_edge(iCLK) and (sPulse = '1' and sQEMCONFIG = '1') then
     if (sDir = '1') then
       sQEMCOUNTER <= sQEMCOUNTER - 1;
     else
       sQEMCOUNTER <= sQEMCOUNTER + 1;
     end if;		
-  end if;
+  end if;		
 end process enc_count;
 
 end architecture LOGIC;

@@ -44,12 +44,19 @@ SIGNAL iData : STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL iIndex : STD_LOGIC;
 SIGNAL inRESET : STD_LOGIC;
 SIGNAL iWrQEMCONFIG : STD_LOGIC;
+SIGNAL iWrQEMCOUNTERL : STD_LOGIC;
+SIGNAL iWrQEMCOUNTERH : STD_LOGIC;
 SIGNAL oDir : STD_LOGIC;
 SIGNAL oIndex : STD_LOGIC;
 SIGNAL oPulse : STD_LOGIC;
 SIGNAL oQEMCONFIG : STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL oQEMCOUNTER : STD_LOGIC_VECTOR(31 DOWNTO 0);
 COMPONENT QEMODULE
+  GENERIC
+  (
+  BUSWIDTH : natural := 16;
+  ENCWIDTH : natural := 32
+  );
 	PORT (
 	iA : IN STD_LOGIC;
 	iB : IN STD_LOGIC;
@@ -58,6 +65,8 @@ COMPONENT QEMODULE
 	iIndex : IN STD_LOGIC;
 	inRESET : IN STD_LOGIC;
 	iWrQEMCONFIG : IN STD_LOGIC;
+	iWrQEMCOUNTERL : IN STD_LOGIC;
+	iWrQEMCOUNTERH : IN STD_LOGIC;
 	oDir : OUT STD_LOGIC;
 	oIndex : OUT STD_LOGIC;
 	oPulse : OUT STD_LOGIC;
@@ -82,6 +91,8 @@ GENERIC MAP (period => 100 ns ) PORT MAP ( reset => inRESET, clk_en => '1', clk_
 	iIndex => iIndex,
 	inRESET => inRESET,
 	iWrQEMCONFIG => iWrQEMCONFIG,
+	iWrQEMCOUNTERL => iWrQEMCOUNTERL,
+	iWrQEMCOUNTERH => iWrQEMCOUNTERH,
 	oDir => oDir,
 	oIndex => oIndex,
 	oPulse => oPulse,
@@ -99,10 +110,8 @@ WAIT;
 END PROCESS init;    
                                        
 always : PROCESS                                              
--- optional sensitivity list                                  
--- (        )                                                 
--- variable declarations                                      
 BEGIN                                                         
+
 
 WAIT;                                                        
 END PROCESS always;
@@ -113,14 +122,16 @@ begin
   iA <= '0'; iB <= '0';  
   iData <= (others=>'Z');
   iWrQEMCONFIG <= '0';
+  iWrQEMCOUNTERL <= '0';
+  iWrQEMCOUNTERH <= '0';
   wait until inReset = '1';
+  -- Enable
   iData <= X"0001";
   iWrQEMCONFIG <= '1';
   wait for 100 ns;  
   iWrQEMCONFIG <= '0';  
   wait for 500 ns;  
   -- CW
-  --wait for 30 ns;
   iA <= '1'; iB <= '0';  
   wait for 500 ns;
   iA <= '0'; iB <= '0';  
@@ -136,6 +147,16 @@ begin
   iA <= '0'; iB <= '1'; 
   wait for 500 ns;
   iA <= '1'; iB <= '1';  
+  
+  -- write counters
+  wait for 500 ns;
+  iData <= X"0000";
+  iWrQEMCOUNTERL <= '1';
+  wait for 100 ns;  
+  iWrQEMCOUNTERH <= '1';
+  iWrQEMCOUNTERL <= '0';  
+  wait for 100 ns;  
+  iWrQEMCOUNTERH <= '0';
   
   -- CCW
   wait for 1000 ns;
@@ -155,31 +176,32 @@ begin
   wait for 500 ns;
   iA <= '1'; iB <= '1';  
   
+  -- Disable
   iData <= X"0000";
   iWrQEMCONFIG <= '1';
   wait for 100 ns;  
   iWrQEMCONFIG <= '0';  
   
   -- CW
-  wait for 1030 ns;
-  iA <= '1'; iB <= '0';  
-  wait for 500 ns;
-  iA <= '0'; iB <= '0';  
-  wait for 500 ns;
-  iA <= '0'; iB <= '1';  
-  wait for 500 ns;
-  iA <= '1'; iB <= '1';  
-  wait for 500 ns;
-  iA <= '1'; iB <= '0';  
-  wait for 500 ns;
-  iA <= '0'; iB <= '0';  
-  wait for 500 ns;
-  iA <= '0'; iB <= '1'; 
-  wait for 500 ns;
-  iA <= '1'; iB <= '1';  
+  -- wait for 1030 ns;
+  -- iA <= '1'; iB <= '0';  
+  -- wait for 500 ns;
+  -- iA <= '0'; iB <= '0';  
+  -- wait for 500 ns;
+  -- iA <= '0'; iB <= '1';  
+  -- wait for 500 ns;
+  -- iA <= '1'; iB <= '1';  
+  -- wait for 500 ns;
+  -- iA <= '1'; iB <= '0';  
+  -- wait for 500 ns;
+  -- iA <= '0'; iB <= '0';  
+  -- wait for 500 ns;
+  -- iA <= '0'; iB <= '1'; 
+  -- wait for 500 ns;
+  -- iA <= '1'; iB <= '1';  
   
   -- CCW
-  wait for 1010 ns;
+  wait for 500 ns;
   iA <= '0'; iB <= '1';  
   wait for 500 ns;
   iA <= '0'; iB <= '0';  
@@ -195,7 +217,10 @@ begin
   iA <= '1'; iB <= '0'; 
   wait for 500 ns;
   iA <= '1'; iB <= '1';  
-  
+  wait for 500 ns;
+  iA <= '0'; iB <= '1';  
+
+
   wait;
 end process;
 
