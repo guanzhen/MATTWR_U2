@@ -23,25 +23,7 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package std_logic_1164
 -- Compiling package constants
 
-} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd {0 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd
-Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package constants
--- Compiling entity MTCPLD_Top
--- Compiling architecture logic of MTCPLD_Top
-** Error: C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd(248): (vcom-1136) Unknown identifier "iData".
-
-** Error: C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd(268): (vcom-1136) Unknown identifier "iData".
-
-** Error: C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd(258): (vcom-1272) Length of formal "oQEMCOUNTER" is 32; length of actual is 33.
-
-** Error: C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd(278): (vcom-1272) Length of formal "oQEMCOUNTER" is 32; length of actual is 33.
-
-** Error: C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd(377): VHDL Compiler exiting
-
-} {9.0 10.0 11.0 12.0 13.0 14.0 15.0 16.0 17.0 18.0} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO

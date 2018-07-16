@@ -31,7 +31,6 @@ PORT
   oWrQEMCOUNTERH2 : OUT STD_LOGIC;
   iQEMCONFIG2 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iQEMCOUNTER2 : IN STD_LOGIC_VECTOR(ENC_WIDTH-1 DOWNTO 0);
-  
   --PWM Module
   oWrPWMCONFIG1 : OUT STD_LOGIC;
   oWrPWMPERIOD1 : OUT STD_LOGIC;
@@ -45,11 +44,12 @@ PORT
   iPWMCONFIG2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMDUTY2     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
-  
   --7SEG Module
   oWrSEG7OUTPUT : OUT STD_LOGIC;
   iSEG7OUTPUT : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
-  
+  --Input moudule
+  iINPUTSTATUS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iINPUTS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   --Reset Module : 
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
@@ -154,6 +154,8 @@ begin
     when X"40" => oData <= iSEG7OUTPUT;
     when X"30" => oData <= iRESETCONFIG;
     when X"31" => oData <= iRESETPERIOD;
+    when X"50" => oData <= iINPUTSTATUS;
+    when X"51" => oData <= iINPUTS;
     when others =>  oData <= (others=>'0');
     end case;
   end if;

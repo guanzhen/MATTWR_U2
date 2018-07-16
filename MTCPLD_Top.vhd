@@ -112,7 +112,7 @@ signal sWrConfig     : STD_LOGIC;
 signal sWrPeriod     : STD_LOGIC;
 signal sResetConfig  : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 signal sResetPeriod  : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-
+-- Quadrature Encoder Module (QEM)
 SIGNAL sWrQEMCONFIG1 : STD_LOGIC;
 SIGNAL sWrQEMCOUNTERL1 : STD_LOGIC;
 SIGNAL sWrQEMCOUNTERH1 : STD_LOGIC;
@@ -123,6 +123,11 @@ SIGNAL sWrQEMCOUNTERL2 : STD_LOGIC;
 SIGNAL sWrQEMCOUNTERH2 : STD_LOGIC;
 SIGNAL sQEMCONFIG2 : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 SIGNAL sQEMCOUNTER2 : STD_LOGIC_VECTOR(ENC_WIDTH-1 DOWNTO 0);
+-- Input Module
+SIGNAL siInputs : STD_LOGIC_VECTOR(NUM_OF_INPUTS-1 DOWNTO 0);
+SIGNAL sDiffInputs : STD_LOGIC_VECTOR(NUM_OF_DIFFINPUTS*2-1 DOWNTO 0);
+SIGNAL sInputStatus : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+SIGNAL sInputs : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 
 COMPONENT IO_SPACE
 	PORT (
@@ -156,7 +161,9 @@ COMPONENT IO_SPACE
   iPWMPERIOD2   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   iPWMDUTY2     : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   oWrSEG7OUTPUT : OUT STD_LOGIC;
-  iSEG7OUTPUT   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+  iSEG7OUTPUT   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');  
+  iINPUTSTATUS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+  iINPUTS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
   iRESETCONFIG  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
@@ -246,12 +253,42 @@ COMPONENT QEMODULE
 	);
 END COMPONENT;
 
+COMPONENT INPUTMODULE
+  GENERIC (
+  DATAWIDTH : natural := 16;
+  SINGLE_INPUTS : natural := NUM_OF_INPUTS;
+  FILTER : natural := 5;     -- number of cycles to FILTER Diffential inputs
+  DIFF_INPUTS : natural := NUM_OF_DIFFINPUTS
+  );
+	PORT (
+	iCLK : IN STD_LOGIC;
+	iDiffInputs : IN STD_LOGIC_VECTOR(NUM_OF_DIFFINPUTS*2-1 DOWNTO 0);
+	iInputs : IN STD_LOGIC_VECTOR(NUM_OF_INPUTS-1 DOWNTO 0);
+	inReset : IN STD_LOGIC;
+	oInputs : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+	oInputStatus : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
+	);
+END COMPONENT;
+
 BEGIN
 
 nRESET  <= iSW_RESET_CPLD;
 nCS     <= iCS_FPGA;
 sSeg7En <= iPWM_LED;
+siInputs <= iInput(NUM_OF_INPUTS-1 downto 0);
+sDiffInputs <= iDiffInput(NUM_OF_DIFFINPUTS*2-1 downto 0);
 
+IPMOD : INPUTMODULE
+	PORT MAP (
+-- list connections between master ports and signals
+	iCLK => iCLK,
+	iDiffInputs => sDiffInputs,
+	iInputs => siInputs,
+	inReset => nRESET,
+	oInputs => sInputs,
+	oInputStatus => sInputStatus
+	);
+  
 QENC1 : QEMODULE
   GENERIC MAP (  BUSWIDTH =>  DATAWIDTH,  ENCWIDTH =>  ENC_WIDTH )
 	PORT MAP (
@@ -344,6 +381,8 @@ MOD_IOSPACE : IO_SPACE
   iQEMCOUNTER2 => sQEMCOUNTER2,
   oWrSEG7OUTPUT => sWrSEG7OUTPUT,
   iSEG7OUTPUT => sSEG7OUTPUT,
+  iINPUTSTATUS => sInputStatus,
+  iINPUTS => sInputs,
   oWrRESETCONFIG => sWrConfig,
   oWrRESETPERIOD => sWrPeriod,
   iRESETCONFIG => sResetConfig,
