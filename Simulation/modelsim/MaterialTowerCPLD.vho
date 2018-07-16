@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus II 64-Bit"
 -- VERSION "Version 14.1.0 Build 186 12/03/2014 SJ Full Version"
 
--- DATE "06/28/2018 13:22:00"
+-- DATE "07/13/2018 18:10:21"
 
 -- 
 -- Device: Altera 5M1270ZT144C5 Package TQFP144
@@ -32,125 +32,71 @@ LIBRARY MAXV;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE MAXV.MAXV_COMPONENTS.ALL;
 
-ENTITY 	IO_SPACE IS
+ENTITY 	INPUTMODULE IS
     PORT (
 	iCLK : IN std_logic;
-	inRESET : IN std_logic;
-	inWrRdy : IN std_logic;
-	inRdRdy : IN std_logic;
-	iAddress : IN std_logic_vector(15 DOWNTO 0);
-	iData : IN std_logic_vector(15 DOWNTO 0);
-	oData : OUT std_logic_vector(15 DOWNTO 0);
-	oPWMCONFIG1 : OUT std_logic_vector(15 DOWNTO 0);
-	oPWMPERIOD1 : OUT std_logic_vector(15 DOWNTO 0);
-	oPWMDUTY1 : OUT std_logic_vector(15 DOWNTO 0)
+	inReset : IN std_logic;
+	iInputs : IN std_logic_vector(9 DOWNTO 0);
+	iDiffInputs : IN std_logic_vector(5 DOWNTO 0);
+	oInputStatus : OUT std_logic_vector(15 DOWNTO 0);
+	oInputs : OUT std_logic_vector(15 DOWNTO 0)
 	);
-END IO_SPACE;
+END INPUTMODULE;
 
 -- Design Ports Information
+-- oInputStatus[0]	=>  Location: PIN_23,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[1]	=>  Location: PIN_2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[2]	=>  Location: PIN_91,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[3]	=>  Location: PIN_48,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[4]	=>  Location: PIN_142,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[5]	=>  Location: PIN_137,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[6]	=>  Location: PIN_97,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[7]	=>  Location: PIN_66,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[8]	=>  Location: PIN_130,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[9]	=>  Location: PIN_113,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[10]	=>  Location: PIN_118,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[11]	=>  Location: PIN_49,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[12]	=>  Location: PIN_67,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[13]	=>  Location: PIN_122,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[14]	=>  Location: PIN_28,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputStatus[15]	=>  Location: PIN_14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[0]	=>  Location: PIN_106,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[1]	=>  Location: PIN_120,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[2]	=>  Location: PIN_74,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[3]	=>  Location: PIN_96,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[4]	=>  Location: PIN_129,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[5]	=>  Location: PIN_51,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[6]	=>  Location: PIN_132,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[7]	=>  Location: PIN_141,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[8]	=>  Location: PIN_76,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[9]	=>  Location: PIN_94,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[10]	=>  Location: PIN_133,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[11]	=>  Location: PIN_86,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[12]	=>  Location: PIN_6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[13]	=>  Location: PIN_27,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[14]	=>  Location: PIN_38,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- oInputs[15]	=>  Location: PIN_108,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+-- iInputs[0]	=>  Location: PIN_107,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[1]	=>  Location: PIN_121,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[2]	=>  Location: PIN_73,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[3]	=>  Location: PIN_93,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[4]	=>  Location: PIN_131,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[5]	=>  Location: PIN_50,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[6]	=>  Location: PIN_134,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[7]	=>  Location: PIN_140,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[8]	=>  Location: PIN_77,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iInputs[9]	=>  Location: PIN_98,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iDiffInputs[4]	=>  Location: PIN_87,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iDiffInputs[2]	=>  Location: PIN_5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iDiffInputs[0]	=>  Location: PIN_24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 -- iCLK	=>  Location: PIN_18,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[8]	=>  Location: PIN_81,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[9]	=>  Location: PIN_66,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[10]	=>  Location: PIN_108,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[11]	=>  Location: PIN_96,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[12]	=>  Location: PIN_67,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[13]	=>  Location: PIN_68,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[14]	=>  Location: PIN_75,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[15]	=>  Location: PIN_74,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- oData[0]	=>  Location: PIN_94,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[1]	=>  Location: PIN_112,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[2]	=>  Location: PIN_97,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[3]	=>  Location: PIN_42,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[4]	=>  Location: PIN_52,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[5]	=>  Location: PIN_53,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[6]	=>  Location: PIN_2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[7]	=>  Location: PIN_39,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[8]	=>  Location: PIN_37,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[9]	=>  Location: PIN_113,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[10]	=>  Location: PIN_43,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[11]	=>  Location: PIN_38,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[12]	=>  Location: PIN_111,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[13]	=>  Location: PIN_107,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[14]	=>  Location: PIN_32,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oData[15]	=>  Location: PIN_104,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[0]	=>  Location: PIN_59,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[1]	=>  Location: PIN_122,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[2]	=>  Location: PIN_61,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[3]	=>  Location: PIN_29,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[4]	=>  Location: PIN_121,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[5]	=>  Location: PIN_127,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[6]	=>  Location: PIN_3,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[7]	=>  Location: PIN_5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[8]	=>  Location: PIN_1,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[9]	=>  Location: PIN_130,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[10]	=>  Location: PIN_138,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[11]	=>  Location: PIN_27,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[12]	=>  Location: PIN_44,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[13]	=>  Location: PIN_6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[14]	=>  Location: PIN_7,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMCONFIG1[15]	=>  Location: PIN_114,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[0]	=>  Location: PIN_51,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[1]	=>  Location: PIN_132,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[2]	=>  Location: PIN_101,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[3]	=>  Location: PIN_13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[4]	=>  Location: PIN_131,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[5]	=>  Location: PIN_55,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[6]	=>  Location: PIN_144,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[7]	=>  Location: PIN_16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[8]	=>  Location: PIN_24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[9]	=>  Location: PIN_129,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[10]	=>  Location: PIN_141,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[11]	=>  Location: PIN_22,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[12]	=>  Location: PIN_137,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[13]	=>  Location: PIN_134,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[14]	=>  Location: PIN_8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMPERIOD1[15]	=>  Location: PIN_103,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[0]	=>  Location: PIN_117,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[1]	=>  Location: PIN_57,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[2]	=>  Location: PIN_98,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[3]	=>  Location: PIN_45,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[4]	=>  Location: PIN_49,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[5]	=>  Location: PIN_95,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[6]	=>  Location: PIN_4,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[7]	=>  Location: PIN_40,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[8]	=>  Location: PIN_142,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[9]	=>  Location: PIN_123,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[10]	=>  Location: PIN_48,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[11]	=>  Location: PIN_41,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[12]	=>  Location: PIN_31,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[13]	=>  Location: PIN_106,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[14]	=>  Location: PIN_140,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- oPWMDUTY1[15]	=>  Location: PIN_118,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
--- inRdRdy	=>  Location: PIN_91,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[0]	=>  Location: PIN_63,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[1]	=>  Location: PIN_119,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[2]	=>  Location: PIN_87,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[3]	=>  Location: PIN_86,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[4]	=>  Location: PIN_89,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[5]	=>  Location: PIN_88,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[6]	=>  Location: PIN_30,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iAddress[7]	=>  Location: PIN_28,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- inRESET	=>  Location: PIN_62,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[0]	=>  Location: PIN_124,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- inWrRdy	=>  Location: PIN_20,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[1]	=>  Location: PIN_120,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[2]	=>  Location: PIN_102,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[3]	=>  Location: PIN_14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[4]	=>  Location: PIN_125,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[5]	=>  Location: PIN_60,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[6]	=>  Location: PIN_21,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[7]	=>  Location: PIN_23,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[8]	=>  Location: PIN_15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[9]	=>  Location: PIN_58,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[10]	=>  Location: PIN_139,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[11]	=>  Location: PIN_143,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[12]	=>  Location: PIN_50,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[13]	=>  Location: PIN_133,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[14]	=>  Location: PIN_12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
--- iData[15]	=>  Location: PIN_105,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- inReset	=>  Location: PIN_20,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iDiffInputs[1]	=>  Location: PIN_22,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iDiffInputs[3]	=>  Location: PIN_4,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+-- iDiffInputs[5]	=>  Location: PIN_89,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 
 
-ARCHITECTURE structure OF IO_SPACE IS
+ARCHITECTURE structure OF INPUTMODULE IS
 SIGNAL gnd : std_logic := '0';
 SIGNAL vcc : std_logic := '1';
 SIGNAL unknown : std_logic := 'X';
@@ -161,2153 +107,44 @@ SIGNAL ww_devoe : std_logic;
 SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
 SIGNAL ww_iCLK : std_logic;
-SIGNAL ww_inRESET : std_logic;
-SIGNAL ww_inWrRdy : std_logic;
-SIGNAL ww_inRdRdy : std_logic;
-SIGNAL ww_iAddress : std_logic_vector(15 DOWNTO 0);
-SIGNAL ww_iData : std_logic_vector(15 DOWNTO 0);
-SIGNAL ww_oData : std_logic_vector(15 DOWNTO 0);
-SIGNAL ww_oPWMCONFIG1 : std_logic_vector(15 DOWNTO 0);
-SIGNAL ww_oPWMPERIOD1 : std_logic_vector(15 DOWNTO 0);
-SIGNAL ww_oPWMDUTY1 : std_logic_vector(15 DOWNTO 0);
-SIGNAL \inRdRdy~combout\ : std_logic;
-SIGNAL \inWrRdy~combout\ : std_logic;
-SIGNAL \inRESET~combout\ : std_logic;
-SIGNAL \sPWMDUTY1[0]~0_combout\ : std_logic;
-SIGNAL \sPWMDUTY1[0]~1_combout\ : std_logic;
-SIGNAL \sPWMCONFIG1[0]~0_combout\ : std_logic;
-SIGNAL \sPWMDUTY1[0]~2_combout\ : std_logic;
-SIGNAL \sPWMPERIOD1[0]~0_combout\ : std_logic;
-SIGNAL \oData[1]~0_combout\ : std_logic;
-SIGNAL \oData[0]~reg0_regout\ : std_logic;
-SIGNAL \oData[1]~reg0_regout\ : std_logic;
-SIGNAL \oData[2]~reg0_regout\ : std_logic;
-SIGNAL \oData[3]~reg0_regout\ : std_logic;
-SIGNAL \sPWMDUTY1[4]~_wirecell_combout\ : std_logic;
-SIGNAL \oData[4]~reg0_regout\ : std_logic;
-SIGNAL \sPWMDUTY1[5]~_wirecell_combout\ : std_logic;
-SIGNAL \oData[5]~reg0_regout\ : std_logic;
-SIGNAL \oData[6]~reg0_regout\ : std_logic;
-SIGNAL \oData[7]~reg0_regout\ : std_logic;
-SIGNAL \oData[8]~reg0_regout\ : std_logic;
-SIGNAL \oData[9]~reg0_regout\ : std_logic;
-SIGNAL \oData[10]~reg0_regout\ : std_logic;
-SIGNAL \oData[11]~reg0_regout\ : std_logic;
-SIGNAL \sPWMDUTY1[12]~_wirecell_combout\ : std_logic;
-SIGNAL \oData[12]~reg0_regout\ : std_logic;
-SIGNAL \sPWMDUTY1[13]~_wirecell_combout\ : std_logic;
-SIGNAL \oData[13]~reg0_regout\ : std_logic;
-SIGNAL \oData[14]~reg0_regout\ : std_logic;
-SIGNAL \oData[15]~reg0_regout\ : std_logic;
-SIGNAL sPWMCONFIG1 : std_logic_vector(15 DOWNTO 0);
-SIGNAL \iAddress~combout\ : std_logic_vector(15 DOWNTO 0);
-SIGNAL sPWMPERIOD1 : std_logic_vector(15 DOWNTO 0);
-SIGNAL sPWMDUTY1 : std_logic_vector(15 DOWNTO 0);
-SIGNAL \iData~combout\ : std_logic_vector(15 DOWNTO 0);
-SIGNAL \ALT_INV_inWrRdy~combout\ : std_logic;
-SIGNAL \ALT_INV_inRdRdy~combout\ : std_logic;
-SIGNAL ALT_INV_sPWMDUTY1 : std_logic_vector(13 DOWNTO 4);
-SIGNAL ALT_INV_sPWMPERIOD1 : std_logic_vector(13 DOWNTO 5);
-SIGNAL ALT_INV_sPWMCONFIG1 : std_logic_vector(12 DOWNTO 4);
+SIGNAL ww_inReset : std_logic;
+SIGNAL ww_iInputs : std_logic_vector(9 DOWNTO 0);
+SIGNAL ww_iDiffInputs : std_logic_vector(5 DOWNTO 0);
+SIGNAL ww_oInputStatus : std_logic_vector(15 DOWNTO 0);
+SIGNAL ww_oInputs : std_logic_vector(15 DOWNTO 0);
+SIGNAL \iCLK~combout\ : std_logic;
+SIGNAL \inReset~combout\ : std_logic;
+SIGNAL \sDiffStatus[0][0]~regout\ : std_logic;
+SIGNAL \sDiffStatus[1][0]~regout\ : std_logic;
+SIGNAL \sDiffStatus[2][0]~regout\ : std_logic;
+SIGNAL \sDiffStatus[3][0]~regout\ : std_logic;
+SIGNAL \sDiffStatus[4][0]~regout\ : std_logic;
+SIGNAL \sDiffStatus[0][1]~regout\ : std_logic;
+SIGNAL \sDiffStatus[1][1]~regout\ : std_logic;
+SIGNAL \sDiffStatus[2][1]~regout\ : std_logic;
+SIGNAL \sDiffStatus[3][1]~regout\ : std_logic;
+SIGNAL \sDiffStatus[4][1]~regout\ : std_logic;
+SIGNAL \sDiffStatus[0][2]~regout\ : std_logic;
+SIGNAL \sDiffStatus[1][2]~regout\ : std_logic;
+SIGNAL \sDiffStatus[2][2]~regout\ : std_logic;
+SIGNAL \sDiffStatus[3][2]~regout\ : std_logic;
+SIGNAL \sDiffStatus[4][2]~regout\ : std_logic;
+SIGNAL \iInputs~combout\ : std_logic_vector(9 DOWNTO 0);
+SIGNAL \iDiffInputs~combout\ : std_logic_vector(5 DOWNTO 0);
+SIGNAL \ALT_INV_inReset~combout\ : std_logic;
 
 BEGIN
 
 ww_iCLK <= iCLK;
-ww_inRESET <= inRESET;
-ww_inWrRdy <= inWrRdy;
-ww_inRdRdy <= inRdRdy;
-ww_iAddress <= iAddress;
-ww_iData <= iData;
-oData <= ww_oData;
-oPWMCONFIG1 <= ww_oPWMCONFIG1;
-oPWMPERIOD1 <= ww_oPWMPERIOD1;
-oPWMDUTY1 <= ww_oPWMDUTY1;
+ww_inReset <= inReset;
+ww_iInputs <= iInputs;
+ww_iDiffInputs <= iDiffInputs;
+oInputStatus <= ww_oInputStatus;
+oInputs <= ww_oInputs;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
-\ALT_INV_inWrRdy~combout\ <= NOT \inWrRdy~combout\;
-\ALT_INV_inRdRdy~combout\ <= NOT \inRdRdy~combout\;
-ALT_INV_sPWMDUTY1(13) <= NOT sPWMDUTY1(13);
-ALT_INV_sPWMDUTY1(12) <= NOT sPWMDUTY1(12);
-ALT_INV_sPWMDUTY1(5) <= NOT sPWMDUTY1(5);
-ALT_INV_sPWMDUTY1(4) <= NOT sPWMDUTY1(4);
-ALT_INV_sPWMPERIOD1(13) <= NOT sPWMPERIOD1(13);
-ALT_INV_sPWMPERIOD1(5) <= NOT sPWMPERIOD1(5);
-ALT_INV_sPWMCONFIG1(12) <= NOT sPWMCONFIG1(12);
-ALT_INV_sPWMCONFIG1(4) <= NOT sPWMCONFIG1(4);
-
--- Location: PIN_91,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\inRdRdy~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_inRdRdy,
-	combout => \inRdRdy~combout\);
-
--- Location: PIN_63,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[0]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(0),
-	combout => \iAddress~combout\(0));
-
--- Location: PIN_20,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\inWrRdy~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_inWrRdy,
-	combout => \inWrRdy~combout\);
-
--- Location: PIN_124,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[0]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(0),
-	combout => \iData~combout\(0));
-
--- Location: PIN_62,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\inRESET~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_inRESET,
-	combout => \inRESET~combout\);
-
--- Location: PIN_28,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[7]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(7),
-	combout => \iAddress~combout\(7));
-
--- Location: PIN_87,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[2]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(2),
-	combout => \iAddress~combout\(2));
-
--- Location: PIN_89,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[4]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(4),
-	combout => \iAddress~combout\(4));
-
--- Location: PIN_88,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[5]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(5),
-	combout => \iAddress~combout\(5));
-
--- Location: PIN_86,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[3]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(3),
-	combout => \iAddress~combout\(3));
-
--- Location: LC_X16_Y5_N2
-\sPWMDUTY1[0]~0\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[0]~0_combout\ = (!\iAddress~combout\(2) & (!\iAddress~combout\(4) & (!\iAddress~combout\(5) & !\iAddress~combout\(3))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \iAddress~combout\(2),
-	datab => \iAddress~combout\(4),
-	datac => \iAddress~combout\(5),
-	datad => \iAddress~combout\(3),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[0]~0_combout\);
-
--- Location: PIN_30,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[6]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(6),
-	combout => \iAddress~combout\(6));
-
--- Location: LC_X3_Y5_N0
-\sPWMDUTY1[0]~1\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[0]~1_combout\ = ((!\iAddress~combout\(7) & (\sPWMDUTY1[0]~0_combout\ & !\iAddress~combout\(6))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0030",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	datab => \iAddress~combout\(7),
-	datac => \sPWMDUTY1[0]~0_combout\,
-	datad => \iAddress~combout\(6),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[0]~1_combout\);
-
--- Location: PIN_119,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[1]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iAddress(1),
-	combout => \iAddress~combout\(1));
-
--- Location: LC_X3_Y8_N6
-\sPWMCONFIG1[0]~0\ : maxv_lcell
--- Equation(s):
--- \sPWMCONFIG1[0]~0_combout\ = (!\iAddress~combout\(0) & (\inRESET~combout\ & (\sPWMDUTY1[0]~1_combout\ & !\iAddress~combout\(1))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0040",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \iAddress~combout\(0),
-	datab => \inRESET~combout\,
-	datac => \sPWMDUTY1[0]~1_combout\,
-	datad => \iAddress~combout\(1),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMCONFIG1[0]~0_combout\);
-
--- Location: LC_X9_Y8_N5
-\sPWMCONFIG1[0]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(0) = DFFEAS((((\iData~combout\(0)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ff00",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(0),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(0));
-
--- Location: LC_X5_Y8_N2
-\sPWMDUTY1[0]~2\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[0]~2_combout\ = (!\iAddress~combout\(0) & (\inRESET~combout\ & (\sPWMDUTY1[0]~1_combout\ & \iAddress~combout\(1))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "4000",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \iAddress~combout\(0),
-	datab => \inRESET~combout\,
-	datac => \sPWMDUTY1[0]~1_combout\,
-	datad => \iAddress~combout\(1),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[0]~2_combout\);
-
--- Location: LC_X9_Y8_N0
-\sPWMDUTY1[0]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(0) = DFFEAS((((\iData~combout\(0)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ff00",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(0),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(0));
-
--- Location: LC_X5_Y8_N8
-\sPWMPERIOD1[0]~0\ : maxv_lcell
--- Equation(s):
--- \sPWMPERIOD1[0]~0_combout\ = (\iAddress~combout\(0) & (\inRESET~combout\ & (\sPWMDUTY1[0]~1_combout\ & !\iAddress~combout\(1))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0080",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \iAddress~combout\(0),
-	datab => \inRESET~combout\,
-	datac => \sPWMDUTY1[0]~1_combout\,
-	datad => \iAddress~combout\(1),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMPERIOD1[0]~0_combout\);
-
--- Location: LC_X7_Y8_N4
-\sPWMPERIOD1[0]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(0) = DFFEAS(((\iData~combout\(0))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(0),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(0));
-
--- Location: LC_X3_Y8_N9
-\oData[1]~0\ : maxv_lcell
--- Equation(s):
--- \oData[1]~0_combout\ = (((\iAddress~combout\(0) & \iAddress~combout\(1))) # (!\sPWMDUTY1[0]~1_combout\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "af0f",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \iAddress~combout\(0),
-	datac => \sPWMDUTY1[0]~1_combout\,
-	datad => \iAddress~combout\(1),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \oData[1]~0_combout\);
-
--- Location: LC_X8_Y8_N6
-\oData[0]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[0]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(0))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(0))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(0), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(0),
-	datac => sPWMDUTY1(0),
-	datad => sPWMPERIOD1(0),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[0]~reg0_regout\);
-
--- Location: PIN_120,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[1]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(1),
-	combout => \iData~combout\(1));
-
--- Location: LC_X9_Y8_N4
-\sPWMCONFIG1[1]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(1) = DFFEAS(((\iData~combout\(1))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(1),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(1));
-
--- Location: LC_X9_Y8_N9
-\sPWMDUTY1[1]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(1) = DFFEAS(((\iData~combout\(1))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(1),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(1));
-
--- Location: LC_X7_Y8_N7
-\sPWMPERIOD1[1]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(1) = DFFEAS(((\iData~combout\(1))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(1),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(1));
-
--- Location: LC_X8_Y8_N4
-\oData[1]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[1]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(1))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(1))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(1), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(1),
-	datac => sPWMDUTY1(1),
-	datad => sPWMPERIOD1(1),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[1]~reg0_regout\);
-
--- Location: PIN_102,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[2]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(2),
-	combout => \iData~combout\(2));
-
--- Location: LC_X9_Y7_N6
-\sPWMCONFIG1[2]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(2) = DFFEAS((\iData~combout\(2)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(2),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(2));
-
--- Location: LC_X11_Y7_N2
-\sPWMDUTY1[2]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(2) = DFFEAS((\iData~combout\(2)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(2),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(2));
-
--- Location: LC_X9_Y7_N4
-\sPWMPERIOD1[2]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(2) = DFFEAS((\iData~combout\(2)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(2),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(2));
-
--- Location: LC_X10_Y7_N5
-\oData[2]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[2]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(2))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(2))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(2), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(2),
-	datac => sPWMDUTY1(2),
-	datad => sPWMPERIOD1(2),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[2]~reg0_regout\);
-
--- Location: PIN_14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[3]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(3),
-	combout => \iData~combout\(3));
-
--- Location: LC_X6_Y8_N4
-\sPWMCONFIG1[3]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(3) = DFFEAS(((\iData~combout\(3))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(3),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(3));
-
--- Location: LC_X6_Y8_N3
-\sPWMDUTY1[3]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(3) = DFFEAS((\iData~combout\(3)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(3),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(3));
-
--- Location: LC_X4_Y8_N5
-\sPWMPERIOD1[3]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(3) = DFFEAS(((\iData~combout\(3))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(3),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(3));
-
--- Location: LC_X5_Y8_N5
-\oData[3]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[3]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(3))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(3))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(3), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(3),
-	datac => sPWMDUTY1(3),
-	datad => sPWMPERIOD1(3),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[3]~reg0_regout\);
-
--- Location: PIN_125,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[4]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(4),
-	combout => \iData~combout\(4));
-
--- Location: LC_X9_Y8_N8
-\sPWMCONFIG1[4]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(4) = DFFEAS((!\iData~combout\(4)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "5555",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(4),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(4));
-
--- Location: LC_X7_Y8_N3
-\sPWMDUTY1[4]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(4) = DFFEAS((!\iData~combout\(4)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "5555",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(4),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(4));
-
--- Location: LC_X7_Y8_N9
-\sPWMDUTY1[4]~_wirecell\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[4]~_wirecell_combout\ = (((!sPWMDUTY1(4))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "00ff",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	datad => sPWMDUTY1(4),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[4]~_wirecell_combout\);
-
--- Location: LC_X7_Y8_N5
-\sPWMPERIOD1[4]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(4) = DFFEAS((\iData~combout\(4)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(4),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(4));
-
--- Location: LC_X8_Y8_N5
-\oData[4]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[4]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(4))))) # (!\iAddress~combout\(0) & (!sPWMCONFIG1(4))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, \sPWMDUTY1[4]~_wirecell_combout\, , \oData[1]~0_combout\, 
--- \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "bb11",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(4),
-	datac => \sPWMDUTY1[4]~_wirecell_combout\,
-	datad => sPWMPERIOD1(4),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[4]~reg0_regout\);
-
--- Location: PIN_60,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[5]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(5),
-	combout => \iData~combout\(5));
-
--- Location: LC_X9_Y8_N1
-\sPWMCONFIG1[5]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(5) = DFFEAS((\iData~combout\(5)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(5),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(5));
-
--- Location: LC_X9_Y8_N7
-\sPWMDUTY1[5]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(5) = DFFEAS(((!\iData~combout\(5))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "3333",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(5),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(5));
-
--- Location: LC_X9_Y8_N3
-\sPWMDUTY1[5]~_wirecell\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[5]~_wirecell_combout\ = (((!sPWMDUTY1(5))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0f0f",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	datac => sPWMDUTY1(5),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[5]~_wirecell_combout\);
-
--- Location: LC_X9_Y7_N8
-\sPWMPERIOD1[5]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(5) = DFFEAS((((!\iData~combout\(5)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "00ff",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(5),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(5));
-
--- Location: LC_X8_Y8_N2
-\oData[5]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[5]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((!sPWMPERIOD1(5))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(5))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, \sPWMDUTY1[5]~_wirecell_combout\, , \oData[1]~0_combout\, 
--- \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "22ee",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => sPWMCONFIG1(5),
-	datab => \iAddress~combout\(0),
-	datac => \sPWMDUTY1[5]~_wirecell_combout\,
-	datad => sPWMPERIOD1(5),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[5]~reg0_regout\);
-
--- Location: PIN_21,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[6]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(6),
-	combout => \iData~combout\(6));
-
--- Location: LC_X2_Y8_N8
-\sPWMCONFIG1[6]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(6) = DFFEAS(((\iData~combout\(6))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(6),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(6));
-
--- Location: LC_X4_Y8_N3
-\sPWMDUTY1[6]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(6) = DFFEAS(((\iData~combout\(6))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(6),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(6));
-
--- Location: LC_X2_Y8_N2
-\sPWMPERIOD1[6]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(6) = DFFEAS(((\iData~combout\(6))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(6),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(6));
-
--- Location: LC_X3_Y8_N4
-\oData[6]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[6]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(6))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(6))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(6), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee22",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => sPWMCONFIG1(6),
-	datab => \iAddress~combout\(0),
-	datac => sPWMDUTY1(6),
-	datad => sPWMPERIOD1(6),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[6]~reg0_regout\);
-
--- Location: PIN_23,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[7]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(7),
-	combout => \iData~combout\(7));
-
--- Location: LC_X2_Y8_N7
-\sPWMCONFIG1[7]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(7) = DFFEAS(GND, !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, \iData~combout\(7), , , VCC)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datac => \iData~combout\(7),
-	aclr => GND,
-	sload => VCC,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(7));
-
--- Location: LC_X6_Y8_N1
-\sPWMDUTY1[7]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(7) = DFFEAS(((\iData~combout\(7))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(7),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(7));
-
--- Location: LC_X2_Y8_N0
-\sPWMPERIOD1[7]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(7) = DFFEAS(GND, !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, \iData~combout\(7), , , VCC)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datac => \iData~combout\(7),
-	aclr => GND,
-	sload => VCC,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(7));
-
--- Location: LC_X3_Y8_N8
-\oData[7]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[7]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(7))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(7))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(7), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(7),
-	datac => sPWMDUTY1(7),
-	datad => sPWMPERIOD1(7),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[7]~reg0_regout\);
-
--- Location: PIN_15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[8]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(8),
-	combout => \iData~combout\(8));
-
--- Location: LC_X2_Y8_N6
-\sPWMPERIOD1[8]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(8) = DFFEAS(((\iData~combout\(8))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(8),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(8));
-
--- Location: LC_X4_Y8_N7
-\sPWMDUTY1[8]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(8) = DFFEAS(((\iData~combout\(8))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(8),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(8));
-
--- Location: LC_X1_Y8_N1
-\sPWMCONFIG1[8]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(8) = DFFEAS((((\iData~combout\(8)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ff00",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(8),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(8));
-
--- Location: LC_X3_Y8_N5
-\oData[8]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[8]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (sPWMPERIOD1(8))) # (!\iAddress~combout\(0) & (((sPWMCONFIG1(8))))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(8), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "dd88",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMPERIOD1(8),
-	datac => sPWMDUTY1(8),
-	datad => sPWMCONFIG1(8),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[8]~reg0_regout\);
-
--- Location: PIN_58,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[9]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(9),
-	combout => \iData~combout\(9));
-
--- Location: LC_X9_Y8_N2
-\sPWMCONFIG1[9]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(9) = DFFEAS((\iData~combout\(9)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(9),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(9));
-
--- Location: LC_X9_Y8_N6
-\sPWMDUTY1[9]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(9) = DFFEAS((\iData~combout\(9)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(9),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(9));
-
--- Location: LC_X7_Y8_N0
-\sPWMPERIOD1[9]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(9) = DFFEAS(((\iData~combout\(9))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(9),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(9));
-
--- Location: LC_X8_Y8_N3
-\oData[9]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[9]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(9))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(9))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(9), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(9),
-	datac => sPWMDUTY1(9),
-	datad => sPWMPERIOD1(9),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[9]~reg0_regout\);
-
--- Location: PIN_139,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[10]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(10),
-	combout => \iData~combout\(10));
-
--- Location: LC_X6_Y8_N5
-\sPWMCONFIG1[10]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(10) = DFFEAS(GND, !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, \iData~combout\(10), , , VCC)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datac => \iData~combout\(10),
-	aclr => GND,
-	sload => VCC,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(10));
-
--- Location: LC_X6_Y8_N2
-\sPWMDUTY1[10]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(10) = DFFEAS(GND, !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, \iData~combout\(10), , , VCC)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0000",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datac => \iData~combout\(10),
-	aclr => GND,
-	sload => VCC,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(10));
-
--- Location: LC_X4_Y8_N0
-\sPWMPERIOD1[10]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(10) = DFFEAS((\iData~combout\(10)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(10),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(10));
-
--- Location: LC_X5_Y8_N9
-\oData[10]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[10]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(10))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(10))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(10), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee44",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(10),
-	datac => sPWMDUTY1(10),
-	datad => sPWMPERIOD1(10),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[10]~reg0_regout\);
-
--- Location: PIN_143,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[11]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(11),
-	combout => \iData~combout\(11));
-
--- Location: LC_X2_Y8_N5
-\sPWMCONFIG1[11]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(11) = DFFEAS((((\iData~combout\(11)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ff00",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(11),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(11));
-
--- Location: LC_X4_Y8_N9
-\sPWMDUTY1[11]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(11) = DFFEAS(((\iData~combout\(11))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(11),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(11));
-
--- Location: LC_X2_Y8_N9
-\sPWMPERIOD1[11]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(11) = DFFEAS((((\iData~combout\(11)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ff00",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(11),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(11));
-
--- Location: LC_X3_Y8_N2
-\oData[11]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[11]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(11))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(11))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(11), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee22",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => sPWMCONFIG1(11),
-	datab => \iAddress~combout\(0),
-	datac => sPWMDUTY1(11),
-	datad => sPWMPERIOD1(11),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[11]~reg0_regout\);
-
--- Location: PIN_50,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[12]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(12),
-	combout => \iData~combout\(12));
-
--- Location: LC_X6_Y8_N8
-\sPWMCONFIG1[12]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(12) = DFFEAS((!\iData~combout\(12)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "5555",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(12),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(12));
-
--- Location: LC_X4_Y8_N1
-\sPWMDUTY1[12]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(12) = DFFEAS((!\iData~combout\(12)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "5555",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(12),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(12));
-
--- Location: LC_X4_Y8_N6
-\sPWMDUTY1[12]~_wirecell\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[12]~_wirecell_combout\ = (((!sPWMDUTY1(12))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "00ff",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	datad => sPWMDUTY1(12),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[12]~_wirecell_combout\);
-
--- Location: LC_X7_Y8_N6
-\sPWMPERIOD1[12]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(12) = DFFEAS((\iData~combout\(12)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(12),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(12));
-
--- Location: LC_X5_Y8_N4
-\oData[12]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[12]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(12))))) # (!\iAddress~combout\(0) & (!sPWMCONFIG1(12))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, \sPWMDUTY1[12]~_wirecell_combout\, , \oData[1]~0_combout\, 
--- \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "bb11",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMCONFIG1(12),
-	datac => \sPWMDUTY1[12]~_wirecell_combout\,
-	datad => sPWMPERIOD1(12),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[12]~reg0_regout\);
-
--- Location: PIN_133,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[13]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(13),
-	combout => \iData~combout\(13));
-
--- Location: LC_X7_Y8_N8
-\sPWMPERIOD1[13]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(13) = DFFEAS((((!\iData~combout\(13)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0f0f",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datac => \iData~combout\(13),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(13));
-
--- Location: LC_X4_Y8_N4
-\sPWMDUTY1[13]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(13) = DFFEAS((((!\iData~combout\(13)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0f0f",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datac => \iData~combout\(13),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(13));
-
--- Location: LC_X4_Y8_N8
-\sPWMDUTY1[13]~_wirecell\ : maxv_lcell
--- Equation(s):
--- \sPWMDUTY1[13]~_wirecell_combout\ = (((!sPWMDUTY1(13))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0f0f",
-	operation_mode => "normal",
-	output_mode => "comb_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	datac => sPWMDUTY1(13),
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	combout => \sPWMDUTY1[13]~_wirecell_combout\);
-
--- Location: LC_X2_Y8_N4
-\sPWMCONFIG1[13]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(13) = DFFEAS(((\iData~combout\(13))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(13),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(13));
-
--- Location: LC_X5_Y8_N6
-\oData[13]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[13]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (!sPWMPERIOD1(13))) # (!\iAddress~combout\(0) & (((sPWMCONFIG1(13))))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, \sPWMDUTY1[13]~_wirecell_combout\, , \oData[1]~0_combout\, 
--- \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "7722",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMPERIOD1(13),
-	datac => \sPWMDUTY1[13]~_wirecell_combout\,
-	datad => sPWMCONFIG1(13),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[13]~reg0_regout\);
-
--- Location: PIN_12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[14]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(14),
-	combout => \iData~combout\(14));
-
--- Location: LC_X2_Y8_N1
-\sPWMCONFIG1[14]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(14) = DFFEAS(((\iData~combout\(14))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(14),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(14));
-
--- Location: LC_X4_Y8_N2
-\sPWMDUTY1[14]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(14) = DFFEAS(((\iData~combout\(14))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(14),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(14));
-
--- Location: LC_X2_Y8_N3
-\sPWMPERIOD1[14]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(14) = DFFEAS(((\iData~combout\(14))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "cccc",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datab => \iData~combout\(14),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(14));
-
--- Location: LC_X3_Y8_N7
-\oData[14]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[14]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (((sPWMPERIOD1(14))))) # (!\iAddress~combout\(0) & (sPWMCONFIG1(14))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(14), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ee22",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => sPWMCONFIG1(14),
-	datab => \iAddress~combout\(0),
-	datac => sPWMDUTY1(14),
-	datad => sPWMPERIOD1(14),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[14]~reg0_regout\);
-
--- Location: PIN_105,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iData[15]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "input")
--- pragma translate_on
-PORT MAP (
-	oe => GND,
-	padio => ww_iData(15),
-	combout => \iData~combout\(15));
-
--- Location: LC_X10_Y8_N4
-\sPWMPERIOD1[15]\ : maxv_lcell
--- Equation(s):
--- sPWMPERIOD1(15) = DFFEAS((\iData~combout\(15)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMPERIOD1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(15),
-	aclr => GND,
-	ena => \sPWMPERIOD1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMPERIOD1(15));
-
--- Location: LC_X10_Y8_N9
-\sPWMDUTY1[15]\ : maxv_lcell
--- Equation(s):
--- sPWMDUTY1(15) = DFFEAS((\iData~combout\(15)), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMDUTY1[0]~2_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "aaaa",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	dataa => \iData~combout\(15),
-	aclr => GND,
-	ena => \sPWMDUTY1[0]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMDUTY1(15));
-
--- Location: LC_X12_Y8_N1
-\sPWMCONFIG1[15]\ : maxv_lcell
--- Equation(s):
--- sPWMCONFIG1(15) = DFFEAS((((\iData~combout\(15)))), !GLOBAL(\inWrRdy~combout\), VCC, , \sPWMCONFIG1[0]~0_combout\, , , , )
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "ff00",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "off")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inWrRdy~combout\,
-	datad => \iData~combout\(15),
-	aclr => GND,
-	ena => \sPWMCONFIG1[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => sPWMCONFIG1(15));
-
--- Location: LC_X11_Y8_N2
-\oData[15]~reg0\ : maxv_lcell
--- Equation(s):
--- \oData[15]~reg0_regout\ = DFFEAS((\iAddress~combout\(0) & (sPWMPERIOD1(15))) # (!\iAddress~combout\(0) & (((sPWMCONFIG1(15))))), !GLOBAL(\inRdRdy~combout\), VCC, , \inRESET~combout\, sPWMDUTY1(15), , \oData[1]~0_combout\, \iAddress~combout\(1))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "dd88",
-	operation_mode => "normal",
-	output_mode => "reg_only",
-	register_cascade_mode => "off",
-	sum_lutc_input => "datac",
-	synch_mode => "on")
--- pragma translate_on
-PORT MAP (
-	clk => \ALT_INV_inRdRdy~combout\,
-	dataa => \iAddress~combout\(0),
-	datab => sPWMPERIOD1(15),
-	datac => sPWMDUTY1(15),
-	datad => sPWMCONFIG1(15),
-	aclr => GND,
-	sclr => \oData[1]~0_combout\,
-	sload => \iAddress~combout\(1),
-	ena => \inRESET~combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	regout => \oData[15]~reg0_regout\);
+\ALT_INV_inReset~combout\ <= NOT \inReset~combout\;
 
 -- Location: PIN_18,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 \iCLK~I\ : maxv_io
@@ -2317,791 +154,892 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iCLK);
+	padio => ww_iCLK,
+	combout => \iCLK~combout\);
 
--- Location: PIN_81,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[8]~I\ : maxv_io
+-- Location: PIN_22,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iDiffInputs[1]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(8));
+	padio => ww_iDiffInputs(1),
+	combout => \iDiffInputs~combout\(1));
 
--- Location: PIN_66,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[9]~I\ : maxv_io
+-- Location: PIN_24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iDiffInputs[0]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(9));
+	padio => ww_iDiffInputs(0),
+	combout => \iDiffInputs~combout\(0));
 
--- Location: PIN_108,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[10]~I\ : maxv_io
+-- Location: PIN_20,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\inReset~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(10));
+	padio => ww_inReset,
+	combout => \inReset~combout\);
 
--- Location: PIN_96,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[11]~I\ : maxv_io
+-- Location: LC_X1_Y6_N5
+\sDiffStatus[0][0]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[0][0]~regout\ = DFFEAS(((\iDiffInputs~combout\(1) $ (\iDiffInputs~combout\(0)))), GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , , , , )
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0ff0",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "off")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \iDiffInputs~combout\(1),
+	datad => \iDiffInputs~combout\(0),
+	aclr => \ALT_INV_inReset~combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[0][0]~regout\);
+
+-- Location: LC_X1_Y6_N0
+\sDiffStatus[1][0]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[1][0]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[0][0]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[0][0]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[1][0]~regout\);
+
+-- Location: LC_X1_Y6_N6
+\sDiffStatus[2][0]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[2][0]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[1][0]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[1][0]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[2][0]~regout\);
+
+-- Location: LC_X1_Y6_N7
+\sDiffStatus[3][0]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[3][0]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[2][0]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[2][0]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[3][0]~regout\);
+
+-- Location: LC_X1_Y6_N4
+\sDiffStatus[4][0]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[4][0]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[3][0]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[3][0]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[4][0]~regout\);
+
+-- Location: PIN_4,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iDiffInputs[3]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(11));
+	padio => ww_iDiffInputs(3),
+	combout => \iDiffInputs~combout\(3));
 
--- Location: PIN_67,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[12]~I\ : maxv_io
+-- Location: PIN_5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iDiffInputs[2]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(12));
+	padio => ww_iDiffInputs(2),
+	combout => \iDiffInputs~combout\(2));
 
--- Location: PIN_68,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[13]~I\ : maxv_io
+-- Location: LC_X1_Y9_N7
+\sDiffStatus[0][1]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[0][1]~regout\ = DFFEAS((\iDiffInputs~combout\(3) $ ((\iDiffInputs~combout\(2)))), GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , , , , )
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "3c3c",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "off")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datab => \iDiffInputs~combout\(3),
+	datac => \iDiffInputs~combout\(2),
+	aclr => \ALT_INV_inReset~combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[0][1]~regout\);
+
+-- Location: LC_X1_Y9_N6
+\sDiffStatus[1][1]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[1][1]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[0][1]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[0][1]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[1][1]~regout\);
+
+-- Location: LC_X1_Y9_N5
+\sDiffStatus[2][1]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[2][1]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[1][1]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[1][1]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[2][1]~regout\);
+
+-- Location: LC_X1_Y9_N0
+\sDiffStatus[3][1]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[3][1]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[2][1]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[2][1]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[3][1]~regout\);
+
+-- Location: LC_X1_Y9_N4
+\sDiffStatus[4][1]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[4][1]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[3][1]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[3][1]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[4][1]~regout\);
+
+-- Location: PIN_87,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iDiffInputs[4]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(13));
+	padio => ww_iDiffInputs(4),
+	combout => \iDiffInputs~combout\(4));
 
--- Location: PIN_75,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[14]~I\ : maxv_io
+-- Location: PIN_89,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iDiffInputs[5]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(14));
+	padio => ww_iDiffInputs(5),
+	combout => \iDiffInputs~combout\(5));
 
--- Location: PIN_74,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
-\iAddress[15]~I\ : maxv_io
+-- Location: LC_X16_Y5_N5
+\sDiffStatus[0][2]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[0][2]~regout\ = DFFEAS((\iDiffInputs~combout\(4) $ (((\iDiffInputs~combout\(5))))), GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , , , , )
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "33cc",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "off")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datab => \iDiffInputs~combout\(4),
+	datad => \iDiffInputs~combout\(5),
+	aclr => \ALT_INV_inReset~combout\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[0][2]~regout\);
+
+-- Location: LC_X16_Y5_N6
+\sDiffStatus[1][2]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[1][2]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[0][2]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[0][2]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[1][2]~regout\);
+
+-- Location: LC_X16_Y5_N4
+\sDiffStatus[2][2]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[2][2]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[1][2]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[1][2]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[2][2]~regout\);
+
+-- Location: LC_X16_Y5_N0
+\sDiffStatus[3][2]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[3][2]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[2][2]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[2][2]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[3][2]~regout\);
+
+-- Location: LC_X16_Y5_N2
+\sDiffStatus[4][2]\ : maxv_lcell
+-- Equation(s):
+-- \sDiffStatus[4][2]~regout\ = DFFEAS(GND, GLOBAL(\iCLK~combout\), GLOBAL(\inReset~combout\), , , \sDiffStatus[3][2]~regout\, , , VCC)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000",
+	operation_mode => "normal",
+	output_mode => "reg_only",
+	register_cascade_mode => "off",
+	sum_lutc_input => "datac",
+	synch_mode => "on")
+-- pragma translate_on
+PORT MAP (
+	clk => \iCLK~combout\,
+	datac => \sDiffStatus[3][2]~regout\,
+	aclr => \ALT_INV_inReset~combout\,
+	sload => VCC,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	regout => \sDiffStatus[4][2]~regout\);
+
+-- Location: PIN_107,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[0]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "input")
 -- pragma translate_on
 PORT MAP (
 	oe => GND,
-	padio => ww_iAddress(15));
+	padio => ww_iInputs(0),
+	combout => \iInputs~combout\(0));
 
--- Location: PIN_94,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[0]~I\ : maxv_io
+-- Location: PIN_121,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[1]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(1),
+	combout => \iInputs~combout\(1));
+
+-- Location: PIN_73,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[2]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(2),
+	combout => \iInputs~combout\(2));
+
+-- Location: PIN_93,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[3]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(3),
+	combout => \iInputs~combout\(3));
+
+-- Location: PIN_131,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[4]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(4),
+	combout => \iInputs~combout\(4));
+
+-- Location: PIN_50,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[5]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(5),
+	combout => \iInputs~combout\(5));
+
+-- Location: PIN_134,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[6]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(6),
+	combout => \iInputs~combout\(6));
+
+-- Location: PIN_140,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[7]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(7),
+	combout => \iInputs~combout\(7));
+
+-- Location: PIN_77,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[8]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(8),
+	combout => \iInputs~combout\(8));
+
+-- Location: PIN_98,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
+\iInputs[9]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "input")
+-- pragma translate_on
+PORT MAP (
+	oe => GND,
+	padio => ww_iInputs(9),
+	combout => \iInputs~combout\(9));
+
+-- Location: PIN_23,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[0]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => \oData[0]~reg0_regout\,
+	datain => \sDiffStatus[4][0]~regout\,
 	oe => VCC,
-	padio => ww_oData(0));
-
--- Location: PIN_112,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[1]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[1]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(1));
-
--- Location: PIN_97,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[2]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[2]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(2));
-
--- Location: PIN_42,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[3]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[3]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(3));
-
--- Location: PIN_52,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[4]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[4]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(4));
-
--- Location: PIN_53,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[5]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[5]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(5));
+	padio => ww_oInputStatus(0));
 
 -- Location: PIN_2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[6]~I\ : maxv_io
+\oInputStatus[1]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => \oData[6]~reg0_regout\,
+	datain => \sDiffStatus[4][1]~regout\,
 	oe => VCC,
-	padio => ww_oData(6));
+	padio => ww_oInputStatus(1));
 
--- Location: PIN_39,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[7]~I\ : maxv_io
+-- Location: PIN_91,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[2]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => \oData[7]~reg0_regout\,
+	datain => \sDiffStatus[4][2]~regout\,
 	oe => VCC,
-	padio => ww_oData(7));
-
--- Location: PIN_37,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[8]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[8]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(8));
-
--- Location: PIN_113,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[9]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[9]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(9));
-
--- Location: PIN_43,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[10]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[10]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(10));
-
--- Location: PIN_38,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[11]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[11]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(11));
-
--- Location: PIN_111,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[12]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[12]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(12));
-
--- Location: PIN_107,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[13]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[13]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(13));
-
--- Location: PIN_32,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[14]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[14]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(14));
-
--- Location: PIN_104,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oData[15]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => \oData[15]~reg0_regout\,
-	oe => VCC,
-	padio => ww_oData(15));
-
--- Location: PIN_59,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[0]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(0),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(0));
-
--- Location: PIN_122,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[1]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(1),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(1));
-
--- Location: PIN_61,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[2]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(2),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(2));
-
--- Location: PIN_29,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[3]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(3),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(3));
-
--- Location: PIN_121,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[4]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => ALT_INV_sPWMCONFIG1(4),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(4));
-
--- Location: PIN_127,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[5]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(5),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(5));
-
--- Location: PIN_3,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[6]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(6),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(6));
-
--- Location: PIN_5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[7]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(7),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(7));
-
--- Location: PIN_1,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[8]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(8),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(8));
-
--- Location: PIN_130,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[9]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(9),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(9));
-
--- Location: PIN_138,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[10]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(10),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(10));
-
--- Location: PIN_27,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[11]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(11),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(11));
-
--- Location: PIN_44,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[12]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => ALT_INV_sPWMCONFIG1(12),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(12));
-
--- Location: PIN_6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[13]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(13),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(13));
-
--- Location: PIN_7,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[14]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(14),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(14));
-
--- Location: PIN_114,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMCONFIG1[15]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMCONFIG1(15),
-	oe => VCC,
-	padio => ww_oPWMCONFIG1(15));
-
--- Location: PIN_51,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[0]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(0),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(0));
-
--- Location: PIN_132,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[1]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(1),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(1));
-
--- Location: PIN_101,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[2]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(2),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(2));
-
--- Location: PIN_13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[3]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(3),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(3));
-
--- Location: PIN_131,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[4]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(4),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(4));
-
--- Location: PIN_55,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[5]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => ALT_INV_sPWMPERIOD1(5),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(5));
-
--- Location: PIN_144,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[6]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(6),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(6));
-
--- Location: PIN_16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[7]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(7),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(7));
-
--- Location: PIN_24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[8]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(8),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(8));
-
--- Location: PIN_129,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[9]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(9),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(9));
-
--- Location: PIN_141,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[10]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(10),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(10));
-
--- Location: PIN_22,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[11]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(11),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(11));
-
--- Location: PIN_137,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[12]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(12),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(12));
-
--- Location: PIN_134,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[13]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => ALT_INV_sPWMPERIOD1(13),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(13));
-
--- Location: PIN_8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[14]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(14),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(14));
-
--- Location: PIN_103,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMPERIOD1[15]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMPERIOD1(15),
-	oe => VCC,
-	padio => ww_oPWMPERIOD1(15));
-
--- Location: PIN_117,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[0]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(0),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(0));
-
--- Location: PIN_57,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[1]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(1),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(1));
-
--- Location: PIN_98,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[2]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(2),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(2));
-
--- Location: PIN_45,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[3]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(3),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(3));
-
--- Location: PIN_49,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[4]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => ALT_INV_sPWMDUTY1(4),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(4));
-
--- Location: PIN_95,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[5]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => ALT_INV_sPWMDUTY1(5),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(5));
-
--- Location: PIN_4,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[6]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(6),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(6));
-
--- Location: PIN_40,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[7]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(7),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(7));
-
--- Location: PIN_142,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[8]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(8),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(8));
-
--- Location: PIN_123,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[9]~I\ : maxv_io
--- pragma translate_off
-GENERIC MAP (
-	operation_mode => "output")
--- pragma translate_on
-PORT MAP (
-	datain => sPWMDUTY1(9),
-	oe => VCC,
-	padio => ww_oPWMDUTY1(9));
+	padio => ww_oInputStatus(2));
 
 -- Location: PIN_48,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[10]~I\ : maxv_io
+\oInputStatus[3]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => sPWMDUTY1(10),
+	datain => GND,
 	oe => VCC,
-	padio => ww_oPWMDUTY1(10));
+	padio => ww_oInputStatus(3));
 
--- Location: PIN_41,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[11]~I\ : maxv_io
+-- Location: PIN_142,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[4]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => sPWMDUTY1(11),
+	datain => GND,
 	oe => VCC,
-	padio => ww_oPWMDUTY1(11));
+	padio => ww_oInputStatus(4));
 
--- Location: PIN_31,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[12]~I\ : maxv_io
+-- Location: PIN_137,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[5]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => ALT_INV_sPWMDUTY1(12),
+	datain => GND,
 	oe => VCC,
-	padio => ww_oPWMDUTY1(12));
+	padio => ww_oInputStatus(5));
 
--- Location: PIN_106,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[13]~I\ : maxv_io
+-- Location: PIN_97,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[6]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => ALT_INV_sPWMDUTY1(13),
+	datain => GND,
 	oe => VCC,
-	padio => ww_oPWMDUTY1(13));
+	padio => ww_oInputStatus(6));
 
--- Location: PIN_140,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[14]~I\ : maxv_io
+-- Location: PIN_66,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[7]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => sPWMDUTY1(14),
+	datain => GND,
 	oe => VCC,
-	padio => ww_oPWMDUTY1(14));
+	padio => ww_oInputStatus(7));
+
+-- Location: PIN_130,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[8]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(8));
+
+-- Location: PIN_113,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[9]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(9));
 
 -- Location: PIN_118,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
-\oPWMDUTY1[15]~I\ : maxv_io
+\oInputStatus[10]~I\ : maxv_io
 -- pragma translate_off
 GENERIC MAP (
 	operation_mode => "output")
 -- pragma translate_on
 PORT MAP (
-	datain => sPWMDUTY1(15),
+	datain => GND,
 	oe => VCC,
-	padio => ww_oPWMDUTY1(15));
+	padio => ww_oInputStatus(10));
+
+-- Location: PIN_49,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[11]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(11));
+
+-- Location: PIN_67,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[12]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(12));
+
+-- Location: PIN_122,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[13]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(13));
+
+-- Location: PIN_28,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[14]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(14));
+
+-- Location: PIN_14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputStatus[15]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputStatus(15));
+
+-- Location: PIN_106,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[0]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(0),
+	oe => VCC,
+	padio => ww_oInputs(0));
+
+-- Location: PIN_120,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[1]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(1),
+	oe => VCC,
+	padio => ww_oInputs(1));
+
+-- Location: PIN_74,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[2]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(2),
+	oe => VCC,
+	padio => ww_oInputs(2));
+
+-- Location: PIN_96,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[3]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(3),
+	oe => VCC,
+	padio => ww_oInputs(3));
+
+-- Location: PIN_129,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[4]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(4),
+	oe => VCC,
+	padio => ww_oInputs(4));
+
+-- Location: PIN_51,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[5]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(5),
+	oe => VCC,
+	padio => ww_oInputs(5));
+
+-- Location: PIN_132,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[6]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(6),
+	oe => VCC,
+	padio => ww_oInputs(6));
+
+-- Location: PIN_141,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[7]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(7),
+	oe => VCC,
+	padio => ww_oInputs(7));
+
+-- Location: PIN_76,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[8]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(8),
+	oe => VCC,
+	padio => ww_oInputs(8));
+
+-- Location: PIN_94,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[9]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iInputs~combout\(9),
+	oe => VCC,
+	padio => ww_oInputs(9));
+
+-- Location: PIN_133,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[10]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputs(10));
+
+-- Location: PIN_86,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[11]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iDiffInputs~combout\(4),
+	oe => VCC,
+	padio => ww_oInputs(11));
+
+-- Location: PIN_6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[12]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iDiffInputs~combout\(2),
+	oe => VCC,
+	padio => ww_oInputs(12));
+
+-- Location: PIN_27,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[13]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => \iDiffInputs~combout\(0),
+	oe => VCC,
+	padio => ww_oInputs(13));
+
+-- Location: PIN_38,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[14]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputs(14));
+
+-- Location: PIN_108,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 16mA
+\oInputs[15]~I\ : maxv_io
+-- pragma translate_off
+GENERIC MAP (
+	operation_mode => "output")
+-- pragma translate_on
+PORT MAP (
+	datain => GND,
+	oe => VCC,
+	padio => ww_oInputs(15));
 END structure;
 
 
