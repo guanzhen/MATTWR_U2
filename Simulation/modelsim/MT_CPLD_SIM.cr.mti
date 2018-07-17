@@ -16,12 +16,23 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity PWMMODULE_vhd_tst
 -- Compiling architecture PWMMODULE_arch of PWMMODULE_vhd_tst
 
-} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/constants.vhd
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/InputModule.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/InputModule.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling package constants
+-- Compiling entity INPUTMODULE
+-- Compiling architecture LOGIC of INPUTMODULE
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_QEMODULE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_QEMODULE.vht
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package COMMON
+-- Compiling entity QEMODULE_vhd_tst
+-- Compiling architecture QEMODULE_arch of QEMODULE_vhd_tst
 
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_SRAMIO_IOSPACE.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
@@ -69,6 +80,15 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity RESETMODULE_vhd_tst
 -- Compiling architecture RESETMODULE_arch of RESETMODULE_vhd_tst
 
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/QEModule.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/QEModule.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity QEMODULE
+-- Compiling architecture LOGIC of QEMODULE
+
 } {} {}} C:/Projects/Quartus/MT_CPLD_SVN/QuadDecToDirPulse.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_SVN/QuadDecToDirPulse.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
@@ -112,6 +132,16 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity TB_EBU_GEN
 -- Compiling architecture logic of TB_EBU_GEN
 -- Loading entity MOD_EBU
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_INPUTMODULE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_INPUTMODULE.vht
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package COMMON
+-- Compiling entity INPUTMODULE_vhd_tst
+-- Compiling architecture INPUTMODULE_arch of INPUTMODULE_vhd_tst
 
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_7SEG.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_7SEG.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014

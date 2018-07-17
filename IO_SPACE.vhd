@@ -47,9 +47,12 @@ PORT
   --7SEG Module
   oWrSEG7OUTPUT : OUT STD_LOGIC;
   iSEG7OUTPUT : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
-  --Input moudule
+  --Input Module
   iINPUTSTATUS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iINPUTS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  -- Output Module
+  oWrOUTPUTS : OUT STD_LOGIC;
+  iOUTPUTS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   --Reset Module : 
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
@@ -84,6 +87,7 @@ begin
     oWrQEMCONFIG2 <= '0';
     oWrQEMCOUNTERL2 <= '0';
     oWrQEMCOUNTERH2 <= '0';
+    oWrOUTPUTS <= '0';
   elsif falling_edge(inWrRdy) then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
@@ -99,7 +103,8 @@ begin
     oWrQEMCOUNTERH1 <= '0';
     oWrQEMCONFIG2 <= '0';
     oWrQEMCOUNTERL2 <= '0';
-    oWrQEMCOUNTERH2 <= '0';
+    oWrQEMCOUNTERH2 <= '0';    
+    oWrOUTPUTS <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
     when X"00" => oWrPWMCONFIG1 <= '1';
@@ -117,6 +122,7 @@ begin
     when X"13" => oWrQEMCONFIG2 <= '1';
     when X"14" => oWrQEMCOUNTERL2 <= '1';
     when X"15" => oWrQEMCOUNTERH2 <= '1';    
+    when X"60" => oWrOUTPUTS <= '1';
     when others =>
     end case;
   end if;
@@ -150,12 +156,13 @@ begin
     when X"14" => oData <= sQEMBUFFER2;
     when X"15" => 
       oData <= iQEMCOUNTER2(15 downto 0);
-      sQEMBUFFER1 <= iQEMCOUNTER2(ENC_WIDTH-1 downto 16);
+      sQEMBUFFER2 <= iQEMCOUNTER2(ENC_WIDTH-1 downto 16);
     when X"40" => oData <= iSEG7OUTPUT;
     when X"30" => oData <= iRESETCONFIG;
     when X"31" => oData <= iRESETPERIOD;
     when X"50" => oData <= iINPUTSTATUS;
     when X"51" => oData <= iINPUTS;
+    when X"60" => oData <= iOUTPUTS;
     when others =>  oData <= (others=>'0');
     end case;
   end if;
