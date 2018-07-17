@@ -53,6 +53,13 @@ PORT
   -- Output Module
   oWrOUTPUTS : OUT STD_LOGIC;
   iOUTPUTS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  -- Sync Module
+  oWrSYNCONFIG1 : OUT STD_LOGIC;  
+  oWrSYNCONFIG2 : OUT STD_LOGIC;  
+  iSYNCONFIG1 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNCONFIG2 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNDIR : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNVALUE : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0); 
   --Reset Module : 
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
@@ -88,6 +95,8 @@ begin
     oWrQEMCOUNTERL2 <= '0';
     oWrQEMCOUNTERH2 <= '0';
     oWrOUTPUTS <= '0';
+    oWrSYNCONFIG1 <= '0';
+    oWrSYNCONFIG2 <= '0';
   elsif falling_edge(inWrRdy) then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
@@ -105,6 +114,8 @@ begin
     oWrQEMCOUNTERL2 <= '0';
     oWrQEMCOUNTERH2 <= '0';    
     oWrOUTPUTS <= '0';
+    oWrSYNCONFIG1 <= '0';
+    oWrSYNCONFIG2 <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
     when X"00" => oWrPWMCONFIG1 <= '1';
@@ -123,7 +134,9 @@ begin
     when X"14" => oWrQEMCOUNTERL2 <= '1';
     when X"15" => oWrQEMCOUNTERH2 <= '1';    
     when X"60" => oWrOUTPUTS <= '1';
-    when others =>
+    when X"70" => oWrSYNCONFIG1 <= '1';
+    when X"71" => oWrSYNCONFIG2 <= '1';
+    when others => null;
     end case;
   end if;
 end process IO_SPACE_PROC_WR;
@@ -163,6 +176,10 @@ begin
     when X"50" => oData <= iINPUTSTATUS;
     when X"51" => oData <= iINPUTS;
     when X"60" => oData <= iOUTPUTS;
+    when X"70" => oData <= iSYNCONFIG1;
+    when X"71" => oData <= iSYNCONFIG2;
+    when X"72" => oData <= iSYNDIR;
+    when X"73" => oData <= iSYNVALUE;
     when others =>  oData <= (others=>'0');
     end case;
   end if;
