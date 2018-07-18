@@ -8,14 +8,6 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity SYNCMODULE
 -- Compiling architecture LOGIC of SYNCMODULE
 
-} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Hex7Seg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Hex7Seg.vhd
-Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity LED7SEGMODULE
--- Compiling architecture A_Hex7Seg of LED7SEGMODULE
-
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_PWMMODULE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_PWMMODULE.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
