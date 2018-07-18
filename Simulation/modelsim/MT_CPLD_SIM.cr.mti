@@ -26,6 +26,15 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Compiling entity PWMMODULE_vhd_tst
 -- Compiling architecture PWMMODULE_arch of PWMMODULE_vhd_tst
 
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/MTCPLD_Top.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package constants
+-- Compiling entity MTCPLD_Top
+-- Compiling architecture logic of MTCPLD_Top
+
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/InputModule.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/InputModule.vhd
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package STANDARD
@@ -79,6 +88,15 @@ Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
 -- Loading package std_logic_1164
 -- Compiling entity MOD_EBU
 -- Compiling architecture async_mux of MOD_EBU
+
+} {} {}} C:/Projects/Quartus/MT_CPLD_GIT/IO_SPACE.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/IO_SPACE.vhd
+Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package constants
+-- Compiling entity IO_SPACE
+-- Compiling architecture A_IO_SPACE of IO_SPACE
 
 } {} {}} C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_RESETMODULE.vht {1 {vcom -work work -2002 -explicit -stats=none C:/Projects/Quartus/MT_CPLD_GIT/Simulation/modelsim/TB_RESETMODULE.vht
 Model Technology ModelSim ALTERA vcom 10.3c Compiler 2014.09 Sep 20 2014
