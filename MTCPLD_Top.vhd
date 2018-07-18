@@ -108,7 +108,7 @@ signal sPWMOUT2      : STD_LOGIC;
 --7SEGMENT Led module signals
 signal sWrSEG7OUTPUT : STD_LOGIC;
 signal sSeg7En       : STD_LOGIC;
-signal sSEG7OUTPUT   : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+signal sSEG7OUTPUT   : STD_LOGIC_VECTOR(7 DOWNTO 0);
 -- Reset Module signals
 signal sWrConfig     : STD_LOGIC;
 signal sWrPeriod     : STD_LOGIC;
@@ -357,12 +357,12 @@ sDiffInputs <= iDiffInput(NUM_OF_DIFFINPUTS*2-1 downto 0);
 oRSTIN <= sOutputs(NUM_OF_OUTPUTS-1); -- top bit is reset signal for EEPROM.
 oOutput <= sOutputs(NUM_OF_OUTPUTS-2 downto 0); -- rest of the bits are for outputs.
 sSyncSelc <= iSYNC_SEL2 & iSYNC_SEL1;
-oCPLD_DEBUG <= (nWR,nRD,nADV,nCS);
+oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
 oLED_PWM <= sPWMOUT1;
 oLED_FPGA_OK <= sPWMOUT1;
 oLED_ENC_ERR <= sPWMOUT2;
-
 oPWM2 <= sPWMOUT2;
+
 SYNCMOD : SYNCMODULE
 	PORT MAP (
 -- list connections between master ports and signals
@@ -507,7 +507,7 @@ MOD_IOSPACE : IO_SPACE
   iQEMCONFIG2 => sQEMCONFIG2,
   iQEMCOUNTER2 => sQEMCOUNTER2,
   oWrSEG7OUTPUT => sWrSEG7OUTPUT,
-  iSEG7OUTPUT => sSEG7OUTPUT,
+  iSEG7OUTPUT => B"0000_0000" & sSEG7OUTPUT,
   iINPUTSTATUS => sInputStatus,
   iINPUTS => sInputs,
   oWrOUTPUTS => sWrOutput,
