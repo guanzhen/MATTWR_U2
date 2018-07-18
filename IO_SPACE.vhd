@@ -60,6 +60,9 @@ PORT
   iSYNCONFIG2 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iSYNDIR : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iSYNVALUE : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0); 
+  -- Serial Mux Module
+  oWrSERIALMUXCONFIG : OUT STD_LOGIC;  
+  iSERIALMUXCONFIG : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);   
   --Reset Module : 
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
@@ -97,6 +100,7 @@ begin
     oWrOUTPUTS <= '0';
     oWrSYNCONFIG1 <= '0';
     oWrSYNCONFIG2 <= '0';
+    oWrSERIALMUXCONFIG <= '0';
   elsif falling_edge(inWrRdy) then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
@@ -116,6 +120,7 @@ begin
     oWrOUTPUTS <= '0';
     oWrSYNCONFIG1 <= '0';
     oWrSYNCONFIG2 <= '0';
+    oWrSERIALMUXCONFIG <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
     when X"00" => oWrPWMCONFIG1 <= '1';
@@ -125,6 +130,7 @@ begin
     when X"04" => oWrPWMPERIOD2 <= '1';
     when X"05" => oWrPWMDUTY2 <= '1';
     when X"40" => oWrSEG7OUTPUT <= '1';    
+    when X"20" => oWrSERIALMUXCONFIG <= '1';
     when X"30" => oWrRESETCONFIG <= '1';
     when X"31" => oWrRESETPERIOD <= '1';
     when X"10" => oWrQEMCONFIG1 <= '1';
@@ -171,6 +177,7 @@ begin
       oData <= iQEMCOUNTER2(15 downto 0);
       sQEMBUFFER2 <= iQEMCOUNTER2(ENC_WIDTH-1 downto 16);
     when X"40" => oData <= iSEG7OUTPUT;
+    when X"20" => oData <= iSERIALMUXCONFIG;
     when X"30" => oData <= iRESETCONFIG;
     when X"31" => oData <= iRESETPERIOD;
     when X"50" => oData <= iINPUTSTATUS;

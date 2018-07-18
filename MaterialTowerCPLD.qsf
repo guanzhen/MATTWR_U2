@@ -194,17 +194,10 @@ set_location_assignment PIN_81 -to iInput[7]
 set_location_assignment PIN_84 -to iInput[8]
 set_location_assignment PIN_85 -to iInput[9]
 set_location_assignment PIN_86 -to iInput[10]
-set_location_assignment PIN_88 -to iInput[11]
+set_location_assignment PIN_87 -to iInput[11]
 set_location_assignment PIN_18 -to iCLK
-set_location_assignment PIN_89 -to iInput[12]
-set_location_assignment PIN_91 -to iInput[13]
-set_location_assignment PIN_93 -to iInput[14]
-set_location_assignment PIN_94 -to iInput[15]
-set_location_assignment PIN_95 -to iInput[16]
-set_location_assignment PIN_96 -to iInput[17]
-set_location_assignment PIN_97 -to iInput[18]
-set_location_assignment PIN_98 -to iInput[19]
-set_location_assignment PIN_101 -to iInput[20]
+set_location_assignment PIN_88 -to iInput[12]
+set_location_assignment PIN_89 -to iInput[13]
 set_location_assignment PIN_67 -to iENC_A3
 set_location_assignment PIN_70 -to iENC_A4
 set_location_assignment PIN_68 -to iENC_B3
@@ -222,8 +215,6 @@ set_location_assignment PIN_42 -to ioSYNC[3]
 set_location_assignment PIN_43 -to ioSYNC[4]
 set_location_assignment PIN_44 -to ioSYNC[5]
 set_location_assignment PIN_45 -to ioSYNC[6]
-set_location_assignment PIN_37 -to iSYNC_SEL[0]
-set_location_assignment PIN_38 -to iSYNC_SEL[1]
 set_location_assignment PIN_144 -to oOutput[14]
 set_location_assignment PIN_51 -to oCPLD_DEBUG[3]
 set_location_assignment PIN_50 -to oCPLD_DEBUG[2]
@@ -235,6 +226,7 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[1]
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to oCPLD_DEBUG[0]
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name VHDL_FILE SerialMux.vhd
 set_global_assignment -name VHDL_FILE SyncModule.vhd
 set_global_assignment -name VHDL_FILE InputModule.vhd
 set_global_assignment -name VHDL_FILE QEModule.vhd
@@ -246,3 +238,13 @@ set_global_assignment -name VHDL_FILE constants.vhd
 set_global_assignment -name VHDL_FILE MTCPLD_Top.vhd
 set_global_assignment -name VHDL_FILE SRAM_IO.vhd
 set_global_assignment -name VHDL_FILE IO_SPACE.vhd
+set_location_assignment PIN_37 -to iSYNC_SEL1
+set_location_assignment PIN_38 -to iSYNC_SEL2
+set_location_assignment PIN_91 -to iDiffInput[0]
+set_location_assignment PIN_93 -to iDiffInput[1]
+set_location_assignment PIN_94 -to iDiffInput[2]
+set_location_assignment PIN_95 -to iDiffInput[3]
+set_location_assignment PIN_96 -to iDiffInput[4]
+set_location_assignment PIN_97 -to iDiffInput[5]
+set_location_assignment PIN_98 -to iDiffInput[6]
+set_location_assignment PIN_101 -to iDiffInput[7]

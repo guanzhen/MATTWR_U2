@@ -93,7 +93,7 @@ BEGIN
   wait for 100 ns;
   inReset <= '1';                      
 WAIT;                                                       
-END PROCESS init;                   
+END PROCESS init;
 
 always : PROCESS
 procedure SetInputBit (constant bitval : natural range 9 downto 0) is
@@ -164,7 +164,6 @@ BEGIN
   wait for 100 ns;
   inWrSYNCONFIG2 <= '0';  
   -- 
-  -- 
   oSync(6 downto 5) <= "00";
   SetInputBit(0);
   wait for 100 ns;
@@ -176,7 +175,7 @@ BEGIN
   wait for 100 ns;
   SetInputBit(4);
   wait for 100 ns;
-   oSync(6 downto 5) <= "01";
+  oSync(6 downto 5) <= "01";
   SetInputBit(5);
   wait for 100 ns;
   SetInputBit(6);
