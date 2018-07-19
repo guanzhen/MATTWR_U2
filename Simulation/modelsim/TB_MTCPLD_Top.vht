@@ -266,187 +266,239 @@ GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => iSW_RESET_CPLD );
   
 
 TESTSRAM : PROCESS is
+variable TestCase : integer range 0 to 10 := 10;
+PROCEDURE WRITEREG (constant REGNUM : std_logic_vector(DATAWIDTH-1 downto 0);constant WRDATA : std_logic_vector(DATAWIDTH-1 downto 0)) is
 BEGIN
-
+  sEBU_iRdWr <='0'; -- Set to write mode.
+  sEBU_iRst <= '0';
+  wait for 100 ns;
+  sEBU_iRst <= '1';
+  -- Write PWM Config
+  sEBU_iAdd <= REGNUM;
+  sEBU_iData <= WRDATA;
+  wait until iWR = '1';
+END PROCEDURE;
+BEGIN
+-- disable this simulation
+TestCase := 1;
 --defaults
---------------------------------------------------------
--- WRITE 1
---------------------------------------------------------
-sEBU_iRdWr <='0'; -- Set to write mode.
-sEBU_iRst <= '0';
-wait for 100 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(0, sEBU_iAdd'length));
-sEBU_iData <= X"0011";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
+case TestCase is 
+  when 1 =>  
+  WRITEREG(X"0001",X"0010");
+  WRITEREG(X"0002",X"0008");
+  WRITEREG(X"0000",X"0001");
+  WRITEREG(X"0004",X"0020");
+  WRITEREG(X"0005",X"0010");
+  WRITEREG(X"0003",X"0001");
+  wait;
+when 2 =>
+  --------------------------------------------------------
+  -- WRITE 1
+  --------------------------------------------------------
+  sEBU_iRdWr <='0'; -- Set to write mode.
+  sEBU_iRst <= '0';
+  wait for 100 ns;
+  sEBU_iRst <= '1';
+  -- Write: address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(0, sEBU_iAdd'length));
+  sEBU_iData <= X"0011";
+  wait until iWR = '0';
+  --write : command phase
+  wait until iWR = '1';
 
---------------------------------------------------------
--- WRITE 2
---------------------------------------------------------
-sEBU_iRst <= '0';
-wait for 100 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(1, sEBU_iAdd'length));
-sEBU_iData <= X"0022";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
+  --------------------------------------------------------
+  -- WRITE 2
+  --------------------------------------------------------
+  sEBU_iRst <= '0';
+  wait for 100 ns;
+  sEBU_iRst <= '1';
+  -- Write: address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(1, sEBU_iAdd'length));
+  sEBU_iData <= X"0022";
+  wait until iWR = '0';
+  --write : command phase
+  wait until iWR = '1';
 
-wait until rising_edge(iCLK);
-wait for 300 ns;
---------------------------------------------------------
--- WRITE 3
---------------------------------------------------------
+  wait until rising_edge(iCLK);
+  wait for 300 ns;
+  --------------------------------------------------------
+  -- WRITE 3
+  --------------------------------------------------------
 
-sEBU_iRst <= '0';
-wait for 100 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(2, sEBU_iAdd'length));
-sEBU_iData <= X"0033";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
-wait for 200 ns;
+  sEBU_iRst <= '0';
+  wait for 100 ns;
+  sEBU_iRst <= '1';
+  -- Write: address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(2, sEBU_iAdd'length));
+  sEBU_iData <= X"0033";
+  wait until iWR = '0';
+  --write : command phase
+  wait until iWR = '1';
+  wait for 200 ns;
 
---------------------------------------------------------
--- WRITE 4
---------------------------------------------------------
+  --------------------------------------------------------
+  -- WRITE 4
+  --------------------------------------------------------
 
-sEBU_iRst <= '0';
-wait for 100 ns;
-sEBU_iRst <= '1';
--- Write: address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(3, sEBU_iAdd'length));
-sEBU_iData <= X"0044";
-wait until iWR = '0';
---write : command phase
-wait until iWR = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  sEBU_iRst <= '0';
+  wait for 100 ns;
+  sEBU_iRst <= '1';
+  -- Write: address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(3, sEBU_iAdd'length));
+  sEBU_iData <= X"0044";
+  wait until iWR = '0';
+  --write : command phase
+  wait until iWR = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
---------------------------------------------------------
--- READ no WAIT 1
---------------------------------------------------------
--- Read
-sEBU_ienwait <= '0';
-sEBU_iRdWr <='1';
-nRESET <= '0';
-sEBU_iRst<= '0';
-wait for 100 ns;
-sEBU_iRst<= '1';
-nRESET <= '1';
--- Read : address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(0, sEBU_iAdd'length));
-sEBU_iData <= (others => 'Z');
-wait until iRD = '0';
--- read : command phase
-wait until iRD = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  --------------------------------------------------------
+  -- READ no WAIT 1
+  --------------------------------------------------------
+  -- Read
+  sEBU_ienwait <= '0';
+  sEBU_iRdWr <='1';
+  nRESET <= '0';
+  sEBU_iRst<= '0';
+  wait for 100 ns;
+  sEBU_iRst<= '1';
+  nRESET <= '1';
+  -- Read : address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(0, sEBU_iAdd'length));
+  sEBU_iData <= (others => 'Z');
+  wait until iRD = '0';
+  -- read : command phase
+  wait until iRD = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
---------------------------------------------------------
--- READ no WAIT 2
---------------------------------------------------------
--- Read
-sEBU_ienwait <= '0';
-sEBU_iRdWr <='1';
-sEBU_iRst<= '0';
-wait for 100 ns;
-sEBU_iRst<= '1';
--- Read : address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(1, sEBU_iAdd'length));
-sEBU_iData <= (others => 'Z');
-wait until iRD = '0';
--- read : command phase
-wait until iRD = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  --------------------------------------------------------
+  -- READ no WAIT 2
+  --------------------------------------------------------
+  -- Read
+  sEBU_ienwait <= '0';
+  sEBU_iRdWr <='1';
+  sEBU_iRst<= '0';
+  wait for 100 ns;
+  sEBU_iRst<= '1';
+  -- Read : address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(1, sEBU_iAdd'length));
+  sEBU_iData <= (others => 'Z');
+  wait until iRD = '0';
+  -- read : command phase
+  wait until iRD = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
---------------------------------------------------------
--- READ no WAIT 3
---------------------------------------------------------
--- Read
-sEBU_ienwait <= '0';
-sEBU_iRdWr <='1';
-sEBU_iRst<= '0';
-wait for 600 ns;
-sEBU_iRst<= '1';
--- Read : address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(2, sEBU_iAdd'length));
-sEBU_iData <= (others => 'Z');
-wait until iRD = '0';
--- read : command phase
-wait until iRD = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  --------------------------------------------------------
+  -- READ no WAIT 3
+  --------------------------------------------------------
+  -- Read
+  sEBU_ienwait <= '0';
+  sEBU_iRdWr <='1';
+  sEBU_iRst<= '0';
+  wait for 600 ns;
+  sEBU_iRst<= '1';
+  -- Read : address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(2, sEBU_iAdd'length));
+  sEBU_iData <= (others => 'Z');
+  wait until iRD = '0';
+  -- read : command phase
+  wait until iRD = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
---------------------------------------------------------
--- READ no WAIT 1
---------------------------------------------------------
--- Read
-sEBU_ienwait <= '0';
-sEBU_iRdWr <='1';
-sEBU_iRst<= '0';
-wait for 100 ns;
-sEBU_iRst<= '1';
--- Read : address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(3, sEBU_iAdd'length));
-sEBU_iData <= (others => 'Z');
-wait until iRD = '0';
--- read : command phase
-wait until iRD = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  --------------------------------------------------------
+  -- READ no WAIT 1
+  --------------------------------------------------------
+  -- Read
+  sEBU_ienwait <= '0';
+  sEBU_iRdWr <='1';
+  sEBU_iRst<= '0';
+  wait for 100 ns;
+  sEBU_iRst<= '1';
+  -- Read : address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(3, sEBU_iAdd'length));
+  sEBU_iData <= (others => 'Z');
+  wait until iRD = '0';
+  -- read : command phase
+  wait until iRD = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
---------------------------------------------------------
--- READ no WAIT 2
---------------------------------------------------------
--- Read
-sEBU_ienwait <= '0';
-sEBU_iRdWr <='1';
-sEBU_iRst<= '0';
-wait for 100 ns;
-sEBU_iRst<= '1';
--- Read : address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(4, sEBU_iAdd'length));
-sEBU_iData <= (others => 'Z');
-wait until iRD = '0';
--- read : command phase
-wait until iRD = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  --------------------------------------------------------
+  -- READ no WAIT 2
+  --------------------------------------------------------
+  -- Read
+  sEBU_ienwait <= '0';
+  sEBU_iRdWr <='1';
+  sEBU_iRst<= '0';
+  wait for 100 ns;
+  sEBU_iRst<= '1';
+  -- Read : address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(4, sEBU_iAdd'length));
+  sEBU_iData <= (others => 'Z');
+  wait until iRD = '0';
+  -- read : command phase
+  wait until iRD = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
---------------------------------------------------------
--- READ no WAIT 3
---------------------------------------------------------
--- Read
-sEBU_ienwait <= '0';
-sEBU_iRdWr <='1';
-sEBU_iRst<= '0';
-wait for 300 ns;
-sEBU_iRst<= '1';
--- Read : address phase
-sEBU_iAdd <= std_logic_vector(to_unsigned(5, sEBU_iAdd'length));
-sEBU_iData <= (others => 'Z');
-wait until iRD = '0';
--- read : command phase
-wait until iRD = '1';
-wait for 100 ns;
-sEBU_iRst <= 'Z';
-wait for 200 ns;
+  --------------------------------------------------------
+  -- READ no WAIT 3
+  --------------------------------------------------------
+  -- Read
+  sEBU_ienwait <= '0';
+  sEBU_iRdWr <='1';
+  sEBU_iRst<= '0';
+  wait for 300 ns;
+  sEBU_iRst<= '1';
+  -- Read : address phase
+  sEBU_iAdd <= std_logic_vector(to_unsigned(5, sEBU_iAdd'length));
+  sEBU_iData <= (others => 'Z');
+  wait until iRD = '0';
+  -- read : command phase
+  wait until iRD = '1';
+  wait for 100 ns;
+  sEBU_iRst <= 'Z';
+  wait for 200 ns;
 
+wait; --END case 2
+when others =>
+end case;
 wait; -- last line. DO NOT MOVE!
 END PROCESS TESTSRAM;
+
+TESTINPUTS : PROCESS IS
+BEGIN
+iSYNC_SEL1 <= '0';
+iSYNC_SEL2 <= '0';
+iENC_A3 <= '0';
+iENC_A4 <= '0';
+iENC_B3 <= '0';
+iENC_B4 <= '0';
+iENC_N3 <= '0';
+iENC_N4 <= '0';
+iPWM_LED <= '0';
+iLED_OVERCURRENT <= '0';
+iRFID1_RXD <= '0';
+iRFID2_RXD <= '0';
+iRFID_MUX_SEL <= '0';
+iRFID_TXD <= '0';
+iInput <= (others => '0');
+iDiffInput <= (others => '0');
+iDIP_SWITCH <= (others => '0');
+ioSYNC <= (others => 'H');
+sEBU_iRdWr <='0'; -- Set to write mode.
+sEBU_iRst <= '0';
+wait until nRESET = '1';
+wait;
+END PROCESS;
 
 END MTCPLD_Top_arch;

@@ -23,20 +23,27 @@ add wave -noupdate -radix decimal -childformat {{/tb_mtcpld_top/i1/IO_ADDR(15) -
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/nWrRdy
 add wave -noupdate -divider SRAM
 add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/nCS
-add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/sReadState
 add wave -noupdate /tb_mtcpld_top/i1/MOD_SRAMIO/sWrState
 add wave -noupdate -divider PWM
-add wave -noupdate /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMCONFIG
-add wave -noupdate /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMPERIOD
-add wave -noupdate /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMDUTY
-add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMCONFIG
-add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMPERIOD
-add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMDUTY
+add wave -noupdate -group PWM1 /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMCONFIG
+add wave -noupdate -group PWM1 /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMPERIOD
+add wave -noupdate -group PWM1 /tb_mtcpld_top/i1/MOD_PWM1/iWrPWMDUTY
+add wave -noupdate -group PWM1 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMCONFIG
+add wave -noupdate -group PWM1 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMPERIOD
+add wave -noupdate -group PWM1 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM1/oPWMDUTY
+add wave -noupdate -group PWM1 /tb_mtcpld_top/i1/MOD_PWM1/oPWM
+add wave -noupdate -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/iWrPWMCONFIG
+add wave -noupdate -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/iWrPWMPERIOD
+add wave -noupdate -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/iWrPWMDUTY
+add wave -noupdate -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/sPWMCONFIG
+add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/sPWMPERIOD
+add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/sDUTY
+add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/oPWM
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ps} 0} {{Cursor 2} {5985276 ps} 0}
+WaveRestoreCursors {{Cursor 1} {32285696 ps} 0} {{Cursor 2} {9092784 ps} 0}
 quietly wave cursor active 2
-configure wave -namecolwidth 250
-configure wave -valuecolwidth 55
+configure wave -namecolwidth 278
+configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
 configure wave -snapdistance 10
@@ -49,4 +56,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {12600 ns}
+WaveRestoreZoom {0 ps} {36750 ns}
