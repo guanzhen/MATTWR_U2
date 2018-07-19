@@ -62,7 +62,7 @@ else
 end if;
 end process;
 
-PWM_G : process (iCLK,sEN,inRESET,iWrPWMDUTY,iWrPWMPERIOD) is
+PWM_G : process (iCLK,sEN,inRESET,sPWMState,iWrPWMDUTY,iWrPWMPERIOD,sPWMPERIOD) is
 variable vDutyCnt : natural range 0 to 2**PWMBITWIDTH-1;
 variable vCounter : natural range 0 to 2**PWMBITWIDTH-1;
 begin
