@@ -99,6 +99,10 @@ BEGIN
   wait for 100 ns;
   iWrConfig <= '0';
   wait until oReset = '1';
+  iWrConfig <= '1';
+  iData <= X"0000";
+  wait for 100 ns;
+  iWrConfig <= '0';  
   wait for 1000 ns;
   iWrPeriod <= '1';
   iData <= X"0001";
@@ -109,5 +113,10 @@ BEGIN
   wait for 100 ns;
   iWrConfig <= '0';
   wait until oReset = '1';
+  iWrConfig <= '1';
+  iData <= X"0000";
+  wait for 100 ns;
+  iWrConfig <= '0';
+  
 END PROCESS always;                                          
 END RESETMODULE_arch;
