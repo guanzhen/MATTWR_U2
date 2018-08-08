@@ -150,6 +150,7 @@ COMPONENT IO_SPACE
 	PORT (
 	iCLK      : IN STD_LOGIC;
 	inRESET   : IN STD_LOGIC;
+  inCS      : IN STD_LOGIC;
 	inWrRdy   : IN STD_LOGIC;
 	inRdRdy   : IN STD_LOGIC;
 	iAddress  : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
@@ -358,12 +359,22 @@ sDiffInputs <= iDiffInput(NUM_OF_DIFFINPUTS*2-1 downto 0);
 oRSTIN <= sOutputs(NUM_OF_OUTPUTS-1); -- top bit is reset signal for EEPROM.
 oOutput <= sOutputs(NUM_OF_OUTPUTS-2 downto 0); -- rest of the bits are for outputs.
 sSyncSelc <= iSYNC_SEL2 & iSYNC_SEL1;
-oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
+
 oLED_PWM <= sPWMOUT1;
 oLED_FPGA_OK <= sPWMOUT1;
 oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
+
+DEBUG : process (iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,ioData,iSW_RESET_CPLD) is
+begin
+ case iDIP_SWITCH is
+ when B"0000" =>  oCPLD_DEBUG <= (iWR,iSW_RESET_CPLD,iADV,iCS_FPGA); 
+ when B"0001" =>  oCPLD_DEBUG <= iCS_FPGA & ioData(2 downto 0); 
+ when B"0010" =>  oCPLD_DEBUG <= iCS_FPGA & ioData(6 downto 4); 
+ when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
+ end case; 
+end process;
 
 SYNCMOD : SYNCMODULE
 	PORT MAP (
@@ -481,6 +492,7 @@ MOD_IOSPACE : IO_SPACE
 -- list connections between master ports and signals
 	iAddress => IO_ADDR,
 	iCLK => iCLK,
+  inCS => nCS,
 	iData => IO_DAT_WR,
 	inRdRdy => iRD,
 	inRESET => nRESET,

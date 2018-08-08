@@ -179,10 +179,10 @@ END COMPONENT;
 BEGIN
 
 ebu_clk : MOD_CLKGEN 
-GENERIC MAP (period => 10 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sEBUCLK );
+GENERIC MAP (period => 7 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => sEBUCLK );
 
 cpld_clk : MOD_CLKGEN
-GENERIC MAP (period => 50 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => iCLK );
+GENERIC MAP (period => 63 ns ) PORT MAP ( reset => nRESET, clk_en => '1', clk_o => iCLK );
 
 reset : MOD_RESET
 GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => nRESET );
@@ -193,8 +193,8 @@ GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => iSW_RESET_CPLD );
   ebu_gen : entity work.mod_ebu(async_mux)
   GENERIC MAP (
   addrc => 1, addhold=> 0 , cmd_delay => 0, 
-  waitrdc => 6,
-  waitwrd => 6, 
+  waitrdc => 9,
+  waitwrd => 9, 
   datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
   datawidth => DATAWIDTH, addwidth => DATAWIDTH )
   PORT MAP (
@@ -318,8 +318,13 @@ case TestCase is
   READREG('0',X"03");
   WRITEREG(X"31",X"0001");
   WRITEREG(X"30",X"0001");  
-  WRITEREG(X"01",X"0010");  
-  
+  WRITEREG(X"01",X"0016");  
+  WRITEREG(X"01",X"0011");    
+  WRITEREG(X"01",X"0012");    
+  READREG('0',X"02");
+  READREG('0',X"05");
+  READREG('0',X"01");
+  READREG('0',X"04");
   wait;
 when 2 =>
 

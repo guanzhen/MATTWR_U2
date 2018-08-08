@@ -13,10 +13,11 @@ GENERIC
 PORT 
   (
 	iCLK      : IN STD_LOGIC;
-	inRESET   : IN STD_LOGIC;   
+	inRESET   : IN STD_LOGIC;
+	inCS      : IN STD_LOGIC;
 	inWrRdy   : IN STD_LOGIC;
-  inRdRdy   : IN STD_LOGIC;  
-  iAddress  : IN std_logic_vector(BUSWIDTH-1 downto 0);
+  inRdRdy   : IN STD_LOGIC;
+	iAddress  : IN std_logic_vector(BUSWIDTH-1 downto 0);
   iData     : IN std_logic_vector(BUSWIDTH-1 downto 0);
   oData     : OUT std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   
@@ -77,10 +78,10 @@ signal sQEMBUFFER2 : STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
 BEGIN
 
 -- Set the respective write signal based on address input.
-IO_SPACE_PROC_WR : process (inRESET,inWrRdy)
+IO_SPACE_PROC_WR : process (inRESET,inWrRdy,inCS)
 variable vAddress : std_logic_vector (7 downto 0);
 begin
-  if (inRESET = '0') then
+  if (inRESET = '0' or inCS = '1') then
     vAddress := (others => '0');
     oWrPWMCONFIG1 <= '0';
     oWrPWMPERIOD1 <= '0';
@@ -101,7 +102,7 @@ begin
     oWrSYNCONFIG1 <= '0';
     oWrSYNCONFIG2 <= '0';
     oWrSERIALMUXCONFIG <= '0';
-  elsif falling_edge(inWrRdy) then
+  elsif falling_edge(inWrRdy) and inCS = '0' then
     -- Set all write signals to inactive state.
     oWrPWMCONFIG1 <= '0';
     oWrPWMPERIOD1 <= '0';
@@ -112,6 +113,7 @@ begin
     oWrSEG7OUTPUT <= '0';
     oWrRESETCONFIG <= '0';
     oWrRESETPERIOD <= '0';
+    oWrQEMCONFIG1 <= '0';
     oWrQEMCOUNTERL1 <= '0';
     oWrQEMCOUNTERH1 <= '0';
     oWrQEMCONFIG2 <= '0';
@@ -148,7 +150,7 @@ begin
 end process IO_SPACE_PROC_WR;
   
 -- Direct the respective data to read to EBU interface
-IO_SPACE_PROC_RD : process (inRESET,iCLK,inRdRdy)
+IO_SPACE_PROC_RD : process (inRESET,iCLK,inRdRdy,inCS)
 variable vAddress : std_logic_vector (7 downto 0);
 begin
   if (inRESET = '0') then
@@ -156,7 +158,7 @@ begin
     sQEMBUFFER1 <= (others => '0');
     sQEMBUFFER2 <= (others => '0');
     oData <= (others => '0');
-  elsif falling_edge(inRdRdy) then
+  elsif falling_edge(inRdRdy) and inCS = '0' then
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is			
     -- PWMCONFIG1
