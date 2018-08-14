@@ -3,6 +3,10 @@ use ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 use std.standard;
 
+LIBRARY work;
+USE work.constants.all;
+
+
 entity PWMMODULE is
 GENERIC
   (
@@ -47,8 +51,8 @@ PWM_CTRL : process(iData,inRESET,iCLK,iWrPWMCONFIG,iWrPWMDUTY,iWrPWMPERIOD) is
 begin
 if (inRESET = '0')then
   sPWMCONFIG <= (others=> '0');
-  sPWMPERIOD <= (others=> '0');
-  sDUTY      <= (others=> '0');
+  sPWMPERIOD <= std_logic_vector(to_unsigned(DEFAULT_PWM_PERIOD,sPWMPERIOD'length));
+  sDUTY <= std_logic_vector(to_unsigned(DEFAULT_PWM_DUTY,sDUTY'length));
 else
   if rising_edge(iWrPWMCONFIG) then
     sPWMCONFIG <= iData(2 downto 0);
