@@ -5,7 +5,7 @@ ENTITY LED7SEGMODULE IS
 
 GENERIC (
 DATAWIDTH : integer := 16;
-INACTIVESTATE : std_logic := '0'
+INACTIVESTATE : std_logic := '1'
 );
 PORT 
 (
