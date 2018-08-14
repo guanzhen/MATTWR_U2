@@ -27,7 +27,7 @@ end SRAM_IO;
 
 architecture A_SRAM_IO of SRAM_IO is
 type readstate is ( idle,read_start,read_end );
-type writestate is ( idle,write_start1,write_start2,write_end );
+type writestate is ( idle,write_start1,write_start2,write_start3,write_end );
 
 signal sRdState : readstate:= idle;
 signal sWrState : writestate:= idle;
@@ -48,8 +48,6 @@ end process SRAM_ADDR_PROC;
 ----------------------
 -- READ SIGNALS
 ----------------------
-
---DATA <= IO_DAT_RD when sRdState = read_start else (others => 'Z');
 SRAM_RD_DATA_PROC: process (nRESET, iCLK,nCS,nRD, IO_DAT_RD) is
 begin
   if nRESET = '0' or nCS = '1' then
@@ -74,31 +72,42 @@ end process SRAM_RD_STATE_PROC;
 ----------------------
 -- WRITE SIGNALS
 ----------------------
+-- SRAM_WR_DATA_PROC: process (nRESET, nCS, nWR, DATA) is
+-- begin
+  -- if nRESET = '0' then
+    -- IO_DAT_WR <= (others => '0');
+  -- elsif falling_edge(nWR) and nCS = '0' then
+    -- IO_DAT_WR <= DATA;
+  -- end if;  
+-- end process SRAM_WR_DATA_PROC;
+
+-- -- nWrite state machine
+-- SRAM_WR_STATE_PROC: process (nRESET, nCS, iCLK,nWR,sWrState) is
+-- begin
+  -- if nRESET = '0' or nCS = '1' then
+    -- sWrState <= idle;
+  -- elsif nWR = '0' and nCS = '0' and sWrState = idle then
+    -- sWrState <= write_start1;
+  -- elsif rising_edge(iCLK) then
+    -- if sWrState = write_start1 then
+      -- sWrState <= write_start2;
+	 -- elsif sWrState = write_start2 then
+      -- sWrState <= write_end;
+    -- end if;
+  -- end if;
+-- end process SRAM_WR_STATE_PROC;
+
+--SRAM_WR_SIG : nWrRdy <= '0' when sWrState = write_start2 else '1';
+
 SRAM_WR_DATA_PROC: process (nRESET, nCS, nWR, DATA) is
 begin
   if nRESET = '0' then
     IO_DAT_WR <= (others => '0');
-  elsif falling_edge(nWR) and nCS = '0' then
+  else
     IO_DAT_WR <= DATA;
-  end if;   
+  end if;  
 end process SRAM_WR_DATA_PROC;
 
--- nWrite state machine
-SRAM_WR_STATE_PROC: process (nRESET, nCS, iCLK,nWR,sWrState) is
-begin
-  if nRESET = '0' or nCS = '1' then
-    sWrState <= idle;
-  elsif nWR = '0' and sWrState = idle then
-    sWrState <= write_start1;
-  elsif rising_edge(iCLK) then
-    if sWrState = write_start1 then
-      sWrState <= write_start2;
-	 elsif sWrState = write_start2 then
-      sWrState <= write_end;
-    end if;
-  end if;
-end process SRAM_WR_STATE_PROC;
-
-SRAM_WR_SIG : nWrRdy <= '0' when sWrState = write_start2 else '1';
+SRAM_WR_SIG : nWrRdy <= nWR;
 
 END architecture A_SRAM_IO;
