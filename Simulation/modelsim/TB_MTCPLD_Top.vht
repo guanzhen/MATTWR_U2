@@ -194,7 +194,7 @@ GENERIC MAP (delay => 100 ns) PORT MAP ( reset_o => iSW_RESET_CPLD );
   GENERIC MAP (
   addrc => 1, addhold=> 0 , cmd_delay => 0, 
   waitrdc => 9,
-  waitwrd => 9, 
+  waitwrd => 15, 
   datac => 0 , rdrecovc => 0, wrrecovc => 0 ,
   datawidth => DATAWIDTH, addwidth => DATAWIDTH )
   PORT MAP (
@@ -306,27 +306,22 @@ TestCase := 1;
 case TestCase is 
   when 1 =>  
   -- setup PWM1
-  WRITEREG(X"01",X"1010");
-  READREG('1',X"01");
-  WRITEREG(X"02",X"1008");
-  READREG('1',X"02");
-  WRITEREG(X"00",X"0001");
+  WRITEREG(X"00",X"0004");
+  WRITEREG(X"01",X"07D0");
+  WRITEREG(X"02",X"03E8");
+  WRITEREG(X"00",X"0005");
   -- setup PWM2
-  WRITEREG(X"40",X"00C9");
-  WRITEREG(X"04",X"1020");
-  READREG('1',X"04");
-  WRITEREG(X"05",X"1011");
-  READREG('1',X"05");
-  WRITEREG(X"03",X"0001");
+  WRITEREG(X"03",X"0004");
+  WRITEREG(X"04",X"03E8");
+  WRITEREG(X"05",X"01F4");
+  WRITEREG(X"03",X"0005");
   -- read PWM1 config
   READREG('1',X"00");
   -- read PWM2 config
   READREG('1',X"03");
   WRITEREG(X"31",X"0001");
   WRITEREG(X"30",X"0001");  
-  WRITEREG(X"01",X"0016");  
-  WRITEREG(X"01",X"0011");    
-  WRITEREG(X"01",X"0012");    
+
   READREG('1',X"02");
   READREG('1',X"05");
   READREG('1',X"01");
