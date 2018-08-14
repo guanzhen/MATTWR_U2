@@ -6,14 +6,14 @@ add wave -noupdate /tb_mtcpld_top/ebu_gen/state
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/iAddress
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/iData
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/oData
-add wave -noupdate -radix decimal /tb_mtcpld_top/ebu_gen/ioData
+add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/ioData
 add wave -noupdate -divider CPLD
 add wave -noupdate /tb_mtcpld_top/i1/iSW_RESET_CPLD
 add wave -noupdate /tb_mtcpld_top/i1/iCLK
 add wave -noupdate /tb_mtcpld_top/i1/iCS_FPGA
 add wave -noupdate /tb_mtcpld_top/i1/iADV
 add wave -noupdate /tb_mtcpld_top/i1/iRD
-add wave -noupdate /tb_mtcpld_top/i1/nWAIT
+add wave -noupdate /tb_mtcpld_top/i1/oWAIT
 add wave -noupdate /tb_mtcpld_top/i1/iWR
 add wave -noupdate -radix decimal /tb_mtcpld_top/i1/ioData
 add wave -noupdate -divider INTERFACE
@@ -41,8 +41,8 @@ add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/sDU
 add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/oPWM
 add wave -noupdate /tb_mtcpld_top/i1/oRST
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {5069367 ps} 0} {{Cursor 2} {1529550 ps} 0}
-quietly wave cursor active 2
+WaveRestoreCursors {{Cursor 1} {2319637 ps} 0} {{Cursor 2} {156630 ps} 0}
+quietly wave cursor active 1
 configure wave -namecolwidth 300
 configure wave -valuecolwidth 50
 configure wave -justifyvalue left
@@ -57,4 +57,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {7875 ns}
+WaveRestoreZoom {2259306 ps} {4359306 ps}

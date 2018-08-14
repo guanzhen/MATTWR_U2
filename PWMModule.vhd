@@ -38,8 +38,8 @@ signal sDEFOP     : STD_LOGIC_VECTOR(1 downto 0):= (others => '0');
 begin
 
 oPWMCONFIG <= B"0000_0000_0000_0" & sPWMCONFIG;
-oPWMPERIOD <= std_logic_vector(sPWMPERIOD);
-oPWMDUTY <= std_logic_vector(sDUTY);
+oPWMPERIOD <= sPWMPERIOD;
+oPWMDUTY <= sDUTY;
 S_EN : sEN <= sPWMCONFIG(0); -- Enable bit
 S_DEFOP : sDEFOP <= sPWMCONFIG(2 downto 1);
 

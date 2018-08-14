@@ -279,6 +279,7 @@ BEGIN
   sEBU_iData <= WRDATA;
   wait until iWR = '1';
   sEBU_iData <= (others => 'Z');
+  sEBU_iAdd <= (others => '0');
 END PROCEDURE;
 
 PROCEDURE READREG(constant en_wait: std_logic; constant REGNUM : std_logic_vector(7 downto 0)) is
@@ -294,7 +295,7 @@ BEGIN
   wait until iRD = '0';
   -- read : command phase
   wait until iRD = '1';
-
+  sEBU_iAdd <= (others => '0');
 END PROCEDURE;
 BEGIN
 -----------------------------------
@@ -305,26 +306,31 @@ TestCase := 1;
 case TestCase is 
   when 1 =>  
   -- setup PWM1
-  WRITEREG(X"01",X"0010");
-  WRITEREG(X"02",X"0008");
-  WRITEREG(X"00",X"0005");
+  WRITEREG(X"01",X"1010");
+  READREG('1',X"01");
+  WRITEREG(X"02",X"1008");
+  READREG('1',X"02");
+  WRITEREG(X"00",X"0001");
   -- setup PWM2
-  WRITEREG(X"04",X"0020");
-  WRITEREG(X"05",X"0010");
+  WRITEREG(X"40",X"00C9");
+  WRITEREG(X"04",X"1020");
+  READREG('1',X"04");
+  WRITEREG(X"05",X"1011");
+  READREG('1',X"05");
   WRITEREG(X"03",X"0001");
   -- read PWM1 config
-  READREG('0',X"00");
+  READREG('1',X"00");
   -- read PWM2 config
-  READREG('0',X"03");
+  READREG('1',X"03");
   WRITEREG(X"31",X"0001");
   WRITEREG(X"30",X"0001");  
   WRITEREG(X"01",X"0016");  
   WRITEREG(X"01",X"0011");    
   WRITEREG(X"01",X"0012");    
-  READREG('0',X"02");
-  READREG('0',X"05");
-  READREG('0',X"01");
-  READREG('0',X"04");
+  READREG('1',X"02");
+  READREG('1',X"05");
+  READREG('1',X"01");
+  READREG('1',X"04");
   wait;
 when 2 =>
 

@@ -366,14 +366,21 @@ oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
 
-DEBUG : process (iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,ioData,iSW_RESET_CPLD) is
+DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL) is
 begin
- case iDIP_SWITCH is
- when B"0000" =>  oCPLD_DEBUG <= (iWR,iSW_RESET_CPLD,iADV,iCS_FPGA); 
- when B"0001" =>  oCPLD_DEBUG <= iCS_FPGA & ioData(2 downto 0); 
- when B"0010" =>  oCPLD_DEBUG <= iCS_FPGA & ioData(6 downto 4); 
- when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
- end case; 
+  if (nRESET = '0') then
+    oCPLD_DEBUG <= "0000";
+  elsif rising_edge(iCLK) then
+    case iDIP_SWITCH is
+    when B"0000" =>  oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA); 
+    when B"0001" =>  oCPLD_DEBUG <= IO_DAT_WR(3 downto 0); 
+    when B"0010" =>  oCPLD_DEBUG <= IO_DAT_WR(7 downto 4);
+    when B"0100" =>  oCPLD_DEBUG <= IO_DAT_RD(3 downto 0); 
+    when B"0101" =>  oCPLD_DEBUG <= IO_DAT_RD(7 downto 4); 
+    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
+    when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
+    end case;
+  end if;
 end process;
 
 SYNCMOD : SYNCMODULE
