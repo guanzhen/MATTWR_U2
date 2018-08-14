@@ -169,15 +169,15 @@ begin
     when X"04" => oData <= iPWMPERIOD2;
     when X"05" => oData <= iPWMDUTY2;
     when X"10" => oData <= iQEMCONFIG1;
-    when X"11" => oData <= sQEMBUFFER1;
-    when X"12" => 
-      oData <= iQEMCOUNTER1(15 downto 0);
+    when X"11" => 
       sQEMBUFFER1 <= iQEMCOUNTER1(ENC_WIDTH-1 downto 16);
+      oData <= iQEMCOUNTER1(15 downto 0);
+    when X"12" => oData <= sQEMBUFFER1;
     when X"13" => oData <= iQEMCONFIG2;
-    when X"14" => oData <= sQEMBUFFER2;
-    when X"15" => 
-      oData <= iQEMCOUNTER2(15 downto 0);
+    when X"14" => 
       sQEMBUFFER2 <= iQEMCOUNTER2(ENC_WIDTH-1 downto 16);
+      oData <= iQEMCOUNTER2(15 downto 0);
+    when X"15" => oData <= sQEMBUFFER2;
     when X"40" => oData <= iSEG7OUTPUT;
     when X"20" => oData <= iSERIALMUXCONFIG;
     when X"30" => oData <= iRESETCONFIG;
