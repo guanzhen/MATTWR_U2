@@ -89,7 +89,7 @@ signal IO_ADDR       : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal IO_DAT_WR     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal IO_DAT_RD     : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
 signal nWrRdy        : STD_LOGIC;
-
+signal sReset        : STD_LOGIC;
 -- PWM modules signals
 signal sWrPWMCONFIG1 : STD_LOGIC;
 signal sWrPWMPERIOD1 : STD_LOGIC;
@@ -364,9 +364,15 @@ oLED_PWM <= sPWMOUT1;
 oLED_FPGA_OK <= sPWMOUT1;
 oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
+oRST <= sReset;
+--oRST <= '1';
+
 sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
 
-DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL) is
+DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,
+                  ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,
+                  iSYNC_SEL2,iRFID_MUX_SEL,sPWMOUT2,sPWMOUT1,sWrPWMCONFIG1,sWrPWMCONFIG2
+                  ) is
 begin
   if (nRESET = '0') then
     oCPLD_DEBUG <= "0000";
@@ -375,9 +381,10 @@ begin
     when B"0000" =>  oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA); 
     when B"0001" =>  oCPLD_DEBUG <= IO_DAT_WR(3 downto 0); 
     when B"0010" =>  oCPLD_DEBUG <= IO_DAT_WR(7 downto 4);
+    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
     when B"0100" =>  oCPLD_DEBUG <= IO_DAT_RD(3 downto 0); 
     when B"0101" =>  oCPLD_DEBUG <= IO_DAT_RD(7 downto 4); 
-    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
+    when B"0110" =>  oCPLD_DEBUG <= (sPWMOUT2,sPWMOUT1,sReset,sWrPWMCONFIG2);
     when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
     end case;
   end if;
@@ -591,7 +598,7 @@ MOD_RESET : RESETMODULE
 	inReset => nRESET,
 	iWrConfig => sWrConfig,
 	iWrPeriod => sWrPeriod,
-	oReset => oRST,
+	oReset => sReset,
 	oResetConfig => sResetConfig,
 	oResetPeriod => sResetPeriod
 	);
