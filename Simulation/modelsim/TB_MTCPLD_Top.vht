@@ -349,7 +349,7 @@ BEGIN
   iENC_N4 <= '0';
   iPWM_LED <= '0';
   iLED_OVERCURRENT <= '0';
-  iRFID1_RXD <= '0';
+  iRFID1_RXD <= '0';d
   iRFID2_RXD <= '0';
   iRFID_MUX_SEL <= '0';
   iRFID_TXD <= '0';
@@ -357,8 +357,6 @@ BEGIN
   iDiffInput <= (others => '0');
   iDIP_SWITCH <= (others => '0');
   ioSYNC <= (others => 'H');
-  sEBU_iRdWr <='0'; -- Set to write mode.
-  sEBU_iRst <= '0';
 wait until nRESET = '1';
 wait;
 END PROCESS;
