@@ -25,7 +25,7 @@ PORT
 ); 
 END;
 
-ARCHITECTURE LOGIC OF RESETMODULE IS 
+ARCHITECTURE LOGIC OF RESETMODULE IS
 SIGNAL sResetConfig   : STD_LOGIC; -- holds reset configuration
 SIGNAL sResetPeriod   : STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0); -- holds reset configuration
 SIGNAL sEnable        : STD_LOGIC:= '0';
@@ -55,20 +55,24 @@ BEGIN
 END PROCESS;
 
 COUNTER : PROCESS(inReset,iCLK,sCounter1USOF,iWrPeriod,sResetPeriod,sEnable)
+TYPE ResetState is (RESET_START,RESET_END);
 variable vCounter : integer range 0 to MAXCOUNT-1:= 0;
 variable vPeriod  : integer range 0 to MAXCOUNT-1:= 0;
+variable vState : ResetState := RESET_START;
 BEGIN
   if (inReset = '0' or sEnable = '0') then -- reset internal counter on reset or write to period counter
     vCounter := 0;
     sReset <= '0';
+	 vState := RESET_START;
   else
-    if rising_edge(iCLK) and sEnable = '1' then -- increment counter when module is enabled
+    if rising_edge(iCLK) and sEnable = '1' and vState = RESET_START then -- increment counter when module is enabled
       sReset <= '1';                                   -- set output reset signal
       if (sCounter1USOF = '1') then 
         vCounter := vCounter + 1;
         vPeriod := to_integer(unsigned(sResetPeriod(DATAWIDTH-1 downto 0))); 
         if (vCounter = vPeriod) then
           sReset <= '0';                                   -- set output reset signal
+			 vState := RESET_END;									  -- hold output high until config register is reset
         end if;
       end if;
     end if;  
@@ -85,7 +89,8 @@ BEGIN
     sCounter1USOF <= '0'; 
     vCounter1US := vCounter1US + 1;
   end if;  
-    if vCounter1US = COUNTSPERUS then
+  
+  if vCounter1US = COUNTSPERUS then
     sCounter1USOF <= '1';
     vCounter1US := 0;
   end if;  
