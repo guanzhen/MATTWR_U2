@@ -30,7 +30,7 @@ END;
   
 ARCHITECTURE LOGIC OF SYNCMODULE IS
 --SIGNAL sSYNVALUE : std_logic_vector(NUMOFSYNC-1 downto 0):=(others => '0');
-SIGNAL sSYNDIR : std_logic_vector(NUMOFSYNC-1 downto 0);
+SIGNAL sSYNCDIR : std_logic_vector(NUMOFSYNC-1 downto 0);
 SIGNAL sSYNCONFIG : std_logic_vector(31 downto 0);
 SIGNAL sSYNCOUT : std_logic_vector(NUMOFSYNC-1 downto 0);
 CONSTANT PADDING : std_logic_vector(BUSWIDTH-NUMOFSYNC-1 downto 0):=(others =>'0');
@@ -39,13 +39,13 @@ BEGIN
 --sSYNVALUE <= oSync; -- inputs from sync interface
 oSYNCONFIG1 <= sSYNCONFIG(15 downto 0) ;
 oSYNCONFIG2 <= sSYNCONFIG(31 downto 16);
-oSYNDIR <= PADDING & sSYNDIR; --output of syn direction register
+oSYNDIR <= PADDING & sSYNCDIR; --output of syn direction register
 --oSync <= sSYNCOUT; -- output to sync interfaces
 oSYNVALUE <= PADDING & to_x01(ioSync); -- output of synvalue register 
 
 SYNCO_GEN : for I in 0 to NUMOFSYNC-1 generate
 begin
-  ioSync(I) <= sSYNCOUT(I) when sSYNDIR(I) = '0' else 'Z' ;
+  ioSync(I) <= sSYNCOUT(I) when sSYNCDIR(I) = '0' else 'Z' ;
 end generate;
 
 WRITECTRL : PROCESS (inRESET,inWrSYNCONFIG1,inWrSYNCONFIG2,iData)
@@ -65,17 +65,17 @@ END PROCESS;
 SYNCDIR : PROCESS (inRESET,iCLK,inSyncSel) 
 BEGIN
   if (inRESET = '0') then
-    sSYNDIR <= (others=>'0');
+    sSYNCDIR <= (others=>'1');
   elsif rising_edge(iCLK) then
     case inSyncSel is
-    when "00" =>  sSYNDIR <= "1100000";
-    when "01" =>  sSYNDIR <= "0011111";
-    when others =>  sSYNDIR <= "0000000";
+    when "00" =>  sSYNCDIR <= "0011111"; --Main Board
+    when "10" =>  sSYNCDIR <= "1100000"; --Sub Board
+    when others =>  sSYNCDIR <= "0000000";
     end case;  
   end if;
 END PROCESS;
 
-INPUTSYNCMUX : PROCESS(inRESET,iCLK,sSYNCONFIG,sSYNDIR,iInputs)
+INPUTSYNCMUX : PROCESS(inRESET,iCLK,sSYNCONFIG,sSYNCDIR,iInputs)
 subtype IONUM is INTEGER range 0 to 2**4-1;
 variable temp : IONUM;
 BEGIN
