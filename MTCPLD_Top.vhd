@@ -348,13 +348,16 @@ COMPONENT INPUTMODULE
 	);
 END COMPONENT;
 
+SIGNAL DIP_SWITCH_BUFF,sig_a,sig_b,sig_c,sig_d : STD_LOGIC_VECTOR(3 downto 0);
 BEGIN
 
 nRESET  <= iSW_RESET_CPLD;
 nCS     <= iCS_FPGA;
 sSeg7En <= iPWM_LED;
 o7SEGLED <= sSEG7OUTPUT;
-siInputs <= iInput(NUM_OF_INPUTS-1 downto 0);
+--siInputs <= iInput(NUM_OF_INPUTS-1 downto 0);
+siInputs(3 downto 0) <= DIP_SWITCH_BUFF;
+siInputs(NUM_OF_INPUTS-1 downto  4) <= iInput(NUM_OF_INPUTS-1 downto 4);
 sDiffInputs <= iDiffInput(NUM_OF_DIFFINPUTS*2-1 downto 0);
 oRSTIN <= sOutputs(NUM_OF_OUTPUTS-1); -- top bit is reset signal for EEPROM.
 oOutput <= sOutputs(NUM_OF_OUTPUTS-2 downto 0); -- rest of the bits are for outputs.
@@ -365,7 +368,7 @@ oLED_FPGA_OK <= sPWMOUT1;
 oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 oRST <= sReset;
---oRST <= '1';
+
 
 sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
 
@@ -374,21 +377,43 @@ DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,
                   iSYNC_SEL2,iRFID_MUX_SEL,sPWMOUT2,sPWMOUT1,sWrPWMCONFIG1,sWrPWMCONFIG2
                   ) is
 begin
-  if (nRESET = '0') then
-    oCPLD_DEBUG <= "0000";
-  elsif rising_edge(iCLK) then
-    case iDIP_SWITCH is
-    when B"0000" =>  oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA); 
-    when B"0001" =>  oCPLD_DEBUG <= IO_DAT_WR(3 downto 0); 
-    when B"0010" =>  oCPLD_DEBUG <= IO_DAT_WR(7 downto 4);
-    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
-    when B"0100" =>  oCPLD_DEBUG <= IO_DAT_RD(3 downto 0); 
-    when B"0101" =>  oCPLD_DEBUG <= IO_DAT_RD(7 downto 4); 
-    when B"0110" =>  oCPLD_DEBUG <= (sPWMOUT2,sPWMOUT1,sReset,sWrPWMCONFIG2);
-    when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
-    end case;
-  end if;
+--  if (nRESET = '0') then
+--    --oCPLD_DEBUG <= "0000";
+--  elsif rising_edge(iCLK) then
+----    case iDIP_SWITCH is 
+----    when B"0000" =>  oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA); 
+----    when B"0001" =>  oCPLD_DEBUG <= IO_DAT_WR(3 downto 0); 
+----    when B"0010" =>  oCPLD_DEBUG <= IO_DAT_WR(7 downto 4);
+----    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
+----    when B"0100" =>  oCPLD_DEBUG <= IO_DAT_RD(3 downto 0); 
+----    when B"0101" =>  oCPLD_DEBUG <= IO_DAT_RD(7 downto 4); 
+----    when B"0110" =>  oCPLD_DEBUG <= (sPWMOUT2,sPWMOUT1,sReset,sWrPWMCONFIG2);
+----    when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
+----    end case;
+--  end if;
+
+oCPLD_DEBUG <= (others => 'Z');
+    
 end process;
+
+
+DIP_SWITCH_DEBOUNCE : PROCESS(iCLK,nRESET,iDIP_SWITCH) is
+BEGIN
+  if nRESET = '0' then
+    sig_a <= "0000";
+    sig_b <= "0000";
+    sig_c <= "0000";
+    sig_d <= "0000";
+    DIP_SWITCH_BUFF <= "0000";
+  elsif rising_edge(iCLK) then
+    sig_a <= iDIP_SWITCH;
+    sig_b <= sig_a;
+    sig_c <= sig_b;
+    sig_d <= sig_c;
+    DIP_SWITCH_BUFF <= sig_d;
+  end if;
+END PROCESS;
+
 
 SYNCMOD : SYNCMODULE
 	PORT MAP (

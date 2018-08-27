@@ -20,7 +20,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 14.1.0 Build 186 12/03/2014 SJ Full Version"
 
-## DATE    "Tue Aug 14 14:21:58 2018"
+## DATE    "Mon Aug 20 11:13:00 2018"
 
 ##
 ## DEVICE  "5M1270ZT144C5"
@@ -59,6 +59,7 @@ create_clock -name {oWrPWMPERIOD2} -period 14.000 -waveform { 0.000 7.000 } [get
 create_clock -name {oWrRESETPERIOD} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrRESETPERIOD}]
 create_clock -name {oWrRESETCONFIG} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrRESETCONFIG}]
 
+
 #**************************************************************
 # Create Generated Clock
 #**************************************************************
@@ -81,6 +82,38 @@ create_clock -name {oWrRESETCONFIG} -period 14.000 -waveform { 0.000 7.000 } [ge
 # Set Input Delay
 #**************************************************************
 
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[0]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[0]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[1]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[1]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[2]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[2]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[3]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[3]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[4]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[4]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[5]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[5]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[6]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[6]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[7]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[7]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[8]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[8]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[9]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[9]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[10]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[10]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[11]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[11]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[12]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[12]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[13]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[13]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[14]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[14]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iADV}]  3.500 [get_ports {ioData[15]}]
+set_input_delay -add_delay  -clock_fall -clock [get_clocks {iWR}]  3.500 [get_ports {ioData[15]}]
 
 
 #**************************************************************
@@ -110,7 +143,6 @@ create_clock -name {oWrRESETCONFIG} -period 14.000 -waveform { 0.000 7.000 } [ge
 #**************************************************************
 # Set Maximum Delay
 #**************************************************************
-
 
 
 
