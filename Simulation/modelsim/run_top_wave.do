@@ -35,6 +35,7 @@ add wave -noupdate -expand -group PWM1 /tb_mtcpld_top/i1/MOD_PWM1/oPWM
 add wave -noupdate -expand -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/iWrPWMCONFIG
 add wave -noupdate -expand -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/iWrPWMPERIOD
 add wave -noupdate -expand -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/iWrPWMDUTY
+add wave -noupdate -expand -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/oPWMCONFIG
 add wave -noupdate -expand -group PWM2 /tb_mtcpld_top/i1/MOD_PWM2/sPWMCONFIG
 add wave -noupdate -expand -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/sPWMPERIOD
 add wave -noupdate -expand -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/MOD_PWM2/sDUTY
@@ -45,7 +46,7 @@ add wave -noupdate -expand -group 7Seg -radix hexadecimal /tb_mtcpld_top/i1/MOD_
 add wave -noupdate -expand -group Reset /tb_mtcpld_top/i1/MOD_RESET/iWrPeriod
 add wave -noupdate -expand -group Reset -radix hexadecimal /tb_mtcpld_top/i1/MOD_RESET/sResetPeriod
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {3288550 ps} 0} {{Cursor 2} {1722137 ps} 0}
+WaveRestoreCursors {{Cursor 1} {0 ps} 0} {{Cursor 2} {435849 ps} 0}
 quietly wave cursor active 2
 configure wave -namecolwidth 244
 configure wave -valuecolwidth 94

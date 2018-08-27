@@ -297,11 +297,21 @@ BEGIN
   wait until iRD = '1';
   sEBU_iAdd <= (others => '0');
 END PROCEDURE;
+
+PROCEDURE SETDIP(constant DATA : std_logic_vector(3 downto 0)) is
+BEGIN
+ wait until rising_edge(iCLK);
+ iDIP_SWITCH <= DATA;
+ wait until rising_edge(iCLK);
+END PROCEDURE;
+
 BEGIN
 -----------------------------------
 -- Test starts here
 -----------------------------------
-TestCase := 1;
+iDIP_SWITCH <= "0000";
+ioSYNC <= (others => 'Z');
+TestCase := 3;
 --defaults
 case TestCase is 
   when 1 =>  
@@ -326,8 +336,29 @@ case TestCase is
   READREG('1',X"05");
   READREG('1',X"01");
   READREG('1',X"04");
-  wait;
+  TestCase := 2;
+  --wait;
 when 2 =>
+  TestCase := 3;
+when 3 => -- Test Sync module
+  WRITEREG(X"70",X"3210");
+  SETDIP("0001");
+  SETDIP("0011");
+  SETDIP("0100");
+  SETDIP("1100");
+  WRITEREG(X"71",X"3210");
+  SETDIP("1001");
+  SETDIP("1011");
+  SETDIP("1100");
+  SETDIP("0011");
+  READREG('1',X"72");
+  READREG('1',X"73");
+  ioSYNC(5) <= '1';
+  wait until rising_edge(iCLK);
+  ioSYNC(5) <= '0';
+  ioSYNC(6) <= '1';
+  wait until rising_edge(iCLK);
+  ioSYNC(6) <= '0';
 
 wait; --END case 2
 when others =>
@@ -340,7 +371,7 @@ END PROCESS TESTSRAM;
 TESTINPUTS : PROCESS IS
 BEGIN
   iSYNC_SEL1 <= '0';
-  iSYNC_SEL2 <= '0';
+  iSYNC_SEL2 <= '1';
   iENC_A3 <= '0';
   iENC_A4 <= '0';
   iENC_B3 <= '0';
@@ -349,13 +380,12 @@ BEGIN
   iENC_N4 <= '0';
   iPWM_LED <= '0';
   iLED_OVERCURRENT <= '0';
-  iRFID1_RXD <= '0';d
+  iRFID1_RXD <= '0';
   iRFID2_RXD <= '0';
   iRFID_MUX_SEL <= '0';
   iRFID_TXD <= '0';
   iInput <= (others => '0');
   iDiffInput <= (others => '0');
-  iDIP_SWITCH <= (others => '0');
   ioSYNC <= (others => 'H');
 wait until nRESET = '1';
 wait;
