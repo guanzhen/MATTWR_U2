@@ -1,11 +1,14 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
+LIBRARY work;
+USE work.constants.all;
+
 ENTITY INPUTMODULE IS
 
 GENERIC (
 DATAWIDTH : natural := 16;
-SINGLE_INPUTS : natural := 10;
+SINGLE_INPUTS : natural := NUM_OF_INPUTS;
 FILTER : natural := 5;     -- number of cycles to FILTER Diffential inputs
 DIFF_INPUTS : natural := 3
 );
@@ -34,7 +37,7 @@ DIFF3H <= iDiffInputs(5);
 DIFF2H <= iDiffInputs(3);
 DIFF1H <= iDiffInputs(1);
 
-oInputs <= B"00" & DIFF3H & DIFF2H & DIFF1H & "0" & iInputs;
+oInputs <= DIFF3H & DIFF2H & DIFF1H & iInputs;
 oInputStatus <= X"000" & B"0" & sDiffStatus;
 
 -- Monitor the differential inputs, to determine if there is error in status.

@@ -222,7 +222,7 @@ COMPONENT SYNCMODULE
 	PORT (
 	iCLK : IN STD_LOGIC;
 	iData : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	iInputs : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
+	iInputs : IN STD_LOGIC_VECTOR(NUM_OF_INPUTS-1 DOWNTO 0);
 	inRESET : IN STD_LOGIC;
 	inSyncSel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 	inWrSYNCONFIG1 : IN STD_LOGIC;
@@ -355,9 +355,7 @@ nRESET  <= iSW_RESET_CPLD;
 nCS     <= iCS_FPGA;
 sSeg7En <= iPWM_LED;
 o7SEGLED <= sSEG7OUTPUT;
---siInputs <= iInput(NUM_OF_INPUTS-1 downto 0);
-siInputs(3 downto 0) <= DIP_SWITCH_BUFF;
-siInputs(NUM_OF_INPUTS-1 downto  4) <= iInput(NUM_OF_INPUTS-1 downto 4);
+siInputs <= iInput(NUM_OF_INPUTS-1 downto 0);
 sDiffInputs <= iDiffInput(NUM_OF_DIFFINPUTS*2-1 downto 0);
 oRSTIN <= sOutputs(NUM_OF_OUTPUTS-1); -- top bit is reset signal for EEPROM.
 oOutput <= sOutputs(NUM_OF_OUTPUTS-2 downto 0); -- rest of the bits are for outputs.
