@@ -1,4 +1,4 @@
-/* Quartus II 64-Bit Version 14.1.0 Build 186 12/03/2014 SJ Full Version */
+/* Quartus II 64-Bit Version 14.1.1 Build 190 01/19/2015 SJ Full Version */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
