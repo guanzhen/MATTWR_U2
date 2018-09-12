@@ -82,6 +82,7 @@ ENTITY MTCPLD_Top IS
 END MTCPLD_Top;
 
 ARCHITECTURE logic OF MTCPLD_Top IS 
+-- signal inCLKBUF1,inCLKBUF2, inCLK : STD_LOGIC := '1';
 signal nRESET        : STD_LOGIC := '1';                                             
 signal nCS           : STD_LOGIC := '1';                                                
 signal nWAIT         : STD_LOGIC := '1';                                             
@@ -145,6 +146,9 @@ SIGNAL sSYNCONFIG2 : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 -- SERIALMUX module
 SIGNAL sWrSERIALMUXCONFIG : STD_LOGIC;
 SIGNAL sSERIALMUXCONFIG : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+-- TIMERMODULE
+SIGNAL sTimermilli : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+SIGNAL sTimersec : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 COMPONENT IO_SPACE
 	PORT (
@@ -195,8 +199,9 @@ COMPONENT IO_SPACE
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
   iRESETCONFIG  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
-  iRESETPERIOD  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
-
+  iRESETPERIOD  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+  iTimersec   : IN std_logic_vector(31 downto 0):= (others => '0');
+  iTimermilli   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
 	);
 END COMPONENT;
 
@@ -348,6 +353,27 @@ COMPONENT INPUTMODULE
 	);
 END COMPONENT;
 
+COMPONENT TIMERMODULE is
+	generic
+	(
+  DATAWIDTH   : natural := DATAWIDTH;
+  MAX_COUNT_WIDTH   : natural := 30;
+  COUNTS_PER_MS : integer := 16000000;   -- 16000000: 16MHz iCLK : 16,000,000 counts = 1mS
+  COUNTS_PER_SEC : integer := 1000    -- 1000: 1000 ms = 1s
+	);
+	port
+	(
+    -- Input ports
+    iCLK         : IN STD_LOGIC;
+    inRESET      : IN STD_LOGIC;   
+    iData        : IN STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
+    -- Output ports
+    oTimersec   : OUT std_logic_vector(31 downto 0):= (others => '0');
+    oTimermilli   : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+	);
+END COMPONENT;
+
+
 SIGNAL DIP_SWITCH_BUFF,sig_a,sig_b,sig_c,sig_d : STD_LOGIC_VECTOR(3 downto 0);
 BEGIN
 
@@ -367,8 +393,15 @@ oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 oRST <= sReset;
 
-
 sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
+-- CLKBUFFER : process (iCLK,inCLKBUF1,inCLKBUF2)is 
+-- begin
+  -- if rising_edge(iCLK) then 
+    -- inCLKBUF1 <= iCLK;
+    -- inCLKBUF2 <= inCLKBUF1;
+    -- inCLK <= inCLKBUF2;
+  -- end if;
+-- end process;
 
 DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,
                   ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,
@@ -412,6 +445,15 @@ BEGIN
   end if;
 END PROCESS;
 
+TIMERMOD : TIMERMODULE
+  GENERIC MAP (  DATAWIDTH =>  DATAWIDTH,  COUNTS_PER_MS =>  10, COUNTS_PER_SEC => 10 )
+  PORT MAP (
+  iCLK => iCLK,
+  iData => IO_DAT_WR,
+  inRESET => nRESET,
+  oTimermilli => sTimermilli,
+  oTimersec => sTimersec
+  );
 
 SYNCMOD : SYNCMODULE
 	PORT MAP (
@@ -574,7 +616,9 @@ MOD_IOSPACE : IO_SPACE
   oWrRESETCONFIG => sWrConfig,
   oWrRESETPERIOD => sWrPeriod,
   iRESETCONFIG => sResetConfig,
-  iRESETPERIOD => sResetPeriod   
+  iRESETPERIOD => sResetPeriod,
+  iTimersec => sTimersec,
+  iTimermilli => sTimermilli 
 	);  
 
 MOD_PWM1 : PWMMODULE

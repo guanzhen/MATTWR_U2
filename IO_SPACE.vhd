@@ -68,13 +68,17 @@ PORT
   oWrRESETCONFIG : OUT STD_LOGIC;
   oWrRESETPERIOD : OUT STD_LOGIC;
   iRESETCONFIG  : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
-  iRESETPERIOD  : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0')
+  iRESETPERIOD  : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  -- Timer Module:
+  iTimersec   : IN std_logic_vector(31 downto 0):= (others => '0');
+  iTimermilli   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0')
   );
 end IO_SPACE;
 
 architecture A_IO_SPACE of IO_SPACE is
 signal sQEMBUFFER1 : STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
 signal sQEMBUFFER2 : STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
+signal sTIMERBUFFER : STD_LOGIC_VECTOR(BUSWIDTH-1 downto 0);
 BEGIN
 
 -- Set the respective write signal based on address input.
@@ -178,10 +182,10 @@ begin
       sQEMBUFFER2 <= iQEMCOUNTER2(ENC_WIDTH-1 downto 16);
       oData <= iQEMCOUNTER2(15 downto 0);
     when X"15" => oData <= sQEMBUFFER2;
-    when X"40" => oData <= iSEG7OUTPUT;
     when X"20" => oData <= iSERIALMUXCONFIG;
     when X"30" => oData <= iRESETCONFIG;
     when X"31" => oData <= iRESETPERIOD;
+    when X"40" => oData <= iSEG7OUTPUT;
     when X"50" => oData <= iINPUTSTATUS;
     when X"51" => oData <= iINPUTS;
     when X"60" => oData <= iOUTPUTS;
@@ -189,6 +193,11 @@ begin
     when X"71" => oData <= iSYNCONFIG2;
     when X"72" => oData <= iSYNDIR;
     when X"73" => oData <= iSYNVALUE;
+    when X"80" => oData <= iTimermilli;
+    when X"81" => 
+        sTIMERBUFFER <= iTimersec(31 downto 16);
+        oData <= iTimersec(15 downto 0);
+    when X"82" => oData <= sTIMERBUFFER;    
     when others =>  oData <= (others=>'0');
     end case;
   end if;

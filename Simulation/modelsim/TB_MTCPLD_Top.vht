@@ -311,7 +311,7 @@ BEGIN
 -----------------------------------
 iDIP_SWITCH <= "0000";
 ioSYNC <= (others => 'Z');
-TestCase := 3;
+TestCase := 2;
 --defaults
 case TestCase is 
   when 1 =>  
@@ -336,10 +336,18 @@ case TestCase is
   READREG('1',X"05");
   READREG('1',X"01");
   READREG('1',X"04");
-  TestCase := 2;
+  TestCase := 10;
   --wait;
 when 2 =>
-  TestCase := 3;
+  wait for 1 ms;
+  READREG('1',X"80");
+  READREG('1',X"81");
+  READREG('1',X"82");
+  wait for 1 us;
+  READREG('1',X"80");
+  READREG('1',X"81");
+  READREG('1',X"82");
+  TestCase := 10;
 when 3 => -- Test Sync module
   WRITEREG(X"70",X"3210");
   SETDIP("0001");
@@ -359,8 +367,9 @@ when 3 => -- Test Sync module
   ioSYNC(6) <= '1';
   wait until rising_edge(iCLK);
   ioSYNC(6) <= '0';
-
-wait; --END case 2
+  TestCase := 10;
+when 10 =>
+  wait;
 when others =>
 end case;
 wait; -- last line. DO NOT MOVE!

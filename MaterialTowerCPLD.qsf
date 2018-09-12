@@ -231,19 +231,6 @@ set_location_assignment PIN_96 -to iDiffInput[4]
 set_location_assignment PIN_97 -to iDiffInput[5]
 set_location_assignment PIN_98 -to iDiffInput[6]
 set_location_assignment PIN_101 -to iDiffInput[7]
-set_global_assignment -name SDC_FILE MaterialTowerCPLD.out.sdc
-set_global_assignment -name VHDL_FILE SerialMux.vhd
-set_global_assignment -name VHDL_FILE SyncModule.vhd
-set_global_assignment -name VHDL_FILE InputModule.vhd
-set_global_assignment -name VHDL_FILE QEModule.vhd
-set_global_assignment -name VHDL_FILE PWMModule.vhd
-set_global_assignment -name VHDL_FILE ResetModule.vhd
-set_global_assignment -name VHDL_FILE OutputModule.vhd
-set_global_assignment -name VHDL_FILE Hex7Seg.vhd
-set_global_assignment -name VHDL_FILE constants.vhd
-set_global_assignment -name VHDL_FILE MTCPLD_Top.vhd
-set_global_assignment -name VHDL_FILE SRAM_IO.vhd
-set_global_assignment -name VHDL_FILE IO_SPACE.vhd
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_SETUP_SCRIPT Simulation/modelsim/run_top_wave.do -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME TB_TOP -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id TB_TOP
@@ -263,3 +250,17 @@ set_global_assignment -name EDA_TEST_BENCH_FILE Simulation/modelsim/MaterialTowe
 set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE PERFORMANCE"
 set_global_assignment -name ALLOW_REGISTER_MERGING ON
 set_global_assignment -name MAXII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name VHDL_FILE TimerModule.vhd
+set_global_assignment -name SDC_FILE MaterialTowerCPLD.out.sdc
+set_global_assignment -name VHDL_FILE SerialMux.vhd
+set_global_assignment -name VHDL_FILE SyncModule.vhd
+set_global_assignment -name VHDL_FILE InputModule.vhd
+set_global_assignment -name VHDL_FILE QEModule.vhd
+set_global_assignment -name VHDL_FILE PWMModule.vhd
+set_global_assignment -name VHDL_FILE ResetModule.vhd
+set_global_assignment -name VHDL_FILE OutputModule.vhd
+set_global_assignment -name VHDL_FILE Hex7Seg.vhd
+set_global_assignment -name VHDL_FILE constants.vhd
+set_global_assignment -name VHDL_FILE MTCPLD_Top.vhd
+set_global_assignment -name VHDL_FILE SRAM_IO.vhd
+set_global_assignment -name VHDL_FILE IO_SPACE.vhd
