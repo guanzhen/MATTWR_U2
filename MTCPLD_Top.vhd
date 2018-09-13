@@ -147,7 +147,8 @@ SIGNAL sSYNCONFIG2 : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 SIGNAL sWrSERIALMUXCONFIG : STD_LOGIC;
 SIGNAL sSERIALMUXCONFIG : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 -- TIMERMODULE
-SIGNAL sTimermilli : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+SIGNAL sTimermS : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+SIGNAL sTimeruS : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 SIGNAL sTimersec : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 COMPONENT IO_SPACE
@@ -201,7 +202,8 @@ COMPONENT IO_SPACE
   iRESETCONFIG  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   iRESETPERIOD  : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
   iTimersec   : IN std_logic_vector(31 downto 0):= (others => '0');
-  iTimermilli   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+  iTimermS   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+  iTimeruS   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
 	);
 END COMPONENT;
 
@@ -358,8 +360,9 @@ COMPONENT TIMERMODULE is
 	(
   DATAWIDTH   : natural := DATAWIDTH;
   MAX_COUNT_WIDTH   : natural := 30;
-  COUNTS_PER_MS : integer := 16000;   -- 16000: 16MHz iCLK : 16,000,000 counts = 1mS
-  COUNTS_PER_SEC : integer := 1000    -- 1000: 1000 ms = 1s
+  COUNTS_PER_US : integer := 16;   
+  COUNTS_PER_MS : integer := 1000;
+  COUNTS_PER_SEC : integer := 1000
 	);
 	port
 	(
@@ -369,7 +372,9 @@ COMPONENT TIMERMODULE is
     iData        : IN STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
     -- Output ports
     oTimersec   : OUT std_logic_vector(31 downto 0):= (others => '0');
-    oTimermilli   : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+    oTimermS   : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
+    oTimeruS   : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
+
 	);
 END COMPONENT;
 
@@ -451,7 +456,8 @@ TIMERMOD : TIMERMODULE
   iCLK => iCLK,
   iData => IO_DAT_WR,
   inRESET => nRESET,
-  oTimermilli => sTimermilli,
+  oTimermS => sTimermS,
+  oTimeruS => sTimeruS,  
   oTimersec => sTimersec
   );
 
@@ -618,7 +624,8 @@ MOD_IOSPACE : IO_SPACE
   iRESETCONFIG => sResetConfig,
   iRESETPERIOD => sResetPeriod,
   iTimersec => sTimersec,
-  iTimermilli => sTimermilli 
+  iTimermS => sTimermS, 
+  iTimeruS => sTimeruS
 	);  
 
 MOD_PWM1 : PWMMODULE
