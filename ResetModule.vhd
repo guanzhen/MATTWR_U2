@@ -10,7 +10,7 @@ ENTITY RESETMODULE IS
 GENERIC (
 DATAWIDTH   : integer := 16;
 MAXCOUNT    : integer := 65536;  -- max count of 65mS (16 bit limitation)
-COUNTSPERUS : integer := 16000   -- 16MHz iCLK : 16000 counts = 1uS
+COUNTSPERUS : integer := 16   -- 16MHz iCLK : 16 counts = 1uS
 );
 PORT 
 (

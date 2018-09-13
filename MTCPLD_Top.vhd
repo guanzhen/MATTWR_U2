@@ -358,7 +358,7 @@ COMPONENT TIMERMODULE is
 	(
   DATAWIDTH   : natural := DATAWIDTH;
   MAX_COUNT_WIDTH   : natural := 30;
-  COUNTS_PER_MS : integer := 16000000;   -- 16000000: 16MHz iCLK : 16,000,000 counts = 1mS
+  COUNTS_PER_MS : integer := 16000;   -- 16000: 16MHz iCLK : 16,000,000 counts = 1mS
   COUNTS_PER_SEC : integer := 1000    -- 1000: 1000 ms = 1s
 	);
 	port
@@ -446,7 +446,7 @@ BEGIN
 END PROCESS;
 
 TIMERMOD : TIMERMODULE
-  GENERIC MAP (  DATAWIDTH =>  DATAWIDTH)
+  GENERIC MAP (  DATAWIDTH =>  DATAWIDTH )
   PORT MAP (
   iCLK => iCLK,
   iData => IO_DAT_WR,
