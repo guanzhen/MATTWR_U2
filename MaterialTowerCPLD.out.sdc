@@ -121,22 +121,22 @@ set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData
 # Set Output Delay
 #**************************************************************
 
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[0]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[1]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[2]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[3]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[4]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[5]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[6]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[7]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[8]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[9]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[10]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[11]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[12]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[13]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[14]}]
-set_output_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[15]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[0]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[1]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[2]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[3]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[4]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[5]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[6]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[7]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[8]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[9]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[10]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[11]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[12]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[13]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[14]}]
+set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[15]}]
 
 
 #**************************************************************
