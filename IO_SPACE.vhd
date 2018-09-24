@@ -202,7 +202,8 @@ begin
 		sTIMERBUFFER3 <= iTimersec(31 downto 16);
     when X"81" => oData <= sTIMERBUFFER1;
     when X"82" => oData <= sTIMERBUFFER2;
-    when X"83" => oData <= sTIMERBUFFER3;    
+    when X"83" => oData <= sTIMERBUFFER3;  
+    when X"F0" => oData <= VERSION;
     when others =>  oData <= (others=>'0');
     end case;
   end if;
