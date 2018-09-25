@@ -163,8 +163,11 @@ begin
     vAddress := (others => '0');    
     sQEMBUFFER1 <= (others => '0');
     sQEMBUFFER2 <= (others => '0');
+    sTIMERBUFFER1 <= (others => '0');
+    sTIMERBUFFER2 <= (others => '0');
+    sTIMERBUFFER3 <= (others => '0');
     oData <= (others => '0');
-  elsif falling_edge(inRdRdy) and inCS = '0' then
+  elsif inRdRdy = '0' and inCS = '0' then
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is			
     -- PWMCONFIG1
@@ -206,6 +209,8 @@ begin
     when X"F0" => oData <= VERSION;
     when others =>  oData <= (others=>'0');
     end case;
+  else
+	 oData <= (others=>'0');
   end if;
 end process IO_SPACE_PROC_RD;
 

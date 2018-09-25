@@ -6,7 +6,7 @@ add wave -noupdate /tb_mtcpld_top/ebu_gen/state
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/iAddress
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/iData
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/oData
-add wave -noupdate -radix hexadecimal /tb_mtcpld_top/ebu_gen/ioData
+add wave -noupdate -radix hexadecimal -childformat {{/tb_mtcpld_top/ebu_gen/ioData(15) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(14) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(13) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(12) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(11) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(10) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(9) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(8) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(7) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(6) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(5) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(4) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(3) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(2) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(1) -radix hexadecimal} {/tb_mtcpld_top/ebu_gen/ioData(0) -radix hexadecimal}} -subitemconfig {/tb_mtcpld_top/ebu_gen/ioData(15) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(14) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(13) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(12) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(11) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(10) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(9) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(8) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(7) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(6) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(5) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(4) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(3) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(2) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(1) {-height 15 -radix hexadecimal} /tb_mtcpld_top/ebu_gen/ioData(0) {-height 15 -radix hexadecimal}} /tb_mtcpld_top/ebu_gen/ioData
 add wave -noupdate -divider CPLD
 add wave -noupdate /tb_mtcpld_top/i1/iSW_RESET_CPLD
 add wave -noupdate /tb_mtcpld_top/i1/iCLK
@@ -17,12 +17,19 @@ add wave -noupdate /tb_mtcpld_top/i1/oWAIT
 add wave -noupdate /tb_mtcpld_top/i1/iWR
 add wave -noupdate -radix hexadecimal /tb_mtcpld_top/i1/ioData
 add wave -noupdate -divider INTERFACE
+add wave -noupdate /tb_mtcpld_top/i1/\\QENC1|sQEMCOUNTER\\
+add wave -noupdate /tb_mtcpld_top/i1/\\QENC2|sQEMCOUNTER\\
 add wave -noupdate -divider SRAM
-add wave -noupdate /tb_mtcpld_top/i1/\\MOD_SRAMIO|IO_ADDR\\
 add wave -noupdate -divider PWM
+add wave -noupdate -group PWM1 -radix hexadecimal /tb_mtcpld_top/i1/\\MOD_PWM1|sPWMPERIOD\\
+add wave -noupdate -group PWM1 -radix hexadecimal /tb_mtcpld_top/i1/\\MOD_PWM1|sPWMCONFIG\\
+add wave -noupdate -group PWM1 -radix hexadecimal /tb_mtcpld_top/i1/\\MOD_PWM1|sDUTY\\
+add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/\\MOD_PWM2|sPWMPERIOD\\
+add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/\\MOD_PWM2|sPWMCONFIG\\
+add wave -noupdate -group PWM2 -radix hexadecimal /tb_mtcpld_top/i1/\\MOD_PWM2|sDUTY\\
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1674024 ps} 0} {{Cursor 2} {608922 ps} 0}
-quietly wave cursor active 1
+WaveRestoreCursors {{Cursor 1} {3091578 ps} 0} {{Cursor 2} {113277 ps} 0}
+quietly wave cursor active 2
 configure wave -namecolwidth 300
 configure wave -valuecolwidth 94
 configure wave -justifyvalue left
@@ -37,4 +44,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {1543750 ps} {1953601 ps}
+WaveRestoreZoom {0 ps} {656250 ps}

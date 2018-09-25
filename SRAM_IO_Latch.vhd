@@ -40,21 +40,29 @@ SRAM_ADDR_PROC: process (nRESET, nCS, nADV, DATA) is
 begin
   if nRESET = '0' then
     IO_ADDR <= (others => '0');
-  elsif nCS = '0' and nADV= '0' then 
-    IO_ADDR <= to_x01(DATA);
+  elsif nCS = '0'then
+	 if nADV= '0' then
+		IO_ADDR <= to_x01(DATA);
+	 else
+		IO_ADDR <= IO_ADDR;
+	 end if;
   end if ;
 end process SRAM_ADDR_PROC;
 
 ----------------------
 -- READ SIGNALS
 ----------------------
-SRAM_RD_DATA_PROC: process (nRESET, iCLK,nCS,nRD, IO_DAT_RD) is
+SRAM_RD_DATA_PROC: process (nRESET, iCLK,nCS,nRD, IO_DAT_RD,DATA) is
 begin
-  if nRESET = '0' or nCS = '1' then
+  if nRESET = '0' then
     DATA <= (others => 'Z');
-  elsif nCS = '0' and nRD = '0' then
-    DATA <= IO_DAT_RD;
-  end if;
+  else
+    if nCS = '0' and nRD = '0'then
+	 	 DATA <= IO_DAT_RD;
+	 else
+      DATA <= (others => 'Z');
+	 end if;
+  end if;  
 end process SRAM_RD_DATA_PROC;
 
 -- nWait state machine
@@ -79,6 +87,8 @@ begin
     IO_DAT_WR <= (others => '0');
   elsif nCS = '0' and nWR = '0' then
     IO_DAT_WR <= DATA;
+  else 
+	 IO_DAT_WR <= IO_DAT_WR;
   end if;  
 end process SRAM_WR_DATA_PROC;
 

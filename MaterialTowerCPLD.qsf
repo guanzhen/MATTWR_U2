@@ -250,6 +250,7 @@ set_global_assignment -name EDA_TEST_BENCH_FILE Simulation/modelsim/MaterialTowe
 set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE PERFORMANCE"
 set_global_assignment -name ALLOW_REGISTER_MERGING ON
 set_global_assignment -name MAXII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name VHDL_FILE SRAM_IO_Latch.vhd
 set_global_assignment -name VHDL_FILE TimerModule.vhd
 set_global_assignment -name SDC_FILE MaterialTowerCPLD.out.sdc
 set_global_assignment -name VHDL_FILE SerialMux.vhd
