@@ -311,7 +311,7 @@ BEGIN
 -----------------------------------
 iDIP_SWITCH <= "0000";
 ioSYNC <= (others => 'Z');
-TestCase := 2;
+TestCase := 1;
 --defaults
 case TestCase is 
   when 1 =>  
