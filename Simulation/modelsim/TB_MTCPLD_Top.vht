@@ -309,33 +309,81 @@ BEGIN
 -----------------------------------
 -- Test starts here
 -----------------------------------
-iDIP_SWITCH <= "0000";
+iDIP_SWITCH <= "0101";
 ioSYNC <= (others => 'Z');
-TestCase := 2;
+TestCase := 1;
 --defaults
 case TestCase is 
-  when 1 =>  
+  when 1 =>  -- PWM Test
+  -- Read version
+  READREG('1',X"F0");
   -- setup PWM1
   WRITEREG(X"00",X"0004");
-  WRITEREG(X"01",X"07D0");
-  WRITEREG(X"02",X"03E8");
-  WRITEREG(X"00",X"0005");
+  WRITEREG(X"01",X"0010");
+  WRITEREG(X"02",X"0020");
+  -- read PWM1 reg
+  READREG('1',X"01");
+  READREG('1',X"02");
+  READREG('1',X"03");
   -- setup PWM2
   WRITEREG(X"03",X"0004");
-  WRITEREG(X"04",X"03E8");
-  WRITEREG(X"05",X"01F4");
-  WRITEREG(X"03",X"0005");
-  -- read PWM1 config
-  READREG('1',X"00");
-  -- read PWM2 config
-  READREG('1',X"03");
-  WRITEREG(X"31",X"0001");
-  WRITEREG(X"30",X"0001");  
-
-  READREG('1',X"02");
-  READREG('1',X"05");
-  READREG('1',X"01");
+  WRITEREG(X"04",X"0040");
+  WRITEREG(X"05",X"0050");
+  -- read PWM2 reg
   READREG('1',X"04");
+  READREG('1',X"05");
+  READREG('1',X"06");
+  -- setup QEM1
+  WRITEREG(X"10",X"0000");
+  WRITEREG(X"11",X"0110");
+  WRITEREG(X"12",X"0220");
+  -- read QEM 1
+  READREG('1',X"10");
+  READREG('1',X"11");
+  READREG('1',X"12");  
+  -- setup QEM2  
+  WRITEREG(X"13",X"0000");
+  WRITEREG(X"14",X"0140");
+  WRITEREG(X"15",X"0150");
+  -- read QEM 2
+  READREG('1',X"13");
+  READREG('1',X"14");
+  READREG('1',X"15");  
+  -- setup SERIAL mux
+  WRITEREG(X"20",X"0007");
+  -- read Serial MUX
+  READREG('1',X"20");  
+  -- write Reset
+  WRITEREG(X"30",X"0001");
+  WRITEREG(X"31",X"0310");
+  -- read Reset
+  READREG('1',X"30");
+  READREG('1',X"31");
+  -- write 7Seg
+  WRITEREG(X"40",X"0044");
+  -- read Serial MUX
+  READREG('1',X"40");  
+  -- Read inputs
+  READREG('1',X"50");
+  READREG('1',X"51");
+  -- Write output
+  WRITEREG(X"60",X"0066");
+  -- Read output
+  READREG('1',X"60");
+  -- write sync config
+  WRITEREG(X"70",X"3210");
+  WRITEREG(X"71",X"7654");
+  -- read sync registers
+  READREG('1',X"70");
+  READREG('1',X"71");
+  READREG('1',X"72"); -- sync dir
+  READREG('1',X"73"); -- sync val
+  -- read timers
+  READREG('1',X"80");
+  READREG('1',X"81");
+  READREG('1',X"82");
+  READREG('1',X"83");  
+  report "Test End";
   TestCase := 10;
   --wait;
 when 2 =>
@@ -368,6 +416,28 @@ when 3 => -- Test Sync module
   wait until rising_edge(iCLK);
   ioSYNC(6) <= '0';
   TestCase := 10;
+when 4 => -- PWM Test
+  -- setup PWM1
+  WRITEREG(X"00",X"0004");
+  WRITEREG(X"01",X"07D0");
+  WRITEREG(X"02",X"03E8");
+  WRITEREG(X"00",X"0005");
+  -- setup PWM2
+  WRITEREG(X"03",X"0004");
+  WRITEREG(X"04",X"03E8");
+  WRITEREG(X"05",X"01F4");
+  WRITEREG(X"03",X"0005");
+  -- read PWM1 config
+  
+  WRITEREG(X"31",X"0001");
+  WRITEREG(X"30",X"0001");  
+
+  READREG('1',X"02");
+  READREG('1',X"05");
+  READREG('1',X"01");
+  READREG('1',X"04");
+  TestCase := 10;
+  --wait;
 when 10 =>
   wait;
 when others =>
