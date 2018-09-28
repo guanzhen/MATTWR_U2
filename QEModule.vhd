@@ -51,30 +51,26 @@ oQEMCONFIG <= X"000" & B"000" & sQEMCONFIG;
 
 DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW) else '1';
 oQEMCOUNTER <= STD_LOGIC_VECTOR(sQEMCOUNTER);
-
+sWrCounter <= iWrQEMCOUNTERH;
 QEM_CTRL : process (iCLK,inRESET,iWrQEMCONFIG,iWrQEMCOUNTERL,iWrQEMCOUNTERH)
 begin
   if (inRESET = '0') then
     sQEMCONFIG <= '0';
-  else
-    if rising_edge(iWrQEMCONFIG) then
-      sQEMCONFIG <= iData(0);
-    end if;
+  elsif rising_edge(iWrQEMCONFIG) then
+    sQEMCONFIG <= iData(0);
   end if;  
   
   if (inRESET = '0') then
-    sBUFFER <= (others => '0');
-    sWrCounter <= '0';
-  elsif rising_edge(iCLK) then
-    sWrCounter <= '0';
-    if (iWrQEMCOUNTERL = '1') then
-      sBUFFER(15 downto 0) <= iData;
-    end if; 
-    if (iWrQEMCOUNTERH = '1') then
-      sBUFFER(31 downto 16) <= iData;
-      sWrCounter <= '1';
-    end if;
-  end if;    
+    sBUFFER(15 downto 0) <= (others => '0');
+  elsif rising_edge(iWrQEMCOUNTERL) then
+    sBUFFER(15 downto 0) <= iData;
+  end if;
+  
+  if (inRESET = '0') then
+    sBUFFER(31 downto 16) <= (others => '0');
+  elsif rising_edge(iWrQEMCOUNTERH) then
+    sBUFFER(31 downto 16) <= iData;
+  end if;  
 end process;
 
 QuadDecProcess : process (inRESET,iCLK,iA,iB) is 
