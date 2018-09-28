@@ -20,7 +20,7 @@
 ## PROGRAM "Quartus II"
 ## VERSION "Version 14.1.1 Build 190 01/19/2015 SJ Full Version"
 
-## DATE    "Mon Sep 10 10:59:02 2018"
+## DATE    "Thu Sep 27 13:47:56 2018"
 
 ##
 ## DEVICE  "5M1270ZT144C5"
@@ -60,12 +60,11 @@ create_clock -name {oWrRESETPERIOD} -period 14.000 -waveform { 0.000 7.000 } [ge
 create_clock -name {oWrRESETCONFIG} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrRESETCONFIG}]
 create_clock -name {ebu_ext} -period 7.000 -waveform { 0.000 3.500 } 
 
-
 #**************************************************************
 # Create Generated Clock
 #**************************************************************
-
-
+derive_pll_clocks
+#create_generated_clock -name oWrPWMConfig1 -source [get_nets {MOD_IOSPACE|oWrPWMCONFIG1}] 
 
 #**************************************************************
 # Set Clock Latency
@@ -77,72 +76,34 @@ create_clock -name {ebu_ext} -period 7.000 -waveform { 0.000 3.500 }
 # Set Clock Uncertainty
 #**************************************************************
 
-
+derive_clock_uncertainty
 
 #**************************************************************
 # Set Input Delay
 #**************************************************************
-
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[0]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[1]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[2]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[3]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[4]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[5]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[6]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[7]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[8]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[9]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[10]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[11]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[12]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[13]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[14]}]
-set_input_delay -add_delay  -clock [get_clocks {iWR}]  0.000 [get_ports {ioData[15]}]
-
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[0]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[1]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[2]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[3]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[4]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[5]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[6]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[7]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[8]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[9]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[10]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[11]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[12]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[13]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[14]}]
-set_input_delay -add_delay  -clock [get_clocks {iADV}]  0.000 [get_ports {ioData[15]}]
+set_input_delay -add_delay -clock { iCLK } 0 [get_ports {iENC_A* iENC_B*}]
+set_input_delay -add_delay -clock { iCLK } 0 [get_ports {iRFID1_RXD iRFID2_RXD iRFID_MUX_SEL iRFID_TXD}]
+set_input_delay -add_delay -clock { iWR } 0 [get_ports {ioData*}]
+set_input_delay -add_delay -clock { iADV } 0 [get_ports {ioData*}]
 
 #**************************************************************
 # Set Output Delay
 #**************************************************************
 
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[0]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[1]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[2]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[3]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[4]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[5]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[6]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[7]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[8]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[9]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[10]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[11]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[12]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[13]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[14]}]
-set_output_delay -add_delay  -clock [get_clocks {iRD}]  0.000 [get_ports {ioData[15]}]
-
+set_output_delay -clock { oWrOUTPUTS } 0 [get_ports {oOutput*}]
+set_output_delay -clock { iRD }  0 [get_ports {ioData*}]
+set_output_delay -clock { oWrSEG7OUTPUT }  0 [get_ports {o7SEGLED*}]
 
 #**************************************************************
 # Set Clock Groups
 #**************************************************************
-
+set_clock_groups -asynchronous \
+	-group [get_clocks {iCLK}] \
+	-group [get_clocks {iRD iWR iADV}] \
+	-group [get_clocks {oWrSEG7OUTPUT}]
+	#-group [get_clocks {oWrOUTPUTS}] \
+	
+	#-group [get_clocks {oWrPWMConfig1,oWrPWMDuty1,oWrPWMConfig2,oWrPWMDuty2,oWrQEMConfig1,oWrQWMConfig2,oWrOUTPUTS,oWrSEG7OUTPUT,oWrSERIALMUXCONFIG,oWrSYNCONFIG1,oWrSYNCONFIG2,oWrPWMPERIOD1,oWrPWMPERIOD2,oWrRESETPERIOD,oWrRESETCONFIG}]
 
 
 #**************************************************************
