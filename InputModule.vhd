@@ -41,7 +41,7 @@ oInputs <= DIFF3H & DIFF2H & DIFF1H & iInputs;
 oInputStatus <= X"000" & B"0" & sDiffStatus;
 
 -- Monitor the differential inputs, to determine if there is error in status.
--- filter the 5 clock.
+-- filter for 5 clock cycles.
 PROCPDIFFSTATUS : PROCESS(inReset,iCLK,iDiffInputs,sDiffFilter)
   variable vTemp : STD_LOGIC_VECTOR(DIFF_INPUTS-1 downto 0);
   BEGIN  
