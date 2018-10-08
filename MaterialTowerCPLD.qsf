@@ -223,14 +223,6 @@ set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
 set_location_assignment PIN_37 -to iSYNC_SEL1
 set_location_assignment PIN_38 -to iSYNC_SEL2
-set_location_assignment PIN_91 -to iDiffInput[0]
-set_location_assignment PIN_93 -to iDiffInput[1]
-set_location_assignment PIN_94 -to iDiffInput[2]
-set_location_assignment PIN_95 -to iDiffInput[3]
-set_location_assignment PIN_96 -to iDiffInput[4]
-set_location_assignment PIN_97 -to iDiffInput[5]
-set_location_assignment PIN_98 -to iDiffInput[6]
-set_location_assignment PIN_101 -to iDiffInput[7]
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_SETUP_SCRIPT Simulation/modelsim/run_top_wave.do -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME TB_TOP -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id TB_TOP
@@ -264,3 +256,11 @@ set_global_assignment -name VHDL_FILE constants.vhd
 set_global_assignment -name VHDL_FILE MTCPLD_Top.vhd
 set_global_assignment -name VHDL_FILE SRAM_IO.vhd
 set_global_assignment -name VHDL_FILE IO_SPACE.vhd
+set_location_assignment PIN_101 -to iInput[21]
+set_location_assignment PIN_91 -to iInput[14]
+set_location_assignment PIN_98 -to iInput[20]
+set_location_assignment PIN_97 -to iInput[19]
+set_location_assignment PIN_96 -to iInput[18]
+set_location_assignment PIN_95 -to iInput[17]
+set_location_assignment PIN_94 -to iInput[16]
+set_location_assignment PIN_93 -to iInput[15]

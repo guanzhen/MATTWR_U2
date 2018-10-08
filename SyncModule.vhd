@@ -19,7 +19,7 @@ PORT
 	inWrSYNCONFIG2   : IN STD_LOGIC;  
 	inSyncSel : IN STD_LOGIC_VECTOR(1 downto 0);  
   iData     : IN std_logic_vector(BUSWIDTH-1 downto 0);
-  iInputs   : IN std_logic_vector(NUM_OF_INPUTS-1 downto 0);
+  iInputs   : IN std_logic_vector(NUM_OF_SE_INPUTS-1 downto 0);
   oSYNDIR : OUT std_logic_vector(BUSWIDTH-1 downto 0);
   oSYNCONFIG1 : OUT std_logic_vector(BUSWIDTH-1 downto 0);
   oSYNCONFIG2 : OUT std_logic_vector(BUSWIDTH-1 downto 0);

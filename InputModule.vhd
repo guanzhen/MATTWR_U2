@@ -8,7 +8,7 @@ ENTITY INPUTMODULE IS
 
 GENERIC (
 DATAWIDTH : natural := 16;
-SINGLE_INPUTS : natural := NUM_OF_INPUTS;
+SINGLE_INPUTS : natural := NUM_OF_SE_INPUTS;
 FILTER : natural := 5;     -- number of cycles to FILTER Diffential inputs
 DIFF_INPUTS : natural := 3
 );
