@@ -14,7 +14,7 @@ constant DEFAULT_PWM_DUTY : integer := 100;
 
 -- Main Board
 constant NUM_OF_SE_INPUTS : natural := 14;
-constant NUM_OF_DIFFINPUTS : natural := 3;
+constant NUM_OF_DIFFINPUTS : natural := 2;
 -- Sub Board / AIV Board
 --constant NUM_OF_SE_INPUTS : natural := 12;
 --constant NUM_OF_DIFFINPUTS : natural := 4;

@@ -127,8 +127,6 @@ SIGNAL sWrQEMCOUNTERH2 : STD_LOGIC;
 SIGNAL sQEMCONFIG2 : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 SIGNAL sQEMCOUNTER2 : STD_LOGIC_VECTOR(ENC_WIDTH-1 DOWNTO 0);
 -- Input Module
-SIGNAL siInputs : STD_LOGIC_VECTOR(NUM_OF_SE_INPUTS-1 DOWNTO 0);
-SIGNAL sDiffInputs : STD_LOGIC_VECTOR(NUM_OF_DIFFINPUTS*2-1 DOWNTO 0);
 SIGNAL sInputStatus : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 SIGNAL sInputs : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 -- Output Module
@@ -228,7 +226,7 @@ COMPONENT SYNCMODULE
 	PORT (
 	iCLK : IN STD_LOGIC;
 	iData : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-	iInputs : IN STD_LOGIC_VECTOR(NUM_OF_SE_INPUTS-1 DOWNTO 0);
+	iInputs : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 	inRESET : IN STD_LOGIC;
 	inSyncSel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 	inWrSYNCONFIG1 : IN STD_LOGIC;
@@ -340,14 +338,11 @@ END COMPONENT;
 COMPONENT INPUTMODULE
   GENERIC (
   DATAWIDTH : natural := DATAWIDTH;
-  SINGLE_INPUTS : natural := NUM_OF_SE_INPUTS;
-  FILTER : natural := 5;     -- number of cycles to FILTER Diffential inputs
-  DIFF_INPUTS : natural := NUM_OF_DIFFINPUTS
+  FILTER : natural := 5     -- number of cycles to FILTER Diffential inputs
   );
 	PORT (
 	iCLK : IN STD_LOGIC;
-	iDiffInputs : IN STD_LOGIC_VECTOR(NUM_OF_DIFFINPUTS*2-1 DOWNTO 0);
-	iInputs : IN STD_LOGIC_VECTOR(NUM_OF_SE_INPUTS-1 DOWNTO 0);
+	iInputs : IN STD_LOGIC_VECTOR(NUM_OF_INPUTS-1 DOWNTO 0);
 	inReset : IN STD_LOGIC;
 	oInputs : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 	oInputStatus : OUT STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0)
@@ -385,8 +380,6 @@ nRESET  <= iSW_RESET_CPLD;
 nCS     <= iCS_FPGA;
 sSeg7En <= iPWM_LED;
 o7SEGLED <= sSEG7OUTPUT;
-siInputs <= iInput(NUM_OF_SE_INPUTS-1 downto 0);
-sDiffInputs <= iInput(NUM_OF_DIFFINPUTS*2-1 + NUM_OF_SE_INPUTS downto NUM_OF_SE_INPUTS);
 oRSTIN <= sOutputs(NUM_OF_OUTPUTS-1); -- top bit is reset signal for EEPROM.
 oOutput <= sOutputs(NUM_OF_OUTPUTS-2 downto 0); -- rest of the bits are for outputs.
 sSyncSelc <= iSYNC_SEL2 & iSYNC_SEL1;
@@ -465,7 +458,7 @@ SYNCMOD : SYNCMODULE
 -- list connections between master ports and signals
 	iCLK => iCLK,
 	iData => IO_DAT_WR,
-	iInputs => siInputs,
+	iInputs => sInputs,
 	inRESET => nRESET,
 	inSyncSel => sSyncSelc,
 	inWrSYNCONFIG1 => sWrSYNCONFIG1,
@@ -489,8 +482,7 @@ IPMOD : INPUTMODULE
 	PORT MAP (
 -- list connections between master ports and signals
 	iCLK => iCLK,
-	iDiffInputs => sDiffInputs,
-	iInputs => siInputs,
+	iInputs => iInput,
 	inReset => nRESET,
 	oInputs => sInputs,
 	oInputStatus => sInputStatus
