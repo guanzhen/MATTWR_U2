@@ -38,8 +38,7 @@ ARCHITECTURE INPUTMODULE_arch OF INPUTMODULE_vhd_tst IS
 -- constants                                                 
 -- signals                                                   
 SIGNAL iCLK : STD_LOGIC;
-SIGNAL iDiffInputs : STD_LOGIC_VECTOR(5 DOWNTO 0);
-SIGNAL iInputs : STD_LOGIC_VECTOR(9 DOWNTO 0);
+SIGNAL iInputs : STD_LOGIC_VECTOR(21 DOWNTO 0);
 SIGNAL inReset : STD_LOGIC;
 SIGNAL oInputs : STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL oInputStatus : STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -48,8 +47,7 @@ SIGNAL DIFF1L,DIFF2L,DIFF3L,DIFF1H,DIFF2H,DIFF3H : STD_LOGIC;
 COMPONENT INPUTMODULE
 	PORT (
 	iCLK : IN STD_LOGIC;
-	iDiffInputs : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
-	iInputs : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
+	iInputs : IN STD_LOGIC_VECTOR(21 DOWNTO 0);
 	inReset : IN STD_LOGIC;
 	oInputs : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 	oInputStatus : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
@@ -64,7 +62,6 @@ GENERIC MAP (period => 100 ns ) PORT MAP ( reset => inRESET, clk_en => '1', clk_
 	PORT MAP (
 -- list connections between master ports and signals
 	iCLK => iCLK,
-	iDiffInputs => iDiffInputs,
 	iInputs => iInputs,
 	inReset => inReset,
 	oInputs => oInputs,
@@ -80,17 +77,19 @@ BEGIN
 WAIT;                                                       
 END PROCESS init;                                           
 
+--MainBoard config 14 single ended, 2 diff inputs
 DIFF1L <= NOT DIFF1H when DIFF1_ERR = '0' else DIFF1H;
 DIFF2L <= NOT DIFF2H when DIFF2_ERR = '0' else DIFF2H;
 DIFF3L <= NOT DIFF3H when DIFF3_ERR = '0' else DIFF3H;
-iDiffInputs <= (DIFF3H,DIFF3L,DIFF2H,DIFF2L,DIFF1H,DIFF1L);
+iInputs(19 downto 14) <= (DIFF3H,DIFF3L,DIFF2H,DIFF2L,DIFF1H,DIFF1L);
 
 always : PROCESS                                              
 -- optional sensitivity list                                  
 -- (        )                                                 
 -- variable declarations                              
 BEGIN                                                                 -- code executes for every event on sensitivity list  
-iInputs <= (others => '0');
+iInputs(13 downto 0) <= (others => '0');
+iInputs(21 downto 20) <= (others => '0');
 DIFF3H <= '0';
 DIFF2H <= '0';
 DIFF1H <= '0';
@@ -98,6 +97,34 @@ DIFF1_ERR <= '0';
 DIFF2_ERR <= '0';
 DIFF3_ERR <= '0';
 wait until inReset = '1';
+
+
+wait for 500 ns;
+DIFF1H <= '1';
+DIFF2H <= '0';
+DIFF3H <= '0';
+wait for 500 ns;
+DIFF1H <= '0';
+DIFF2H <= '1';
+DIFF3H <= '0';
+wait for 500 ns;
+DIFF1H <= '0';
+DIFF2H <= '0';
+DIFF3H <= '1';
+wait for 500 ns;
+DIFF1H <= '1';
+DIFF2H <= '1';
+DIFF3H <= '0';
+wait for 500 ns;
+DIFF1H <= '0';
+DIFF2H <= '1';
+DIFF3H <= '1';
+wait for 500 ns;
+DIFF1H <= '1';
+DIFF2H <= '0';
+DIFF3H <= '1';
+wait for 500 ns;
+
 
 DIFF1H <= '1';
 wait for 100 ns;
