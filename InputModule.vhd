@@ -33,7 +33,7 @@ BEGIN
 
 DIFFSTATUS_GEN : for I in 0 to DIFF_INPUTS-1 generate
 begin
-  sDiffHigh(I) <= sDiffInputs(I*2+1);
+  sDiffHigh(I) <= sDiffInputs(I*2+1) when sDiffStatus(I) = '1' else '0'; 
 end generate;
 
 siInputs <= iInputs(NUM_OF_SE_INPUTS-1 downto 0);
