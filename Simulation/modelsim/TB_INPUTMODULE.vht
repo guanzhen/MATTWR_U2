@@ -42,8 +42,8 @@ SIGNAL iInputs : STD_LOGIC_VECTOR(21 DOWNTO 0);
 SIGNAL inReset : STD_LOGIC;
 SIGNAL oInputs : STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL oInputStatus : STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL DIFF1_ERR,DIFF2_ERR,DIFF3_ERR : STD_LOGIC;
-SIGNAL DIFF1L,DIFF2L,DIFF3L,DIFF1H,DIFF2H,DIFF3H : STD_LOGIC;
+SIGNAL DIFF1_ERR,DIFF2_ERR,DIFF3_ERR,DIFF4_ERR : STD_LOGIC;
+SIGNAL DIFF1L,DIFF2L,DIFF3L,DIFF1H,DIFF2H,DIFF3H,DIFF4L,DIFF4H : STD_LOGIC;
 COMPONENT INPUTMODULE
 	PORT (
 	iCLK : IN STD_LOGIC;
@@ -78,51 +78,82 @@ WAIT;
 END PROCESS init;                                           
 
 --MainBoard config 14 single ended, 2 diff inputs
+--DIFF1L <= NOT DIFF1H when DIFF1_ERR = '0' else DIFF1H;
+--DIFF2L <= NOT DIFF2H when DIFF2_ERR = '0' else DIFF2H;
+--DIFF3L <= NOT DIFF3H when DIFF3_ERR = '0' else DIFF3H;
+--iInputs(19 downto 14) <= (DIFF3H,DIFF3L,DIFF2H,DIFF2L,DIFF1H,DIFF1L);
+--iInputs(13 downto 0) <= (others => '0');
+
+-- subboard config 12 singled ended, 4 diff inputs.
 DIFF1L <= NOT DIFF1H when DIFF1_ERR = '0' else DIFF1H;
 DIFF2L <= NOT DIFF2H when DIFF2_ERR = '0' else DIFF2H;
 DIFF3L <= NOT DIFF3H when DIFF3_ERR = '0' else DIFF3H;
-iInputs(19 downto 14) <= (DIFF3H,DIFF3L,DIFF2H,DIFF2L,DIFF1H,DIFF1L);
+DIFF4L <= NOT DIFF4H when DIFF4_ERR = '0' else DIFF3H;
+iInputs(21 downto 20) <= (others => '0');
+iInputs(19 downto 12) <= (DIFF4H,DIFF4L,DIFF3H,DIFF3L,DIFF2H,DIFF2L,DIFF1H,DIFF1L);
+iInputs(11 downto 0) <= (others => '0');
 
 always : PROCESS                                              
 -- optional sensitivity list                                  
 -- (        )                                                 
 -- variable declarations                              
 BEGIN                                                                 -- code executes for every event on sensitivity list  
-iInputs(13 downto 0) <= (others => '0');
-iInputs(21 downto 20) <= (others => '0');
+DIFF4H <= '0';
 DIFF3H <= '0';
 DIFF2H <= '0';
 DIFF1H <= '0';
 DIFF1_ERR <= '0';
 DIFF2_ERR <= '0';
 DIFF3_ERR <= '0';
+DIFF4_ERR <= '0';
 wait until inReset = '1';
 
 
-wait for 500 ns;
+wait for 500 ns; --1
 DIFF1H <= '1';
 DIFF2H <= '0';
 DIFF3H <= '0';
-wait for 500 ns;
+DIFF4H <= '0';
+wait for 500 ns; --2
 DIFF1H <= '0';
 DIFF2H <= '1';
 DIFF3H <= '0';
-wait for 500 ns;
+DIFF4H <= '0';
+wait for 500 ns; --3
 DIFF1H <= '0';
 DIFF2H <= '0';
 DIFF3H <= '1';
-wait for 500 ns;
+DIFF4H <= '0';
+wait for 500 ns; --4
+DIFF1H <= '0';
+DIFF2H <= '0';
+DIFF3H <= '0';
+DIFF4H <= '1';
+wait for 500 ns; --5
 DIFF1H <= '1';
 DIFF2H <= '1';
 DIFF3H <= '0';
-wait for 500 ns;
+DIFF4H <= '0';
+wait for 500 ns; --6
 DIFF1H <= '0';
-DIFF2H <= '1';
+DIFF2H <= '0';
 DIFF3H <= '1';
-wait for 500 ns;
+DIFF4H <= '1';
+wait for 500 ns; --7
 DIFF1H <= '1';
 DIFF2H <= '0';
 DIFF3H <= '1';
+DIFF4H <= '0';
+wait for 500 ns; --8
+DIFF1H <= '0';
+DIFF2H <= '1';
+DIFF3H <= '0';
+DIFF4H <= '1';
+wait for 500 ns; --9 
+DIFF1H <= '0';
+DIFF2H <= '0';
+DIFF3H <= '0';
+DIFF4H <= '0';
 wait for 500 ns;
 
 
@@ -137,10 +168,11 @@ DIFF1_ERR <= '1';
 wait for 100 ns;
 DIFF1_ERR <= '0';
 DIFF1H <= '1';
-wait for 100 ns;
+wait for 200 ns;
 DIFF1_ERR <= '1';
-wait for 700 ns;
+wait for 300 ns;
 DIFF1_ERR <= '0';
+wait for 500 ns;
 
 DIFF2H <= '1';
 wait for 100 ns;
@@ -157,7 +189,7 @@ wait for 200 ns;
 DIFF2_ERR <= '1';
 wait for 300 ns;
 DIFF2_ERR <= '0';
-wait for 300 ns;
+wait for 500 ns;
 
 DIFF3H <= '1';
 wait for 100 ns;
@@ -174,6 +206,24 @@ wait for 200 ns;
 DIFF3_ERR <= '1';
 wait for 300 ns;
 DIFF3_ERR <= '0';
+wait for 500 ns;
+
+DIFF4H <= '1';
+wait for 100 ns;
+DIFF4H <= '0';
+wait for 100 ns;
+DIFF4H <= '1';
+wait for 100 ns;
+DIFF4H <= '0';
+DIFF4_ERR <= '1';
+wait for 100 ns;
+DIFF4_ERR <= '0';
+DIFF4H <= '1';
+wait for 200 ns;
+DIFF4_ERR <= '1';
+wait for 300 ns;
+DIFF4_ERR <= '0';
+wait for 500 ns;
 
 
 
