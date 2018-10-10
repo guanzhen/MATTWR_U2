@@ -27,7 +27,7 @@ oOutput <= sPadding & sOutput;
 WRITEREG : PROCESS(inReset,iWrData,iData)
   BEGIN  
   if (inReset = '0') then
-    sOutput <= ((DATAWIDTH-1) => '1', others =>INACTIVESTATE);	-- EEPROM write protect disabled by default.
+    sOutput <= (others =>INACTIVESTATE);	-- EEPROM write protect disabled by default.
   elsif rising_edge(iWrData) then -- write data on signal
     sOutput <= iData(OUTPUTWIDTH-1 DOWNTO 0);
   end if;  

@@ -53,7 +53,7 @@ ENTITY MTCPLD_Top IS
   o7SEGLED :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
   iDIP_SWITCH :  IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
   iInput  : IN STD_LOGIC_VECTOR(NUM_OF_INPUTS-1 DOWNTO 0);
-  oOutput : OUT STD_LOGIC_VECTOR(NUM_OF_OUTPUTS-2 DOWNTO 0);
+  oOutput : OUT STD_LOGIC_VECTOR(NUM_OF_OUTPUTS-1 DOWNTO 0);
   
   iSYNC_SEL1 :  IN  STD_LOGIC;
   iSYNC_SEL2 :  IN  STD_LOGIC;
@@ -129,9 +129,12 @@ SIGNAL sQEMCOUNTER2 : STD_LOGIC_VECTOR(ENC_WIDTH-1 DOWNTO 0);
 -- Input Module
 SIGNAL sInputStatus : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
 SIGNAL sInputs : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
--- Output Module
-SIGNAL sOutputs : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-SIGNAL sWrOutput : STD_LOGIC;
+-- Output Module 1
+SIGNAL sOutput1 : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+SIGNAL sWrOutput1 : STD_LOGIC;
+-- Output Module 2
+SIGNAL sOutput2 : STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+SIGNAL sWrOutput2 : STD_LOGIC;
 -- Sync Module
 SIGNAL sSyncSelc : STD_LOGIC_VECTOR(1 downto 0);
 SIGNAL sWrSYNCONFIG1 : STD_LOGIC;
@@ -184,8 +187,10 @@ COMPONENT IO_SPACE
   iSEG7OUTPUT   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');  
   iINPUTSTATUS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
   iINPUTS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);  
-  oWrOUTPUTS : OUT STD_LOGIC;  
-  iOUTPUTS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+  oWrOUTPUT1 : OUT STD_LOGIC;  
+  iOUTPUT1 : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+  oWrOUTPUT2 : OUT STD_LOGIC;  
+  iOUTPUT2 : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
   oWrSYNCONFIG1 : OUT STD_LOGIC;  
   oWrSYNCONFIG2 : OUT STD_LOGIC;  
   iSYNCONFIG1 : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
@@ -378,27 +383,18 @@ BEGIN
 
 nRESET  <= iSW_RESET_CPLD;
 nCS     <= iCS_FPGA;
-sSeg7En <= iPWM_LED;
-o7SEGLED <= sSEG7OUTPUT;
-oRSTIN <= sOutputs(NUM_OF_OUTPUTS-1); -- top bit is reset signal for EEPROM.
-oOutput <= sOutputs(NUM_OF_OUTPUTS-2 downto 0); -- rest of the bits are for outputs.
 sSyncSelc <= iSYNC_SEL2 & iSYNC_SEL1;
-
+sSeg7En <= iPWM_LED;
+sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
+o7SEGLED <= sSEG7OUTPUT;
+oOutput <= sOutput1(NUM_OF_OUTPUTS-1 downto 0); -- rest of the bits are for outputs.
+oRSTIN      <= sOutput2(0); -- reset signal for EEPROM.
+oLED_ENABLE <= sOutput2(1); -- LED enable pin
 oLED_PWM <= sPWMOUT1;
 oLED_FPGA_OK <= sPWMOUT1;
 oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 oRST <= sReset;
-
-sSEG7OUTPUT16 <= B"0000_0000" & sSEG7OUTPUT;
--- CLKBUFFER : process (iCLK,inCLKBUF1,inCLKBUF2)is 
--- begin
-  -- if rising_edge(iCLK) then 
-    -- inCLKBUF1 <= iCLK;
-    -- inCLKBUF2 <= inCLKBUF1;
-    -- inCLK <= inCLKBUF2;
-  -- end if;
--- end process;
 
 DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,
                   ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,
@@ -470,12 +466,22 @@ SYNCMOD : SYNCMODULE
 	oSYNVALUE => sSYNVALUE
 	);
 
-OPMOD : OUTPUTMODULE
+OPMOD1 : OUTPUTMODULE
+  GENERIC MAP (OUTPUTWIDTH => NUM_OF_OUTPUTS )
+  PORT MAP ( 
+  inReset => nRESET,
+  iWrData => sWrOutput1,
+  iData => IO_DAT_WR,
+  oOutput => sOutput1
+  );
+
+OPMOD2 : OUTPUTMODULE -- This module for output other signals
+  GENERIC MAP (OUTPUTWIDTH => 2 )
   PORT MAP (
   inReset => nRESET,
-  iWrData => sWrOutput,
+  iWrData => sWrOutput2,
   iData => IO_DAT_WR,
-  oOutput => sOutputs
+  oOutput => sOutput2
   );
   
 IPMOD : INPUTMODULE
@@ -600,8 +606,10 @@ MOD_IOSPACE : IO_SPACE
   iSEG7OUTPUT => sSEG7OUTPUT16,
   iINPUTSTATUS => sInputStatus,
   iINPUTS => sInputs,
-  oWrOUTPUTS => sWrOutput,
-  iOUTPUTS => sOutputs,
+  oWrOUTPUT1 => sWrOutput1,
+  iOUTPUT1 => sOutput1,
+  oWrOUTPUT2 => sWrOutput2,
+  iOUTPUT2 => sOutput2,
   oWrSYNCONFIG1 => sWrSYNCONFIG1,
   oWrSYNCONFIG2 => sWrSYNCONFIG2,
   iSYNCONFIG1 => sSYNCONFIG1,
