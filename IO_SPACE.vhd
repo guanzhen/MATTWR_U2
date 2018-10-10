@@ -51,6 +51,8 @@ PORT
   --Input Module
   iINPUTSTATUS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iINPUTS : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  --Dip Switches:
+  iDIPSWITCH : IN STD_LOGIC_VECTOR(3 downto 0);
   -- Output Module
   oWrOUTPUT1 : OUT STD_LOGIC;
   iOUTPUT1 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
@@ -208,7 +210,8 @@ begin
 		sTIMERBUFFER3 <= iTimersec(31 downto 16);
     when X"81" => oData <= sTIMERBUFFER1;
     when X"82" => oData <= sTIMERBUFFER2;
-    when X"83" => oData <= sTIMERBUFFER3;  
+    when X"83" => oData <= sTIMERBUFFER3;
+    when X"90" => oData <= B"0000_0000_0000" & iDIPSWITCH;
     when X"F0" => oData <= VERSION;
     when others =>  oData <= (others=>'0');
     end case;

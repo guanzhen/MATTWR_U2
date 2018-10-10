@@ -49,7 +49,8 @@ create_clock -name {oWrPWMConfig2} -period 14.000 -waveform { 0.000 7.000 } [get
 create_clock -name {oWrPWMDuty2} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrPWMDUTY2}]
 create_clock -name {oWrQEMConfig1} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrQEMCONFIG1}]
 create_clock -name {oWrQWMConfig2} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrQEMCONFIG2}]
-create_clock -name {oWrOUTPUTS} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrOUTPUTS}]
+create_clock -name {oWrOUTPUT1} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrOUTPUT1}]
+create_clock -name {oWrOUTPUT2} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrOUTPUT2}]
 create_clock -name {oWrSEG7OUTPUT} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrSEG7OUTPUT}]
 create_clock -name {oWrSERIALMUXCONFIG} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrSERIALMUXCONFIG}]
 create_clock -name {oWrSYNCONFIG1} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrSYNCONFIG1}]
@@ -58,7 +59,11 @@ create_clock -name {oWrPWMPERIOD1} -period 14.000 -waveform { 0.000 7.000 } [get
 create_clock -name {oWrPWMPERIOD2} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrPWMPERIOD2}]
 create_clock -name {oWrRESETPERIOD} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrRESETPERIOD}]
 create_clock -name {oWrRESETCONFIG} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrRESETCONFIG}]
-create_clock -name {ebu_ext} -period 7.000 -waveform { 0.000 3.500 } 
+create_clock -name {oWrQEMCOUNTERL1} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrQEMCOUNTERL1}]
+create_clock -name {oWrQEMCOUNTERL2} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrQEMCOUNTERL2}]
+create_clock -name {oWrQEMCOUNTERH1} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrQEMCOUNTERH1}]
+create_clock -name {oWrQEMCOUNTERH2} -period 14.000 -waveform { 0.000 7.000 } [get_nets {MOD_IOSPACE|oWrQEMCOUNTERH2}]
+#create_clock -name {ebu_ext} -period 7.000 -waveform { 0.000 3.500 } 
 
 #**************************************************************
 # Create Generated Clock
@@ -90,7 +95,8 @@ set_input_delay -add_delay -clock { iADV } 0 [get_ports {ioData*}]
 # Set Output Delay
 #**************************************************************
 
-set_output_delay -clock { oWrOUTPUTS } 0 [get_ports {oOutput*}]
+set_output_delay -clock { oWrOUTPUT1 } 0 [get_ports {oOutput*}]
+set_output_delay -clock { oWrOUTPUT2 } 0 [get_ports {oRSTIN oLED_ENABLE}]
 set_output_delay -clock { iRD }  0 [get_ports {ioData*}]
 set_output_delay -clock { oWrSEG7OUTPUT }  0 [get_ports {o7SEGLED*}]
 

@@ -186,7 +186,8 @@ COMPONENT IO_SPACE
   oWrSEG7OUTPUT : OUT STD_LOGIC;
   iSEG7OUTPUT   : IN std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');  
   iINPUTSTATUS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
-  iINPUTS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);  
+  iINPUTS : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
+  iDIPSWITCH : IN STD_LOGIC_VECTOR(3 downto 0);
   oWrOUTPUT1 : OUT STD_LOGIC;  
   iOUTPUT1 : IN STD_LOGIC_VECTOR(DATAWIDTH-1 DOWNTO 0);
   oWrOUTPUT2 : OUT STD_LOGIC;  
@@ -396,31 +397,6 @@ oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 oRST <= sReset;
 
-DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,
-                  ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,
-                  iSYNC_SEL2,iRFID_MUX_SEL,sPWMOUT2,sPWMOUT1,sWrPWMCONFIG1,sWrPWMCONFIG2
-                  ) is
-begin
---  if (nRESET = '0') then
---    --oCPLD_DEBUG <= "0000";
---  elsif rising_edge(iCLK) then
-----    case iDIP_SWITCH is 
-----    when B"0000" =>  oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA); 
-----    when B"0001" =>  oCPLD_DEBUG <= IO_DAT_WR(3 downto 0); 
-----    when B"0010" =>  oCPLD_DEBUG <= IO_DAT_WR(7 downto 4);
-----    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
-----    when B"0100" =>  oCPLD_DEBUG <= IO_DAT_RD(3 downto 0); 
-----    when B"0101" =>  oCPLD_DEBUG <= IO_DAT_RD(7 downto 4); 
-----    when B"0110" =>  oCPLD_DEBUG <= (sPWMOUT2,sPWMOUT1,sReset,sWrPWMCONFIG2);
-----    when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
-----    end case;
---  end if;
-
-oCPLD_DEBUG <= (others => 'Z');
-    
-end process;
-
-
 DIP_SWITCH_DEBOUNCE : PROCESS(iCLK,nRESET,iDIP_SWITCH) is
 BEGIN
   if nRESET = '0' then
@@ -606,6 +582,7 @@ MOD_IOSPACE : IO_SPACE
   iSEG7OUTPUT => sSEG7OUTPUT16,
   iINPUTSTATUS => sInputStatus,
   iINPUTS => sInputs,
+  iDIPSWITCH => DIP_SWITCH_BUFF,
   oWrOUTPUT1 => sWrOutput1,
   iOUTPUT1 => sOutput1,
   oWrOUTPUT2 => sWrOutput2,
@@ -675,4 +652,28 @@ MOD_RESET : RESETMODULE
 	oResetConfig => sResetConfig,
 	oResetPeriod => sResetPeriod
 	);
+  
+DEBUG : process (iCLK,nRESET,iDIP_SWITCH,iWR,iRD,iADV,iCS_FPGA,
+                  ioData,iSW_RESET_CPLD,iPWM_LED,iSYNC_SEL1,
+                  iSYNC_SEL2,iRFID_MUX_SEL,sPWMOUT2,sPWMOUT1,sWrPWMCONFIG1,sWrPWMCONFIG2
+                  ) is
+begin
+--  if (nRESET = '0') then
+--    --oCPLD_DEBUG <= "0000";
+--  elsif rising_edge(iCLK) then
+----    case iDIP_SWITCH is 
+----    when B"0000" =>  oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA); 
+----    when B"0001" =>  oCPLD_DEBUG <= IO_DAT_WR(3 downto 0); 
+----    when B"0010" =>  oCPLD_DEBUG <= IO_DAT_WR(7 downto 4);
+----    when B"0011" =>  oCPLD_DEBUG <= (iPWM_LED,iSYNC_SEL1,iSYNC_SEL2,iRFID_MUX_SEL);
+----    when B"0100" =>  oCPLD_DEBUG <= IO_DAT_RD(3 downto 0); 
+----    when B"0101" =>  oCPLD_DEBUG <= IO_DAT_RD(7 downto 4); 
+----    when B"0110" =>  oCPLD_DEBUG <= (sPWMOUT2,sPWMOUT1,sReset,sWrPWMCONFIG2);
+----    when others =>	oCPLD_DEBUG <= (iWR,iRD,iADV,iCS_FPGA);
+----    end case;
+--  end if;
+
+oCPLD_DEBUG <= (others => 'Z');
+    
+end process;
 END logic;
