@@ -199,10 +199,10 @@ set_location_assignment PIN_68 -to iENC_B3
 set_location_assignment PIN_71 -to iENC_B4
 set_location_assignment PIN_69 -to iENC_N3
 set_location_assignment PIN_72 -to iENC_N4
-set_location_assignment PIN_109 -to iDIP_SWITCH[0]
-set_location_assignment PIN_110 -to iDIP_SWITCH[1]
-set_location_assignment PIN_111 -to iDIP_SWITCH[2]
-set_location_assignment PIN_112 -to iDIP_SWITCH[3]
+set_location_assignment PIN_112 -to iDIP_SWITCH[0]
+set_location_assignment PIN_111 -to iDIP_SWITCH[1]
+set_location_assignment PIN_110 -to iDIP_SWITCH[2]
+set_location_assignment PIN_109 -to iDIP_SWITCH[3]
 set_location_assignment PIN_39 -to ioSYNC[0]
 set_location_assignment PIN_40 -to ioSYNC[1]
 set_location_assignment PIN_41 -to ioSYNC[2]
