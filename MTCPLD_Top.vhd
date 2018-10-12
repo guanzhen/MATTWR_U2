@@ -371,6 +371,7 @@ COMPONENT TIMERMODULE is
     inRESET      : IN STD_LOGIC;   
     iData        : IN STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
     -- Output ports
+	 oSecond : OUT STD_LOGIC;
     oTimersec   : OUT std_logic_vector(31 downto 0):= (others => '0');
     oTimermS   : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
     oTimeruS   : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
@@ -392,7 +393,6 @@ oOutput <= sOutput1(NUM_OF_OUTPUTS-1 downto 0); -- rest of the bits are for outp
 oRSTIN      <= sOutput2(0); -- reset signal for EEPROM.
 oLED_ENABLE <= sOutput2(1); -- LED enable pin
 oLED_PWM <= sPWMOUT1;
-oLED_FPGA_OK <= sPWMOUT1;
 oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 oRST <= sReset;
@@ -420,6 +420,7 @@ TIMERMOD : TIMERMODULE
   iCLK => iCLK,
   iData => IO_DAT_WR,
   inRESET => nRESET,
+  oSecond => oLED_FPGA_OK,
   oTimermS => sTimermS,
   oTimeruS => sTimeruS,  
   oTimersec => sTimersec

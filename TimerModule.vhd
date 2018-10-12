@@ -24,6 +24,7 @@ entity TIMERMODULE is
     inRESET      : IN STD_LOGIC;   
     iData        : IN STD_LOGIC_VECTOR(DATAWIDTH-1 downto 0);
     -- Output ports
+	 oSecond : OUT std_LOGIC;
     oTimersec : OUT std_logic_vector(31 downto 0):= (others => '0');
     oTimermS  : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0');
     oTimeruS  : OUT std_logic_vector(DATAWIDTH-1 downto 0):= (others => '0')
@@ -40,7 +41,7 @@ signal sTIMERSEC : natural range 0 to 2**MAX_COUNT_WIDTH := 0;
 signal sTIMERMILLI : natural range 0 to COUNTS_PER_SEC := 0;
 signal sTIMERUS : natural range 0 to COUNTS_PER_MS := 0;
 signal sTIMER1US : natural range 0 to COUNTS_PER_US := 0;
-
+signal sSeconds : STD_LOGIC;
 signal sCounter1USOF : STD_LOGIC:= '0'; -- signal for overflow output from COUNTER1US
 signal sCounter1msOF : STD_LOGIC:= '0'; -- signal for overflow output from COUNTER
 signal sCounter1secSOF : STD_LOGIC:= '0'; -- signal for overflow output from COUNTER1US
@@ -52,6 +53,7 @@ sEnable <= '1';
 oTimersec <= std_logic_vector(to_unsigned(sTIMERSEC, oTimersec'length));
 oTimermS <= std_logic_vector(to_unsigned(sTIMERMILLI, oTimermS'length));
 oTimeruS <= std_logic_vector(to_unsigned(sTIMERUS, oTimeruS'length));
+oSecond <=  std_logic_vector(to_unsigned(sTIMERSEC, oTimersec'length))(0);
 
 COUNTER : PROCESS(inReset,iCLK,sCounter1secSOF,sEnable,sTIMERSEC) -- counts Seconds
 BEGIN
