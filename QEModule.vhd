@@ -49,7 +49,7 @@ oPulse <= sPulse when sQEMCONFIG = '1' else '0';
 oIndex <= iIndex;
 oQEMCONFIG <= X"000" & B"000" & sQEMCONFIG;
 
-DIR_OUTPUT : sDir <= '0' when (sQEMDir = CW) else '1';
+DIR_OUTPUT : sDir <= '1' when (sQEMDir = CW) else '0';
 oQEMCOUNTER <= STD_LOGIC_VECTOR(sQEMCOUNTER);
 sWrCounter <= iWrQEMCOUNTERH;
 QEM_CTRL : process (iCLK,inRESET,iWrQEMCONFIG,iWrQEMCOUNTERL,iWrQEMCOUNTERH)
