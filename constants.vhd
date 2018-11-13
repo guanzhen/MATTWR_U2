@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 
 package constants is
 
-constant VERSION : std_logic_vector(15 downto 0) := X"0003"; -- V0.03
+constant VERSION : std_logic_vector(15 downto 0) := X"0004"; -- V0.03
 constant NUM_OF_PWMMOD  : natural :=3;
 constant DEFAULT_RESET_PERIOD : integer := 1000; -- 1ms;
 constant ENC_WIDTH : natural := 32; -- 1ms;
