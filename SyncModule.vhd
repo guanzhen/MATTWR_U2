@@ -83,7 +83,7 @@ BEGIN
     temp := to_integer(unsigned(sSYNCONFIG(I*4+3 downto I*4))); -- find the input mapped to output pin.
     sSYNCOUT(I) <= iInputs(temp);
   end loop;
-  sSYNCOUT(4) <= iInputs(10) OR iInputs(11) OR iInputs(12) OR iInputs(13); -- special pin 5 that has fixed assignments.
+  sSYNCOUT(4) <= iInputs(12) OR NOT iInputs(8) OR iInputs(14) OR iInputs(15); -- special pin 5 that has fixed assignments.
 END PROCESS;
 
 END ARCHITECTURE LOGIC;
