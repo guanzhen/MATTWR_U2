@@ -406,8 +406,8 @@ o7SEGLED <= sSEG7OUTPUT;
 oOutput <= sOutput1(NUM_OF_OUTPUTS-1 downto 0); -- rest of the bits are for outputs.
 oRSTIN      <= sOutput2(0); -- reset signal for EEPROM.
 oLED_ENABLE <= sOutput2(1); -- LED enable pin
+oLED_ENC_ERR <= sOutput2(2); -- LED encoder error
 oLED_PWM <= sPWMOUT1;
-oLED_ENC_ERR <= sPWMOUT2;
 oPWM2 <= sPWMOUT2;
 oRST <= sReset;
 
@@ -471,7 +471,7 @@ OPMOD1 : OUTPUTMODULE
   );
 
 OPMOD2 : OUTPUTMODULE -- This module for output other signals
-  GENERIC MAP (OUTPUTWIDTH => 2 )
+  GENERIC MAP (OUTPUTWIDTH => 3 )
   PORT MAP (
   inReset => nRESET,
   iWrData => sWrOutput2,
