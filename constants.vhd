@@ -11,7 +11,7 @@ constant NUM_OF_INPUTS : natural := 22;
 constant NUM_OF_OUTPUTS : natural := 15;
 constant DEFAULT_PWM_PERIOD : integer := 1000;
 constant DEFAULT_PWM_DUTY : integer := 100;
-
+constant NUM_OF_SYNC : integer := 7;
 -- Main Board
 constant NUM_OF_SE_INPUTS : natural := 14;
 constant NUM_OF_DIFFINPUTS : natural := 2;

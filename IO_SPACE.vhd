@@ -59,10 +59,14 @@ PORT
   oWrOUTPUT2 : OUT STD_LOGIC;
   iOUTPUT2 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   -- Sync Module
-  oWrSYNCONFIG1 : OUT STD_LOGIC;  
-  oWrSYNCONFIG2 : OUT STD_LOGIC;  
+  oWrSYNCONFIG : OUT STD_LOGIC_VECTOR(NUM_OF_SYNC-1 DOWNTO 0);  
   iSYNCONFIG1 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iSYNCONFIG2 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNCONFIG3 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNCONFIG4 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNCONFIG5 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNCONFIG6 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
+  iSYNCONFIG7 : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iSYNDIR : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0);
   iSYNVALUE : IN STD_LOGIC_VECTOR(BUSWIDTH-1 DOWNTO 0); 
   -- Serial Mux Module
@@ -110,8 +114,7 @@ begin
     oWrQEMCOUNTERH2 <= '0';
     oWrOUTPUT1 <= '0';    
     oWrOUTPUT2 <= '0';
-    oWrSYNCONFIG1 <= '0';
-    oWrSYNCONFIG2 <= '0';
+    oWrSYNCONFIG <= (others=>'0');
     oWrSERIALMUXCONFIG <= '0';
   elsif falling_edge(inWrRdy) and inCS = '0' then
     -- Set all write signals to inactive state.
@@ -132,8 +135,7 @@ begin
     oWrQEMCOUNTERH2 <= '0';    
     oWrOUTPUT1 <= '0';
     oWrOUTPUT2 <= '0';
-    oWrSYNCONFIG1 <= '0';
-    oWrSYNCONFIG2 <= '0';
+    oWrSYNCONFIG <= (others =>'0');
     oWrSERIALMUXCONFIG <= '0';
     vAddress := iAddress(7 downto 0); -- use only the lower byte for address.
     case vAddress is 
@@ -155,8 +157,13 @@ begin
     when X"15" => oWrQEMCOUNTERH2 <= '1';    
     when X"60" => oWrOUTPUT1 <= '1';
     when X"61" => oWrOUTPUT2 <= '1';
-    when X"70" => oWrSYNCONFIG1 <= '1';
-    when X"71" => oWrSYNCONFIG2 <= '1';
+    when X"72" => oWrSYNCONFIG(0) <= '1';
+    when X"73" => oWrSYNCONFIG(1) <= '1';
+    when X"74" => oWrSYNCONFIG(2) <= '1';
+    when X"75" => oWrSYNCONFIG(3) <= '1';
+    when X"76" => oWrSYNCONFIG(4) <= '1';
+    when X"77" => oWrSYNCONFIG(5) <= '1';
+    when X"78" => oWrSYNCONFIG(6) <= '1';
     when others => null;
     end case;
   end if;
@@ -199,10 +206,15 @@ begin
     when X"51" => oData <= iINPUTS;
     when X"60" => oData <= iOUTPUT1;
     when X"61" => oData <= iOUTPUT2;
-    when X"70" => oData <= iSYNCONFIG1;
-    when X"71" => oData <= iSYNCONFIG2;
-    when X"72" => oData <= iSYNDIR;
-    when X"73" => oData <= iSYNVALUE;
+    when X"70" => oData <= iSYNDIR;
+    when X"71" => oData <= iSYNVALUE;
+    when X"72" => oData <= iSYNCONFIG1;
+    when X"73" => oData <= iSYNCONFIG2;
+    when X"74" => oData <= iSYNCONFIG3;
+    when X"75" => oData <= iSYNCONFIG4;
+    when X"76" => oData <= iSYNCONFIG5;
+    when X"77" => oData <= iSYNCONFIG6;
+    when X"78" => oData <= iSYNCONFIG7;
     when X"80" => 
 		oData <= iTimeruS;
 		sTIMERBUFFER1 <= iTimermS;		
