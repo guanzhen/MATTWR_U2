@@ -160,7 +160,7 @@ set_location_assignment PIN_140 -to oOutput[10]
 set_location_assignment PIN_141 -to oOutput[11]
 set_location_assignment PIN_142 -to oOutput[12]
 set_location_assignment PIN_143 -to oOutput[13]
-set_location_assignment PIN_125 -to oPWM2
+set_location_assignment PIN_58 -to oPWM2
 set_location_assignment PIN_114 -to o7SEGLED[0]
 set_location_assignment PIN_103 -to oRFID1_TXD
 set_location_assignment PIN_105 -to oRFID2_TXD
