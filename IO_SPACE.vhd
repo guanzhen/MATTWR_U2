@@ -45,6 +45,12 @@ PORT
   iPWMCONFIG2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMPERIOD2   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   iPWMDUTY2     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  oWrPWMCONFIG3 : OUT STD_LOGIC;
+  oWrPWMPERIOD3 : OUT STD_LOGIC;
+  oWrPWMDUTY3   : OUT STD_LOGIC;
+  iPWMCONFIG3   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  iPWMPERIOD3   : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
+  iPWMDUTY3     : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
   --7SEG Module
   oWrSEG7OUTPUT : OUT STD_LOGIC;
   iSEG7OUTPUT : IN std_logic_vector(BUSWIDTH-1 downto 0):= (others => '0');
@@ -103,6 +109,9 @@ begin
     oWrPWMCONFIG2 <= '0';
     oWrPWMPERIOD2 <= '0';
     oWrPWMDUTY2 <= '0';
+    oWrPWMCONFIG3 <= '0';
+    oWrPWMPERIOD3 <= '0';
+    oWrPWMDUTY3 <= '0';
     oWrSEG7OUTPUT <= '0';
     oWrRESETCONFIG <= '0';
     oWrRESETPERIOD <= '0';
@@ -124,6 +133,9 @@ begin
     oWrPWMCONFIG2 <= '0';
     oWrPWMPERIOD2 <= '0';
     oWrPWMDUTY2 <= '0';
+    oWrPWMCONFIG3 <= '0';
+    oWrPWMPERIOD3 <= '0';
+    oWrPWMDUTY3 <= '0';
     oWrSEG7OUTPUT <= '0';
     oWrRESETCONFIG <= '0';
     oWrRESETPERIOD <= '0';
@@ -145,6 +157,9 @@ begin
     when X"03" => oWrPWMCONFIG2 <= '1';
     when X"04" => oWrPWMPERIOD2 <= '1';
     when X"05" => oWrPWMDUTY2 <= '1';
+    when X"06" => oWrPWMCONFIG3 <= '1';
+    when X"07" => oWrPWMPERIOD3 <= '1';
+    when X"08" => oWrPWMDUTY3 <= '1';
     when X"40" => oWrSEG7OUTPUT <= '1';    
     when X"20" => oWrSERIALMUXCONFIG <= '1';
     when X"30" => oWrRESETCONFIG <= '1';
@@ -188,6 +203,9 @@ begin
     when X"03" => oData <= iPWMCONFIG2;
     when X"04" => oData <= iPWMPERIOD2;
     when X"05" => oData <= iPWMDUTY2;
+    when X"06" => oData <= iPWMCONFIG3;
+    when X"07" => oData <= iPWMPERIOD3;
+    when X"08" => oData <= iPWMDUTY3;
     when X"10" => oData <= iQEMCONFIG1;
     when X"11" => 
       sQEMBUFFER1 <= iQEMCOUNTER1(ENC_WIDTH-1 downto 16);

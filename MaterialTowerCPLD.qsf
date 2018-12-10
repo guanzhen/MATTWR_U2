@@ -264,3 +264,4 @@ set_location_assignment PIN_96 -to iInput[18]
 set_location_assignment PIN_95 -to iInput[17]
 set_location_assignment PIN_94 -to iInput[16]
 set_location_assignment PIN_93 -to iInput[15]
+set_location_assignment PIN_125 -to oPWM3
